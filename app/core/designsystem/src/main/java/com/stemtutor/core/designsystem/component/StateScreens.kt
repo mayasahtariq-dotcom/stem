@@ -6,48 +6,47 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.stemtutor.core.designsystem.R
+import com.stemtutor.core.designsystem.mascot.CowMascot
+import com.stemtutor.core.designsystem.mascot.CowPose
 import com.stemtutor.core.designsystem.preview.BilingualPreviews
-import com.stemtutor.core.designsystem.theme.StemColors
 import com.stemtutor.core.designsystem.theme.StemTutorTheme
 
-/** Shown while data loads. The retry button appears only when [onRetry] is given. */
+/** Shown while data loads: the cow wonders. The retry button appears only when [onRetry] is given. */
 @Composable
 fun LoadingScreen(
     modifier: Modifier = Modifier,
     @StringRes messageRes: Int = R.string.ds_loading,
     onRetry: (() -> Unit)? = null,
+    animate: Boolean = true,
 ) {
-    StateScreen(modifier, messageRes, onRetry) {
-        CircularProgressIndicator(color = StemColors.DeepBlue, modifier = Modifier.size(48.dp))
-    }
+    StateScreen(modifier, messageRes, onRetry, CowPose.Question, animate)
 }
 
+/** Something failed: a sad cow, the message and a retry button. Never a blank screen. */
 @Composable
 fun ErrorScreen(
     onRetry: () -> Unit,
     modifier: Modifier = Modifier,
     @StringRes messageRes: Int = R.string.ds_error,
+    animate: Boolean = true,
 ) {
-    StateScreen(modifier, messageRes, onRetry) { Text("⚠️", fontSize = 40.sp) }
+    StateScreen(modifier, messageRes, onRetry, CowPose.Sad, animate)
 }
 
+/** Nothing here yet: a napping cow. */
 @Composable
 fun EmptyScreen(
     onRetry: () -> Unit,
     modifier: Modifier = Modifier,
     @StringRes messageRes: Int = R.string.ds_empty,
+    animate: Boolean = true,
 ) {
-    StateScreen(modifier, messageRes, onRetry) { Text("📭", fontSize = 40.sp) }
+    StateScreen(modifier, messageRes, onRetry, CowPose.Sleep, animate)
 }
 
 @Composable
@@ -55,17 +54,18 @@ private fun StateScreen(
     modifier: Modifier,
     @StringRes messageRes: Int,
     onRetry: (() -> Unit)?,
-    illustration: @Composable () -> Unit,
+    pose: CowPose,
+    animate: Boolean,
 ) {
     Column(
         modifier = modifier.fillMaxSize().padding(24.dp),
-        verticalArrangement = Arrangement.spacedBy(20.dp, Alignment.CenterVertically),
+        verticalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterVertically),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        illustration()
-        BilingualText(messageRes, size = BilingualTextSize.Large, textAlign = TextAlign.Center)
+        SpeechBubble(messageRes, Modifier.fillMaxWidth())
+        CowMascot(pose, animate = animate)
         if (onRetry != null) {
-            ChunkyButton(R.string.ds_retry, onRetry, Modifier.fillMaxWidth())
+            ChunkyButton(R.string.ds_retry, onRetry, Modifier.fillMaxWidth().padding(top = 8.dp))
         }
     }
 }
@@ -73,17 +73,17 @@ private fun StateScreen(
 @BilingualPreviews
 @Composable
 private fun LoadingScreenPreview() {
-    StemTutorTheme { LoadingScreen(onRetry = {}) }
+    StemTutorTheme { LoadingScreen(onRetry = {}, animate = false) }
 }
 
 @BilingualPreviews
 @Composable
 private fun ErrorScreenPreview() {
-    StemTutorTheme { ErrorScreen(onRetry = {}) }
+    StemTutorTheme { ErrorScreen(onRetry = {}, animate = false) }
 }
 
 @BilingualPreviews
 @Composable
 private fun EmptyScreenPreview() {
-    StemTutorTheme { EmptyScreen(onRetry = {}) }
+    StemTutorTheme { EmptyScreen(onRetry = {}, animate = false) }
 }

@@ -2,24 +2,36 @@ package com.stemtutor.core.designsystem.theme
 
 import androidx.compose.ui.graphics.Color
 
-/** Design tokens from the PRD. Text on baby blue or cream is always dark, never white. */
+/**
+ * Mooshala design tokens (Finch-style: white screens, green 3D buttons, blue celebration
+ * screens). Replaces the PRD palette; see docs/decisions.md.
+ */
 object StemColors {
     val White = Color(0xFFFFFFFF)
-    val BabyBlue = Color(0xFFA9CBF0) // main buttons, headers, finished lessons
-    val Cream = Color(0xFFF3DFB8) // current lesson, class key, highlights
-    val DeepBlue = Color(0xFF2C5A88) // headings, links and outlines only
-    val Green = Color(0xFF2E9E5B) // correct answers only
-    val Red = Color(0xFFE5484D) // wrong answers, hearts, alerts
-    val Muted = Color(0xFF5E6B64) // muted text; never use anything lighter for text
 
-    val Ink = Color(0xFF1C2630) // body text, and text on baby blue / cream
+    val Green = Color(0xFF55B752) // primary buttons, progress, correct answers
+    val GreenDark = Color(0xFF3F9A3D) // 3D edge under green, correct-answer text
+    val Blue = Color(0xFF1499E0) // celebration screens, current lesson, selection
+    val BlueDark = Color(0xFF0D7FC0)
+    val Red = Color(0xFFE2574C) // wrong answers, hearts, alerts
+    val Gold = Color(0xFFFFC23A) // stars, focus rings, highlights
 
-    // Derived shades for chunky edges and tinted backgrounds (not text colours).
-    val BabyBlueEdge = Color(0xFF7FA9D6)
-    val BabyBlueTint = Color(0xFFE9F2FC)
-    val CreamEdge = Color(0xFFD8BD88)
-    val GreenTint = Color(0xFFE3F4EA)
-    val RedTint = Color(0xFFFDE8E9)
-    val NeutralBorder = Color(0xFFD5DCE3)
-    val DisabledFill = Color(0xFFECEFF2)
+    val Ink = Color(0xFF2E3135) // body text
+    val Muted = Color(0xFF6B7682) // English lines and secondary text; never lighter
+    val Line = Color(0xFFE7EAEE) // borders, empty bars
+    val Soft = Color(0xFFF2F4F6) // speech bubbles, icon wells
+    val Cream = Color(0xFFFFF8EE) // term cards
+    val Brown = Color(0xFF8A6650) // chips, earthy accents
+    val Outline = Color(0xFF5A3D2E) // sticker and mascot outlines
+
+    // Tints and edges (not text colours).
+    val BlueTint = Color(0xFFEAF6FD)
+    val GreenTint = Color(0xFFECF8EB)
+    val RedTint = Color(0xFFFDEEED)
+    val CorrectText = Color(0xFF2C7A2A)
+    val WrongText = Color(0xFFB23A30)
+    val WhiteEdge = Color(0xFFC9D6E0)
+    val DisabledEdge = Color(0xFFD5DADE)
+    val ChipFill = Color(0xFFF6EAD8)
+    val CreamBorder = Color(0xFFF0E2CC)
 }

@@ -14,4 +14,16 @@
 - **Libraries declared before they are used.** supabase-kt (auth), Room, CameraX, Coil and Media3 are declared now, as M0 asks, but have no code until the milestone that needs them. Room's KSP compiler will be added with the first entity.
 - **Library versions** are a known-compatible stable set (AGP 8.7.3, Kotlin 2.1.0, Compose BOM 2024.12.01, Gradle 8.11.1) rather than the newest, to keep the build reliable.
 - **Verification limits for M0.** The development PC had no JDK, Android SDK or Docker. The Android build and tests were verified only in GitHub Actions, and Docker Compose was written but not run locally. The backend was tested locally, and the migration/RLS test runs in CI against a pgvector Postgres service.
-- **Streak icon** uses the 🔥 emoji, since the core Material icon set has no flame. XP uses a star and hearts a heart.
+## M0 restyle: Mooshala design (2026-11-14)
+
+The user supplied a web prototype, `docs/design/mooshala-code.md` ("Mooshala"), and asked for its look to be applied to the app. They chose **Mooshala's design over the PRD's Design section**, and **look only**: its screens get built in the milestone that owns each one.
+
+- **Palette replaced.** The PRD's baby blue, cream and deep blue are gone. The tokens are now Mooshala's: green `#55B752`/`#3F9A3D` (primary buttons, progress, correct), blue `#1499E0` (selection, current lesson, celebration screens), red `#E2574C` (wrong, hearts), gold `#FFC23A`, ink `#2E3135`, muted `#6B7682` (never lighter), line `#E7EAEE`, soft `#F2F4F6`, cream `#FFF8EE`, brown `#8A6650`. See `core/designsystem/.../theme/Color.kt`.
+- **White text on green buttons** follows the prototype. Its contrast (about 2.6:1) is below WCAG AA even for large text. Flagged here so it can be revisited (for example a darker green face) if accessibility testing calls for it.
+- **Fonts.** Headings, buttons and English lines use **Rubik** (one variable font file, weights 400–800, from google/fonts, OFL). Regional lines keep **Noto Sans Devanagari / Kannada** bold, since Rubik has no Indic glyphs. The Latin Noto Sans files were removed.
+- **Button styles** are now Primary (green), White and Ghost, plus disabled, instead of the PRD's blue/cream/neutral. The 3D edge is 5 dp and the face drops 4 dp when pressed, as in the prototype.
+- **Mascot.** The prototype's chibi cow is redrawn in Compose Canvas (`mascot/CowMascot.kt`) with 7 poses (wave, heart, thumbs, question, sleep, cool, sad) and its idle animations. The meadow background is `mascot/MeadowScene.kt`. The loading, error and empty screens use the cow (question, sad, sleep) with a speech bubble.
+- **Sticker icons.** The prototype's 24×24 hand-drawn icons are generated into `icon/StickerIconData.kt` (53 icons) and replace emoji and Material icons in the HUD and source chip. `seeds`, `calc` and `cowface` were skipped, since they use computed SVG.
+- **App name** is now "Mooshala" (launcher label; the prototype's name), with a green launcher background.
+- **Not built (out of PRD scope or later milestones):** pet feeding and fullness, the food shop, collectable cow poses, quests, the exam season, cow and student naming, and the role screen. The PRD doesn't define the gamified pet features. They need a product decision and a PRD update before any milestone builds them.
+- **Superseded:** the earlier note that the streak icon uses the 🔥 emoji. It is now the flame sticker icon.

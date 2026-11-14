@@ -2,7 +2,6 @@ package com.stemtutor.core.designsystem.component
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -22,7 +21,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.CornerRadius
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
@@ -36,21 +40,15 @@ import com.stemtutor.core.designsystem.theme.StemTutorTheme
 
 enum class AnswerOptionState { Default, Selected, Correct, Wrong, CorrectReveal, Disabled }
 
-private data class OptionColors(val fill: Color, val border: Color, val text: Color, val english: Color)
+private data class OptionColors(val fill: Color, val border: Color, val text: Color)
 
 private fun colorsFor(state: AnswerOptionState) = when (state) {
-    AnswerOptionState.Default ->
-        OptionColors(StemColors.White, StemColors.NeutralBorder, StemColors.Ink, StemColors.Muted)
-    AnswerOptionState.Selected ->
-        OptionColors(StemColors.BabyBlueTint, StemColors.DeepBlue, StemColors.Ink, StemColors.Muted)
-    AnswerOptionState.Correct ->
-        OptionColors(StemColors.GreenTint, StemColors.Green, StemColors.Ink, StemColors.Muted)
-    AnswerOptionState.Wrong ->
-        OptionColors(StemColors.RedTint, StemColors.Red, StemColors.Ink, StemColors.Muted)
-    AnswerOptionState.CorrectReveal ->
-        OptionColors(StemColors.White, StemColors.Green, StemColors.Ink, StemColors.Muted)
-    AnswerOptionState.Disabled ->
-        OptionColors(StemColors.DisabledFill, StemColors.NeutralBorder, StemColors.Muted, StemColors.Muted)
+    AnswerOptionState.Default -> OptionColors(StemColors.White, StemColors.Line, StemColors.Ink)
+    AnswerOptionState.Selected -> OptionColors(StemColors.BlueTint, StemColors.Blue, StemColors.Ink)
+    AnswerOptionState.Correct -> OptionColors(StemColors.GreenTint, StemColors.Green, StemColors.Ink)
+    AnswerOptionState.Wrong -> OptionColors(StemColors.RedTint, StemColors.Red, StemColors.Ink)
+    AnswerOptionState.CorrectReveal -> OptionColors(StemColors.White, StemColors.Green, StemColors.Ink)
+    AnswerOptionState.Disabled -> OptionColors(StemColors.Soft, StemColors.Line, StemColors.Muted)
 }
 
 @StringRes
@@ -62,9 +60,13 @@ private fun stateLabel(state: AnswerOptionState): Int? = when (state) {
     else -> null
 }
 
-private val OptionShape = RoundedCornerShape(14.dp)
+private val OptionRadius = 16.dp
+private val OptionShape = RoundedCornerShape(OptionRadius)
 
-/** A tappable answer card. Only Default and Selected accept taps. */
+/**
+ * Mooshala answer card: 2 dp border with a thicker 4 dp bottom edge. Only Default and Selected
+ * accept taps.
+ */
 @Composable
 fun AnswerOption(
     text: BilingualString,
@@ -81,7 +83,20 @@ fun AnswerOption(
             .heightIn(min = 56.dp)
             .clip(OptionShape)
             .background(colors.fill)
-            .border(if (state == AnswerOptionState.Default) 2.dp else 3.dp, colors.border, OptionShape)
+            .drawBehind {
+                val side = 2.dp.toPx()
+                val bottom = 4.dp.toPx()
+                val radius = CornerRadius(OptionRadius.toPx())
+                // Bottom edge: a filled rounded rect peeking out below the outline.
+                drawRoundRect(colors.border, cornerRadius = radius)
+                drawRoundRect(
+                    colors.fill,
+                    topLeft = Offset(side, side),
+                    size = Size(size.width - 2 * side, size.height - side - bottom),
+                    cornerRadius = CornerRadius(radius.x - side),
+                )
+                drawRoundRect(colors.border, cornerRadius = radius, style = Stroke(side))
+            }
             .selectable(
                 selected = state == AnswerOptionState.Selected,
                 enabled = tappable,
@@ -89,16 +104,15 @@ fun AnswerOption(
                 onClick = onClick,
             )
             .semantics { if (description != null) stateDescription = description }
-            .padding(horizontal = 16.dp, vertical = 10.dp),
+            .padding(start = 16.dp, end = 16.dp, top = 12.dp, bottom = 14.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         BilingualText(
             text = text,
             modifier = Modifier.weight(1f),
-            size = BilingualTextSize.Medium,
+            size = BilingualTextSize.Large,
             regionalColor = colors.text,
-            englishColor = colors.english,
         )
         StateBadge(state)
     }

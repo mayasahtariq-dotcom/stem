@@ -26,17 +26,19 @@ Files: `app/core/designsystem/src/main/res/values-{hi,kn}/strings.xml`, `app/app
 | ds_sample_check | Check | जाँचें | ಪರಿಶೀಲಿಸಿ | [ ] |
 | ds_sample_continue | Continue | आगे बढ़ें | ಮುಂದುವರಿಸಿ | [ ] |
 | ds_sample_skip | Skip | छोड़ें | ಬಿಟ್ಟುಬಿಡಿ | [ ] |
-| release_placeholder | STEM Tutor is coming soon. | STEM Tutor जल्द आ रहा है। | STEM Tutor ಶೀಘ್ರದಲ್ಲೇ ಬರಲಿದೆ. | [ ] |
+| release_placeholder | Mooshala is coming soon. | मूशाला जल्द आ रहा है। | ಮೂಶಾಲೆ ಶೀಘ್ರದಲ್ಲೇ ಬರಲಿದೆ. | [ ] |
 | gallery_title | Component gallery | कंपोनेंट गैलरी | ಕಾಂಪೊನೆಂಟ್ ಗ್ಯಾಲರಿ | [ ] |
 | gallery_section_text | Bilingual text | दो भाषाओं में लिखावट | ಎರಡು ಭಾಷೆಯ ಪಠ್ಯ | [ ] |
 | gallery_section_buttons | Buttons | बटन | ಬಟನ್‌ಗಳು | [ ] |
 | gallery_section_options | Answer options (tap one) | जवाब के विकल्प (एक चुनें) | ಉತ್ತರದ ಆಯ್ಕೆಗಳು (ಒಂದನ್ನು ಆರಿಸಿ) | [ ] |
 | gallery_section_option_states | Answer option states | जवाब के विकल्प की स्थितियाँ | ಉತ್ತರದ ಆಯ್ಕೆಯ ಸ್ಥಿತಿಗಳು | [ ] |
 | gallery_section_stats | Streak, XP and hearts | स्ट्रीक, XP और दिल | ಸ್ಟ್ರೀಕ್, XP ಮತ್ತು ಹೃದಯಗಳು | [ ] |
-| gallery_section_source | Source chip | स्रोत चिप | ಮೂಲ ಚಿಪ್ | [ ] |
 | gallery_section_states | Loading, error and empty screens | लोडिंग, गड़बड़ी और खाली स्क्रीन | ಲೋಡಿಂಗ್, ದೋಷ ಮತ್ತು ಖಾಲಿ ಪರದೆಗಳು | [ ] |
 | gallery_section_backend | Backend status | सर्वर की स्थिति | ಸರ್ವರ್ ಸ್ಥಿತಿ | [ ] |
 | gallery_backend_ok | Connected (version %1$s) | जुड़ गया (वर्ज़न %1$s) | ಸಂಪರ್ಕಗೊಂಡಿದೆ (ಆವೃತ್ತಿ %1$s) | [ ] |
+| gallery_section_bubble | Speech bubble and progress | बोलने का बुलबुला और प्रगति | ಮಾತಿನ ಗುಳ್ಳೆ ಮತ್ತು ಪ್ರಗತಿ | [ ] |
+| gallery_section_mascot | The cow and its poses | गाय और उसके पोज़ | ಹಸು ಮತ್ತು ಅದರ ಭಂಗಿಗಳು | [ ] |
+| gallery_section_icons | Sticker icons | स्टिकर आइकन | ಸ್ಟಿಕರ್ ಐಕಾನ್‌ಗಳು | [ ] |
 | gallery_backend_error | Can't reach the server. | सर्वर से नहीं जुड़ पा रहे। | ಸರ್ವರ್ ತಲುಪಲು ಆಗುತ್ತಿಲ್ಲ. | [ ] |
 
-Fixed labels in code (not resources): the language toggle shows "हिन्दी + English" and "ಕನ್ನಡ + English".
+Fixed labels in code (not resources): the language toggle shows "हिंदी" / "Hindi + English" and "ಕನ್ನಡ" / "Kannada + English". The app name "Mooshala" is written मूशाला / ಮೂಶಾಲೆ (spellings taken from the design prototype).

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">STEM Tutor</string>
-    <string name="release_placeholder">STEM Tutor is coming soon.</string>
+    <string name="app_name" translatable="false">Mooshala</string>
+    <string name="release_placeholder">Mooshala is coming soon.</string>
 </resources>

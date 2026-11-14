@@ -1,6 +1,6 @@
 # STEM Tutor
 
-A Duolingo-style bilingual (Hindi/Kannada + English) learning app for Biology, Chemistry and Physics. The full spec is `docs/PRD.md`: read its overview before any milestone, build milestones strictly in order, and don't build features from later milestones early. Wherever the PRD says VERIFY, read the vendor's current docs before writing code.
+Mooshala: a Duolingo-style bilingual (Hindi/Kannada + English) learning app for Biology, Chemistry and Physics. The full spec is `docs/PRD.md`: read its overview before any milestone, build milestones strictly in order, and don't build features from later milestones early. Wherever the PRD says VERIFY, read the vendor's current docs before writing code.
 
 ## Rules (from the PRD)
 
@@ -18,7 +18,11 @@ A Duolingo-style bilingual (Hindi/Kannada + English) learning app for Biology, C
 - Use `BilingualText` for every question, option, button and explanation: bold regional line above the muted English line. Get both lines with `bilingualStringResource(R.string.x)`.
 - The app language follows the stored language mode (`LanguageRepository`), never the phone's language.
 - Every Hindi/Kannada string written is a draft: add it to `docs/translations-to-review.md`.
-- Say "Not quite", never "Wrong". Text on baby blue or cream is always dark.
+- Say "Not quite", never "Wrong".
+
+## Design
+
+The look follows the Mooshala prototype (`docs/design/mooshala-code.md`), which replaces the PRD's Design section (see `docs/decisions.md`). Use the design-system tokens and components: `StemColors`, `Rubik` + Noto regional fonts, `ChunkyButton` (Primary/White/Ghost), `AnswerOption`, `SpeechBubble`, `ProgressBar`, `TopStatsBar`, `SourceChip`, `StickerIcon` (never emoji), `CowMascot` and `MeadowScene`. When a milestone builds a screen that Mooshala mocks up, follow the mockup, but only build what the PRD scopes for that milestone.
 
 ## Layout
 

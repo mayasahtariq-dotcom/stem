@@ -20,7 +20,7 @@ import com.stemtutor.core.designsystem.preview.BilingualPreviews
 import com.stemtutor.core.designsystem.text.BilingualString
 import com.stemtutor.core.designsystem.text.bilingualStringResource
 import com.stemtutor.core.designsystem.text.currentLanguageMode
-import com.stemtutor.core.designsystem.theme.NotoSans
+import com.stemtutor.core.designsystem.theme.Rubik
 import com.stemtutor.core.designsystem.theme.StemColors
 import com.stemtutor.core.designsystem.theme.StemTutorTheme
 import com.stemtutor.core.designsystem.theme.regionalFontFamily
@@ -74,7 +74,8 @@ fun BilingualText(
             text = text.english,
             modifier = Modifier.padding(top = 2.dp).testTag(BilingualTextTags.ENGLISH),
             style = TextStyle(
-                fontFamily = NotoSans,
+                fontFamily = Rubik,
+                fontWeight = FontWeight.Medium,
                 fontSize = size.englishSize,
                 lineHeight = size.englishLineHeight,
                 color = englishColor,

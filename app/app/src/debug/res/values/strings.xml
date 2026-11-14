@@ -6,9 +6,11 @@
     <string name="gallery_section_options">Answer options (tap one)</string>
     <string name="gallery_section_option_states">Answer option states</string>
     <string name="gallery_section_stats">Streak, XP and hearts</string>
-    <string name="gallery_section_source">Source chip</string>
     <string name="gallery_section_states">Loading, error and empty screens</string>
     <string name="gallery_section_backend">Backend status</string>
     <string name="gallery_backend_ok">Connected (version %1$s)</string>
     <string name="gallery_backend_error">Can\'t reach the server.</string>
+    <string name="gallery_section_bubble">Speech bubble and progress</string>
+    <string name="gallery_section_mascot">The cow and its poses</string>
+    <string name="gallery_section_icons">Sticker icons</string>
 </resources>
