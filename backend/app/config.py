@@ -1,4 +1,5 @@
 from functools import lru_cache
+from typing import Literal
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -15,6 +16,32 @@ class Settings(BaseSettings):
     anthropic_api_key: str = ""
     sarvam_api_key: str = ""
     log_level: str = "INFO"
+
+    # ---- AI (M2). Open-source models; fakes until configured. --------------------------
+    # true: fake OCR, LLM and embeddings (tests, development without models).
+    use_fake_ai: bool = True
+    # Any OpenAI-compatible chat API: OpenRouter, Together, Groq, vLLM, Ollama...
+    llm_base_url: str = "https://openrouter.ai/api/v1"
+    llm_api_key: str = ""
+    # Model names are settings, never hard-coded (PRD). Chosen by the bake-off on real notes.
+    llm_outline_model: str = "qwen/qwen-2.5-72b-instruct"
+    llm_terms_model: str = "qwen/qwen-2.5-7b-instruct"
+    llm_questions_model: str = "qwen/qwen-2.5-72b-instruct"
+    llm_timeout_seconds: float = 120.0
+    # Rough cost estimate per million tokens, in US dollars, for the generation metrics.
+    llm_price_input_per_mtok: float = 0.0
+    llm_price_output_per_mtok: float = 0.0
+    embedding_model: str = "BAAI/bge-m3"
+    embedding_dim: int = 1024
+
+    # ---- Storage and jobs ------------------------------------------------------------------
+    storage_backend: Literal["local", "supabase"] = "local"
+    storage_bucket: str = "notes"
+    local_storage_dir: str = "var/uploads"
+    # Base URL the app uses to reach this API (for LocalStorage upload links).
+    public_base_url: str = "http://localhost:8000"
+    # true: run background jobs in-process (tests, development). false: procrastinate queue.
+    jobs_inline: bool = True
 
 
 @lru_cache

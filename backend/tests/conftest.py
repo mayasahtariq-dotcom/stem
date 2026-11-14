@@ -12,6 +12,7 @@ import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import Engine, create_engine, text
 
+from app.ai.providers import Services, build_services, get_services
 from app.config import Settings, get_settings
 from app.main import create_app
 
@@ -104,7 +105,11 @@ def migrated_engine(database_url: str) -> Iterator[Engine]:
 def wipe(engine: Engine) -> None:
     with engine.begin() as conn:
         conn.execute(
-            text("TRUNCATE join_attempts, memberships, classrooms, users, auth.users CASCADE")
+            text(
+                "TRUNCATE course_assignments, terms, questions, lessons, units, courses,"
+                " note_chunks, upload_pages, uploads, join_attempts, memberships, classrooms,"
+                " users, auth.users CASCADE"
+            )
         )
 
 
@@ -120,9 +125,25 @@ def db_settings(database_url: str, migrated_engine: Engine) -> Settings:
 
 
 @pytest.fixture
-def api(db_settings: Settings) -> Iterator[TestClient]:
+def services(db_settings: Settings, tmp_path: Path) -> Services:
+    """Fake AI, files in a temp folder, jobs run inline."""
+    settings = db_settings.model_copy(
+        update={
+            "use_fake_ai": True,
+            "storage_backend": "local",
+            "local_storage_dir": str(tmp_path / "uploads"),
+            "public_base_url": "http://testserver",
+            "jobs_inline": True,
+        }
+    )
+    return build_services(settings)
+
+
+@pytest.fixture
+def api(db_settings: Settings, services: Services) -> Iterator[TestClient]:
     app = create_app()
     app.dependency_overrides[get_settings] = lambda: db_settings
+    app.dependency_overrides[get_services] = lambda: services
     with TestClient(app) as c:
         yield c
 
@@ -154,6 +175,12 @@ class Person:
 
     def post(self, path: str, body: dict[str, Any]) -> Any:
         return self.api.post(path, json=body, headers=self.headers)
+
+    def put(self, path: str, body: dict[str, Any]) -> Any:
+        return self.api.put(path, json=body, headers=self.headers)
+
+    def delete(self, path: str) -> Any:
+        return self.api.delete(path, headers=self.headers)
 
 
 @pytest.fixture

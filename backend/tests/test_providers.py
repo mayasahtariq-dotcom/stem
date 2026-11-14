@@ -1,3 +1,4 @@
+from app.ai.embeddings import FakeEmbeddingProvider
 from app.ai.llm import FakeLLMProvider, LLMProvider, LLMRequest
 from app.speech.provider import FakeSpeechProvider, SpeechProvider
 
@@ -7,7 +8,8 @@ def test_fake_llm_returns_canned_responses_in_order() -> None:
     request = LLMRequest(model="fake", system="s", prompt="p")
     assert provider.complete(request).text == '{"a": 1}'
     assert provider.complete(request).text == '{"b": 2}'
-    assert len(provider.embed(["x", "y"])) == 2
+    vectors = FakeEmbeddingProvider(dim=16).embed(["x", "y"])
+    assert len(vectors) == 2 and len(vectors[0]) == 16
 
 
 def test_fake_speech_is_deterministic() -> None:

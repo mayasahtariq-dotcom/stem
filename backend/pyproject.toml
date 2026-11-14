@@ -12,6 +12,8 @@ dependencies = [
     "psycopg[binary]>=3.2",
     "pyjwt[crypto]>=2.9",
     "procrastinate>=2.0",
+    "httpx>=0.27",
+    "pypdf>=4.0",
 ]
 
 [project.optional-dependencies]
@@ -24,12 +26,23 @@ dev = [
     "pgserver>=0.1; sys_platform == 'win32'",
 ]
 
+# Real AI models (Surya OCR, BGE-M3 embeddings). Heavy (PyTorch); not installed in CI.
+ml = [
+    "surya-ocr>=0.6",
+    "sentence-transformers>=3.0",
+    "pillow>=10.0",
+    "pypdfium2>=4.0",
+]
+
 [build-system]
 requires = ["setuptools>=69"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 include = ["app*"]
+
+[tool.setuptools.package-data]
+"app.ai.prompts" = ["*.md"]
 
 [tool.ruff]
 line-length = 100
@@ -49,7 +62,7 @@ plugins = ["pydantic.mypy"]
 exclude = ["alembic/"]
 
 [[tool.mypy.overrides]]
-module = ["procrastinate.*", "pgserver", "pgserver.*"]
+module = ["procrastinate.*", "pgserver", "pgserver.*", "surya.*", "sentence_transformers.*", "PIL.*", "pypdf.*"]
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]
