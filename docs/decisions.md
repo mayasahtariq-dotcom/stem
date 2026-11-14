@@ -54,3 +54,23 @@ The user supplied a web prototype, `docs/design/mooshala-code.md` ("Mooshala"), 
   - **Licence (VERIFY before the pilot):** Surya's code is GPL-3.0, which is fine for server-side use. Its model weights are free for personal use, research and small organisations, but larger commercial use needs a paid licence. Check the current terms on the Surya repository before any commercial launch.
   - **Known limits:** Surya is strongest on printed text, so messy handwriting may need retakes or teacher fixes in review. Low OCR confidence feeds the PRD's "flagged" questions.
   - **Still open:** the model that writes the outline, terms and questions (also to be open-source, e.g. Qwen, Gemma or Sarvam-M via a hosted API). It will be picked by comparing candidates on real note photos at the start of M2.
+
+## M2 (2026-11-15)
+
+- **Started before M1's device checks.** At the user's request, M2 began while M1's phone checks (real Supabase login, WhatsApp share, QR scan, links) were still open.
+- **Open-source AI instead of Claude.** Every AI step sits behind an interface with a fake used in tests and debug builds:
+  - **OCR:** Surya (see "M2 preparation" above). The PRD's "strongest vision model reads each page" becomes Surya text + confidence, plus Surya layout boxes for diagram positions. Formulas come through as OCR text, not separate formula objects.
+  - **Text model:** any OpenAI-compatible chat API (`LLM_BASE_URL`, `LLM_API_KEY`), so OpenRouter, Together, Groq or a self-hosted vLLM/Ollama all work. The outline, terms and questions models are separate settings (PRD: "model names are settings"). Defaults are Qwen 2.5 72B/7B until the bake-off picks the winner.
+  - **Embeddings:** BGE-M3 (1024 dimensions) via sentence-transformers, stored in pgvector.
+  - Surya and BGE-M3 need PyTorch, so they're an optional `[ml]` extra. CI and tests use the fakes.
+- **Model choice still open.** `backend/scripts/bakeoff.py` runs Surya plus each candidate model on `samples/*.jpg` and saves the results to `docs/demos/M2-samples/`. That's also the PRD's "manual run with real AI on three real handwritten note photos".
+- **Storage.** Supabase Storage (private bucket, signed upload links) in production. `LocalStorage` (files on the PC, uploaded through a signed `PUT /local-storage/{token}`) for development, so the real pipeline can run without Supabase. The page files skip our API token.
+- **Jobs.** procrastinate (Postgres queue) when `JOBS_INLINE=false`; jobs run in-process for tests and development. Jobs are queued after the response, and the upload is claimed in its own short transaction, so the request never holds a lock the job needs. An early version deadlocked on this; the claim fixes it.
+- **Invalid AI output.** One retry, then the outline marks the upload `needs_review`, or a lesson becomes `needs_review`; term cards are skipped. Page numbers the AI invents are corrected to a real page, with lowered confidence and a flag. Questions from pages with OCR confidence below 0.6 are flagged automatically.
+- **Lazy generation.** Lesson N+1 is generated when the teacher opens lesson N in review. A conditional UPDATE makes this happen exactly once. M3 will reuse `ensure_next_lesson` when a student starts a lesson.
+- **Personal courses** skip review: their lessons are published right away and show the "AI-made" badge. A teacher can also choose "just for me".
+- **PDFs** count as one page of the 10. Text PDFs are read directly; scanned ones go through OCR.
+- **Students' course list** is read-only until M3, as the PRD says. Students don't see unpublished lessons of class courses at all (RLS), and a direct request gets 403 `LESSON_NOT_PUBLISHED`.
+- **Library added:** `androidx.exifinterface`, a small AndroidX library, so phone photos aren't decoded sideways.
+- **Ready banner.** When generation finishes after the teacher left the screen, an in-app banner appears at the top of any screen. Push notifications replace it in M6.
+- **Page reordering:** long-press and drag a thumbnail sideways, or use the arrow buttons for accessibility.

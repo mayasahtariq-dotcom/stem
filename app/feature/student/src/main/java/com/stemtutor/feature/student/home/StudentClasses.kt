@@ -26,6 +26,8 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.stemtutor.core.data.classroom.ClassroomRepository
+import com.stemtutor.core.data.course.CourseRepository
+import com.stemtutor.core.data.model.CourseSummary
 import com.stemtutor.core.data.model.StudentClassroom
 import com.stemtutor.core.data.model.Subject
 import com.stemtutor.core.data.profile.ProfileRepository
@@ -44,6 +46,7 @@ import com.stemtutor.core.designsystem.mascot.MeadowScene
 import com.stemtutor.core.designsystem.preview.BilingualPreviews
 import com.stemtutor.core.designsystem.text.BilingualString
 import com.stemtutor.core.designsystem.text.bilingualStringResource
+import com.stemtutor.core.designsystem.text.currentLanguageMode
 import com.stemtutor.core.designsystem.text.messageRes
 import com.stemtutor.core.designsystem.theme.StemColors
 import com.stemtutor.core.designsystem.theme.StemTutorTheme
@@ -62,7 +65,11 @@ import com.stemtutor.core.designsystem.R as DsR
 sealed interface StudentClassesUiState {
     data object Loading : StudentClassesUiState
     data class Error(val error: AppError) : StudentClassesUiState
-    data class Ready(val name: String, val classes: List<StudentClassroom>) : StudentClassesUiState
+    data class Ready(
+        val name: String,
+        val classes: List<StudentClassroom>,
+        val courses: List<CourseSummary> = emptyList(),
+    ) : StudentClassesUiState
 }
 
 /** Shared by the Home and Class tabs: the student's name and the classes they've joined. */
@@ -70,6 +77,7 @@ sealed interface StudentClassesUiState {
 class StudentClassesViewModel @Inject constructor(
     private val classrooms: ClassroomRepository,
     private val profiles: ProfileRepository,
+    private val courses: CourseRepository,
 ) : ViewModel() {
     private val _state = MutableStateFlow<StudentClassesUiState>(StudentClassesUiState.Loading)
     val state: StateFlow<StudentClassesUiState> = _state.asStateFlow()
@@ -82,8 +90,9 @@ class StudentClassesViewModel @Inject constructor(
         if (_state.value !is StudentClassesUiState.Ready) _state.value = StudentClassesUiState.Loading
         viewModelScope.launch {
             val name = profiles.me().getOrNull()?.name.orEmpty()
+            val myCourses = courses.studentCourses().getOrDefault(emptyList())
             classrooms.myClassrooms().fold(
-                onSuccess = { _state.value = StudentClassesUiState.Ready(name, it) },
+                onSuccess = { _state.value = StudentClassesUiState.Ready(name, it, myCourses) },
                 onFailure = { _state.value = StudentClassesUiState.Error(it.appError) },
             )
         }
@@ -92,7 +101,13 @@ class StudentClassesViewModel @Inject constructor(
 
 /** Student home: the meadow and cow, a greeting, My classes and a Join button. */
 @Composable
-fun StudentHomeScreen(state: StudentClassesUiState, onJoin: () -> Unit, onRetry: () -> Unit, animate: Boolean = true) {
+fun StudentHomeScreen(
+    state: StudentClassesUiState,
+    onJoin: () -> Unit,
+    onRetry: () -> Unit,
+    animate: Boolean = true,
+    onMakeCourse: () -> Unit = {},
+) {
     when (state) {
         StudentClassesUiState.Loading -> LoadingScreen(animate = animate)
         is StudentClassesUiState.Error -> ErrorScreen(onRetry, messageRes = state.error.messageRes(), animate = animate)
@@ -117,6 +132,50 @@ fun StudentHomeScreen(state: StudentClassesUiState, onJoin: () -> Unit, onRetry:
                 )
             }
             classList(state.classes, onJoin)
+            item {
+                ChunkyButton(
+                    com.stemtutor.feature.notes.R.string.nt_make_course,
+                    onMakeCourse,
+                    Modifier.padding(horizontal = 20.dp).fillMaxWidth(),
+                    ChunkyButtonStyle.Cream,
+                )
+            }
+            if (state.courses.isNotEmpty()) {
+                item {
+                    BilingualText(R.string.st_my_courses, size = BilingualTextSize.Large, modifier = Modifier.padding(horizontal = 20.dp))
+                }
+                items(state.courses, key = { "course-" + it.id }) { CourseCard(it) }
+                item {
+                    BilingualText(R.string.st_courses_soon, size = BilingualTextSize.Small, modifier = Modifier.padding(horizontal = 20.dp))
+                }
+            }
+        }
+    }
+}
+
+/** Read-only until M3 (playing lessons). Personal courses carry the "AI-made" badge. */
+@Composable
+private fun CourseCard(c: CourseSummary) {
+    Row(
+        Modifier
+            .padding(horizontal = 20.dp)
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(22.dp))
+            .background(StemColors.Cream)
+            .padding(12.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
+    ) {
+        StickerIcon(Sticker.Books, size = 32.dp)
+        BilingualText(BilingualString(c.title.regional(currentLanguageMode()), c.title.en), modifier = Modifier.weight(1f))
+        if (c.aiMade) {
+            BilingualText(
+                R.string.st_ai_made,
+                size = BilingualTextSize.Small,
+                regionalColor = StemColors.Brown,
+                englishColor = StemColors.Brown,
+                modifier = Modifier.clip(RoundedCornerShape(10.dp)).background(StemColors.ChipFill).padding(horizontal = 8.dp, vertical = 2.dp),
+            )
         }
     }
 }

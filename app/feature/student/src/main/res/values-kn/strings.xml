@@ -20,4 +20,8 @@
     <string name="st_camera_why">ತರಗತಿಯ QR ಕೋಡ್ ಸ್ಕ್ಯಾನ್ ಮಾಡಲು ಮೂಶಾಲೆಗೆ ಕ್ಯಾಮೆರಾ ಬೇಕು.</string>
     <string name="st_camera_allow">ಕ್ಯಾಮೆರಾ ಅನುಮತಿಸಿ</string>
     <string name="st_scan_hint">ಕ್ಯಾಮೆರಾವನ್ನು ಬೋರ್ಡ್‌ನ QR ಕೋಡ್ ಕಡೆ ತೋರಿಸಿ.</string>
+
+    <string name="st_my_courses">ನನ್ನ ಕೋರ್ಸ್‌ಗಳು</string>
+    <string name="st_ai_made">AI ನಿರ್ಮಿತ</string>
+    <string name="st_courses_soon">ಮುಂದಿನ ಅಪ್‌ಡೇಟ್‌ನಲ್ಲಿ ಪಾಠಗಳನ್ನು ಆಡಬಹುದು.</string>
 </resources>

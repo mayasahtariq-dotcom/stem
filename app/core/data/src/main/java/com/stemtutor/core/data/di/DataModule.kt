@@ -9,6 +9,10 @@ import com.stemtutor.core.data.auth.SupabaseAuthRepository
 import com.stemtutor.core.data.classroom.ClassroomRepository
 import com.stemtutor.core.data.classroom.FakeClassroomRepository
 import com.stemtutor.core.data.classroom.RemoteClassroomRepository
+import com.stemtutor.core.data.course.CourseRepository
+import com.stemtutor.core.data.course.FakeCourseRepository
+import com.stemtutor.core.data.course.GenerationWatcher
+import com.stemtutor.core.data.course.RemoteCourseRepository
 import com.stemtutor.core.data.health.FakeHealthRepository
 import com.stemtutor.core.data.health.HealthRepository
 import com.stemtutor.core.data.health.RealHealthRepository
@@ -62,6 +66,15 @@ object DataModule {
         profiles: ProfileRepository,
     ): ClassroomRepository =
         if (config.useRealApi) RemoteClassroomRepository(api.get()) else FakeClassroomRepository(auth, profiles)
+
+    @Provides
+    @Singleton
+    fun provideCourseRepository(config: ApiConfig, api: Provider<StemApi>, auth: AuthRepository): CourseRepository =
+        if (config.useRealApi) RemoteCourseRepository(api.get()) else FakeCourseRepository(auth)
+
+    @Provides
+    @Singleton
+    fun provideGenerationWatcher(courses: CourseRepository): GenerationWatcher = GenerationWatcher(courses)
 
     @Provides
     @Singleton

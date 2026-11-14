@@ -30,6 +30,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import com.stemtutor.core.common.language.LanguageMode
 import com.stemtutor.core.data.classroom.ClassroomRepository
+import com.stemtutor.core.data.course.CourseRepository
+import com.stemtutor.core.data.model.CourseSummary
 import com.stemtutor.core.data.model.Subject
 import com.stemtutor.core.data.model.TeacherClassroom
 import com.stemtutor.core.data.profile.ProfileRepository
@@ -47,6 +49,7 @@ import com.stemtutor.core.designsystem.mascot.CowPose
 import com.stemtutor.core.designsystem.preview.BilingualPreviews
 import com.stemtutor.core.designsystem.text.BilingualString
 import com.stemtutor.core.designsystem.text.bilingualStringResource
+import com.stemtutor.core.designsystem.text.currentLanguageMode
 import com.stemtutor.core.designsystem.text.messageRes
 import com.stemtutor.core.designsystem.theme.StemColors
 import com.stemtutor.core.designsystem.theme.StemTutorTheme
@@ -98,13 +101,18 @@ fun HeaderIconButton(icon: Sticker, description: String, onClick: () -> Unit) {
 sealed interface TeacherHomeUiState {
     data object Loading : TeacherHomeUiState
     data class Error(val error: AppError) : TeacherHomeUiState
-    data class Ready(val name: String, val classes: List<TeacherClassroom>) : TeacherHomeUiState
+    data class Ready(
+        val name: String,
+        val classes: List<TeacherClassroom>,
+        val courses: List<CourseSummary> = emptyList(),
+    ) : TeacherHomeUiState
 }
 
 @HiltViewModel
 class TeacherHomeViewModel @Inject constructor(
     private val classrooms: ClassroomRepository,
     private val profiles: ProfileRepository,
+    private val courses: CourseRepository,
 ) : ViewModel() {
     private val _state = MutableStateFlow<TeacherHomeUiState>(TeacherHomeUiState.Loading)
     val state: StateFlow<TeacherHomeUiState> = _state.asStateFlow()
@@ -117,8 +125,9 @@ class TeacherHomeViewModel @Inject constructor(
         if (_state.value !is TeacherHomeUiState.Ready) _state.value = TeacherHomeUiState.Loading
         viewModelScope.launch {
             val name = profiles.me().getOrNull()?.name.orEmpty()
+            val myCourses = courses.teacherCourses().getOrDefault(emptyList())
             classrooms.teacherClassrooms().fold(
-                onSuccess = { _state.value = TeacherHomeUiState.Ready(name, it) },
+                onSuccess = { _state.value = TeacherHomeUiState.Ready(name, it, myCourses) },
                 onFailure = { _state.value = TeacherHomeUiState.Error(it.appError) },
             )
         }
@@ -130,12 +139,18 @@ fun TeacherHomeRoute(
     onCreate: () -> Unit,
     onOpen: (String) -> Unit,
     onProfile: () -> Unit,
+    onMakeCourse: () -> Unit,
+    onOpenCourse: (String) -> Unit,
     refreshKey: Int = 0,
     viewModel: TeacherHomeViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     androidx.compose.runtime.LaunchedEffect(refreshKey) { if (refreshKey > 0) viewModel.load() }
-    TeacherHomeScreen(state, onCreate, onOpen, onProfile, viewModel::load)
+    androidx.lifecycle.compose.LifecycleResumeEffect(Unit) {
+        viewModel.load()
+        onPauseOrDispose {}
+    }
+    TeacherHomeScreen(state, onCreate, onOpen, onProfile, viewModel::load, onMakeCourse = onMakeCourse, onOpenCourse = onOpenCourse)
 }
 
 @Composable
@@ -146,6 +161,8 @@ fun TeacherHomeScreen(
     onProfile: () -> Unit,
     onRetry: () -> Unit,
     animate: Boolean = true,
+    onMakeCourse: () -> Unit = {},
+    onOpenCourse: (String) -> Unit = {},
 ) {
     Column(Modifier.fillMaxSize().background(StemColors.TeacherBackground)) {
         val name = (state as? TeacherHomeUiState.Ready)?.name.orEmpty()
@@ -162,6 +179,14 @@ fun TeacherHomeScreen(
                 contentPadding = PaddingValues(16.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp),
             ) {
+                item {
+                    ChunkyButton(
+                        com.stemtutor.feature.notes.R.string.nt_make_course,
+                        onMakeCourse,
+                        Modifier.fillMaxWidth(),
+                        com.stemtutor.core.designsystem.component.ChunkyButtonStyle.Cream,
+                    )
+                }
                 item { BilingualText(R.string.te_my_classes, size = BilingualTextSize.Large) }
                 if (state.classes.isEmpty()) {
                     item {
@@ -173,7 +198,31 @@ fun TeacherHomeScreen(
                 }
                 items(state.classes, key = { it.id }) { ClassroomCard(it) { onOpen(it.id) } }
                 item { ChunkyButton(R.string.te_create, onCreate, Modifier.fillMaxWidth()) }
+                item { BilingualText(R.string.tc_courses, size = BilingualTextSize.Large) }
+                if (state.courses.isEmpty()) item { SpeechBubble(R.string.tc_no_courses, Modifier.fillMaxWidth()) }
+                items(state.courses, key = { "course-" + it.id }) { CourseCard(it) { onOpenCourse(it.id) } }
             }
+        }
+    }
+}
+
+@Composable
+private fun CourseCard(c: CourseSummary, onClick: () -> Unit) {
+    val counts = bilingualStringResource(R.string.tc_lessons_n, c.lessonCount, c.publishedCount)
+    Row(
+        Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(22.dp))
+            .background(StemColors.White)
+            .clickable(onClick = onClick)
+            .padding(14.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
+    ) {
+        StickerIcon(Sticker.Books, size = 36.dp)
+        Column(Modifier.weight(1f)) {
+            BilingualText(BilingualString(c.title.regional(currentLanguageMode()), c.title.en))
+            Text("${counts.regional} · ${counts.english}", color = StemColors.Muted, fontSize = 13.sp)
         }
     }
 }

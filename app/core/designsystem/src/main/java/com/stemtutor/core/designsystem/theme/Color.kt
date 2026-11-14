@@ -42,4 +42,7 @@ object StemColors {
     val TeacherBackground = Color(0xFFFFF8EC)
     val FieldFill = Color(0xFFFAFBFC)
     val KeyCream = Color(0xFFF3DFB8)
+    val CreamEdge = Color(0xFFD8BD88)
+    val FlagFill = Color(0xFFFFF4D6)
+    val FlagText = Color(0xFF8A5A00)
 }

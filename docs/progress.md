@@ -23,11 +23,11 @@ One checklist per milestone, copied from `docs/PRD.md`. Tick items only when the
 
 ## M2: Notes to course
 
-- [ ] A teacher uploads three photos and sees the outline and lesson 1 in under 60 seconds with real Claude.
-- [ ] Flagged items appear first with a reason.
-- [ ] A teacher can edit, regenerate and delete questions, and the changes are saved.
-- [ ] Publishing to a classroom makes the course appear in that class's student list.
-- [ ] A student can make a personal course and it shows the "AI-made" badge.
+- [ ] A teacher uploads three photos and sees the outline and lesson 1 in under 60 seconds with real Claude. *(Claude replaced by open-source models at the user's request; needs the real-model run with `scripts/bakeoff.py` and timing.)*
+- [x] Flagged items appear first with a reason. *(Tested in the app and the backend.)*
+- [x] A teacher can edit, regenerate and delete questions, and the changes are saved. *(Backend tests on Postgres; app flow built on the same API.)*
+- [x] Publishing to a classroom makes the course appear in that class's student list. *(Backend test; needs a device check.)*
+- [x] A student can make a personal course and it shows the "AI-made" badge. *(Backend test; needs a device check.)*
 - [ ] All tests pass, `progress.md` is ticked and the demo note is written.
 
 ## M3: Student learning

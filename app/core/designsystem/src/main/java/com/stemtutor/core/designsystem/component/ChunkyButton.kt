@@ -33,9 +33,10 @@ import com.stemtutor.core.designsystem.theme.StemTutorTheme
 
 /**
  * Mooshala button styles: [Primary] green with white text (one per screen), [White] for
- * secondary actions and on blue/coloured screens, [Ghost] a flat text button.
+ * secondary actions and on blue/coloured screens, [Ghost] a flat text button, [Cream] the big
+ * "Make a course from notes" highlight.
  */
-enum class ChunkyButtonStyle { Primary, White, Ghost }
+enum class ChunkyButtonStyle { Primary, White, Ghost, Cream }
 
 private data class ChunkyColors(val face: Color, val edge: Color, val text: Color, val english: Color)
 
@@ -45,6 +46,8 @@ private fun colorsFor(style: ChunkyButtonStyle, enabled: Boolean): ChunkyColors 
     !enabled -> ChunkyColors(StemColors.Line, StemColors.DisabledEdge, StemColors.Muted, StemColors.Muted)
     style == ChunkyButtonStyle.Primary ->
         ChunkyColors(StemColors.Green, StemColors.GreenDark, StemColors.White, StemColors.White.copy(alpha = 0.85f))
+    style == ChunkyButtonStyle.Cream ->
+        ChunkyColors(StemColors.KeyCream, StemColors.CreamEdge, StemColors.Ink, StemColors.Brown)
     else -> ChunkyColors(StemColors.White, StemColors.WhiteEdge, StemColors.Ink, StemColors.Muted)
 }
 

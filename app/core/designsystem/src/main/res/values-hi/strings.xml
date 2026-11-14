@@ -51,4 +51,15 @@
     <string name="ds_back">वापस</string>
     <string name="ds_profile">प्रोफ़ाइल</string>
     <string name="ds_home">होम</string>
+
+    <string name="err_invalid_upload">इन पेजों में कुछ गड़बड़ है। कृपया जाँचें।</string>
+    <string name="err_file_too_large">यह फ़ाइल बहुत बड़ी है। PDF 10 MB तक हो सकती है।</string>
+    <string name="err_pages_missing">कुछ पेज अपलोड नहीं हुए। फिर से कोशिश करें।</string>
+    <string name="err_lesson_not_published">यह पाठ अभी प्रकाशित नहीं हुआ है।</string>
+    <string name="err_lesson_not_ready">यह पाठ अभी तैयार नहीं है।</string>
+    <string name="err_invalid_question">सवाल की हर भाषा भरें।</string>
+    <string name="err_ai_unavailable">AI अभी व्यस्त है। थोड़ी देर में फिर कोशिश करें।</string>
+    <string name="ds_save">सेव करें</string>
+    <string name="ds_cancel">रद्द करें</string>
+    <string name="ds_done">हो गया</string>
 </resources>

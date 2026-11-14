@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- DRAFT translations: listed in docs/translations-to-review.md for a native speaker. -->
+<resources>
+    <string name="nt_make_course">नोट्स से कोर्स बनाओ</string>
+    <string name="nt_add_pages_hint">आज के नोट्स की फ़ोटो जोड़ो, 10 पेज तक।</string>
+    <string name="nt_camera">कैमरा</string>
+    <string name="nt_gallery">गैलरी</string>
+    <string name="nt_pdf">PDF</string>
+    <string name="nt_type">नोट्स टाइप करो</string>
+    <string name="nt_pages_n">पेज: 10 में से %1$d</string>
+    <string name="nt_page_n">पेज %1$d</string>
+    <string name="nt_move_left">बाएँ करो</string>
+    <string name="nt_move_right">दाएँ करो</string>
+    <string name="nt_delete_page">पेज हटाओ</string>
+    <string name="nt_edit_page">काटो या घुमाओ</string>
+    <string name="nt_blurry">यह फ़ोटो धुंधली लग रही है। दोबारा लें या रखें?</string>
+    <string name="nt_retake">दोबारा लो</string>
+    <string name="nt_keep">रखो</string>
+    <string name="nt_subject_grade">विषय और कक्षा</string>
+    <string name="nt_for_class">मेरी क्लास के लिए</string>
+    <string name="nt_just_me">सिर्फ़ मेरे लिए</string>
+    <string name="nt_make">कोर्स बनाओ</string>
+    <string name="nt_typed_placeholder">अपने नोट्स टाइप या पेस्ट करो</string>
+    <string name="nt_add_text">पेज जोड़ो</string>
+    <string name="nt_pdf_too_big">यह PDF 10 MB से बड़ी है। छोटी फ़ाइल चुनो।</string>
+    <string name="nt_too_many_pages">तुम 10 पेज तक जोड़ सकते हो।</string>
+    <string name="nt_preparing">तुम्हारे पेज तैयार हो रहे हैं…</string>
+    <string name="nt_rotate">घुमाओ</string>
+    <string name="nt_crop_hint">काटने के लिए कोने खींचो।</string>
+    <string name="nt_take_photo">फ़ोटो लो</string>
+    <string name="nt_photos_taken">%1$d ली गईं</string>
+    <string name="nt_camera_why">नोट्स की फ़ोटो लेने के लिए मूशाला को कैमरा चाहिए।</string>
+    <string name="nt_allow_camera">कैमरा चालू करो</string>
+    <string name="nt_gen_title">तुम्हारा कोर्स बन रहा है…</string>
+    <string name="nt_step_queued">नोट्स मिल गए</string>
+    <string name="nt_step_reading">नोट्स पढ़ रहे हैं (%1$d पेज)</string>
+    <string name="nt_step_chunking">नोट्स सजा रहे हैं</string>
+    <string name="nt_step_outlining">विषय ढूँढ रहे हैं</string>
+    <string name="nt_step_terms">मुख्य शब्द ढूँढ रहे हैं</string>
+    <string name="nt_step_lesson">पाठ 1 बना रहे हैं</string>
+    <string name="nt_step_ready">पाठ 1 तैयार है!</string>
+    <string name="nt_can_leave">तुम जा सकते हो। पाठ 1 तैयार होने पर हम बताएँगे।</string>
+    <string name="nt_leave">अभी के लिए बाहर जाओ</string>
+    <string name="nt_open_review">कोर्स जाँचो</string>
+    <string name="nt_open_course">कोर्स खोलो</string>
+    <string name="nt_gen_failed">इन नोट्स से कोर्स नहीं बन पाया। साफ़ फ़ोटो से कोशिश करो।</string>
+    <string name="nt_gen_needs_review">AI के जवाब की जाँच ज़रूरी है। थोड़ी देर में फिर कोशिश करो।</string>
+    <string name="nt_banner_ready">तुम्हारा कोर्स तैयार है!</string>
+    <string name="nt_banner_open">खोलो</string>
+</resources>

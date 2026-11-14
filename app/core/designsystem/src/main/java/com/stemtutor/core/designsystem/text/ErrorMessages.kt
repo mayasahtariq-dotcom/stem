@@ -22,5 +22,12 @@ fun AppError.messageRes(): Int = when (this) {
         ApiErrorCode.LANGUAGE_NOT_ALLOWED -> R.string.err_language_not_allowed
         ApiErrorCode.TOO_MANY_ATTEMPTS -> R.string.err_too_many_attempts
         ApiErrorCode.KEY_GENERATION_FAILED -> R.string.err_unknown
+        ApiErrorCode.INVALID_UPLOAD -> R.string.err_invalid_upload
+        ApiErrorCode.FILE_TOO_LARGE -> R.string.err_file_too_large
+        ApiErrorCode.PAGES_MISSING -> R.string.err_pages_missing
+        ApiErrorCode.LESSON_NOT_PUBLISHED -> R.string.err_lesson_not_published
+        ApiErrorCode.LESSON_NOT_READY -> R.string.err_lesson_not_ready
+        ApiErrorCode.INVALID_QUESTION -> R.string.err_invalid_question
+        ApiErrorCode.AI_UNAVAILABLE -> R.string.err_ai_unavailable
     }
 }

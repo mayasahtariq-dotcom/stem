@@ -51,4 +51,15 @@
     <string name="ds_back">ಹಿಂದೆ</string>
     <string name="ds_profile">ಪ್ರೊಫೈಲ್</string>
     <string name="ds_home">ಮನೆ</string>
+
+    <string name="err_invalid_upload">ಈ ಪುಟಗಳಲ್ಲಿ ಏನೋ ತಪ್ಪಿದೆ. ದಯವಿಟ್ಟು ಪರಿಶೀಲಿಸಿ.</string>
+    <string name="err_file_too_large">ಈ ಫೈಲ್ ತುಂಬಾ ದೊಡ್ಡದು. PDF 10 MB ವರೆಗೆ ಇರಬಹುದು.</string>
+    <string name="err_pages_missing">ಕೆಲವು ಪುಟಗಳು ಅಪ್‌ಲೋಡ್ ಆಗಲಿಲ್ಲ. ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.</string>
+    <string name="err_lesson_not_published">ಈ ಪಾಠ ಇನ್ನೂ ಪ್ರಕಟವಾಗಿಲ್ಲ.</string>
+    <string name="err_lesson_not_ready">ಈ ಪಾಠ ಇನ್ನೂ ಸಿದ್ಧವಾಗಿಲ್ಲ.</string>
+    <string name="err_invalid_question">ಪ್ರಶ್ನೆಯ ಪ್ರತಿ ಭಾಷೆಯನ್ನೂ ತುಂಬಿ.</string>
+    <string name="err_ai_unavailable">AI ಈಗ ಕಾರ್ಯನಿರತವಾಗಿದೆ. ಸ್ವಲ್ಪ ಸಮಯದ ನಂತರ ಪ್ರಯತ್ನಿಸಿ.</string>
+    <string name="ds_save">ಉಳಿಸಿ</string>
+    <string name="ds_cancel">ರದ್ದುಮಾಡಿ</string>
+    <string name="ds_done">ಮುಗಿಯಿತು</string>
 </resources>

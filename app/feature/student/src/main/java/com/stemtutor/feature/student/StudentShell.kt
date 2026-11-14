@@ -34,12 +34,17 @@ import com.stemtutor.core.designsystem.R as DsR
 fun StudentShell(
     onJoin: () -> Unit,
     profile: @Composable () -> Unit,
+    onMakeCourse: () -> Unit = {},
     refreshKey: Int = 0,
     viewModel: StudentClassesViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     var tab by rememberSaveable { mutableIntStateOf(0) }
     LaunchedEffect(refreshKey) { if (refreshKey > 0) viewModel.load() }
+    androidx.lifecycle.compose.LifecycleResumeEffect(Unit) {
+        viewModel.load()
+        onPauseOrDispose {}
+    }
     val tabs = listOf(
         Tab(Sticker.Home, bilingualStringResource(R.string.st_tab_home)),
         Tab(Sticker.Book, bilingualStringResource(R.string.st_tab_learn)),
@@ -49,7 +54,7 @@ fun StudentShell(
     Scaffold(bottomBar = { BottomTabs(tabs, tab, { tab = it }) }) { padding ->
         Box(Modifier.fillMaxSize().padding(padding)) {
             when (tab) {
-                0 -> StudentHomeScreen(state, onJoin, viewModel::load)
+                0 -> StudentHomeScreen(state, onJoin, viewModel::load, onMakeCourse = onMakeCourse)
                 1 -> LearnComingSoon()
                 2 -> StudentClassTabScreen(state, onJoin, viewModel::load)
                 else -> profile()

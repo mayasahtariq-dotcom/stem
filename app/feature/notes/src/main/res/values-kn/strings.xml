@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- DRAFT translations: listed in docs/translations-to-review.md for a native speaker. -->
+<resources>
+    <string name="nt_make_course">ನೋಟ್ಸ್‌ನಿಂದ ಕೋರ್ಸ್ ಮಾಡಿ</string>
+    <string name="nt_add_pages_hint">ಇಂದಿನ ನೋಟ್ಸ್ ಫೋಟೋಗಳನ್ನು ಸೇರಿಸಿ, 10 ಪುಟಗಳವರೆಗೆ.</string>
+    <string name="nt_camera">ಕ್ಯಾಮೆರಾ</string>
+    <string name="nt_gallery">ಗ್ಯಾಲರಿ</string>
+    <string name="nt_pdf">PDF</string>
+    <string name="nt_type">ನೋಟ್ಸ್ ಟೈಪ್ ಮಾಡಿ</string>
+    <string name="nt_pages_n">ಪುಟಗಳು: 10ರಲ್ಲಿ %1$d</string>
+    <string name="nt_page_n">ಪುಟ %1$d</string>
+    <string name="nt_move_left">ಎಡಕ್ಕೆ ಸರಿಸಿ</string>
+    <string name="nt_move_right">ಬಲಕ್ಕೆ ಸರಿಸಿ</string>
+    <string name="nt_delete_page">ಪುಟ ಅಳಿಸಿ</string>
+    <string name="nt_edit_page">ಕತ್ತರಿಸಿ ಅಥವಾ ತಿರುಗಿಸಿ</string>
+    <string name="nt_blurry">ಈ ಫೋಟೋ ಮಸುಕಾಗಿದೆ. ಮತ್ತೆ ತೆಗೆಯಬೇಕೇ ಅಥವಾ ಇಟ್ಟುಕೊಳ್ಳಬೇಕೇ?</string>
+    <string name="nt_retake">ಮತ್ತೆ ತೆಗೆಯಿರಿ</string>
+    <string name="nt_keep">ಇಟ್ಟುಕೊಳ್ಳಿ</string>
+    <string name="nt_subject_grade">ವಿಷಯ ಮತ್ತು ತರಗತಿ</string>
+    <string name="nt_for_class">ನನ್ನ ತರಗತಿಗಾಗಿ</string>
+    <string name="nt_just_me">ನನಗೆ ಮಾತ್ರ</string>
+    <string name="nt_make">ಕೋರ್ಸ್ ಮಾಡಿ</string>
+    <string name="nt_typed_placeholder">ನಿಮ್ಮ ನೋಟ್ಸ್ ಟೈಪ್ ಅಥವಾ ಪೇಸ್ಟ್ ಮಾಡಿ</string>
+    <string name="nt_add_text">ಪುಟ ಸೇರಿಸಿ</string>
+    <string name="nt_pdf_too_big">ಈ PDF 10 MB ಗಿಂತ ದೊಡ್ಡದು. ಚಿಕ್ಕ ಫೈಲ್ ಆರಿಸಿ.</string>
+    <string name="nt_too_many_pages">ನೀವು 10 ಪುಟಗಳವರೆಗೆ ಸೇರಿಸಬಹುದು.</string>
+    <string name="nt_preparing">ನಿಮ್ಮ ಪುಟಗಳು ಸಿದ್ಧವಾಗುತ್ತಿವೆ…</string>
+    <string name="nt_rotate">ತಿರುಗಿಸಿ</string>
+    <string name="nt_crop_hint">ಕತ್ತರಿಸಲು ಮೂಲೆಗಳನ್ನು ಎಳೆಯಿರಿ.</string>
+    <string name="nt_take_photo">ಫೋಟೋ ತೆಗೆಯಿರಿ</string>
+    <string name="nt_photos_taken">%1$d ತೆಗೆಯಲಾಗಿದೆ</string>
+    <string name="nt_camera_why">ನೋಟ್ಸ್ ಫೋಟೋ ತೆಗೆಯಲು ಮೂಶಾಲೆಗೆ ಕ್ಯಾಮೆರಾ ಬೇಕು.</string>
+    <string name="nt_allow_camera">ಕ್ಯಾಮೆರಾ ಅನುಮತಿಸಿ</string>
+    <string name="nt_gen_title">ನಿಮ್ಮ ಕೋರ್ಸ್ ತಯಾರಾಗುತ್ತಿದೆ…</string>
+    <string name="nt_step_queued">ನೋಟ್ಸ್ ಸಿಕ್ಕಿವೆ</string>
+    <string name="nt_step_reading">ನೋಟ್ಸ್ ಓದುತ್ತಿದ್ದೇವೆ (%1$d ಪುಟಗಳು)</string>
+    <string name="nt_step_chunking">ನೋಟ್ಸ್ ಜೋಡಿಸುತ್ತಿದ್ದೇವೆ</string>
+    <string name="nt_step_outlining">ವಿಷಯಗಳನ್ನು ಹುಡುಕುತ್ತಿದ್ದೇವೆ</string>
+    <string name="nt_step_terms">ಮುಖ್ಯ ಪದಗಳನ್ನು ಹುಡುಕುತ್ತಿದ್ದೇವೆ</string>
+    <string name="nt_step_lesson">ಪಾಠ 1 ಮಾಡುತ್ತಿದ್ದೇವೆ</string>
+    <string name="nt_step_ready">ಪಾಠ 1 ಸಿದ್ಧವಾಗಿದೆ!</string>
+    <string name="nt_can_leave">ನೀವು ಹೊರಡಬಹುದು. ಪಾಠ 1 ಸಿದ್ಧವಾದಾಗ ತಿಳಿಸುತ್ತೇವೆ.</string>
+    <string name="nt_leave">ಈಗ ಹೊರಹೋಗಿ</string>
+    <string name="nt_open_review">ಕೋರ್ಸ್ ಪರಿಶೀಲಿಸಿ</string>
+    <string name="nt_open_course">ಕೋರ್ಸ್ ತೆರೆಯಿರಿ</string>
+    <string name="nt_gen_failed">ಈ ನೋಟ್ಸ್‌ನಿಂದ ಕೋರ್ಸ್ ಮಾಡಲು ಆಗಲಿಲ್ಲ. ಸ್ಪಷ್ಟ ಫೋಟೋಗಳಿಂದ ಪ್ರಯತ್ನಿಸಿ.</string>
+    <string name="nt_gen_needs_review">AI ಉತ್ತರ ಪರಿಶೀಲನೆ ಬೇಕು. ಸ್ವಲ್ಪ ಸಮಯದ ನಂತರ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.</string>
+    <string name="nt_banner_ready">ನಿಮ್ಮ ಕೋರ್ಸ್ ಸಿದ್ಧವಾಗಿದೆ!</string>
+    <string name="nt_banner_open">ತೆರೆಯಿರಿ</string>
+</resources>

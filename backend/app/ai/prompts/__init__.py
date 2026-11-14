@@ -27,7 +27,7 @@ def rules() -> str:
 
 @lru_cache
 def load(name: str) -> Prompt:
-    raw = (_DIR / f"{name}.md").read_text(encoding="utf-8")
+    raw = (_DIR / f"{name}.md").read_text(encoding="utf-8").replace(chr(13) + chr(10), chr(10))
     header, _, body = raw.partition("\n---\n")
     version = header.removeprefix("version:").strip()
     return Prompt(version=version, template=body.strip())

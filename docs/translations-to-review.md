@@ -174,3 +174,131 @@ Fixed texts in code (the language screen shows all three languages before a lang
 |---|---|---|---|---|
 | pa_hello | Hello, %1$s! | नमस्ते, %1$s! | ನಮಸ್ಕಾರ, %1$s! | [ ] |
 | pa_coming_soon | Linking your child is coming soon. You'll see their progress here. | अपने बच्चे को जोड़ना जल्द आ रहा है। उनकी प्रगति तुम यहाँ देखोगे। | ನಿಮ್ಮ ಮಗುವನ್ನು ಜೋಡಿಸುವುದು ಶೀಘ್ರದಲ್ಲೇ ಬರಲಿದೆ. ಅವರ ಪ್ರಗತಿಯನ್ನು ಇಲ್ಲಿ ನೋಡುತ್ತೀರಿ. | [ ] |
+
+## M2
+
+Also to review: the sample course content in `backend/app/ai/fake_content.py` and `FakeCourseRepository.kt` (Class 9 Biology, the cell), and the AI prompt rules in `backend/app/ai/prompts/` that tell the model how to write Hindi and Kannada.
+
+### core/designsystem
+
+| Key | English | Hindi (draft) | Kannada (draft) | Reviewed |
+|---|---|---|---|---|
+| err_invalid_upload | Something is wrong with these pages. Please check them. | इन पेजों में कुछ गड़बड़ है। कृपया जाँचें। | ಈ ಪುಟಗಳಲ್ಲಿ ಏನೋ ತಪ್ಪಿದೆ. ದಯವಿಟ್ಟು ಪರಿಶೀಲಿಸಿ. | [ ] |
+| err_file_too_large | This file is too big. PDFs can be up to 10 MB. | यह फ़ाइल बहुत बड़ी है। PDF 10 MB तक हो सकती है। | ಈ ಫೈಲ್ ತುಂಬಾ ದೊಡ್ಡದು. PDF 10 MB ವರೆಗೆ ಇರಬಹುದು. | [ ] |
+| err_pages_missing | Some pages didn't upload. Please try again. | कुछ पेज अपलोड नहीं हुए। फिर से कोशिश करें। | ಕೆಲವು ಪುಟಗಳು ಅಪ್‌ಲೋಡ್ ಆಗಲಿಲ್ಲ. ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ. | [ ] |
+| err_lesson_not_published | This lesson isn't published yet. | यह पाठ अभी प्रकाशित नहीं हुआ है। | ಈ ಪಾಠ ಇನ್ನೂ ಪ್ರಕಟವಾಗಿಲ್ಲ. | [ ] |
+| err_lesson_not_ready | This lesson isn't ready yet. | यह पाठ अभी तैयार नहीं है। | ಈ ಪಾಠ ಇನ್ನೂ ಸಿದ್ಧವಾಗಿಲ್ಲ. | [ ] |
+| err_invalid_question | Please fill in every language for the question. | सवाल की हर भाषा भरें। | ಪ್ರಶ್ನೆಯ ಪ್ರತಿ ಭಾಷೆಯನ್ನೂ ತುಂಬಿ. | [ ] |
+| err_ai_unavailable | The AI is busy. Please try again in a moment. | AI अभी व्यस्त है। थोड़ी देर में फिर कोशिश करें। | AI ಈಗ ಕಾರ್ಯನಿರತವಾಗಿದೆ. ಸ್ವಲ್ಪ ಸಮಯದ ನಂತರ ಪ್ರಯತ್ನಿಸಿ. | [ ] |
+| ds_save | Save | सेव करें | ಉಳಿಸಿ | [ ] |
+| ds_cancel | Cancel | रद्द करें | ರದ್ದುಮಾಡಿ | [ ] |
+| ds_done | Done | हो गया | ಮುಗಿಯಿತು | [ ] |
+
+### feature/notes
+
+| Key | English | Hindi (draft) | Kannada (draft) | Reviewed |
+|---|---|---|---|---|
+| nt_make_course | Make a course from notes | नोट्स से कोर्स बनाओ | ನೋಟ್ಸ್‌ನಿಂದ ಕೋರ್ಸ್ ಮಾಡಿ | [ ] |
+| nt_add_pages_hint | Add photos of today's notes, up to 10 pages. | आज के नोट्स की फ़ोटो जोड़ो, 10 पेज तक। | ಇಂದಿನ ನೋಟ್ಸ್ ಫೋಟೋಗಳನ್ನು ಸೇರಿಸಿ, 10 ಪುಟಗಳವರೆಗೆ. | [ ] |
+| nt_camera | Camera | कैमरा | ಕ್ಯಾಮೆರಾ | [ ] |
+| nt_gallery | Gallery | गैलरी | ಗ್ಯಾಲರಿ | [ ] |
+| nt_pdf | PDF | PDF | PDF | [ ] |
+| nt_type | Type notes | नोट्स टाइप करो | ನೋಟ್ಸ್ ಟೈಪ್ ಮಾಡಿ | [ ] |
+| nt_pages_n | Pages: %1$d of 10 | पेज: 10 में से %1$d | ಪುಟಗಳು: 10ರಲ್ಲಿ %1$d | [ ] |
+| nt_page_n | Page %1$d | पेज %1$d | ಪುಟ %1$d | [ ] |
+| nt_move_left | Move left | बाएँ करो | ಎಡಕ್ಕೆ ಸರಿಸಿ | [ ] |
+| nt_move_right | Move right | दाएँ करो | ಬಲಕ್ಕೆ ಸರಿಸಿ | [ ] |
+| nt_delete_page | Delete page | पेज हटाओ | ಪುಟ ಅಳಿಸಿ | [ ] |
+| nt_edit_page | Crop or rotate | काटो या घुमाओ | ಕತ್ತರಿಸಿ ಅಥವಾ ತಿರುಗಿಸಿ | [ ] |
+| nt_blurry | This photo looks blurry. Retake it, or keep it? | यह फ़ोटो धुंधली लग रही है। दोबारा लें या रखें? | ಈ ಫೋಟೋ ಮಸುಕಾಗಿದೆ. ಮತ್ತೆ ತೆಗೆಯಬೇಕೇ ಅಥವಾ ಇಟ್ಟುಕೊಳ್ಳಬೇಕೇ? | [ ] |
+| nt_retake | Retake | दोबारा लो | ಮತ್ತೆ ತೆಗೆಯಿರಿ | [ ] |
+| nt_keep | Keep | रखो | ಇಟ್ಟುಕೊಳ್ಳಿ | [ ] |
+| nt_subject_grade | Subject and grade | विषय और कक्षा | ವಿಷಯ ಮತ್ತು ತರಗತಿ | [ ] |
+| nt_for_class | For my class | मेरी क्लास के लिए | ನನ್ನ ತರಗತಿಗಾಗಿ | [ ] |
+| nt_just_me | Just for me | सिर्फ़ मेरे लिए | ನನಗೆ ಮಾತ್ರ | [ ] |
+| nt_make | Make course | कोर्स बनाओ | ಕೋರ್ಸ್ ಮಾಡಿ | [ ] |
+| nt_typed_placeholder | Type or paste your notes | अपने नोट्स टाइप या पेस्ट करो | ನಿಮ್ಮ ನೋಟ್ಸ್ ಟೈಪ್ ಅಥವಾ ಪೇಸ್ಟ್ ಮಾಡಿ | [ ] |
+| nt_add_text | Add page | पेज जोड़ो | ಪುಟ ಸೇರಿಸಿ | [ ] |
+| nt_pdf_too_big | This PDF is over 10 MB. Please pick a smaller one. | यह PDF 10 MB से बड़ी है। छोटी फ़ाइल चुनो। | ಈ PDF 10 MB ಗಿಂತ ದೊಡ್ಡದು. ಚಿಕ್ಕ ಫೈಲ್ ಆರಿಸಿ. | [ ] |
+| nt_too_many_pages | You can add up to 10 pages. | तुम 10 पेज तक जोड़ सकते हो। | ನೀವು 10 ಪುಟಗಳವರೆಗೆ ಸೇರಿಸಬಹುದು. | [ ] |
+| nt_preparing | Getting your pages ready… | तुम्हारे पेज तैयार हो रहे हैं… | ನಿಮ್ಮ ಪುಟಗಳು ಸಿದ್ಧವಾಗುತ್ತಿವೆ… | [ ] |
+| nt_rotate | Rotate | घुमाओ | ತಿರುಗಿಸಿ | [ ] |
+| nt_crop_hint | Drag the corners to crop. | काटने के लिए कोने खींचो। | ಕತ್ತರಿಸಲು ಮೂಲೆಗಳನ್ನು ಎಳೆಯಿರಿ. | [ ] |
+| nt_take_photo | Take photo | फ़ोटो लो | ಫೋಟೋ ತೆಗೆಯಿರಿ | [ ] |
+| nt_photos_taken | %1$d taken | %1$d ली गईं | %1$d ತೆಗೆಯಲಾಗಿದೆ | [ ] |
+| nt_camera_why | Mooshala needs the camera to photograph your notes. | नोट्स की फ़ोटो लेने के लिए मूशाला को कैमरा चाहिए। | ನೋಟ್ಸ್ ಫೋಟೋ ತೆಗೆಯಲು ಮೂಶಾಲೆಗೆ ಕ್ಯಾಮೆರಾ ಬೇಕು. | [ ] |
+| nt_allow_camera | Allow camera | कैमरा चालू करो | ಕ್ಯಾಮೆರಾ ಅನುಮತಿಸಿ | [ ] |
+| nt_gen_title | Making your course… | तुम्हारा कोर्स बन रहा है… | ನಿಮ್ಮ ಕೋರ್ಸ್ ತಯಾರಾಗುತ್ತಿದೆ… | [ ] |
+| nt_step_queued | Notes received | नोट्स मिल गए | ನೋಟ್ಸ್ ಸಿಕ್ಕಿವೆ | [ ] |
+| nt_step_reading | Reading notes (%1$d pages) | नोट्स पढ़ रहे हैं (%1$d पेज) | ನೋಟ್ಸ್ ಓದುತ್ತಿದ್ದೇವೆ (%1$d ಪುಟಗಳು) | [ ] |
+| nt_step_chunking | Organising the notes | नोट्स सजा रहे हैं | ನೋಟ್ಸ್ ಜೋಡಿಸುತ್ತಿದ್ದೇವೆ | [ ] |
+| nt_step_outlining | Finding topics | विषय ढूँढ रहे हैं | ವಿಷಯಗಳನ್ನು ಹುಡುಕುತ್ತಿದ್ದೇವೆ | [ ] |
+| nt_step_terms | Finding key terms | मुख्य शब्द ढूँढ रहे हैं | ಮುಖ್ಯ ಪದಗಳನ್ನು ಹುಡುಕುತ್ತಿದ್ದೇವೆ | [ ] |
+| nt_step_lesson | Making lesson 1 | पाठ 1 बना रहे हैं | ಪಾಠ 1 ಮಾಡುತ್ತಿದ್ದೇವೆ | [ ] |
+| nt_step_ready | Lesson 1 is ready! | पाठ 1 तैयार है! | ಪಾಠ 1 ಸಿದ್ಧವಾಗಿದೆ! | [ ] |
+| nt_can_leave | You can leave. We'll tell you when lesson 1 is ready. | तुम जा सकते हो। पाठ 1 तैयार होने पर हम बताएँगे। | ನೀವು ಹೊರಡಬಹುದು. ಪಾಠ 1 ಸಿದ್ಧವಾದಾಗ ತಿಳಿಸುತ್ತೇವೆ. | [ ] |
+| nt_leave | Leave for now | अभी के लिए बाहर जाओ | ಈಗ ಹೊರಹೋಗಿ | [ ] |
+| nt_open_review | Review the course | कोर्स जाँचो | ಕೋರ್ಸ್ ಪರಿಶೀಲಿಸಿ | [ ] |
+| nt_open_course | Open the course | कोर्स खोलो | ಕೋರ್ಸ್ ತೆರೆಯಿರಿ | [ ] |
+| nt_gen_failed | We couldn't make a course from these notes. Try clearer photos. | इन नोट्स से कोर्स नहीं बन पाया। साफ़ फ़ोटो से कोशिश करो। | ಈ ನೋಟ್ಸ್‌ನಿಂದ ಕೋರ್ಸ್ ಮಾಡಲು ಆಗಲಿಲ್ಲ. ಸ್ಪಷ್ಟ ಫೋಟೋಗಳಿಂದ ಪ್ರಯತ್ನಿಸಿ. | [ ] |
+| nt_gen_needs_review | The AI's answer needs a check. Please try again in a moment. | AI के जवाब की जाँच ज़रूरी है। थोड़ी देर में फिर कोशिश करो। | AI ಉತ್ತರ ಪರಿಶೀಲನೆ ಬೇಕು. ಸ್ವಲ್ಪ ಸಮಯದ ನಂತರ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ. | [ ] |
+| nt_banner_ready | Your course is ready! | तुम्हारा कोर्स तैयार है! | ನಿಮ್ಮ ಕೋರ್ಸ್ ಸಿದ್ಧವಾಗಿದೆ! | [ ] |
+| nt_banner_open | Open | खोलो | ತೆರೆಯಿರಿ | [ ] |
+
+### feature/teacher
+
+| Key | English | Hindi (draft) | Kannada (draft) | Reviewed |
+|---|---|---|---|---|
+| tc_courses | My courses | मेरे कोर्स | ನನ್ನ ಕೋರ್ಸ್‌ಗಳು | [ ] |
+| tc_no_courses | No courses yet. Photograph today's notes to make one. | अभी कोई कोर्स नहीं। आज के नोट्स की फ़ोटो लेकर एक बनाएँ। | ಇನ್ನೂ ಕೋರ್ಸ್ ಇಲ್ಲ. ಇಂದಿನ ನೋಟ್ಸ್ ಫೋಟೋ ತೆಗೆದು ಒಂದನ್ನು ಮಾಡಿ. | [ ] |
+| tc_lessons_n | %1$d lessons · %2$d published | %1$d पाठ · %2$d प्रकाशित | %1$d ಪಾಠಗಳು · %2$d ಪ್ರಕಟಿತ | [ ] |
+| tc_edit_title | Edit title | शीर्षक बदलें | ಶೀರ್ಷಿಕೆ ಬದಲಿಸಿ | [ ] |
+| tc_assign | Assign to classes | क्लास को दें | ತರಗತಿಗಳಿಗೆ ನೀಡಿ | [ ] |
+| tc_status_ready | Ready | तैयार | ಸಿದ್ಧ | [ ] |
+| tc_status_generating | Being made… | बन रहा है… | ತಯಾರಾಗುತ್ತಿದೆ… | [ ] |
+| tc_status_not_started | Not started | शुरू नहीं हुआ | ಆರಂಭವಾಗಿಲ್ಲ | [ ] |
+| tc_status_needs_review | Needs a check | जाँच ज़रूरी | ಪರಿಶೀಲನೆ ಬೇಕು | [ ] |
+| tc_status_failed | Failed | नहीं बना | ವಿಫಲವಾಗಿದೆ | [ ] |
+| tc_status_published | Published | प्रकाशित | ಪ್ರಕಟಿತ | [ ] |
+| tc_questions_n | %1$d questions | %1$d सवाल | %1$d ಪ್ರಶ್ನೆಗಳು | [ ] |
+| tc_flagged_n | %1$d to check | %1$d जाँचने हैं | %1$d ಪರಿಶೀಲಿಸಬೇಕು | [ ] |
+| tc_flag_banner | Please check this question | कृपया यह सवाल जाँचें | ದಯವಿಟ್ಟು ಈ ಪ್ರಶ್ನೆ ಪರಿಶೀಲಿಸಿ | [ ] |
+| tc_edit | Edit | बदलें | ಬದಲಿಸಿ | [ ] |
+| tc_redo | Redo | फिर से बनाएँ | ಮತ್ತೆ ಮಾಡಿ | [ ] |
+| tc_delete | Delete | हटाएँ | ಅಳಿಸಿ | [ ] |
+| tc_delete_confirm | Delete this question? | यह सवाल हटाएँ? | ಈ ಪ್ರಶ್ನೆ ಅಳಿಸಬೇಕೇ? | [ ] |
+| tc_publish | Publish | प्रकाशित करें | ಪ್ರಕಟಿಸಿ | [ ] |
+| tc_publish_to | Publish to which class? | किस क्लास में प्रकाशित करें? | ಯಾವ ತರಗತಿಗೆ ಪ್ರಕಟಿಸಬೇಕು? | [ ] |
+| tc_lesson_generating | This lesson is being made. It will appear here soon. | यह पाठ बन रहा है। जल्द यहाँ दिखेगा। | ಈ ಪಾಠ ತಯಾರಾಗುತ್ತಿದೆ. ಶೀಘ್ರದಲ್ಲೇ ಇಲ್ಲಿ ಕಾಣುತ್ತದೆ. | [ ] |
+| tc_lesson_needs_review | The AI couldn't make this lesson properly. Please try again later. | AI यह पाठ ठीक से नहीं बना पाया। बाद में फिर कोशिश करें। | AI ಈ ಪಾಠವನ್ನು ಸರಿಯಾಗಿ ಮಾಡಲಾಗಲಿಲ್ಲ. ನಂತರ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ. | [ ] |
+| tc_page_n | Notes page %1$d | नोट्स पेज %1$d | ನೋಟ್ಸ್ ಪುಟ %1$d | [ ] |
+| tc_type_mcq | Multiple choice | बहुविकल्पी | ಬಹು ಆಯ್ಕೆ | [ ] |
+| tc_type_match | Match pairs | जोड़ी मिलाओ | ಜೋಡಿ ಹೊಂದಿಸಿ | [ ] |
+| tc_type_formula | Fill the formula | सूत्र भरो | ಸೂತ್ರ ತುಂಬಿ | [ ] |
+| tc_type_tf | True or false | सही या गलत | ಸರಿ ಅಥವಾ ತಪ್ಪು | [ ] |
+| tc_true | True | सही | ಸರಿ | [ ] |
+| tc_false | False | गलत | ತಪ್ಪು | [ ] |
+| tc_answer_n | Answer: %1$s | जवाब: %1$s | ಉತ್ತರ: %1$s | [ ] |
+| tc_edit_question | Edit question | सवाल बदलें | ಪ್ರಶ್ನೆ ಬದಲಿಸಿ | [ ] |
+| tc_prompt | Question | सवाल | ಪ್ರಶ್ನೆ | [ ] |
+| tc_explanation | Explanation | समझाना | ವಿವರಣೆ | [ ] |
+| tc_option_n | Option %1$d | विकल्प %1$d | ಆಯ್ಕೆ %1$d | [ ] |
+| tc_mark_correct | Correct answer | सही जवाब | ಸರಿಯಾದ ಉತ್ತರ | [ ] |
+| tc_statement | Statement | कथन | ಹೇಳಿಕೆ | [ ] |
+| tc_formula | Formula (use __ for the blank) | सूत्र (खाली जगह के लिए __) | ಸೂತ್ರ (ಖಾಲಿ ಜಾಗಕ್ಕೆ __) | [ ] |
+| tc_answer | Answer | जवाब | ಉತ್ತರ | [ ] |
+| tc_chips | Choices, separated by commas | विकल्प, कॉमा से अलग | ಆಯ್ಕೆಗಳು, ಅಲ್ಪವಿರಾಮದಿಂದ ಬೇರ್ಪಡಿಸಿ | [ ] |
+| tc_pair_n | Pair %1$d | जोड़ी %1$d | ಜೋಡಿ %1$d | [ ] |
+| tc_due_date | Due date (optional) | आखिरी तारीख (वैकल्पिक) | ಕೊನೆಯ ದಿನಾಂಕ (ಐಚ್ಛಿಕ) | [ ] |
+| tc_pick_date | Pick a date | तारीख चुनें | ದಿನಾಂಕ ಆರಿಸಿ | [ ] |
+| tc_no_due | No due date | कोई आखिरी तारीख नहीं | ಕೊನೆಯ ದಿನಾಂಕ ಇಲ್ಲ | [ ] |
+| tc_assigned_ok | Assigned! | दे दिया गया! | ನೀಡಲಾಗಿದೆ! | [ ] |
+| tc_create_class_first | Create a classroom first. | पहले एक कक्षा बनाएँ। | ಮೊದಲು ಒಂದು ತರಗತಿ ರಚಿಸಿ. | [ ] |
+
+### feature/student
+
+| Key | English | Hindi (draft) | Kannada (draft) | Reviewed |
+|---|---|---|---|---|
+| st_my_courses | My courses | मेरे कोर्स | ನನ್ನ ಕೋರ್ಸ್‌ಗಳು | [ ] |
+| st_ai_made | AI-made | AI से बना | AI ನಿರ್ಮಿತ | [ ] |
+| st_courses_soon | You can play lessons in the next update. | अगले अपडेट में तुम पाठ खेल सकोगे। | ಮುಂದಿನ ಅಪ್‌ಡೇಟ್‌ನಲ್ಲಿ ಪಾಠಗಳನ್ನು ಆಡಬಹುದು. | [ ] |

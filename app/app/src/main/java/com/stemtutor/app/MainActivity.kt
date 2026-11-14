@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import com.stemtutor.core.data.course.GenerationWatcher
 import com.stemtutor.core.data.session.PendingJoinKey
 import com.stemtutor.core.designsystem.theme.StemTutorTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,12 +20,14 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity() {
     @Inject lateinit var pendingJoinKey: PendingJoinKey
 
+    @Inject lateinit var watcher: GenerationWatcher
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         if (savedInstanceState == null) handleLink(intent)
         setContent {
-            StemTutorTheme { AppNavHost(pendingJoinKey) }
+            StemTutorTheme { AppNavHost(pendingJoinKey, watcher) }
         }
     }
 

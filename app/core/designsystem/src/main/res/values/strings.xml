@@ -51,4 +51,15 @@
     <string name="ds_back">Back</string>
     <string name="ds_profile">Profile</string>
     <string name="ds_home">Home</string>
+
+    <string name="err_invalid_upload">Something is wrong with these pages. Please check them.</string>
+    <string name="err_file_too_large">This file is too big. PDFs can be up to 10 MB.</string>
+    <string name="err_pages_missing">Some pages didn\'t upload. Please try again.</string>
+    <string name="err_lesson_not_published">This lesson isn\'t published yet.</string>
+    <string name="err_lesson_not_ready">This lesson isn\'t ready yet.</string>
+    <string name="err_invalid_question">Please fill in every language for the question.</string>
+    <string name="err_ai_unavailable">The AI is busy. Please try again in a moment.</string>
+    <string name="ds_save">Save</string>
+    <string name="ds_cancel">Cancel</string>
+    <string name="ds_done">Done</string>
 </resources>

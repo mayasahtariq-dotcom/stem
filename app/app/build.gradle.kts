@@ -68,6 +68,7 @@ dependencies {
     implementation(project(":feature:student"))
     implementation(project(":feature:teacher"))
     implementation(project(":feature:parent"))
+    implementation(project(":feature:notes"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

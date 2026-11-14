@@ -20,4 +20,8 @@
     <string name="st_camera_why">क्लास का QR कोड स्कैन करने के लिए मूशाला को कैमरा चाहिए।</string>
     <string name="st_camera_allow">कैमरा चालू करो</string>
     <string name="st_scan_hint">कैमरा बोर्ड पर लगे QR कोड की तरफ़ करो।</string>
+
+    <string name="st_my_courses">मेरे कोर्स</string>
+    <string name="st_ai_made">AI से बना</string>
+    <string name="st_courses_soon">अगले अपडेट में तुम पाठ खेल सकोगे।</string>
 </resources>

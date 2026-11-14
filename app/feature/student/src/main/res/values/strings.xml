@@ -19,4 +19,8 @@
     <string name="st_camera_why">Mooshala needs the camera to scan the class QR code.</string>
     <string name="st_camera_allow">Allow camera</string>
     <string name="st_scan_hint">Point the camera at the QR code on the board.</string>
+
+    <string name="st_my_courses">My courses</string>
+    <string name="st_ai_made">AI-made</string>
+    <string name="st_courses_soon">You can play lessons in the next update.</string>
 </resources>
