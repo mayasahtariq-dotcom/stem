@@ -13,13 +13,13 @@ One checklist per milestone, copied from `docs/PRD.md`. Tick items only when the
 
 ## M1: Login, roles and classrooms
 
-- [ ] Phone OTP login works on a real device with the real Supabase project.
-- [ ] Language and role are chosen during onboarding and can be changed in Profile.
-- [ ] A teacher can create a class, see its key and QR, and share it to WhatsApp.
-- [ ] A student can join by typing the key, scanning the QR or tapping the link.
-- [ ] Every join error shows a clear bilingual message.
-- [ ] The security and rate-limit tests pass.
-- [ ] `progress.md` is ticked and the M1 demo note is written.
+- [ ] Phone OTP login works on a real device with the real Supabase project. *(Supabase login code is written and the project's keys and phone provider were checked; not yet run on a device. Steps in `docs/demos/M1.md`.)*
+- [ ] Language and role are chosen during onboarding and can be changed in Profile. *(Onboarding flow tested in CI for all three roles with the fake login; Profile changes need a device check.)*
+- [ ] A teacher can create a class, see its key and QR, and share it to WhatsApp. *(Built; create + key generation tested; sharing needs a device.)*
+- [ ] A student can join by typing the key, scanning the QR or tapping the link. *(Built; typing and key parsing tested; scanning and links need a device.)*
+- [x] Every join error shows a clear bilingual message. *(JoinClassScreenTest, Hindi and Kannada.)*
+- [x] The security and rate-limit tests pass. *(RLS member-visibility and 11th-attempt tests pass on Postgres in CI.)*
+- [x] `progress.md` is ticked and the M1 demo note is written.
 
 ## M2: Notes to course
 
