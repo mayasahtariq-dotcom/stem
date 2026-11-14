@@ -47,3 +47,10 @@ The user supplied a web prototype, `docs/design/mooshala-code.md` ("Mooshala"), 
 - **Onboarding flow test.** The PRD's "full onboarding flow, using fake login, ends on the correct home screen for each role" runs through the real ViewModels with the fake repositories (`OnboardingFlowTest`), not a full Hilt UI test, so it runs fast in `testDebugUnitTest`.
 - **Out of scope here:** the pet, shop and quests from the Mooshala mockup. The role screen adds a Parent card, which the mockup doesn't have but the PRD needs. The parent home is a placeholder until M4, as the PRD says.
 - **Local DB tests.** On Windows the backend tests start an embedded Postgres (`pgserver`, a Windows-only dev dependency). CI uses a Postgres service. `gen_random_uuid()` is built in, so no `pgcrypto` extension is needed.
+
+## M2 preparation (2026-11-14)
+
+- **OCR: Surya instead of Claude vision.** At the user's request, M2 will use open-source tools instead of the Claude API, and **Surya OCR** is chosen for reading note photos (Hindi, Kannada and English). It runs inside the Python backend, behind an `OcrProvider` interface with a fake for tests, so it can be swapped later (for example to PaddleOCR or a vision model) without app changes.
+  - **Licence (VERIFY before the pilot):** Surya's code is GPL-3.0, which is fine for server-side use. Its model weights are free for personal use, research and small organisations, but larger commercial use needs a paid licence. Check the current terms on the Surya repository before any commercial launch.
+  - **Known limits:** Surya is strongest on printed text, so messy handwriting may need retakes or teacher fixes in review. Low OCR confidence feeds the PRD's "flagged" questions.
+  - **Still open:** the model that writes the outline, terms and questions (also to be open-source, e.g. Qwen, Gemma or Sarvam-M via a hosted API). It will be picked by comparing candidates on real note photos at the start of M2.
