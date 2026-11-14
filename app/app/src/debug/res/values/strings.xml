@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="gallery_title">Component gallery</string>
+    <string name="gallery_section_text">Bilingual text</string>
+    <string name="gallery_section_buttons">Buttons</string>
+    <string name="gallery_section_options">Answer options (tap one)</string>
+    <string name="gallery_section_option_states">Answer option states</string>
+    <string name="gallery_section_stats">Streak, XP and hearts</string>
+    <string name="gallery_section_source">Source chip</string>
+    <string name="gallery_section_states">Loading, error and empty screens</string>
+    <string name="gallery_section_backend">Backend status</string>
+    <string name="gallery_backend_ok">Connected (version %1$s)</string>
+    <string name="gallery_backend_error">Can\'t reach the server.</string>
+</resources>

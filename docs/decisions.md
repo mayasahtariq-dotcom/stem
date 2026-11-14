@@ -1,0 +1,17 @@
+# Decisions and deviations from the PRD
+
+## M0
+
+- **Gradle root is `app/`, application module is `app/app`.** The PRD names `app/` as the Android project folder and lists `core/*` and `feature/*` modules inside it, so the Gradle root lives at `app/` and the application module is nested at `app/app`.
+- **Compose UI tests run on Robolectric.** CI's command is `./gradlew lint testDebugUnitTest assembleDebug`, which runs no instrumented tests. So the BilingualText UI test is a Compose test run on the JVM with Robolectric, which this command covers.
+- **Language switching in tests.** The running app switches language with `AppCompatDelegate.setApplicationLocales`. Tests and previews use `ProvideLanguageMode` (a locale-overridden Context/Configuration), which exercises the same resource lookup without an Activity.
+- **No `localeConfig` in the manifest.** The app's language comes only from the stored language mode. Declaring `localeConfig` would let Android 13+ system settings change the language behind the app's back. `setApplicationLocales` works without it, and the stored mode is re-applied at every app start (`StemTutorApp.onCreate`), so we don't use AppCompat's `autoStoreLocales` either.
+- **Loading screen retry is optional.** The PRD says loading, error and empty screens each have a retry button. A retry on a loading screen rarely makes sense, so `LoadingScreen` shows the button only when `onRetry` is passed; error and empty screens always show it.
+- **The debug gallery lives in the `debug` source set**, so release builds contain no gallery code. Release builds show a "coming soon" placeholder.
+- **Supabase JWT verification accepts both key types.** Supabase now recommends asymmetric signing keys (ES256/RS256), verified against `<SUPABASE_URL>/auth/v1/.well-known/jwks.json`, and calls the HS256 shared secret legacy. `/me` accepts both: HS256 with `SUPABASE_JWT_SECRET` (as the PRD's env list implies) and ES256/RS256 via JWKS (cached 10 minutes, matching Supabase's edge cache). Tokens must carry `aud=authenticated`, `exp` and `sub`.
+- **Local Postgres auth stubs.** The `users` table references `auth.users` and the RLS policies use `auth.uid()` and the `authenticated` role, which exist only on Supabase. Migration `0001_users` creates minimal stand-ins (`auth.users(id)`, `auth.uid()` reading `request.jwt.claim.sub`, the `authenticated` role) **only when `auth.users` doesn't already exist**, so the same migration runs on Supabase, docker-compose and CI.
+- **`users.phone` is `varchar(20)`, `name` defaults to `''`, `roles` defaults to empty.** A row can exist before onboarding (M1) fills in the name and role.
+- **Libraries declared before they are used.** supabase-kt (auth), Room, CameraX, Coil and Media3 are declared now, as M0 asks, but have no code until the milestone that needs them. Room's KSP compiler will be added with the first entity.
+- **Library versions** are a known-compatible stable set (AGP 8.7.3, Kotlin 2.1.0, Compose BOM 2024.12.01, Gradle 8.11.1) rather than the newest, to keep the build reliable.
+- **Verification limits for M0.** The development PC had no JDK, Android SDK or Docker. The Android build and tests were verified only in GitHub Actions, and Docker Compose was written but not run locally. The backend was tested locally, and the migration/RLS test runs in CI against a pgvector Postgres service.
+- **Streak icon** uses the 🔥 emoji, since the core Material icon set has no flame. XP uses a star and hearts a heart.

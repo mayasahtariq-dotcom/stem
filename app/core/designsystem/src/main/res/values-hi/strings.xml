@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- DRAFT translations: listed in docs/translations-to-review.md for a native speaker. -->
+<resources>
+    <string name="ds_retry">फिर से कोशिश करें</string>
+    <string name="ds_loading">लोड हो रहा है…</string>
+    <string name="ds_error">कुछ गड़बड़ हो गई। इंटरनेट जाँचें और फिर से कोशिश करें।</string>
+    <string name="ds_empty">अभी यहाँ कुछ नहीं है।</string>
+    <string name="ds_source_chip">आपके नोट्स, पेज %1$d</string>
+
+    <string name="ds_stat_streak">स्ट्रीक: %1$d दिन</string>
+    <string name="ds_stat_xp">%1$d XP</string>
+    <string name="ds_stat_hearts">दिल: %1$d</string>
+
+    <string name="ds_option_selected">चुना गया</string>
+    <string name="ds_option_correct">सही</string>
+    <string name="ds_option_not_quite">सही नहीं</string>
+    <string name="ds_option_correct_answer">सही जवाब</string>
+
+    <string name="ds_sample_question">कोशिका का कौन सा भाग ऊर्जा बनाता है?</string>
+    <string name="ds_sample_option_nucleus">न्यूक्लियस</string>
+    <string name="ds_sample_option_mitochondria">माइटोकॉन्ड्रिया</string>
+    <string name="ds_sample_option_ribosome">राइबोसोम</string>
+    <string name="ds_sample_check">जाँचें</string>
+    <string name="ds_sample_continue">आगे बढ़ें</string>
+    <string name="ds_sample_skip">छोड़ें</string>
+</resources>

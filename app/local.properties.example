@@ -1,0 +1,6 @@
+# Copy to local.properties (never committed). Android Studio also adds sdk.dir here.
+API_BASE_URL=http://10.0.2.2:8000/
+SUPABASE_URL=https://your-project-ref.supabase.co
+SUPABASE_ANON_KEY=
+# Debug builds use fake backends unless this is true. Release builds always use the real API.
+USE_REAL_API=false

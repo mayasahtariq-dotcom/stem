@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- DRAFT translations: listed in docs/translations-to-review.md for a native speaker. -->
+<resources>
+    <string name="gallery_title">कंपोनेंट गैलरी</string>
+    <string name="gallery_section_text">दो भाषाओं में लिखावट</string>
+    <string name="gallery_section_buttons">बटन</string>
+    <string name="gallery_section_options">जवाब के विकल्प (एक चुनें)</string>
+    <string name="gallery_section_option_states">जवाब के विकल्प की स्थितियाँ</string>
+    <string name="gallery_section_stats">स्ट्रीक, XP और दिल</string>
+    <string name="gallery_section_source">स्रोत चिप</string>
+    <string name="gallery_section_states">लोडिंग, गड़बड़ी और खाली स्क्रीन</string>
+    <string name="gallery_section_backend">सर्वर की स्थिति</string>
+    <string name="gallery_backend_ok">जुड़ गया (वर्ज़न %1$s)</string>
+    <string name="gallery_backend_error">सर्वर से नहीं जुड़ पा रहे।</string>
+</resources>

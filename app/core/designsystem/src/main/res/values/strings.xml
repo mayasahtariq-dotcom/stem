@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ds_retry">Try again</string>
+    <string name="ds_loading">Loading…</string>
+    <string name="ds_error">Something went wrong. Check your internet and try again.</string>
+    <string name="ds_empty">Nothing here yet.</string>
+    <string name="ds_source_chip">Your notes, page %1$d</string>
+
+    <string name="ds_stat_streak">Streak: %1$d days</string>
+    <string name="ds_stat_xp">%1$d XP</string>
+    <string name="ds_stat_hearts">Hearts: %1$d</string>
+
+    <string name="ds_option_selected">Selected</string>
+    <string name="ds_option_correct">Correct</string>
+    <string name="ds_option_not_quite">Not quite</string>
+    <string name="ds_option_correct_answer">Correct answer</string>
+
+    <!-- Sample content for previews and the debug component gallery. -->
+    <string name="ds_sample_question">Which part of the cell makes energy?</string>
+    <string name="ds_sample_option_nucleus">Nucleus</string>
+    <string name="ds_sample_option_mitochondria">Mitochondria</string>
+    <string name="ds_sample_option_ribosome">Ribosome</string>
+    <string name="ds_sample_check">Check</string>
+    <string name="ds_sample_continue">Continue</string>
+    <string name="ds_sample_skip">Skip</string>
+</resources>

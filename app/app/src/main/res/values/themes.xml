@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- AppCompat theme so AppCompatDelegate per-app locales work; Compose draws everything else. -->
+    <style name="Theme.StemTutor" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="android:statusBarColor">@android:color/white</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+</resources>

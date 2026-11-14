@@ -1,0 +1,29 @@
+# Secrets: never commit. Example files (local.properties.example, .env.example) are committed.
+local.properties
+.env
+*.jks
+*.keystore
+google-services.json
+
+# Android / Gradle
+.gradle/
+build/
+.idea/
+*.iml
+.kotlin/
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+
+# OS
+.DS_Store
+Thumbs.db

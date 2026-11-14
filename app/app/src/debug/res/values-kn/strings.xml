@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- DRAFT translations: listed in docs/translations-to-review.md for a native speaker. -->
+<resources>
+    <string name="gallery_title">ಕಾಂಪೊನೆಂಟ್ ಗ್ಯಾಲರಿ</string>
+    <string name="gallery_section_text">ಎರಡು ಭಾಷೆಯ ಪಠ್ಯ</string>
+    <string name="gallery_section_buttons">ಬಟನ್‌ಗಳು</string>
+    <string name="gallery_section_options">ಉತ್ತರದ ಆಯ್ಕೆಗಳು (ಒಂದನ್ನು ಆರಿಸಿ)</string>
+    <string name="gallery_section_option_states">ಉತ್ತರದ ಆಯ್ಕೆಯ ಸ್ಥಿತಿಗಳು</string>
+    <string name="gallery_section_stats">ಸ್ಟ್ರೀಕ್, XP ಮತ್ತು ಹೃದಯಗಳು</string>
+    <string name="gallery_section_source">ಮೂಲ ಚಿಪ್</string>
+    <string name="gallery_section_states">ಲೋಡಿಂಗ್, ದೋಷ ಮತ್ತು ಖಾಲಿ ಪರದೆಗಳು</string>
+    <string name="gallery_section_backend">ಸರ್ವರ್ ಸ್ಥಿತಿ</string>
+    <string name="gallery_backend_ok">ಸಂಪರ್ಕಗೊಂಡಿದೆ (ಆವೃತ್ತಿ %1$s)</string>
+    <string name="gallery_backend_error">ಸರ್ವರ್ ತಲುಪಲು ಆಗುತ್ತಿಲ್ಲ.</string>
+</resources>
