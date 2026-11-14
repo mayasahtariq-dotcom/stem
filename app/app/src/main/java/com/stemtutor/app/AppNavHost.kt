@@ -239,8 +239,9 @@ private fun androidx.navigation.NavGraphBuilder.notesDestinations(navController:
     composable(Routes.NOTES_CAPTURE) { entry ->
         val parent = remember(entry) { navController.getBackStackEntry(Routes.NOTES_UPLOAD) }
         val vm: NotesUploadViewModel = hiltViewModel(parent)
+        val uploadState by vm.state.collectAsStateWithLifecycle()
         CaptureRoute(
-            maxShots = MAX_PAGES - vm.state.value.pages.size,
+            maxShots = MAX_PAGES - uploadState.pages.size,
             onDone = { uris ->
                 vm.addPhotos(uris)
                 navController.popBackStack()
