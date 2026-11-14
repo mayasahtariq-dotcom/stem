@@ -28,7 +28,7 @@ One checklist per milestone, copied from `docs/PRD.md`. Tick items only when the
 - [x] A teacher can edit, regenerate and delete questions, and the changes are saved. *(Backend tests on Postgres; app flow built on the same API.)*
 - [x] Publishing to a classroom makes the course appear in that class's student list. *(Backend test; needs a device check.)*
 - [x] A student can make a personal course and it shows the "AI-made" badge. *(Backend test; needs a device check.)*
-- [ ] All tests pass, `progress.md` is ticked and the demo note is written.
+- [x] All tests pass, `progress.md` is ticked and the demo note is written. *(51 app + 59 backend tests in CI.)*
 
 ## M3: Student learning
 
