@@ -57,9 +57,8 @@ def _local_pgserver_url() -> str | None:
     except ImportError:
         return None
     datadir = Path(tempfile.gettempdir()) / "stemtutor_pg_test"
-    server = pgserver.get_server(  # type: ignore[attr-defined]
-        str(datadir), cleanup_mode="stop"
-    )
+    get_server = getattr(pgserver, "get_server")  # noqa: B009 - untyped, Windows-only package
+    server = get_server(str(datadir), cleanup_mode="stop")
     uri: str = server.get_uri()
     return uri.replace("postgresql://", "postgresql+psycopg://", 1)
 

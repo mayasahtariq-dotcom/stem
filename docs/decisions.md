@@ -27,3 +27,23 @@ The user supplied a web prototype, `docs/design/mooshala-code.md` ("Mooshala"), 
 - **App name** is now "Mooshala" (launcher label; the prototype's name), with a green launcher background.
 - **Not built (out of PRD scope or later milestones):** pet feeding and fullness, the food shop, collectable cow poses, quests, the exam season, cow and student naming, and the role screen. The PRD doesn't define the gamified pet features. They need a product decision and a PRD update before any milestone builds them.
 - **Superseded:** the earlier note that the streak icon uses the 🔥 emoji. It is now the flame sticker icon.
+
+## M1 (2026-11-14)
+
+- **Started before M0 was fully ticked.** The user asked to begin M1 while three M0 checks still needed a device or Docker (the app opening on a phone, live language switching on a phone, the backend in Docker). Those checks remain open in `progress.md`.
+- **Libraries added beyond the PRD stack, approved with the M1 plan:**
+  - ML Kit barcode scanning, to scan the QR code with the CameraX already in the stack.
+  - ZXing core, to draw the QR code.
+  - Google Play services SMS User Consent API (`play-services-auth-api-phone`), to fill the OTP from the SMS. This needs no SMS permission; the user taps Allow once. Without Play services the user types the code.
+- **Session storage.** The Supabase session is stored in DataStore, encrypted with an AES-GCM key held in the Android Keystore. No extra encryption library is used, since `security-crypto` is deprecated.
+- **Debug builds use a fake login and fake data.** Any 10-digit number signs in with code `123456`, and classrooms live in memory, seeded with demo keys for each error. Set `USE_REAL_API=true` in `local.properties` to use Supabase and the backend.
+- **RLS applies to backend queries.** The backend connects as an elevated role, so for normal requests it switches each transaction to the `authenticated` role with the caller's JWT claims (`SET LOCAL ROLE authenticated` plus `request.jwt.claims`). RLS then really is a second layer, as the PRD says. Only the class preview and join lookup use elevated access, and they return only safe fields.
+- **Policy helper functions.** Policies that check membership or ownership call `SECURITY DEFINER` functions in an `app_private` schema, so policies never query each other's RLS-protected tables, which would recurse. One more of these, `join_key_taken`, checks key uniqueness across all teachers.
+- **Extra users policies.** Teachers can read the names of students in their classrooms, and students can read their own teachers' names. Without this, the PRD's member lists and teacher names couldn't be shown under RLS.
+- **Rate limit.** Preview and join share one budget of 10 per user per rolling hour. Each attempt is recorded in its own transaction, so failed attempts count too. The 11th gets 429 `TOO_MANY_ATTEMPTS`.
+- **Preview returns join errors early.** Preview raises the same codes as join (`KEY_NOT_FOUND`, `KEY_EXPIRED`, `ALREADY_MEMBER`, `LANGUAGE_NOT_ALLOWED`), so the student sees the problem before tapping Join. Join checks them all again. Extra codes: `NOT_A_TEACHER`, `NOT_A_STUDENT` and `PROFILE_INCOMPLETE`.
+- **The last-used role is stored on the device** (DataStore), not on the server. A reinstall lands on the first role in the profile.
+- **Join links.** `stemtutor://join/KEY` works now. `https://<JOIN_LINK_HOST>/join/KEY` is wired with `autoVerify`, but `JOIN_LINK_HOST` defaults to the placeholder `mooshala.example`. Web links only open the app once a real domain is set in `local.properties` and hosts `/.well-known/assetlinks.json`. The QR code encodes the web link, and the scanner extracts the key from any text.
+- **Onboarding flow test.** The PRD's "full onboarding flow, using fake login, ends on the correct home screen for each role" runs through the real ViewModels with the fake repositories (`OnboardingFlowTest`), not a full Hilt UI test, so it runs fast in `testDebugUnitTest`.
+- **Out of scope here:** the pet, shop and quests from the Mooshala mockup. The role screen adds a Parent card, which the mockup doesn't have but the PRD needs. The parent home is a placeholder until M4, as the PRD says.
+- **Local DB tests.** On Windows the backend tests start an embedded Postgres (`pgserver`, a Windows-only dev dependency). CI uses a Postgres service. `gen_random_uuid()` is built in, so no `pgcrypto` extension is needed.
