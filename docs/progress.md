@@ -4,12 +4,12 @@ One checklist per milestone, copied from `docs/PRD.md`. Tick items only when the
 
 ## M0: Foundation
 
-- [ ] The app launches to the component gallery, and every component renders in both languages with previews.
-- [ ] Switching language updates the screen without a restart.
-- [ ] The backend runs locally in Docker with `/health` and `/me` working.
-- [ ] The `users` table exists with its security rule.
-- [ ] CI is green for both app and backend.
-- [ ] The docs files exist, and `progress.md` and the demo note are updated.
+- [ ] The app launches to the component gallery, and every component renders in both languages with previews. *(Builds in CI and the debug APK is produced; not yet opened on a device or emulator.)*
+- [ ] Switching language updates the screen without a restart. *(Covered by unit and Compose tests in CI; needs a check on a device.)*
+- [ ] The backend runs locally in Docker with `/health` and `/me` working. *(`/health` and `/me` verified locally without Docker; Docker isn't installed on the dev PC.)*
+- [x] The `users` table exists with its security rule. *(Migration + RLS test passes against Postgres in CI.)*
+- [x] CI is green for both app and backend.
+- [x] The docs files exist, and `progress.md` and the demo note are updated.
 
 ## M1: Login, roles and classrooms
 
