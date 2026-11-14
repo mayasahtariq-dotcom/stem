@@ -20,6 +20,8 @@ dev = [
     "httpx>=0.27",
     "ruff>=0.6",
     "mypy>=1.11",
+    # Embedded Postgres for local DB tests on Windows; CI uses a Postgres service instead.
+    "pgserver>=0.1; sys_platform == 'win32'",
 ]
 
 [build-system]

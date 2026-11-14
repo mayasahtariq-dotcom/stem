@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="st_hello">Hello, %1$s!</string>
+    <string name="st_my_classes">My classes</string>
+    <string name="st_no_classes">You haven\'t joined a class yet. Ask your teacher for the class key.</string>
+    <string name="st_join_class">Join a class</string>
+    <string name="st_tab_home">Home</string>
+    <string name="st_tab_learn">Learn</string>
+    <string name="st_tab_class">Class</string>
+    <string name="st_learn_soon">Lessons are coming soon! Your teacher will add them here.</string>
+    <string name="st_teacher_n">Teacher: %1$s</string>
+    <string name="st_key_ask">Type the class key from your teacher, or scan the QR code.</string>
+    <string name="st_key_label">Class key</string>
+    <string name="st_scan">Scan QR code</string>
+    <string name="st_preview_title">Class preview</string>
+    <string name="st_languages_n">Languages: %1$s</string>
+    <string name="st_join">Join</string>
+    <string name="st_joined">You joined %1$s!</string>
+    <string name="st_camera_why">Mooshala needs the camera to scan the class QR code.</string>
+    <string name="st_camera_allow">Allow camera</string>
+    <string name="st_scan_hint">Point the camera at the QR code on the board.</string>
+</resources>

@@ -11,6 +11,8 @@ android {
 
 dependencies {
     api(project(":core:common"))
+    implementation(project(":core:network"))
+    implementation(libs.zxing.core)
 
     api(platform(libs.compose.bom))
     api(libs.compose.ui)

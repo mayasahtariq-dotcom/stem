@@ -30,6 +30,10 @@ android {
         buildConfigField("String", "API_BASE_URL", quoted(config("API_BASE_URL", "http://10.0.2.2:8000/")))
         buildConfigField("String", "SUPABASE_URL", quoted(config("SUPABASE_URL", "")))
         buildConfigField("String", "SUPABASE_ANON_KEY", quoted(config("SUPABASE_ANON_KEY", "")))
+        // Web join links: https://<host>/join/<KEY>. A placeholder until a real domain hosts assetlinks.json.
+        val joinHost = config("JOIN_LINK_HOST", "mooshala.example")
+        buildConfigField("String", "JOIN_LINK_HOST", quoted(joinHost))
+        manifestPlaceholders["joinHost"] = joinHost
     }
 
     buildTypes {

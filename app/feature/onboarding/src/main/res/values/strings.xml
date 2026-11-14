@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ob_app_name">Mooshala</string>
+    <string name="ob_tagline">Your notes, turned into lessons in your language</string>
+    <string name="ob_start">Let\'s start</string>
+    <string name="ob_terms">By continuing, you agree to our Terms and Privacy Policy</string>
+    <string name="ob_phone_ask">What\'s your phone number? We\'ll send you a code.</string>
+    <string name="ob_phone_placeholder">10-digit mobile number</string>
+    <string name="ob_send_otp">Send OTP</string>
+    <string name="ob_otp_ask">Enter the 6-digit code sent to %1$s</string>
+    <string name="ob_otp_label">6-digit code</string>
+    <string name="ob_verify">Verify</string>
+    <string name="ob_resend_in">Resend code in %1$d s</string>
+    <string name="ob_resend">Resend code</string>
+    <string name="ob_change_number">Change number</string>
+    <string name="ob_test_code">Test login: use code 123456</string>
+    <string name="ob_next">Next</string>
+    <string name="ob_role_ask">Who are you?</string>
+    <string name="ob_role_student_sub">I want to learn</string>
+    <string name="ob_role_teacher_sub">I teach a class</string>
+    <string name="ob_role_parent_sub">I want to follow my child\'s learning</string>
+    <string name="ob_name_ask">Nice to meet you! What\'s your name?</string>
+    <string name="ob_name_placeholder">Your name</string>
+    <string name="ob_done">Let\'s go!</string>
+    <string name="profile_language">Language</string>
+    <string name="profile_roles">Your roles</string>
+    <string name="profile_current">Using now</string>
+    <string name="profile_switch">Switch to this role</string>
+    <string name="profile_add_role">Add a role</string>
+    <string name="profile_sign_out">Sign out</string>
+</resources>

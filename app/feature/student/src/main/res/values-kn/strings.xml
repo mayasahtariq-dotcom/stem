@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- DRAFT translations: listed in docs/translations-to-review.md for a native speaker. -->
+<resources>
+    <string name="st_hello">ನಮಸ್ಕಾರ, %1$s!</string>
+    <string name="st_my_classes">ನನ್ನ ತರಗತಿಗಳು</string>
+    <string name="st_no_classes">ನೀವು ಇನ್ನೂ ಯಾವ ತರಗತಿಗೂ ಸೇರಿಲ್ಲ. ಶಿಕ್ಷಕರಿಂದ ತರಗತಿ ಕೀ ಕೇಳಿ.</string>
+    <string name="st_join_class">ತರಗತಿಗೆ ಸೇರಿ</string>
+    <string name="st_tab_home">ಮನೆ</string>
+    <string name="st_tab_learn">ಕಲಿ</string>
+    <string name="st_tab_class">ತರಗತಿ</string>
+    <string name="st_learn_soon">ಪಾಠಗಳು ಶೀಘ್ರದಲ್ಲೇ ಬರಲಿವೆ! ನಿಮ್ಮ ಶಿಕ್ಷಕರು ಇಲ್ಲಿ ಸೇರಿಸುತ್ತಾರೆ.</string>
+    <string name="st_teacher_n">ಶಿಕ್ಷಕರು: %1$s</string>
+    <string name="st_key_ask">ಶಿಕ್ಷಕರು ಕೊಟ್ಟ ತರಗತಿ ಕೀ ಟೈಪ್ ಮಾಡಿ, ಅಥವಾ QR ಕೋಡ್ ಸ್ಕ್ಯಾನ್ ಮಾಡಿ.</string>
+    <string name="st_key_label">ತರಗತಿ ಕೀ</string>
+    <string name="st_scan">QR ಕೋಡ್ ಸ್ಕ್ಯಾನ್ ಮಾಡಿ</string>
+    <string name="st_preview_title">ತರಗತಿ ಮುನ್ನೋಟ</string>
+    <string name="st_languages_n">ಭಾಷೆಗಳು: %1$s</string>
+    <string name="st_join">ಸೇರಿ</string>
+    <string name="st_joined">ನೀವು %1$s ಗೆ ಸೇರಿದಿರಿ!</string>
+    <string name="st_camera_why">ತರಗತಿಯ QR ಕೋಡ್ ಸ್ಕ್ಯಾನ್ ಮಾಡಲು ಮೂಶಾಲೆಗೆ ಕ್ಯಾಮೆರಾ ಬೇಕು.</string>
+    <string name="st_camera_allow">ಕ್ಯಾಮೆರಾ ಅನುಮತಿಸಿ</string>
+    <string name="st_scan_hint">ಕ್ಯಾಮೆರಾವನ್ನು ಬೋರ್ಡ್‌ನ QR ಕೋಡ್ ಕಡೆ ತೋರಿಸಿ.</string>
+</resources>

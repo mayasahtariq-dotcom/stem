@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- DRAFT translations: listed in docs/translations-to-review.md for a native speaker. -->
+<resources>
+    <string name="st_hello">नमस्ते, %1$s!</string>
+    <string name="st_my_classes">मेरी क्लास</string>
+    <string name="st_no_classes">तुम अभी किसी क्लास में नहीं हो। टीचर से क्लास की माँगो।</string>
+    <string name="st_join_class">क्लास में जुड़ो</string>
+    <string name="st_tab_home">होम</string>
+    <string name="st_tab_learn">सीखो</string>
+    <string name="st_tab_class">क्लास</string>
+    <string name="st_learn_soon">पाठ जल्द आ रहे हैं! तुम्हारे टीचर उन्हें यहाँ जोड़ेंगे।</string>
+    <string name="st_teacher_n">टीचर: %1$s</string>
+    <string name="st_key_ask">टीचर से मिली क्लास की टाइप करो, या QR कोड स्कैन करो।</string>
+    <string name="st_key_label">क्लास की</string>
+    <string name="st_scan">QR कोड स्कैन करो</string>
+    <string name="st_preview_title">क्लास की झलक</string>
+    <string name="st_languages_n">भाषाएँ: %1$s</string>
+    <string name="st_join">जुड़ो</string>
+    <string name="st_joined">तुम %1$s में जुड़ गए!</string>
+    <string name="st_camera_why">क्लास का QR कोड स्कैन करने के लिए मूशाला को कैमरा चाहिए।</string>
+    <string name="st_camera_allow">कैमरा चालू करो</string>
+    <string name="st_scan_hint">कैमरा बोर्ड पर लगे QR कोड की तरफ़ करो।</string>
+</resources>

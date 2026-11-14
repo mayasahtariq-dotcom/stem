@@ -23,4 +23,32 @@
     <string name="ds_sample_check">जाँचें</string>
     <string name="ds_sample_continue">आगे बढ़ें</string>
     <string name="ds_sample_skip">छोड़ें</string>
+
+    <string name="err_network">इंटरनेट नहीं है। कनेक्शन जाँचें और फिर से कोशिश करें।</string>
+    <string name="err_unknown">कुछ गड़बड़ हो गई। फिर से कोशिश करें।</string>
+    <string name="err_unauthorized">यह कोड सही नहीं है। जाँचकर फिर से डालें।</string>
+    <string name="err_profile_incomplete">पहले अपनी प्रोफ़ाइल पूरी करें।</string>
+    <string name="err_not_a_teacher">सिर्फ़ टीचर क्लास बना सकते हैं। प्रोफ़ाइल में टीचर भूमिका जोड़ें।</string>
+    <string name="err_not_a_student">सिर्फ़ छात्र क्लास में जुड़ सकते हैं। प्रोफ़ाइल में छात्र भूमिका जोड़ें।</string>
+    <string name="err_not_found">यह नहीं मिला।</string>
+    <string name="err_key_not_found">इस की से कोई क्लास नहीं मिली। अपने टीचर से की जाँचें।</string>
+    <string name="err_key_expired">यह क्लास की पुरानी हो गई है। टीचर से नई की माँगें।</string>
+    <string name="err_already_member">तुम पहले से इस क्लास में हो।</string>
+    <string name="err_language_not_allowed">यह क्लास तुम्हारी भाषा में नहीं है। टीचर से पूछें या प्रोफ़ाइल में भाषा बदलें।</string>
+    <string name="err_too_many_attempts">बहुत बार कोशिश हो गई। एक घंटे बाद फिर कोशिश करें।</string>
+    <string name="ds_coming_soon">जल्द आ रहा है</string>
+
+    <string name="role_student">छात्र</string>
+    <string name="role_teacher">टीचर</string>
+    <string name="role_parent">अभिभावक</string>
+    <string name="subject_biology">जीव विज्ञान</string>
+    <string name="subject_chemistry">रसायन विज्ञान</string>
+    <string name="subject_physics">भौतिकी</string>
+    <string name="grade_n">कक्षा %1$d</string>
+    <string name="language_hindi">हिंदी</string>
+    <string name="language_kannada">कन्नड़</string>
+    <string name="students_n">%1$d छात्र</string>
+    <string name="ds_back">वापस</string>
+    <string name="ds_profile">प्रोफ़ाइल</string>
+    <string name="ds_home">होम</string>
 </resources>

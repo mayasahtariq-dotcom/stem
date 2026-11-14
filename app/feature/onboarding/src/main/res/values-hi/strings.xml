@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- DRAFT translations: listed in docs/translations-to-review.md for a native speaker. -->
+<resources>
+    <string name="ob_app_name">मूशाला</string>
+    <string name="ob_tagline">तुम्हारे नोट्स, तुम्हारी भाषा में पाठ</string>
+    <string name="ob_start">चलो शुरू करें</string>
+    <string name="ob_terms">आगे बढ़कर तुम हमारी शर्तें और गोपनीयता नीति मानते हो</string>
+    <string name="ob_phone_ask">तुम्हारा फ़ोन नंबर क्या है? हम एक कोड भेजेंगे।</string>
+    <string name="ob_phone_placeholder">10 अंकों का मोबाइल नंबर</string>
+    <string name="ob_send_otp">OTP भेजें</string>
+    <string name="ob_otp_ask">%1$s पर भेजा गया 6 अंकों का कोड डालें</string>
+    <string name="ob_otp_label">6 अंकों का कोड</string>
+    <string name="ob_verify">जाँचें</string>
+    <string name="ob_resend_in">%1$d सेकंड में कोड फिर भेज सकते हो</string>
+    <string name="ob_resend">कोड फिर भेजें</string>
+    <string name="ob_change_number">नंबर बदलें</string>
+    <string name="ob_test_code">टेस्ट लॉगिन: कोड 123456 डालें</string>
+    <string name="ob_next">आगे</string>
+    <string name="ob_role_ask">तुम कौन हो?</string>
+    <string name="ob_role_student_sub">मुझे सीखना है</string>
+    <string name="ob_role_teacher_sub">मैं क्लास पढ़ाता या पढ़ाती हूँ</string>
+    <string name="ob_role_parent_sub">मुझे अपने बच्चे की पढ़ाई देखनी है</string>
+    <string name="ob_name_ask">मिलकर अच्छा लगा! तुम्हारा नाम क्या है?</string>
+    <string name="ob_name_placeholder">तुम्हारा नाम</string>
+    <string name="ob_done">चलो!</string>
+    <string name="profile_language">भाषा</string>
+    <string name="profile_roles">तुम्हारी भूमिकाएँ</string>
+    <string name="profile_current">अभी चालू</string>
+    <string name="profile_switch">इस भूमिका पर जाएँ</string>
+    <string name="profile_add_role">भूमिका जोड़ें</string>
+    <string name="profile_sign_out">साइन आउट करें</string>
+</resources>

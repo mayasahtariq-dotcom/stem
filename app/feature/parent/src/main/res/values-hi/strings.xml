@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- DRAFT translations: listed in docs/translations-to-review.md for a native speaker. -->
+<resources>
+    <string name="pa_hello">नमस्ते, %1$s!</string>
+    <string name="pa_coming_soon">अपने बच्चे को जोड़ना जल्द आ रहा है। उनकी प्रगति तुम यहाँ देखोगे।</string>
+</resources>

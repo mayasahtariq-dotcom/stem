@@ -23,4 +23,32 @@
     <string name="ds_sample_check">ಪರಿಶೀಲಿಸಿ</string>
     <string name="ds_sample_continue">ಮುಂದುವರಿಸಿ</string>
     <string name="ds_sample_skip">ಬಿಟ್ಟುಬಿಡಿ</string>
+
+    <string name="err_network">ಇಂಟರ್ನೆಟ್ ಇಲ್ಲ. ಸಂಪರ್ಕ ಪರಿಶೀಲಿಸಿ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.</string>
+    <string name="err_unknown">ಏನೋ ತಪ್ಪಾಗಿದೆ. ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.</string>
+    <string name="err_unauthorized">ಈ ಕೋಡ್ ಸರಿಯಿಲ್ಲ. ಪರಿಶೀಲಿಸಿ ಮತ್ತೆ ಹಾಕಿ.</string>
+    <string name="err_profile_incomplete">ಮೊದಲು ನಿಮ್ಮ ಪ್ರೊಫೈಲ್ ಪೂರ್ಣಗೊಳಿಸಿ.</string>
+    <string name="err_not_a_teacher">ಶಿಕ್ಷಕರು ಮಾತ್ರ ತರಗತಿ ರಚಿಸಬಹುದು. ಪ್ರೊಫೈಲ್‌ನಲ್ಲಿ ಶಿಕ್ಷಕ ಪಾತ್ರ ಸೇರಿಸಿ.</string>
+    <string name="err_not_a_student">ವಿದ್ಯಾರ್ಥಿಗಳು ಮಾತ್ರ ತರಗತಿಗೆ ಸೇರಬಹುದು. ಪ್ರೊಫೈಲ್‌ನಲ್ಲಿ ವಿದ್ಯಾರ್ಥಿ ಪಾತ್ರ ಸೇರಿಸಿ.</string>
+    <string name="err_not_found">ಇದು ಸಿಗಲಿಲ್ಲ.</string>
+    <string name="err_key_not_found">ಈ ಕೀ ಇರುವ ತರಗತಿ ಇಲ್ಲ. ನಿಮ್ಮ ಶಿಕ್ಷಕರ ಬಳಿ ಕೀ ಪರಿಶೀಲಿಸಿ.</string>
+    <string name="err_key_expired">ಈ ತರಗತಿ ಕೀ ಅವಧಿ ಮುಗಿದಿದೆ. ಶಿಕ್ಷಕರಿಂದ ಹೊಸ ಕೀ ಕೇಳಿ.</string>
+    <string name="err_already_member">ನೀವು ಈಗಾಗಲೇ ಈ ತರಗತಿಯಲ್ಲಿದ್ದೀರಿ.</string>
+    <string name="err_language_not_allowed">ಈ ತರಗತಿ ನಿಮ್ಮ ಭಾಷೆಯಲ್ಲಿಲ್ಲ. ಶಿಕ್ಷಕರನ್ನು ಕೇಳಿ ಅಥವಾ ಪ್ರೊಫೈಲ್‌ನಲ್ಲಿ ಭಾಷೆ ಬದಲಿಸಿ.</string>
+    <string name="err_too_many_attempts">ತುಂಬಾ ಬಾರಿ ಪ್ರಯತ್ನಿಸಿದ್ದೀರಿ. ಒಂದು ಗಂಟೆ ನಂತರ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.</string>
+    <string name="ds_coming_soon">ಶೀಘ್ರದಲ್ಲೇ ಬರಲಿದೆ</string>
+
+    <string name="role_student">ವಿದ್ಯಾರ್ಥಿ</string>
+    <string name="role_teacher">ಶಿಕ್ಷಕ</string>
+    <string name="role_parent">ಪೋಷಕ</string>
+    <string name="subject_biology">ಜೀವಶಾಸ್ತ್ರ</string>
+    <string name="subject_chemistry">ರಸಾಯನಶಾಸ್ತ್ರ</string>
+    <string name="subject_physics">ಭೌತಶಾಸ್ತ್ರ</string>
+    <string name="grade_n">%1$dನೇ ತರಗತಿ</string>
+    <string name="language_hindi">ಹಿಂದಿ</string>
+    <string name="language_kannada">ಕನ್ನಡ</string>
+    <string name="students_n">%1$d ವಿದ್ಯಾರ್ಥಿಗಳು</string>
+    <string name="ds_back">ಹಿಂದೆ</string>
+    <string name="ds_profile">ಪ್ರೊಫೈಲ್</string>
+    <string name="ds_home">ಮನೆ</string>
 </resources>

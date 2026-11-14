@@ -17,5 +17,8 @@ object AppModule {
         baseUrl = BuildConfig.API_BASE_URL,
         useRealApi = BuildConfig.USE_REAL_API,
         enableHttpLogging = BuildConfig.DEBUG,
+        supabaseUrl = BuildConfig.SUPABASE_URL,
+        supabaseAnonKey = BuildConfig.SUPABASE_ANON_KEY,
+        joinLinkHost = BuildConfig.JOIN_LINK_HOST,
     )
 }

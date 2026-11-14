@@ -34,4 +34,12 @@ object StemColors {
     val DisabledEdge = Color(0xFFD5DADE)
     val ChipFill = Color(0xFFF6EAD8)
     val CreamBorder = Color(0xFFF0E2CC)
+
+    // Teacher mode (Mooshala's livelier teacher screens).
+    val Teal = Color(0xFF2BB3A3)
+    val TealBlue = Color(0xFF1F8FB8)
+    val TealDark = Color(0xFF1D8579)
+    val TeacherBackground = Color(0xFFFFF8EC)
+    val FieldFill = Color(0xFFFAFBFC)
+    val KeyCream = Color(0xFFF3DFB8)
 }

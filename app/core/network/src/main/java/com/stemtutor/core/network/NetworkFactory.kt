@@ -1,5 +1,8 @@
 package com.stemtutor.core.network
 
+import com.stemtutor.core.network.auth.AccessTokenProvider
+import com.stemtutor.core.network.auth.AuthInterceptor
+import com.stemtutor.core.network.auth.TokenRefreshAuthenticator
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
@@ -14,11 +17,15 @@ object NetworkFactory {
         explicitNulls = false
     }
 
-    fun okHttpClient(enableLogging: Boolean): OkHttpClient =
+    fun okHttpClient(enableLogging: Boolean, tokens: AccessTokenProvider? = null): OkHttpClient =
         OkHttpClient.Builder()
             .connectTimeout(15, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
             .apply {
+                if (tokens != null) {
+                    addInterceptor(AuthInterceptor(tokens))
+                    authenticator(TokenRefreshAuthenticator(tokens))
+                }
                 if (enableLogging) {
                     addInterceptor(
                         HttpLoggingInterceptor().apply {

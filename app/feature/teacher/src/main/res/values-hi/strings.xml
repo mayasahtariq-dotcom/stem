@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- DRAFT translations: listed in docs/translations-to-review.md for a native speaker. -->
+<resources>
+    <string name="te_hello">नमस्ते, %1$s</string>
+    <string name="te_my_classes">मेरी कक्षाएँ</string>
+    <string name="te_no_classes">अभी कोई कक्षा नहीं है। एक बनाएँ और उसकी की छात्रों को भेजें।</string>
+    <string name="te_create">कक्षा बनाएँ</string>
+    <string name="te_name_placeholder">जैसे कक्षा 9-A विज्ञान</string>
+    <string name="te_name_label">कक्षा का नाम</string>
+    <string name="te_subject">विषय</string>
+    <string name="te_grade">कक्षा</string>
+    <string name="te_languages">अनुमत भाषाएँ</string>
+    <string name="te_save">बनाएँ</string>
+    <string name="te_name_required">कक्षा का नाम डालें।</string>
+    <string name="te_pick_language">कम से कम एक भाषा चुनें।</string>
+    <string name="te_key_title">क्लास की</string>
+    <string name="te_key_hint">छात्र जुड़ने के लिए यह की टाइप करें या QR कोड स्कैन करें।</string>
+    <string name="te_qr_description">क्लास की %1$s का QR कोड</string>
+    <string name="te_copy">कॉपी करें</string>
+    <string name="te_copied">की कॉपी हो गई</string>
+    <string name="te_share">शेयर करें</string>
+    <string name="te_share_message">मूशाला पर मेरी क्लास \"%1$s\" में जुड़ो। क्लास की: %2$s</string>
+    <string name="te_share_chooser">क्लास की शेयर करें</string>
+    <string name="te_members">छात्र (%1$d)</string>
+    <string name="te_no_members">अभी कोई छात्र नहीं। क्लास की शेयर करें!</string>
+    <string name="te_show_key">की और QR दिखाएँ</string>
+    <string name="te_done">हो गया</string>
+</resources>

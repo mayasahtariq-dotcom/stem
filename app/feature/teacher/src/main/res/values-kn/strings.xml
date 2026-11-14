@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- DRAFT translations: listed in docs/translations-to-review.md for a native speaker. -->
+<resources>
+    <string name="te_hello">ನಮಸ್ಕಾರ, %1$s</string>
+    <string name="te_my_classes">ನನ್ನ ತರಗತಿಗಳು</string>
+    <string name="te_no_classes">ಇನ್ನೂ ತರಗತಿ ಇಲ್ಲ. ಒಂದನ್ನು ರಚಿಸಿ ಅದರ ಕೀ ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಕಳುಹಿಸಿ.</string>
+    <string name="te_create">ತರಗತಿ ರಚಿಸಿ</string>
+    <string name="te_name_placeholder">ಉದಾ. 9-A ವಿಜ್ಞಾನ</string>
+    <string name="te_name_label">ತರಗತಿಯ ಹೆಸರು</string>
+    <string name="te_subject">ವಿಷಯ</string>
+    <string name="te_grade">ತರಗತಿ</string>
+    <string name="te_languages">ಅನುಮತಿಸಿದ ಭಾಷೆಗಳು</string>
+    <string name="te_save">ರಚಿಸಿ</string>
+    <string name="te_name_required">ತರಗತಿಯ ಹೆಸರು ಹಾಕಿ.</string>
+    <string name="te_pick_language">ಕನಿಷ್ಠ ಒಂದು ಭಾಷೆ ಆರಿಸಿ.</string>
+    <string name="te_key_title">ತರಗತಿ ಕೀ</string>
+    <string name="te_key_hint">ವಿದ್ಯಾರ್ಥಿಗಳು ಸೇರಲು ಈ ಕೀ ಟೈಪ್ ಮಾಡಬೇಕು ಅಥವಾ QR ಕೋಡ್ ಸ್ಕ್ಯಾನ್ ಮಾಡಬೇಕು.</string>
+    <string name="te_qr_description">ತರಗತಿ ಕೀ %1$s ನ QR ಕೋಡ್</string>
+    <string name="te_copy">ನಕಲಿಸಿ</string>
+    <string name="te_copied">ಕೀ ನಕಲಾಯಿತು</string>
+    <string name="te_share">ಹಂಚಿಕೊಳ್ಳಿ</string>
+    <string name="te_share_message">ಮೂಶಾಲೆಯಲ್ಲಿ ನನ್ನ ತರಗತಿ \"%1$s\" ಗೆ ಸೇರಿ. ತರಗತಿ ಕೀ: %2$s</string>
+    <string name="te_share_chooser">ತರಗತಿ ಕೀ ಹಂಚಿಕೊಳ್ಳಿ</string>
+    <string name="te_members">ವಿದ್ಯಾರ್ಥಿಗಳು (%1$d)</string>
+    <string name="te_no_members">ಇನ್ನೂ ವಿದ್ಯಾರ್ಥಿಗಳಿಲ್ಲ. ತರಗತಿ ಕೀ ಹಂಚಿಕೊಳ್ಳಿ!</string>
+    <string name="te_show_key">ಕೀ ಮತ್ತು QR ತೋರಿಸಿ</string>
+    <string name="te_done">ಮುಗಿಯಿತು</string>
+</resources>

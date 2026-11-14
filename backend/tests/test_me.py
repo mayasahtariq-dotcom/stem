@@ -11,10 +11,11 @@ def test_me_rejects_missing_token(client: TestClient) -> None:
     assert response.status_code == 401
 
 
-def test_me_accepts_valid_token(client: TestClient) -> None:
-    response = client.get("/me", headers={"Authorization": f"Bearer {make_token()}"})
+def test_me_accepts_valid_token(api: TestClient) -> None:
+    response = api.get("/me", headers={"Authorization": f"Bearer {make_token()}"})
     assert response.status_code == 200
-    assert response.json() == {"id": TEST_USER_ID}
+    assert response.json()["id"] == TEST_USER_ID
+    assert response.json()["registered"] is False
 
 
 @pytest.mark.parametrize(

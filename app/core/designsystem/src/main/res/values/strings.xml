@@ -23,4 +23,32 @@
     <string name="ds_sample_check">Check</string>
     <string name="ds_sample_continue">Continue</string>
     <string name="ds_sample_skip">Skip</string>
+
+    <string name="err_network">No internet. Check your connection and try again.</string>
+    <string name="err_unknown">Something went wrong. Please try again.</string>
+    <string name="err_unauthorized">That code didn't work. Check it and try again.</string>
+    <string name="err_profile_incomplete">Please finish setting up your profile first.</string>
+    <string name="err_not_a_teacher">Only teachers can create a classroom. Add the Teacher role in Profile.</string>
+    <string name="err_not_a_student">Only students can join a class. Add the Student role in Profile.</string>
+    <string name="err_not_found">We couldn't find that.</string>
+    <string name="err_key_not_found">No class has this key. Check it with your teacher.</string>
+    <string name="err_key_expired">This class key has expired. Ask your teacher for a new one.</string>
+    <string name="err_already_member">You're already in this class.</string>
+    <string name="err_language_not_allowed">This class doesn't use your language. Ask your teacher, or change your language in Profile.</string>
+    <string name="err_too_many_attempts">Too many tries. Please wait an hour and try again.</string>
+    <string name="ds_coming_soon">Coming soon</string>
+
+    <string name="role_student">Student</string>
+    <string name="role_teacher">Teacher</string>
+    <string name="role_parent">Parent</string>
+    <string name="subject_biology">Biology</string>
+    <string name="subject_chemistry">Chemistry</string>
+    <string name="subject_physics">Physics</string>
+    <string name="grade_n">Class %1$d</string>
+    <string name="language_hindi">Hindi</string>
+    <string name="language_kannada">Kannada</string>
+    <string name="students_n">%1$d students</string>
+    <string name="ds_back">Back</string>
+    <string name="ds_profile">Profile</string>
+    <string name="ds_home">Home</string>
 </resources>

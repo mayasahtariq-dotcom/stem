@@ -1,10 +1,25 @@
 package com.stemtutor.core.data.di
 
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import com.stemtutor.core.data.auth.AuthRepository
+import com.stemtutor.core.data.auth.EncryptedSessionManager
+import com.stemtutor.core.data.auth.FakeAuthRepository
+import com.stemtutor.core.data.auth.SupabaseAuthRepository
+import com.stemtutor.core.data.classroom.ClassroomRepository
+import com.stemtutor.core.data.classroom.FakeClassroomRepository
+import com.stemtutor.core.data.classroom.RemoteClassroomRepository
 import com.stemtutor.core.data.health.FakeHealthRepository
 import com.stemtutor.core.data.health.HealthRepository
 import com.stemtutor.core.data.health.RealHealthRepository
+import com.stemtutor.core.data.profile.FakeProfileRepository
+import com.stemtutor.core.data.profile.ProfileRepository
+import com.stemtutor.core.data.profile.RemoteProfileRepository
+import com.stemtutor.core.data.session.PendingJoinKey
+import com.stemtutor.core.data.session.SessionStore
 import com.stemtutor.core.network.ApiConfig
 import com.stemtutor.core.network.StemApi
+import com.stemtutor.core.network.auth.AccessTokenProvider
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -12,11 +27,52 @@ import dagger.hilt.components.SingletonComponent
 import javax.inject.Provider
 import javax.inject.Singleton
 
+/** Real or fake implementations, chosen by ApiConfig.useRealApi (debug builds default to fake). */
 @Module
 @InstallIn(SingletonComponent::class)
 object DataModule {
     @Provides
     @Singleton
+    fun provideAuthRepository(config: ApiConfig, dataStore: DataStore<Preferences>): AuthRepository =
+        if (config.useRealApi) {
+            SupabaseAuthRepository(config.supabaseUrl, config.supabaseAnonKey, EncryptedSessionManager(dataStore))
+        } else {
+            FakeAuthRepository(dataStore)
+        }
+
+    @Provides
+    fun provideAccessTokenProvider(auth: AuthRepository): AccessTokenProvider = auth
+
+    @Provides
+    @Singleton
+    fun provideProfileRepository(
+        config: ApiConfig,
+        api: Provider<StemApi>,
+        auth: AuthRepository,
+        dataStore: DataStore<Preferences>,
+    ): ProfileRepository =
+        if (config.useRealApi) RemoteProfileRepository(api.get()) else FakeProfileRepository(auth, dataStore)
+
+    @Provides
+    @Singleton
+    fun provideClassroomRepository(
+        config: ApiConfig,
+        api: Provider<StemApi>,
+        auth: AuthRepository,
+        profiles: ProfileRepository,
+    ): ClassroomRepository =
+        if (config.useRealApi) RemoteClassroomRepository(api.get()) else FakeClassroomRepository(auth, profiles)
+
+    @Provides
+    @Singleton
     fun provideHealthRepository(config: ApiConfig, api: Provider<StemApi>): HealthRepository =
         if (config.useRealApi) RealHealthRepository(api.get()) else FakeHealthRepository()
+
+    @Provides
+    @Singleton
+    fun provideSessionStore(dataStore: DataStore<Preferences>): SessionStore = SessionStore(dataStore)
+
+    @Provides
+    @Singleton
+    fun providePendingJoinKey(): PendingJoinKey = PendingJoinKey()
 }

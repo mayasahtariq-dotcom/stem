@@ -3,6 +3,7 @@ package com.stemtutor.core.network.di
 import com.stemtutor.core.network.ApiConfig
 import com.stemtutor.core.network.NetworkFactory
 import com.stemtutor.core.network.StemApi
+import com.stemtutor.core.network.auth.AccessTokenProvider
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,8 +16,8 @@ import javax.inject.Singleton
 object NetworkModule {
     @Provides
     @Singleton
-    fun provideOkHttp(config: ApiConfig): OkHttpClient =
-        NetworkFactory.okHttpClient(config.enableHttpLogging)
+    fun provideOkHttp(config: ApiConfig, tokens: AccessTokenProvider): OkHttpClient =
+        NetworkFactory.okHttpClient(config.enableHttpLogging, tokens)
 
     @Provides
     @Singleton

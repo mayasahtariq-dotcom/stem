@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="te_hello">Hello, %1$s</string>
+    <string name="te_my_classes">My classrooms</string>
+    <string name="te_no_classes">No classrooms yet. Create one and share its key with your students.</string>
+    <string name="te_create">Create classroom</string>
+    <string name="te_name_placeholder">e.g. Class 9-A Science</string>
+    <string name="te_name_label">Class name</string>
+    <string name="te_subject">Subject</string>
+    <string name="te_grade">Grade</string>
+    <string name="te_languages">Languages allowed</string>
+    <string name="te_save">Create</string>
+    <string name="te_name_required">Enter a class name.</string>
+    <string name="te_pick_language">Pick at least one language.</string>
+    <string name="te_key_title">Class key</string>
+    <string name="te_key_hint">Students type this key or scan the QR code to join.</string>
+    <string name="te_qr_description">QR code for class key %1$s</string>
+    <string name="te_copy">Copy</string>
+    <string name="te_copied">Key copied</string>
+    <string name="te_share">Share</string>
+    <string name="te_share_message">Join my class \"%1$s\" on Mooshala. Class key: %2$s</string>
+    <string name="te_share_chooser">Share class key</string>
+    <string name="te_members">Students (%1$d)</string>
+    <string name="te_no_members">No students yet. Share the class key!</string>
+    <string name="te_show_key">Show key and QR</string>
+    <string name="te_done">Done</string>
+</resources>

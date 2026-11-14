@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pa_hello">Hello, %1$s!</string>
+    <string name="pa_coming_soon">Linking your child is coming soon. You\'ll see their progress here.</string>
+</resources>
