@@ -6,6 +6,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
+import kotlinx.coroutines.cancelAndJoin
+import kotlinx.coroutines.job
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Rule
@@ -38,7 +40,9 @@ class LanguageRepositoryTest {
 
         val (first, firstScope) = newProcess(file)
         first.setLanguageMode(LanguageMode.KANNADA)
-        firstScope.cancel() // app process dies
+        // App process dies: wait until the first DataStore has fully released the file,
+        // since DataStore refuses two active instances on one file.
+        firstScope.coroutineContext.job.cancelAndJoin()
 
         val (second, secondScope) = newProcess(file)
         assertEquals(LanguageMode.KANNADA, second.current())
