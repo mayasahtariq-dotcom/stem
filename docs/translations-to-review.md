@@ -387,3 +387,99 @@ Files: `app/feature/student/src/main/res/values-{hi,kn}/strings.xml`, `app/core/
 | ln_goal_n | %1$d XP | %1$d XP | %1$d XP | [ ] |
 | ln_close | Close | बंद करो | ಮುಚ್ಚಿ | [ ] |
 | ln_back | Back | वापस | ಹಿಂದೆ | [ ] |
+
+
+## M4
+
+Files: `values-{hi,kn}/strings.xml` in `app/feature/teacher`, `app/feature/parent`, `app/feature/student` and `app/core/designsystem`. Also the parent summary sentences in `backend/app/routers/parents.py` (`summary`, `WORDS`) and the sample dashboards in `FakeFamily.kt`.
+
+| Key | English | Hindi (draft) | Kannada (draft) | Reviewed |
+|---|---|---|---|---|
+| err_consent_required | A parent needs to approve your account before you can start lessons. | पाठ शुरू करने से पहले माता-पिता को तुम्हारा खाता मंज़ूर करना होगा। | ಪಾಠಗಳನ್ನು ಆರಂಭಿಸುವ ಮೊದಲು ಪೋಷಕರು ನಿಮ್ಮ ಖಾತೆಯನ್ನು ಅನುಮೋದಿಸಬೇಕು. | [ ] |
+| err_code_not_found | That code doesn't exist. Check it with your child. | यह कोड नहीं मिला। अपने बच्चे से जाँच लें। | ಈ ಕೋಡ್ ಇಲ್ಲ. ನಿಮ್ಮ ಮಗುವಿನೊಂದಿಗೆ ಪರಿಶೀಲಿಸಿ. | [ ] |
+| err_code_expired | This code has expired or was already used. Ask your child for a new one. | यह कोड पुराना हो गया या इस्तेमाल हो चुका। बच्चे से नया कोड लें। | ಈ ಕೋಡ್ ಅವಧಿ ಮುಗಿದಿದೆ ಅಥವಾ ಈಗಾಗಲೇ ಬಳಸಲಾಗಿದೆ. ಮಗುವಿನಿಂದ ಹೊಸ ಕೋಡ್ ಪಡೆಯಿರಿ. | [ ] |
+| err_too_many_parents | This child already has two parents linked. | इस बच्चे से पहले ही दो माता-पिता जुड़े हैं। | ಈ ಮಗುವಿಗೆ ಈಗಾಗಲೇ ಇಬ್ಬರು ಪೋಷಕರು ಜೋಡಣೆಯಾಗಿದ್ದಾರೆ. | [ ] |
+| err_not_a_parent | Only parents can link a child. Add the Parent role in Profile. | सिर्फ़ माता-पिता बच्चे को जोड़ सकते हैं। प्रोफ़ाइल में पैरेंट भूमिका जोड़ें। | ಪೋಷಕರು ಮಾತ್ರ ಮಗುವನ್ನು ಜೋಡಿಸಬಹುದು. ಪ್ರೊಫೈಲ್‌ನಲ್ಲಿ ಪೋಷಕ ಪಾತ್ರ ಸೇರಿಸಿ. | [ ] |
+| db_open | Class dashboard | क्लास डैशबोर्ड | ತರಗತಿ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್ | [ ] |
+| db_title | Class dashboard | क्लास डैशबोर्ड | ತರಗತಿ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್ | [ ] |
+| db_school_consent | School has collected consent | स्कूल ने सहमति ले ली है | ಶಾಲೆ ಒಪ್ಪಿಗೆ ಪಡೆದಿದೆ | [ ] |
+| db_school_consent_help | Tick only if you have signed consent forms on file. Students then don't need a parent to approve in the app. | सिर्फ़ तभी चुनें जब आपके पास हस्ताक्षरित सहमति फ़ॉर्म हों। तब बच्चों को ऐप में माता-पिता की मंज़ूरी नहीं चाहिए। | ಸಹಿ ಮಾಡಿದ ಒಪ್ಪಿಗೆ ಫಾರ್ಮ್‌ಗಳಿದ್ದರೆ ಮಾತ್ರ ಆಯ್ಕೆಮಾಡಿ. ಆಗ ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಆ್ಯಪ್‌ನಲ್ಲಿ ಪೋಷಕರ ಅನುಮೋದನೆ ಬೇಕಿಲ್ಲ. | [ ] |
+| db_all_courses | All courses | सभी कोर्स | ಎಲ್ಲಾ ಕೋರ್ಸ್‌ಗಳು | [ ] |
+| db_active | Active this week | इस हफ़्ते सक्रिय | ಈ ವಾರ ಸಕ್ರಿಯ | [ ] |
+| db_accuracy | Accuracy | सही जवाब | ನಿಖರತೆ | [ ] |
+| db_behind | Behind | पीछे | ಹಿಂದುಳಿದವರು | [ ] |
+| db_weak_topics | Weak topics | कमज़ोर विषय | ದುರ್ಬಲ ವಿಷಯಗಳು | [ ] |
+| db_no_answers_yet | No answers yet. Topics appear once students start lessons. | अभी कोई जवाब नहीं। बच्चे पाठ शुरू करेंगे तो विषय दिखेंगे। | ಇನ್ನೂ ಉತ್ತರಗಳಿಲ್ಲ. ವಿದ್ಯಾರ್ಥಿಗಳು ಪಾಠ ಆರಂಭಿಸಿದಾಗ ವಿಷಯಗಳು ಕಾಣುತ್ತವೆ. | [ ] |
+| db_low_mastery | %1$d students still find this hard | %1$d बच्चों को यह अभी भी कठिन लगता है | %1$d ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಇದು ಇನ್ನೂ ಕಷ್ಟ | [ ] |
+| db_students | Students | विद्यार्थी | ವಿದ್ಯಾರ್ಥಿಗಳು | [ ] |
+| db_no_students | No students have joined yet. | अभी कोई विद्यार्थी नहीं जुड़ा। | ಇನ್ನೂ ಯಾವ ವಿದ್ಯಾರ್ಥಿಯೂ ಸೇರಿಲ್ಲ. | [ ] |
+| db_idle_days | Idle for %1$d days | %1$d दिन से निष्क्रिय | %1$d ದಿನಗಳಿಂದ ನಿಷ್ಕ್ರಿಯ | [ ] |
+| db_overdue_n | %1$d overdue | %1$d की तारीख निकल गई | %1$d ಗಡುವು ಮೀರಿದೆ | [ ] |
+| db_streak | Streak | लगातार दिन | ಸತತ ದಿನಗಳು | [ ] |
+| db_lessons_done | Lessons done | पूरे पाठ | ಮುಗಿದ ಪಾಠಗಳು | [ ] |
+| db_trend_improving | Improving | सुधर रहा है | ಸುಧಾರಿಸುತ್ತಿದೆ | [ ] |
+| db_trend_steady | Steady | स्थिर | ಸ್ಥಿರ | [ ] |
+| db_trend_needs_practice | Needs practice | अभ्यास चाहिए | ಅಭ್ಯಾಸ ಬೇಕು | [ ] |
+| db_twin_title | What they find hard | उन्हें क्या कठिन लगता है | ಅವರಿಗೆ ಯಾವುದು ಕಷ್ಟ | [ ] |
+| db_twin_help | From every answer they give, updated live. | उनके हर जवाब से, तुरंत अपडेट। | ಅವರ ಪ್ರತಿ ಉತ್ತರದಿಂದ, ತಕ್ಷಣ ನವೀಕರಿಸಲಾಗುತ್ತದೆ. | [ ] |
+| db_mixes_up | Often mixes up %1$s and %2$s | अक्सर %1$s और %2$s में उलझता है | ಆಗಾಗ %1$s ಮತ್ತು %2$s ನಡುವೆ ಗೊಂದಲ | [ ] |
+| db_lessons | Lessons | पाठ | ಪಾಠಗಳು | [ ] |
+| fam_link_parent | Link a parent | माता-पिता को जोड़ो | ಪೋಷಕರನ್ನು ಜೋಡಿಸಿ | [ ] |
+| fam_link_explain | Ask your parent to open Mooshala, tap Add child, and enter this code or scan it. | अपने माता-पिता से कहो कि मूशाला खोलें, "बच्चा जोड़ें" दबाएँ और यह कोड डालें या स्कैन करें। | ನಿಮ್ಮ ಪೋಷಕರಿಗೆ ಮೂಶಾಲಾ ತೆರೆದು, "ಮಗುವನ್ನು ಸೇರಿಸಿ" ಒತ್ತಿ, ಈ ಕೋಡ್ ನಮೂದಿಸಲು ಅಥವಾ ಸ್ಕ್ಯಾನ್ ಮಾಡಲು ಹೇಳಿ. | [ ] |
+| fam_qr_desc | QR code to link a parent | माता-पिता को जोड़ने का QR कोड | ಪೋಷಕರನ್ನು ಜೋಡಿಸುವ QR ಕೋಡ್ | [ ] |
+| fam_code_24h | This code works once and lasts 24 hours. | यह कोड एक बार चलता है और 24 घंटे तक रहता है। | ಈ ಕೋಡ್ ಒಮ್ಮೆ ಮಾತ್ರ ಕೆಲಸ ಮಾಡುತ್ತದೆ ಮತ್ತು 24 ಗಂಟೆ ಇರುತ್ತದೆ. | [ ] |
+| fam_linked_parents | Linked parents | जुड़े माता-पिता | ಜೋಡಣೆಯಾದ ಪೋಷಕರು | [ ] |
+| fam_no_parents | No parent linked yet. | अभी कोई माता-पिता नहीं जुड़े। | ಇನ್ನೂ ಯಾವ ಪೋಷಕರೂ ಜೋಡಣೆಯಾಗಿಲ್ಲ. | [ ] |
+| fam_phone_ending | Phone ending %1$s | फ़ोन के आख़िरी अंक %1$s | ಫೋನ್ ಕೊನೆಯ ಅಂಕೆಗಳು %1$s | [ ] |
+| fam_remove | Remove | हटाओ | ತೆಗೆದುಹಾಕಿ | [ ] |
+| fam_consent_pending | Before you start lessons, a parent needs to approve your account. Link a parent and ask them to tap "I approve". | पाठ शुरू करने से पहले माता-पिता को तुम्हारा खाता मंज़ूर करना होगा। माता-पिता को जोड़ो और उनसे "मैं मंज़ूरी देता/देती हूँ" दबाने को कहो। | ಪಾಠಗಳನ್ನು ಆರಂಭಿಸುವ ಮೊದಲು ಪೋಷಕರು ನಿಮ್ಮ ಖಾತೆಯನ್ನು ಅನುಮೋದಿಸಬೇಕು. ಪೋಷಕರನ್ನು ಜೋಡಿಸಿ ಮತ್ತು "ನಾನು ಅನುಮೋದಿಸುತ್ತೇನೆ" ಒತ್ತಲು ಹೇಳಿ. | [ ] |
+| fam_you_know | You know this: %1$d%% | तुम्हें यह आता है: %1$d%% | ನಿಮಗೆ ಇದು ತಿಳಿದಿದೆ: %1$d%% | [ ] |
+| pa_no_children | Add your child to see how they're learning. | अपने बच्चे को जोड़ें और देखें कि वह कैसे पढ़ रहा है। | ನಿಮ್ಮ ಮಗುವನ್ನು ಸೇರಿಸಿ ಮತ್ತು ಅವರ ಕಲಿಕೆ ನೋಡಿ. | [ ] |
+| pa_add_child | Add child | बच्चा जोड़ें | ಮಗುವನ್ನು ಸೇರಿಸಿ | [ ] |
+| pa_child_settings | Child settings | बच्चे की सेटिंग | ಮಗುವಿನ ಸೆಟ್ಟಿಂಗ್‌ಗಳು | [ ] |
+| pa_consent_needed | %1$s is waiting for your approval before starting lessons. | %1$s पाठ शुरू करने के लिए आपकी मंज़ूरी का इंतज़ार कर रहा है। | %1$s ಪಾಠ ಆರಂಭಿಸಲು ನಿಮ್ಮ ಅನುಮೋದನೆಗಾಗಿ ಕಾಯುತ್ತಿದ್ದಾರೆ. | [ ] |
+| pa_consent_revoked | You paused %1$s's account. Approve again to restart lessons. | आपने %1$s का खाता रोक दिया है। पाठ फिर शुरू करने के लिए दोबारा मंज़ूरी दें। | ನೀವು %1$s ಅವರ ಖಾತೆಯನ್ನು ನಿಲ್ಲಿಸಿದ್ದೀರಿ. ಪಾಠಗಳನ್ನು ಮತ್ತೆ ಆರಂಭಿಸಲು ಮತ್ತೆ ಅನುಮೋದಿಸಿ. | [ ] |
+| pa_review_consent | Review and approve | देखें और मंज़ूरी दें | ಪರಿಶೀಲಿಸಿ ಮತ್ತು ಅನುಮೋದಿಸಿ | [ ] |
+| pa_improving | Improving | सुधार हो रहा है | ಸುಧಾರಿಸುತ್ತಿದೆ | [ ] |
+| pa_steady | Steady | स्थिर | ಸ್ಥಿರ | [ ] |
+| pa_needs_practice | Needs practice | अभ्यास चाहिए | ಅಭ್ಯಾಸ ಬೇಕು | [ ] |
+| pa_listen_summary | Listen to summary | सारांश सुनें | ಸಾರಾಂಶ ಕೇಳಿ | [ ] |
+| pa_no_activity | %1$s hasn't practised yet. Their progress will show here. | %1$s ने अभी अभ्यास नहीं किया है। उनकी प्रगति यहाँ दिखेगी। | %1$s ಇನ್ನೂ ಅಭ್ಯಾಸ ಮಾಡಿಲ್ಲ. ಅವರ ಪ್ರಗತಿ ಇಲ್ಲಿ ಕಾಣುತ್ತದೆ. | [ ] |
+| pa_this_week | This week | इस हफ़्ते | ಈ ವಾರ | [ ] |
+| pa_lessons_vs | %1$d lessons (last week %2$d) | %1$d पाठ (पिछले हफ़्ते %2$d) | %1$d ಪಾಠಗಳು (ಕಳೆದ ವಾರ %2$d) | [ ] |
+| pa_minutes | %1$d minutes of practice | %1$d मिनट अभ्यास | %1$d ನಿಮಿಷ ಅಭ್ಯಾಸ | [ ] |
+| pa_streak | Streak: %1$d days | लगातार: %1$d दिन | ಸತತ: %1$d ದಿನಗಳು | [ ] |
+| pa_accuracy | Accuracy | सही जवाब | ನಿಖರತೆ | [ ] |
+| pa_subjects | Subjects | विषय | ವಿಷಯಗಳು | [ ] |
+| pa_strongest | Strongest: %1$s | सबसे अच्छा: %1$s | ಅತ್ಯುತ್ತಮ: %1$s | [ ] |
+| pa_weakest | Needs practice: %1$s | अभ्यास चाहिए: %1$s | ಅಭ್ಯಾಸ ಬೇಕು: %1$s | [ ] |
+| pa_assignments | Assignments | असाइनमेंट | ಅಸೈನ್‌ಮೆಂಟ್‌ಗಳು | [ ] |
+| pa_no_assignments | No assignments yet. | अभी कोई असाइनमेंट नहीं। | ಇನ್ನೂ ಅಸೈನ್‌ಮೆಂಟ್‌ಗಳಿಲ್ಲ. | [ ] |
+| pa_done | Done | पूरा | ಮುಗಿದಿದೆ | [ ] |
+| pa_pending | Pending | बाकी | ಬಾಕಿ | [ ] |
+| pa_overdue | Overdue | तारीख निकल गई | ಗಡುವು ಮೀರಿದೆ | [ ] |
+| pa_classes | Classes | क्लास | ತರಗತಿಗಳು | [ ] |
+| pa_add_child_help | Ask your child to open Profile → Link a parent. Enter the code they see, or scan it. | बच्चे से प्रोफ़ाइल → "माता-पिता को जोड़ो" खोलने को कहें। दिख रहा कोड डालें या स्कैन करें। | ಮಗುವಿಗೆ ಪ್ರೊಫೈಲ್ → "ಪೋಷಕರನ್ನು ಜೋಡಿಸಿ" ತೆರೆಯಲು ಹೇಳಿ. ಕಾಣುವ ಕೋಡ್ ನಮೂದಿಸಿ ಅಥವಾ ಸ್ಕ್ಯಾನ್ ಮಾಡಿ. | [ ] |
+| pa_code_hint | 6-letter code | 6 अक्षरों का कोड | 6 ಅಕ್ಷರಗಳ ಕೋಡ್ | [ ] |
+| pa_check_code | Check code | कोड जाँचें | ಕೋಡ್ ಪರಿಶೀಲಿಸಿ | [ ] |
+| pa_scan | Scan QR code | QR कोड स्कैन करें | QR ಕೋಡ್ ಸ್ಕ್ಯಾನ್ ಮಾಡಿ | [ ] |
+| pa_link | Link | जोड़ें | ಜೋಡಿಸಿ | [ ] |
+| pa_consent_title | Approve %1$s's account | %1$s के खाते को मंज़ूरी दें | %1$s ಅವರ ಖಾತೆಯನ್ನು ಅನುಮೋದಿಸಿ | [ ] |
+| pa_we_collect | What Mooshala keeps | मूशाला क्या रखता है | ಮೂಶಾಲಾ ಏನನ್ನು ಇಟ್ಟುಕೊಳ್ಳುತ್ತದೆ | [ ] |
+| pa_we_collect_list | Your child's name, class and learning activity: lessons, answers and progress. | आपके बच्चे का नाम, क्लास और पढ़ाई की गतिविधि: पाठ, जवाब और प्रगति। | ನಿಮ್ಮ ಮಗುವಿನ ಹೆಸರು, ತರಗತಿ ಮತ್ತು ಕಲಿಕೆಯ ಚಟುವಟಿಕೆ: ಪಾಠಗಳು, ಉತ್ತರಗಳು ಮತ್ತು ಪ್ರಗತಿ. | [ ] |
+| pa_we_dont | What Mooshala never collects | मूशाला क्या कभी नहीं लेता | ಮೂಶಾಲಾ ಎಂದಿಗೂ ಸಂಗ್ರಹಿಸದ್ದು | [ ] |
+| pa_we_dont_list | No location, no contacts, no public profile, no ads. | कोई लोकेशन नहीं, कोई कॉन्टैक्ट नहीं, कोई सार्वजनिक प्रोफ़ाइल नहीं, कोई विज्ञापन नहीं। | ಸ್ಥಳವಿಲ್ಲ, ಸಂಪರ್ಕಗಳಿಲ್ಲ, ಸಾರ್ವಜನಿಕ ಪ್ರೊಫೈಲ್ ಇಲ್ಲ, ಜಾಹೀರಾತುಗಳಿಲ್ಲ. | [ ] |
+| pa_consent_rights | You can withdraw consent or ask us to delete your child's data at any time in Child settings. | आप कभी भी बच्चे की सेटिंग में सहमति वापस ले सकते हैं या बच्चे का डेटा मिटाने को कह सकते हैं। | ಮಗುವಿನ ಸೆಟ್ಟಿಂಗ್‌ಗಳಲ್ಲಿ ಯಾವಾಗ ಬೇಕಾದರೂ ಒಪ್ಪಿಗೆ ಹಿಂಪಡೆಯಬಹುದು ಅಥವಾ ಮಗುವಿನ ಡೇಟಾ ಅಳಿಸಲು ಕೇಳಬಹುದು. | [ ] |
+| pa_i_approve | I approve | मैं मंज़ूरी देता/देती हूँ | ನಾನು ಅನುಮೋದಿಸುತ್ತೇನೆ | [ ] |
+| pa_later | Not now | अभी नहीं | ಈಗ ಬೇಡ | [ ] |
+| pa_consent_on | You've approved this account. | आपने यह खाता मंज़ूर किया है। | ನೀವು ಈ ಖಾತೆಯನ್ನು ಅನುಮೋದಿಸಿದ್ದೀರಿ. | [ ] |
+| pa_consent_off | This account is waiting for approval. | यह खाता मंज़ूरी का इंतज़ार कर रहा है। | ಈ ಖಾತೆ ಅನುಮೋದನೆಗಾಗಿ ಕಾಯುತ್ತಿದೆ. | [ ] |
+| pa_revoke | Withdraw consent | सहमति वापस लें | ಒಪ್ಪಿಗೆ ಹಿಂಪಡೆಯಿರಿ | [ ] |
+| pa_revoke_confirm | Your child won't be able to start lessons until you approve again. | जब तक आप फिर मंज़ूरी नहीं देंगे, बच्चा पाठ शुरू नहीं कर पाएगा। | ನೀವು ಮತ್ತೆ ಅನುಮೋದಿಸುವವರೆಗೆ ಮಗು ಪಾಠ ಆರಂಭಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ. | [ ] |
+| pa_unlink | Remove link | लिंक हटाएँ | ಜೋಡಣೆ ತೆಗೆದುಹಾಕಿ | [ ] |
+| pa_unlink_confirm | You'll stop seeing this child's progress. | आपको इस बच्चे की प्रगति दिखना बंद हो जाएगी। | ಈ ಮಗುವಿನ ಪ್ರಗತಿ ನಿಮಗೆ ಕಾಣುವುದು ನಿಲ್ಲುತ್ತದೆ. | [ ] |
+| pa_delete | Delete my child's data | बच्चे का डेटा मिटाएँ | ಮಗುವಿನ ಡೇಟಾ ಅಳಿಸಿ | [ ] |
+| pa_delete_help | Deletes the account, lessons, answers and progress within 7 days. This can't be undone. | 7 दिनों में खाता, पाठ, जवाब और प्रगति मिटा दी जाएगी। इसे वापस नहीं किया जा सकता। | 7 ದಿನಗಳಲ್ಲಿ ಖಾತೆ, ಪಾಠಗಳು, ಉತ್ತರಗಳು ಮತ್ತು ಪ್ರಗತಿ ಅಳಿಸಲಾಗುತ್ತದೆ. ಇದನ್ನು ಹಿಂಪಡೆಯಲಾಗುವುದಿಲ್ಲ. | [ ] |
+| pa_delete_confirm | Delete all of your child's data? This can't be undone. | बच्चे का सारा डेटा मिटाएँ? इसे वापस नहीं किया जा सकता। | ಮಗುವಿನ ಎಲ್ಲಾ ಡೇಟಾ ಅಳಿಸಬೇಕೆ? ಇದನ್ನು ಹಿಂಪಡೆಯಲಾಗುವುದಿಲ್ಲ. | [ ] |
+| pa_yes | Yes | हाँ | ಹೌದು | [ ] |
+| pa_no | No | नहीं | ಇಲ್ಲ | [ ] |

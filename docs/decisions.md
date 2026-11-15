@@ -116,3 +116,26 @@ The user supplied a web prototype, `docs/design/mooshala-code.md` ("Mooshala"), 
 - **Underlined terms** are found by matching each term's regional form in the regional line and its English form (whole words, any case) in the English line. Options that point to a term key are shown with the term's forms.
 - **Revise** shows "coming soon" (M7), as the PRD says.
 - **Libraries added:** `androidx.media3:media3-datasource` and `media3-database` (same version as `media3-exoplayer`, already in the stack) for the 50 MB on-phone audio cache.
+
+## M4: Teacher dashboard, Parent mode and the Student Twin (2026-11-15)
+
+- **The Student Twin (an addition to the PRD, asked for by the user).** A live model of what each student knows, built only from their answers:
+  - **Mastery per concept** (each lesson and each course term) with Bayesian Knowledge Tracing: start 0.2, learn 0.15, slip 0.1, guess = 1/options (0.5 for true/false). Retries count half.
+  - **Forgetting:** shown mastery = p × 2^(−days/half-life); the half-life starts at 3 days, doubles after a correct review on a later day (max 60), halves after a miss (min 1). `next_review_at` is stored for M7's revision.
+  - **Misconceptions:** a multiple-choice miss whose chosen option is another term records a confusion pair ("mixes up mitochondria and nucleus").
+  - **Habits:** usual practice hour, median answer time, active days in 14 (computed on request, not stored).
+  - **Match pairs** only report how many wrong pairs there were, not which, so every term in a match-pairs question gets the same result (right if no slips).
+  - It's a pure function of the answer log: `twin.rebuild()` replays `answer_attempts` and gives the same state (tested), so parameters can change later.
+  - **Where it shows:** teacher student detail (3 weakest concepts, confusions), weak topics ("N students still find this hard"), the parent dashboard (strongest/weakest topic per subject, the summary), doubt chat (a private hint about what the student finds hard), and "You know this: N%" on term cards.
+  - **Privacy:** learning data only, under the same consent; no doubt texts and no AI-written profile of the child; parents see summaries; deletion removes it; RLS lets the student, their teachers and actively linked parents read it, and only the backend writes it.
+- **Weak topics and tiles use first-try accuracy**, as the PRD says (so a hand calculation can check them); the twin adds the low-mastery count beside them.
+- **"Active this week" and the tile accuracy use the last seven days**, as the PRD's tile text says; the parent dashboard's "this week vs last week" uses Monday–Sunday weeks in India time.
+- **Dashboard cache:** five minutes per classroom (and course filter), in the API process's memory (`DASHBOARD_CACHE_SECONDS`, 0 in tests). Switching school consent clears it. A shared cache (Redis) isn't needed for the pilot.
+- **Authorisation:** teacher and parent endpoints check ownership or an active link through the user's own session (RLS), then read the class or child's data with the service session. RLS policies for parents and teachers on stats, progress, attempts and the twin are added too, and parents have no policy on doubts at all (tested).
+- **Consent gate:** starting a lesson returns 403 `CONSENT_REQUIRED` unless the student is approved or one of their classes has school consent. **Existing student accounts start as pending too**, as the PRD says; for testing, the teacher ticks "School has collected consent" on the class (or a parent approves).
+- **School consent** is a classroom flag with who set it and when; it isn't copied into per-student consent records.
+- **A student stays approved while at least one active linked parent has consented**; removing that parent puts the account back to pending.
+- **Parent summary:** three fixed-template sentences in English, Hindi and Kannada filled with the numbers and the twin's weakest topic (no AI model: free, consistent, and checkable). "Listen to summary" plays it through Sarvam (regional, then English).
+- **Deletion:** the request is recorded at once (and processing stops: consent becomes revoked), then a job deletes the student's profile, which cascades to their learning data, twin, links and consent records. In development the job runs right away; in production it runs from the queue, well inside the PRD's seven days. VERIFY: deleting the Supabase auth account itself needs Supabase's admin API (`DELETE /auth/v1/admin/users/{id}`) and isn't done yet.
+- **Link codes** use the class-key alphabet (no 0/O/1/I/L), last 24 hours and work once. The QR holds just the code; the parent's scanner reuses the class-join scanner with a different code pattern.
+- **Offline fakes:** debug builds show a class of eight students and a parent with two children (one approved, one waiting); code `KAV234` links a third. Pretend-mode lessons aren't consent-gated.

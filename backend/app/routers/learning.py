@@ -32,6 +32,7 @@ from app.db.models import (
     SavedTerm,
     StudentStats,
     TermRow,
+    TwinConcept,
     Unit,
     User,
 )
@@ -41,6 +42,7 @@ from app.learning import rules
 from app.learning.audio import audio_url
 from app.routers.courses import LessonOut, _question_out, _readable_course
 from app.speech.sarvam import SpeechError
+from app.twin import model as twin_model
 from app.twin import service as twin
 
 router = APIRouter(tags=["learning"])
@@ -404,6 +406,24 @@ def require_consent(db: Session, service_db: Session, user_id: str, course: Cour
 class StartOut(BaseModel):
     lesson: LessonOut
     stats: StatsOut
+    # The Student Twin's mastery of each term (0..1) for "You know this: N%" on term cards.
+    term_mastery: dict[str, float] = {}
+
+
+def _term_mastery(
+    db: Session, student_id: uuid.UUID, course_id: uuid.UUID, at: datetime
+) -> dict[str, float]:
+    rows = db.scalars(
+        select(TwinConcept).where(
+            TwinConcept.student_id == student_id,
+            TwinConcept.course_id == course_id,
+            TwinConcept.kind == "term",
+        )
+    )
+    return {
+        r.key: round(twin_model.decayed(r.mastery, r.last_seen_at, r.half_life_days, at), 3)
+        for r in rows
+    }
 
 
 def _playable_lesson(
@@ -468,7 +488,11 @@ def start_lesson(
         terms=terms,
     )
     stats = _load_stats(db, user.id, at)
-    return StartOut(lesson=out, stats=_stats_out(stats, at))
+    return StartOut(
+        lesson=out,
+        stats=_stats_out(stats, at),
+        term_mastery=_term_mastery(db, uuid.UUID(user.id), course.id, at),
+    )
 
 
 class AttemptIn(BaseModel):
@@ -612,6 +636,7 @@ class TermOut(BaseModel):
     content: dict[str, Any]
     source_page: int
     saved: bool
+    mastery: float | None = None
 
 
 @router.get("/courses/{course_id}/terms")
@@ -627,8 +652,15 @@ def course_terms(
         )
     )
     rows = db.scalars(select(TermRow).where(TermRow.course_id == course.id).order_by(TermRow.key))
+    mastery = _term_mastery(db, uuid.UUID(user.id), course.id, now())
     return [
-        TermOut(key=t.key, content=t.content, source_page=t.source_page, saved=t.key in saved)
+        TermOut(
+            key=t.key,
+            content=t.content,
+            source_page=t.source_page,
+            saved=t.key in saved,
+            mastery=mastery.get(t.key),
+        )
         for t in rows
     ]
 

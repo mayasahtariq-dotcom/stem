@@ -31,6 +31,11 @@ enum class ApiErrorCode {
     DOUBT_LIMIT,
     INVALID_ANSWER,
     LESSON_NOT_STARTED,
+    CONSENT_REQUIRED,
+    CODE_NOT_FOUND,
+    CODE_EXPIRED,
+    TOO_MANY_PARENTS,
+    NOT_A_PARENT,
     ;
 
     companion object {

@@ -115,6 +115,14 @@ fun TermCardContent(
             if (term.formal.isComplete() && term.formal.regional(mode) != term.forms.regional(mode)) {
                 BilingualText(bilingualFormat(R.string.ln_formal, term.formal.regional(mode), term.formal.en), size = BilingualTextSize.Small)
             }
+            term.mastery?.let { m ->
+                BilingualText(
+                    bilingualStringResource(R.string.fam_you_know, (m * 100).toInt()),
+                    size = BilingualTextSize.Small,
+                    regionalColor = StemColors.BlueDark,
+                    englishColor = StemColors.BlueDark,
+                )
+            }
             BilingualText(term.meaning.bilingual(mode), size = BilingualTextSize.Large)
             BilingualText(R.string.ln_think_of_it, size = BilingualTextSize.Small, regionalColor = StemColors.Brown, englishColor = StemColors.Brown)
             BilingualText(term.analogy.bilingual(mode))

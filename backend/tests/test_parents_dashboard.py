@@ -290,3 +290,16 @@ def test_twin_rebuild_matches_live_updates(api: Any, people: Any, migrated_engin
     assert replayed == sum(1 for q in qs if q["type"] in ("multiple_choice", "true_false"))
     with migrated_engine.connect() as c:
         assert c.execute(query).all() == live
+
+
+def test_term_mastery_reaches_the_app(api: Any, people: Any) -> None:
+    s = setup_class(api, people, school_consent=True)
+    asha, lesson = s["student"], s["status"]["first_lesson_id"]
+    first = asha.post(f"/lessons/{lesson}/start", {}).json()
+    assert first["term_mastery"] == {}
+    q = next(q for q in first["lesson"]["questions"] if q["type"] == "multiple_choice")
+    answer(asha, q, correct=True)
+    again = asha.post(f"/lessons/{lesson}/start", {}).json()["term_mastery"]
+    assert again and all(0 < v <= 1 for v in again.values())
+    terms = asha.get(f"/courses/{s['status']['course_id']}/terms").json()
+    assert any(t["mastery"] for t in terms)

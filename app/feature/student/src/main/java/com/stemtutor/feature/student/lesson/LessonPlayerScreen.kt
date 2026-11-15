@@ -39,6 +39,8 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.stemtutor.core.data.model.LessonResult
+import com.stemtutor.core.network.AppError
+import com.stemtutor.core.network.ApiErrorCode
 import com.stemtutor.core.data.model.QuestionBody
 import com.stemtutor.core.data.model.StudentStats
 import com.stemtutor.core.data.model.Tri
@@ -77,6 +79,7 @@ enum class DoubtStart { NONE, WHY, SIMPLER }
 fun LessonPlayerRoute(
     onExit: () -> Unit,
     onAskDoubt: (courseId: String, questionId: String?, termKey: String?, start: DoubtStart) -> Unit,
+    onLinkParent: () -> Unit = {},
     viewModel: LessonPlayerViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -103,6 +106,7 @@ fun LessonPlayerRoute(
             onRefreshHearts = viewModel::refreshHearts,
             onDismissNotice = viewModel::dismissNotice,
             onDone = onExit,
+            onLinkParent = onLinkParent,
         ),
     )
 }
@@ -126,6 +130,7 @@ class PlayerActions(
     val onRefreshHearts: () -> Unit = {},
     val onDismissNotice: () -> Unit = {},
     val onDone: () -> Unit = {},
+    val onLinkParent: () -> Unit = {},
 )
 
 @Composable
@@ -133,6 +138,7 @@ fun LessonPlayerScreen(state: PlayerUiState, actions: PlayerActions, animate: Bo
     Box(Modifier.fillMaxSize().background(StemColors.White)) {
         when {
             state.loading -> LoadingScreen(animate = animate)
+            state.loadError == AppError.Api(ApiErrorCode.CONSENT_REQUIRED) -> ConsentPending(actions, animate)
             state.loadError != null -> ErrorScreen(actions.onRetryLoad, messageRes = state.loadError.messageRes(), animate = animate)
             state.result != null -> LessonEnd(state.result, actions.onDone, animate)
             state.completing || state.queue.finished -> Finishing(state, actions, animate)
@@ -321,6 +327,21 @@ private fun Finishing(state: PlayerUiState, actions: PlayerActions, animate: Boo
         ErrorScreen(actions.onRetryComplete, messageRes = state.completeError.messageRes(), animate = animate)
     } else {
         LoadingScreen(animate = animate)
+    }
+}
+
+/** DPDP (M4): a new student's lessons wait for a parent's approval (or school consent). */
+@Composable
+private fun ConsentPending(actions: PlayerActions, animate: Boolean) {
+    Column(
+        Modifier.fillMaxSize().padding(24.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        SpeechBubble(R.string.fam_consent_pending, Modifier.fillMaxWidth())
+        CowMascot(CowPose.Question, animate = animate)
+        ChunkyButton(R.string.fam_link_parent, actions.onLinkParent, Modifier.fillMaxWidth())
+        ChunkyButton(R.string.ln_back_to_path, actions.onDone, Modifier.fillMaxWidth(), ChunkyButtonStyle.Ghost)
     }
 }
 

@@ -20,6 +20,12 @@ import com.stemtutor.core.data.course.CourseRepository
 import com.stemtutor.core.data.course.FakeCourseRepository
 import com.stemtutor.core.data.course.GenerationWatcher
 import com.stemtutor.core.data.course.RemoteCourseRepository
+import com.stemtutor.core.data.family.DashboardRepository
+import com.stemtutor.core.data.family.FakeDashboardRepository
+import com.stemtutor.core.data.family.FakeFamilyRepository
+import com.stemtutor.core.data.family.FamilyRepository
+import com.stemtutor.core.data.family.RemoteDashboardRepository
+import com.stemtutor.core.data.family.RemoteFamilyRepository
 import com.stemtutor.core.data.health.FakeHealthRepository
 import com.stemtutor.core.data.health.HealthRepository
 import com.stemtutor.core.data.health.RealHealthRepository
@@ -32,6 +38,7 @@ import com.stemtutor.core.data.profile.RemoteProfileRepository
 import com.stemtutor.core.data.session.PendingJoinKey
 import com.stemtutor.core.data.session.SessionStore
 import com.stemtutor.core.network.ApiConfig
+import com.stemtutor.core.network.FamilyApi
 import com.stemtutor.core.network.LearningApi
 import com.stemtutor.core.network.StemApi
 import com.stemtutor.core.network.auth.AccessTokenProvider
@@ -111,6 +118,16 @@ object DataModule {
     @Singleton
     fun provideListenController(audio: AudioRepository, player: AudioPlayer): ListenController =
         ListenController(audio, player)
+
+    @Provides
+    @Singleton
+    fun provideDashboardRepository(config: ApiConfig, api: Provider<FamilyApi>): DashboardRepository =
+        if (config.useRealApi) RemoteDashboardRepository(api.get()) else FakeDashboardRepository()
+
+    @Provides
+    @Singleton
+    fun provideFamilyRepository(config: ApiConfig, api: Provider<FamilyApi>): FamilyRepository =
+        if (config.useRealApi) RemoteFamilyRepository(api.get()) else FakeFamilyRepository()
 
     @Provides
     @Singleton

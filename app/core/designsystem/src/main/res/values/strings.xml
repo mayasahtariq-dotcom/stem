@@ -65,4 +65,9 @@
     <string name="err_phone_in_use">This phone number is already used by another account.</string>
     <string name="err_hearts_empty">You\'re out of hearts. Take a break: a heart comes back every 4 hours.</string>
     <string name="err_doubt_limit">You\'ve asked 20 doubts today. Ask more tomorrow!</string>
+    <string name="err_consent_required">A parent needs to approve your account before you can start lessons.</string>
+    <string name="err_code_not_found">That code doesn\'t exist. Check it with your child.</string>
+    <string name="err_code_expired">This code has expired or was already used. Ask your child for a new one.</string>
+    <string name="err_too_many_parents">This child already has two parents linked.</string>
+    <string name="err_not_a_parent">Only parents can link a child. Add the Parent role in Profile.</string>
 </resources>

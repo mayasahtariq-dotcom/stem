@@ -65,4 +65,9 @@
     <string name="err_phone_in_use">यह फ़ोन नंबर पहले से किसी दूसरे खाते में है।</string>
     <string name="err_hearts_empty">तुम्हारे दिल खत्म हो गए। थोड़ा आराम करो: हर 4 घंटे में एक दिल वापस आता है।</string>
     <string name="err_doubt_limit">आज तुमने 20 सवाल पूछ लिए। कल और पूछना!</string>
+    <string name="err_consent_required">पाठ शुरू करने से पहले माता-पिता को तुम्हारा खाता मंज़ूर करना होगा।</string>
+    <string name="err_code_not_found">यह कोड नहीं मिला। अपने बच्चे से जाँच लें।</string>
+    <string name="err_code_expired">यह कोड पुराना हो गया या इस्तेमाल हो चुका। बच्चे से नया कोड लें।</string>
+    <string name="err_too_many_parents">इस बच्चे से पहले ही दो माता-पिता जुड़े हैं।</string>
+    <string name="err_not_a_parent">सिर्फ़ माता-पिता बच्चे को जोड़ सकते हैं। प्रोफ़ाइल में पैरेंट भूमिका जोड़ें।</string>
 </resources>

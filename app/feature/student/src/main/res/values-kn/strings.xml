@@ -97,4 +97,14 @@
     <string name="ln_goal_n">%1$d XP</string>
     <string name="ln_close">ಮುಚ್ಚಿ</string>
     <string name="ln_back">ಹಿಂದೆ</string>
+    <string name="fam_link_parent">ಪೋಷಕರನ್ನು ಜೋಡಿಸಿ</string>
+    <string name="fam_link_explain">ನಿಮ್ಮ ಪೋಷಕರಿಗೆ ಮೂಶಾಲಾ ತೆರೆದು, \"ಮಗುವನ್ನು ಸೇರಿಸಿ\" ಒತ್ತಿ, ಈ ಕೋಡ್ ನಮೂದಿಸಲು ಅಥವಾ ಸ್ಕ್ಯಾನ್ ಮಾಡಲು ಹೇಳಿ.</string>
+    <string name="fam_qr_desc">ಪೋಷಕರನ್ನು ಜೋಡಿಸುವ QR ಕೋಡ್</string>
+    <string name="fam_code_24h">ಈ ಕೋಡ್ ಒಮ್ಮೆ ಮಾತ್ರ ಕೆಲಸ ಮಾಡುತ್ತದೆ ಮತ್ತು 24 ಗಂಟೆ ಇರುತ್ತದೆ.</string>
+    <string name="fam_linked_parents">ಜೋಡಣೆಯಾದ ಪೋಷಕರು</string>
+    <string name="fam_no_parents">ಇನ್ನೂ ಯಾವ ಪೋಷಕರೂ ಜೋಡಣೆಯಾಗಿಲ್ಲ.</string>
+    <string name="fam_phone_ending">ಫೋನ್ ಕೊನೆಯ ಅಂಕೆಗಳು %1$s</string>
+    <string name="fam_remove">ತೆಗೆದುಹಾಕಿ</string>
+    <string name="fam_consent_pending">ಪಾಠಗಳನ್ನು ಆರಂಭಿಸುವ ಮೊದಲು ಪೋಷಕರು ನಿಮ್ಮ ಖಾತೆಯನ್ನು ಅನುಮೋದಿಸಬೇಕು. ಪೋಷಕರನ್ನು ಜೋಡಿಸಿ ಮತ್ತು \"ನಾನು ಅನುಮೋದಿಸುತ್ತೇನೆ\" ಒತ್ತಲು ಹೇಳಿ.</string>
+    <string name="fam_you_know">ನಿಮಗೆ ಇದು ತಿಳಿದಿದೆ: %1$d%%</string>
 </resources>

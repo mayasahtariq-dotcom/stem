@@ -96,4 +96,14 @@
     <string name="ln_goal_n">%1$d XP</string>
     <string name="ln_close">Close</string>
     <string name="ln_back">Back</string>
+    <string name="fam_link_parent">Link a parent</string>
+    <string name="fam_link_explain">Ask your parent to open Mooshala, tap Add child, and enter this code or scan it.</string>
+    <string name="fam_qr_desc">QR code to link a parent</string>
+    <string name="fam_code_24h">This code works once and lasts 24 hours.</string>
+    <string name="fam_linked_parents">Linked parents</string>
+    <string name="fam_no_parents">No parent linked yet.</string>
+    <string name="fam_phone_ending">Phone ending %1$s</string>
+    <string name="fam_remove">Remove</string>
+    <string name="fam_consent_pending">Before you start lessons, a parent needs to approve your account. Link a parent and ask them to tap \"I approve\".</string>
+    <string name="fam_you_know">You know this: %1$d%%</string>
 </resources>

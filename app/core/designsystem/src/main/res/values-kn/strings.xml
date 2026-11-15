@@ -65,4 +65,9 @@
     <string name="err_phone_in_use">ಈ ಫೋನ್ ನಂಬರ್ ಈಗಾಗಲೇ ಇನ್ನೊಂದು ಖಾತೆಯಲ್ಲಿದೆ.</string>
     <string name="err_hearts_empty">ನಿಮ್ಮ ಹೃದಯಗಳು ಮುಗಿದಿವೆ. ಸ್ವಲ್ಪ ವಿಶ್ರಾಂತಿ ಪಡೆಯಿರಿ: ಪ್ರತಿ 4 ಗಂಟೆಗೆ ಒಂದು ಹೃದಯ ಮರಳಿ ಬರುತ್ತದೆ.</string>
     <string name="err_doubt_limit">ಇಂದು ನೀವು 20 ಸಂದೇಹಗಳನ್ನು ಕೇಳಿದ್ದೀರಿ. ನಾಳೆ ಇನ್ನಷ್ಟು ಕೇಳಿ!</string>
+    <string name="err_consent_required">ಪಾಠಗಳನ್ನು ಆರಂಭಿಸುವ ಮೊದಲು ಪೋಷಕರು ನಿಮ್ಮ ಖಾತೆಯನ್ನು ಅನುಮೋದಿಸಬೇಕು.</string>
+    <string name="err_code_not_found">ಈ ಕೋಡ್ ಇಲ್ಲ. ನಿಮ್ಮ ಮಗುವಿನೊಂದಿಗೆ ಪರಿಶೀಲಿಸಿ.</string>
+    <string name="err_code_expired">ಈ ಕೋಡ್ ಅವಧಿ ಮುಗಿದಿದೆ ಅಥವಾ ಈಗಾಗಲೇ ಬಳಸಲಾಗಿದೆ. ಮಗುವಿನಿಂದ ಹೊಸ ಕೋಡ್ ಪಡೆಯಿರಿ.</string>
+    <string name="err_too_many_parents">ಈ ಮಗುವಿಗೆ ಈಗಾಗಲೇ ಇಬ್ಬರು ಪೋಷಕರು ಜೋಡಣೆಯಾಗಿದ್ದಾರೆ.</string>
+    <string name="err_not_a_parent">ಪೋಷಕರು ಮಾತ್ರ ಮಗುವನ್ನು ಜೋಡಿಸಬಹುದು. ಪ್ರೊಫೈಲ್‌ನಲ್ಲಿ ಪೋಷಕ ಪಾತ್ರ ಸೇರಿಸಿ.</string>
 </resources>

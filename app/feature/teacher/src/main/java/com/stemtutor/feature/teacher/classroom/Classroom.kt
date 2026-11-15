@@ -216,9 +216,14 @@ private fun text(res: Int, n: Int): BilingualString = bilingualStringResource(re
 // ---- Details and members ----------------------------------------------------------------
 
 @Composable
-fun ClassroomDetailRoute(onShowKey: () -> Unit, onBack: () -> Unit, viewModel: ClassroomViewModel = hiltViewModel()) {
+fun ClassroomDetailRoute(
+    onShowKey: () -> Unit,
+    onBack: () -> Unit,
+    onDashboard: () -> Unit = {},
+    viewModel: ClassroomViewModel = hiltViewModel(),
+) {
     val state by viewModel.state.collectAsStateWithLifecycle()
-    ClassroomDetailScreen(state, onShowKey, onBack, viewModel::load)
+    ClassroomDetailScreen(state, onShowKey, onBack, viewModel::load, onDashboard = onDashboard)
 }
 
 @Composable
@@ -228,6 +233,7 @@ fun ClassroomDetailScreen(
     onBack: () -> Unit,
     onRetry: () -> Unit,
     animate: Boolean = true,
+    onDashboard: () -> Unit = {},
 ) {
     Column(Modifier.fillMaxSize().background(StemColors.TeacherBackground)) {
         val title = (state as? ClassroomUiState.Ready)?.detail?.classroom?.name.orEmpty()
@@ -250,6 +256,7 @@ fun ClassroomDetailScreen(
                             "${subject.english} · ${grade.english} · ${langs.joinToString(", ") { it.english }} · ${c.joinKey}",
                         ),
                     )
+                    ChunkyButton(R.string.db_open, onDashboard, Modifier.fillMaxWidth())
                     ChunkyButton(R.string.te_show_key, onShowKey, Modifier.fillMaxWidth(), ChunkyButtonStyle.White)
                     BilingualText(text(R.string.te_members, state.detail.members.size), size = BilingualTextSize.Large)
                     if (state.detail.members.isEmpty()) {

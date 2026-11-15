@@ -158,7 +158,9 @@ class RemoteLearningRepository(private val api: LearningApi) : LearningRepositor
                 published = l.published,
                 questions = l.questions.map { QuestionCodec.decode(it, l.terms) },
             ),
-            terms = l.terms.mapValues { (key, content) -> TermCodec.decode(key, content, sourcePage = 1) },
+            terms = l.terms.mapValues { (key, content) ->
+                TermCodec.decode(key, content, sourcePage = 1).copy(mastery = dto.termMastery[key]?.toFloat())
+            },
             stats = dto.stats.toModel(),
         )
     }
@@ -174,7 +176,7 @@ class RemoteLearningRepository(private val api: LearningApi) : LearningRepositor
     }
 
     override suspend fun terms(courseId: String) = apiCall {
-        api.terms(courseId).map { TermCodec.decode(it.key, it.content, it.sourcePage, it.saved) }
+        api.terms(courseId).map { TermCodec.decode(it.key, it.content, it.sourcePage, it.saved).copy(mastery = it.mastery?.toFloat()) }
     }
 
     override suspend fun setTermSaved(courseId: String, key: String, saved: Boolean) = apiCall {

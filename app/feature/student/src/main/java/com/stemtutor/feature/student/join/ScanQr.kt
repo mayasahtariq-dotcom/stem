@@ -53,17 +53,24 @@ import com.stemtutor.core.designsystem.R as DsR
  * permission with a bilingual reason first; the camera is only used on this screen.
  */
 @Composable
-fun ScanQrRoute(onKey: (String) -> Unit, onBack: () -> Unit) {
+fun ScanQrRoute(onKey: (String) -> Unit, onBack: () -> Unit, extract: (String) -> String? = JoinKeys::findIn) {
     val context = LocalContext.current
     var granted by remember {
         mutableStateOf(ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED)
     }
     val request = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { granted = it }
-    ScanQrScreen(granted = granted, onAllow = { request.launch(Manifest.permission.CAMERA) }, onKey = onKey, onBack = onBack)
+    ScanQrScreen(granted = granted, onAllow = { request.launch(Manifest.permission.CAMERA) }, onKey = onKey, onBack = onBack, extract = extract)
 }
 
 @Composable
-fun ScanQrScreen(granted: Boolean, onAllow: () -> Unit, onKey: (String) -> Unit, onBack: () -> Unit, animate: Boolean = true) {
+fun ScanQrScreen(
+    granted: Boolean,
+    onAllow: () -> Unit,
+    onKey: (String) -> Unit,
+    onBack: () -> Unit,
+    animate: Boolean = true,
+    extract: (String) -> String? = JoinKeys::findIn,
+) {
     PromptScreen(
         bubble = bilingualStringResource(if (granted) R.string.st_scan_hint else R.string.st_camera_why),
         pose = CowPose.Question,
@@ -81,14 +88,14 @@ fun ScanQrScreen(granted: Boolean, onAllow: () -> Unit, onKey: (String) -> Unit,
                         .aspectRatio(1f)
                         .clip(RoundedCornerShape(24.dp))
                         .padding(4.dp),
-                ) { CameraScanner(onKey) }
+                ) { CameraScanner(onKey, extract) }
             }
         }
     }
 }
 
 @Composable
-private fun CameraScanner(onKey: (String) -> Unit) {
+private fun CameraScanner(onKey: (String) -> Unit, extract: (String) -> String?) {
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
     val latestOnKey by rememberUpdatedState(onKey)
@@ -109,7 +116,7 @@ private fun CameraScanner(onKey: (String) -> Unit) {
                 .build()
             analysis.setAnalyzer(executor) { proxy ->
                 analyze(proxy, scanner) { text ->
-                    val key = JoinKeys.findIn(text)
+                    val key = extract(text)
                     if (key != null && !delivered) {
                         delivered = true
                         ContextCompat.getMainExecutor(context).execute { latestOnKey(key) }

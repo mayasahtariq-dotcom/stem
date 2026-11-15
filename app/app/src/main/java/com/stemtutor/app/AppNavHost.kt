@@ -43,12 +43,20 @@ import com.stemtutor.feature.onboarding.otp.OtpRoute
 import com.stemtutor.feature.onboarding.phone.PhoneRoute
 import com.stemtutor.feature.onboarding.profile.ProfileRoute
 import com.stemtutor.feature.onboarding.splash.SplashRoute
+import com.stemtutor.feature.parent.AddChildRoute
+import com.stemtutor.feature.parent.CHILD_ID_ARG
+import com.stemtutor.feature.parent.ChildSettingsRoute
+import com.stemtutor.feature.parent.ConsentRoute
+import com.stemtutor.feature.parent.LinkCodes
 import com.stemtutor.feature.parent.ParentShell
+import com.stemtutor.core.data.model.ConsentStatus
 import com.stemtutor.feature.student.StudentShell
 import com.stemtutor.feature.student.doubt.DOUBT_QUESTION_ARG
 import com.stemtutor.feature.student.doubt.DOUBT_START_ARG
 import com.stemtutor.feature.student.doubt.DOUBT_TERM_ARG
 import com.stemtutor.feature.student.doubt.DoubtRoute
+import com.stemtutor.feature.student.family.LinkParentButton
+import com.stemtutor.feature.student.family.LinkParentRoute
 import com.stemtutor.feature.student.goal.DailyGoalSetting
 import com.stemtutor.feature.student.learn.LessonPathRoute
 import com.stemtutor.feature.student.lesson.DoubtStart
@@ -62,6 +70,9 @@ import com.stemtutor.feature.teacher.TeacherHomeRoute
 import com.stemtutor.feature.teacher.classroom.CLASSROOM_ID_ARG
 import com.stemtutor.feature.teacher.classroom.ClassroomDetailRoute
 import com.stemtutor.feature.teacher.classroom.ClassroomKeyRoute
+import com.stemtutor.feature.teacher.classroom.ClassDashboardRoute
+import com.stemtutor.feature.teacher.classroom.STUDENT_ID_ARG
+import com.stemtutor.feature.teacher.classroom.StudentDetailRoute
 import com.stemtutor.feature.teacher.create.CreateClassroomRoute
 
 object Routes {
@@ -85,6 +96,13 @@ object Routes {
     const val TEACHER_KEY = "teacher/classroom/{$CLASSROOM_ID_ARG}/key"
     const val TEACHER_CLASSROOM = "teacher/classroom/{$CLASSROOM_ID_ARG}"
     const val PARENT = "parent"
+    const val PARENT_ADD = "parent/add"
+    const val PARENT_SCAN = "parent/scan"
+    const val PARENT_CONSENT = "parent/consent/{$CHILD_ID_ARG}"
+    const val PARENT_CHILD = "parent/child/{$CHILD_ID_ARG}"
+    const val STUDENT_LINK_PARENT = "student/link-parent"
+    const val TEACHER_DASHBOARD = "teacher/classroom/{$CLASSROOM_ID_ARG}/dashboard"
+    const val TEACHER_STUDENT = "teacher/classroom/{$CLASSROOM_ID_ARG}/student/{$STUDENT_ID_ARG}"
     const val NOTES_UPLOAD = "notes/upload?$PERSONAL_ARG={$PERSONAL_ARG}"
     const val NOTES_CAPTURE = "notes/capture"
     const val NOTES_CROP = "notes/crop/{pageId}"
@@ -113,6 +131,10 @@ object Routes {
     fun teacherAssign(id: String) = "teacher/course/$id/assign"
     fun teacherLesson(id: String) = "teacher/lesson/$id"
     fun teacherQuestion(lessonId: String, questionId: String) = "teacher/lesson/$lessonId/question/$questionId"
+    fun parentConsent(childId: String) = "parent/consent/$childId"
+    fun parentChild(childId: String) = "parent/child/$childId"
+    fun teacherDashboard(id: String) = "teacher/classroom/$id/dashboard"
+    fun teacherStudent(classroomId: String, studentId: String) = "teacher/classroom/$classroomId/student/$studentId"
     fun teacherKey(id: String) = "teacher/classroom/$id/key"
     fun teacherClassroom(id: String) = "teacher/classroom/$id"
     fun home(role: Role) = when (role) {
@@ -162,6 +184,7 @@ fun AppNavHost(
                         onboarding,
                         extraContent = {
                             DailyGoalSetting()
+                            LinkParentButton { navController.navigate(Routes.STUDENT_LINK_PARENT) }
                             DebugProfileExtras(navController)
                         },
                     )
@@ -227,15 +250,22 @@ fun AppNavHost(
             ClassroomDetailRoute(
                 onShowKey = { navController.navigate(Routes.teacherKey(id)) },
                 onBack = { navController.popBackStack() },
+                onDashboard = { navController.navigate(Routes.teacherDashboard(id)) },
             )
         }
 
         composable(Routes.PARENT) {
-            ParentShell(profile = { ProfileRoute(onboarding, extraContent = { DebugProfileExtras(navController) }) })
+            ParentShell(
+                profile = { ProfileRoute(onboarding, extraContent = { DebugProfileExtras(navController) }) },
+                onAddChild = { navController.navigate(Routes.PARENT_ADD) },
+                onConsent = { navController.navigate(Routes.parentConsent(it)) },
+                onChildSettings = { navController.navigate(Routes.parentChild(it)) },
+            )
         }
 
         notesDestinations(navController)
         learningDestinations(navController)
+        familyDestinations(navController)
         teacherCourseDestinations(navController)
         debugDestinations(navController)
     }
@@ -342,7 +372,11 @@ private fun androidx.navigation.NavGraphBuilder.learningDestinations(navControll
         )
     }
     composable(Routes.STUDENT_LESSON, arguments = listOf(navArgument(LESSON_ARG) { type = NavType.StringType })) {
-        LessonPlayerRoute(onExit = { navController.popBackStack() }, onAskDoubt = askDoubt)
+        LessonPlayerRoute(
+            onExit = { navController.popBackStack() },
+            onAskDoubt = askDoubt,
+            onLinkParent = { navController.navigate(Routes.STUDENT_LINK_PARENT) { popUpTo(Routes.STUDENT) } },
+        )
     }
     composable(Routes.STUDENT_TERMS, arguments = listOf(navArgument("courseId") { type = NavType.StringType })) {
         GlossaryRoute(
@@ -360,6 +394,63 @@ private fun androidx.navigation.NavGraphBuilder.learningDestinations(navControll
         ),
     ) {
         DoubtRoute(onBack = { navController.popBackStack() })
+    }
+}
+
+/** M4: the teacher's class dashboard, linking a parent, consent and child settings. */
+private fun androidx.navigation.NavGraphBuilder.familyDestinations(navController: NavHostController) {
+    composable(Routes.TEACHER_DASHBOARD, arguments = listOf(navArgument(CLASSROOM_ID_ARG) { type = NavType.StringType })) { entry ->
+        val id = entry.arguments?.getString(CLASSROOM_ID_ARG).orEmpty()
+        ClassDashboardRoute(
+            onStudent = { navController.navigate(Routes.teacherStudent(id, it)) },
+            onBack = { navController.popBackStack() },
+        )
+    }
+    composable(
+        Routes.TEACHER_STUDENT,
+        arguments = listOf(
+            navArgument(CLASSROOM_ID_ARG) { type = NavType.StringType },
+            navArgument(STUDENT_ID_ARG) { type = NavType.StringType },
+        ),
+    ) {
+        StudentDetailRoute(onBack = { navController.popBackStack() })
+    }
+    composable(Routes.STUDENT_LINK_PARENT) {
+        LinkParentRoute(onBack = { navController.popBackStack() })
+    }
+    composable(Routes.PARENT_ADD) { entry ->
+        val scanned by entry.savedStateHandle.getStateFlow<String?>(SCANNED_KEY, null).collectAsStateWithLifecycle()
+        AddChildRoute(
+            onScan = { navController.navigate(Routes.PARENT_SCAN) },
+            onLinked = { child ->
+                if (child.consent == ConsentStatus.APPROVED) {
+                    navController.popBackStack()
+                } else {
+                    navController.navigate(Routes.parentConsent(child.id)) { popUpTo(Routes.PARENT) }
+                }
+            },
+            onBack = { navController.popBackStack() },
+            scannedCode = scanned,
+        )
+    }
+    composable(Routes.PARENT_SCAN) {
+        ScanQrRoute(
+            onKey = { code ->
+                navController.previousBackStackEntry?.savedStateHandle?.set(SCANNED_KEY, code)
+                navController.popBackStack()
+            },
+            onBack = { navController.popBackStack() },
+            extract = LinkCodes::findIn,
+        )
+    }
+    composable(Routes.PARENT_CONSENT, arguments = listOf(navArgument(CHILD_ID_ARG) { type = NavType.StringType })) {
+        ConsentRoute(onDone = { navController.popBackStack() })
+    }
+    composable(Routes.PARENT_CHILD, arguments = listOf(navArgument(CHILD_ID_ARG) { type = NavType.StringType })) {
+        ChildSettingsRoute(
+            onDone = { navController.popBackStack() },
+            onConsent = { navController.navigate(Routes.parentConsent(it)) },
+        )
     }
 }
 

@@ -97,4 +97,14 @@
     <string name="ln_goal_n">%1$d XP</string>
     <string name="ln_close">बंद करो</string>
     <string name="ln_back">वापस</string>
+    <string name="fam_link_parent">माता-पिता को जोड़ो</string>
+    <string name="fam_link_explain">अपने माता-पिता से कहो कि मूशाला खोलें, \"बच्चा जोड़ें\" दबाएँ और यह कोड डालें या स्कैन करें।</string>
+    <string name="fam_qr_desc">माता-पिता को जोड़ने का QR कोड</string>
+    <string name="fam_code_24h">यह कोड एक बार चलता है और 24 घंटे तक रहता है।</string>
+    <string name="fam_linked_parents">जुड़े माता-पिता</string>
+    <string name="fam_no_parents">अभी कोई माता-पिता नहीं जुड़े।</string>
+    <string name="fam_phone_ending">फ़ोन के आख़िरी अंक %1$s</string>
+    <string name="fam_remove">हटाओ</string>
+    <string name="fam_consent_pending">पाठ शुरू करने से पहले माता-पिता को तुम्हारा खाता मंज़ूर करना होगा। माता-पिता को जोड़ो और उनसे \"मैं मंज़ूरी देता/देती हूँ\" दबाने को कहो।</string>
+    <string name="fam_you_know">तुम्हें यह आता है: %1$d%%</string>
 </resources>

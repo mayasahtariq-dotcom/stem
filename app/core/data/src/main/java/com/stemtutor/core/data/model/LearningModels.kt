@@ -91,6 +91,8 @@ data class Term(
     val related: List<String>,
     val sourcePage: Int,
     val saved: Boolean = false,
+    /** The Student Twin's estimate of how well this student knows the term (0..1), if practised. */
+    val mastery: Float? = null,
 )
 
 /** A lesson ready to play, with the course's term cards and the student's stats. */

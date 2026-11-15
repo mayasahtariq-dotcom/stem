@@ -49,9 +49,10 @@ One checklist per milestone, copied from `docs/PRD.md`. Tick items only when the
 - [ ] A parent with two children can switch between them.
 - [ ] "Listen to summary" plays in the parent's language.
 - [ ] Revoking consent and requesting deletion both work.
-- [ ] The consent gate blocks lessons until approval or school consent.
-- [ ] Tests prove parents can't see doubts or other students.
-- [ ] Tests pass, `progress.md` is ticked and the demo note is written.
+- [x] The consent gate blocks lessons until approval or school consent. (Backend tests; phone check pending.)
+- [x] Tests prove parents can't see doubts or other students.
+- [x] Tests pass, `progress.md` is ticked and the demo note is written. (Backend 114 tests; Android in CI. Phone checks above pending.)
+- [x] Addition: the Student Twin (mastery, forgetting, confusions) powers weak topics, student detail, the parent summary and doubt chat (see decisions.md).
 
 ## M5: Call mode
 

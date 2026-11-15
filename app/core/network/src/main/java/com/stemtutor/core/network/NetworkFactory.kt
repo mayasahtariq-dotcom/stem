@@ -52,4 +52,12 @@ object NetworkFactory {
             .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
             .build()
             .create(LearningApi::class.java)
+
+    fun familyApi(baseUrl: String, client: OkHttpClient): FamilyApi =
+        Retrofit.Builder()
+            .baseUrl(baseUrl)
+            .client(client)
+            .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
+            .build()
+            .create(FamilyApi::class.java)
 }

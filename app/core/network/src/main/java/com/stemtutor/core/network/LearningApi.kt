@@ -135,7 +135,11 @@ data class HomeDto(
 )
 
 @Serializable
-data class StartDto(val lesson: LessonDto, val stats: StatsDto)
+data class StartDto(
+    val lesson: LessonDto,
+    val stats: StatsDto,
+    @SerialName("term_mastery") val termMastery: Map<String, Double> = emptyMap(),
+)
 
 @Serializable
 data class AttemptInDto(
@@ -170,6 +174,7 @@ data class TermDto(
     val content: JsonObject,
     @SerialName("source_page") val sourcePage: Int,
     val saved: Boolean = false,
+    val mastery: Double? = null,
 )
 
 @Serializable

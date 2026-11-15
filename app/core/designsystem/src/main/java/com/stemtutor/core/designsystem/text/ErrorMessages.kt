@@ -34,5 +34,10 @@ fun AppError.messageRes(): Int = when (this) {
         ApiErrorCode.DOUBT_LIMIT -> R.string.err_doubt_limit
         ApiErrorCode.INVALID_ANSWER -> R.string.err_unknown
         ApiErrorCode.LESSON_NOT_STARTED -> R.string.err_unknown
+        ApiErrorCode.CONSENT_REQUIRED -> R.string.err_consent_required
+        ApiErrorCode.CODE_NOT_FOUND -> R.string.err_code_not_found
+        ApiErrorCode.CODE_EXPIRED -> R.string.err_code_expired
+        ApiErrorCode.TOO_MANY_PARENTS -> R.string.err_too_many_parents
+        ApiErrorCode.NOT_A_PARENT -> R.string.err_not_a_parent
     }
 }
