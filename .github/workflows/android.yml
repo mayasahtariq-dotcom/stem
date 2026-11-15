@@ -25,6 +25,20 @@ jobs:
 
       - uses: gradle/actions/setup-gradle@v4
 
+      - name: Check Supabase settings (lengths only, never values)
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: |
+          for name in SUPABASE_URL SUPABASE_ANON_KEY; do
+            value="${!name}"
+            if [ -z "$value" ]; then
+              echo "::warning::$name is empty: the APK will only work in pretend mode"
+            else
+              echo "$name is set (${#value} characters)"
+            fi
+          done
+
       - name: Lint, unit tests and debug build
         # Public Supabase settings for real login in the test APK (repository secrets; the
         # anon key is the public client key). Empty when unset: the APK then only works in
