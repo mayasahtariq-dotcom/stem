@@ -10,6 +10,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
@@ -31,7 +32,8 @@ class GalleryViewModelTest {
     @get:Rule val tmp = TemporaryFolder()
 
     private val storeScope = CoroutineScope(Dispatchers.IO + SupervisorJob())
-    private val applied = mutableListOf<LanguageMode>()
+    // Written from the DataStore's IO thread, read from the test thread.
+    private val applied: MutableList<LanguageMode> = java.util.Collections.synchronizedList(mutableListOf())
     private lateinit var languageRepository: LanguageRepository
 
     @Before
@@ -57,7 +59,9 @@ class GalleryViewModelTest {
         vm.setLanguageMode(LanguageMode.KANNADA)
 
         withTimeout(5_000) { vm.state.first { it.languageMode == LanguageMode.KANNADA } }
-        assertEquals(listOf(LanguageMode.KANNADA), applied)
+        // The stored mode can reach the state a moment before the locale is applied, so wait.
+        withTimeout(5_000) { while (applied.isEmpty()) delay(10) }
+        assertEquals(listOf(LanguageMode.KANNADA), applied.toList())
     }
 
     @Test
