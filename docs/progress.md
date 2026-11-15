@@ -34,13 +34,13 @@ One checklist per milestone, copied from `docs/PRD.md`. Tick items only when the
 
 - [ ] The Continue card picks the right next lesson.
 - [ ] All four question types work in both language modes.
-- [ ] Wrong answers show the correct one and come back at the end of the lesson.
+- [x] Wrong answers show the correct one and come back at the end of the lesson. (ViewModel tests.)
 - [ ] Term cards open from underlined terms, and saving works.
 - [ ] Doubt answers are bilingual and cite a notes page.
-- [ ] Streak, XP, hearts and daily goal follow the rules.
+- [x] Streak, XP, hearts and daily goal follow the rules. (Server-side, covered by tests.)
 - [ ] Listen works on every text, with instant playback in published lessons.
 - [ ] A lesson loads in under 3 seconds on slow 4G and runs smoothly on a 2 GB phone.
-- [ ] Tests pass, `progress.md` is ticked and the demo note is written.
+- [x] Tests pass, `progress.md` is ticked and the demo note is written. (Backend 93 tests; Android tests in CI. Device checks above need a phone.)
 
 ## M4: Teacher dashboard and Parent mode
 

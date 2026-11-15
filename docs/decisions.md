@@ -95,3 +95,24 @@ The user supplied a web prototype, `docs/design/mooshala-code.md` ("Mooshala"), 
 - **End-to-end with real AI on the dev PC (2026-11-15).** A test page (English, Hindi and Kannada lines) went photo → Surya → free OpenRouter models → a course of 3 lessons, with 8 grounded questions of all four types in lesson 1. It took about 5 minutes (OCR 2 min, outline 35 s, terms 1 min, lesson 1 75 s). It works, but it's far from the 60 s target on a CPU with free models.
 - **`PHONE_IN_USE` (409).** Saving a profile with a phone number another account already has used to fail with a 500; it now returns a clear code, shown bilingually in the app.
 - **Dev server start-up retries** when Postgres takes longer than pgserver's 10 s (after an unclean stop, or with antivirus scanning the data files, as seen on the dev PC).
+
+## M3: Student learning (2026-11-15)
+
+- **Started before M2's device checks**, at the user's request (as M2 was before M1's). The M2 device items stay unticked in `progress.md`.
+- **Listen uses Sarvam Bulbul V4 Flash** (`bulbul:v4-flash`, MP3), per the PRD, with voices `ritu_hi_edtech`, `chaitra_kn_narration` and `ritu_en_edtech` (checked in Sarvam's Voices guide). The user has the ₹100 free credit (about ₹2 per 1,000 characters), so:
+  - **`TTS_PREGENERATE=false` by default:** each clip is made on the first Listen tap, then cached in storage under a hash of language, model, voice and text. The PRD's make-audio-at-publish job exists and runs when the setting is `true`. "Instant playback in published lessons" therefore needs the setting on (or a second tap).
+  - The fake voice (a short silent WAV) is used whenever `SARVAM_API_KEY` is blank, in tests and in debug builds.
+  - `POST /audio` is rate-limited per user (300 an hour, in memory) and capped at Sarvam's 2,500 characters.
+- **Grading.** Students receive each question's content, including the right answer, because instant feedback and the match-pairs tiles need it on the phone. The server grades every answer again, and only the server awards XP, takes hearts and keeps the streak (PRD: "calculated on the server"). A student who reads the network traffic could see answers. That's acceptable for practice questions; revisit if lessons ever count towards marks.
+- **Match pairs** are always finished by matching everything. The app sends the number of wrong pairs; a clean match counts as correct (XP), one with slips counts as a miss (asked again at the end) but never costs a heart.
+- **Streak** days use India time (Asia/Kolkata). A missed day shows the streak as 0 at once, and the next finished lesson starts it again at 1.
+- **XP replays.** Replaying a finished lesson earns XP again (as in Duolingo). Simple; revisit if a leaderboard (M7) makes farming a problem.
+- **Doubt retrieval.** With real embeddings (BGE-M3), the five nearest note chunks are sent to the model. With fake embeddings (the CPU dev setup), the whole notes text is sent instead; notes are at most 10 pages, so this fits. Answers say "your notes don't cover this" first when the model reports so, and then have no page chip. Note chunks are owner-only under RLS, so the server reads them with the service session after checking the student can read the course.
+- **Doubt limit:** 20 per India-time day (`DOUBTS_PER_DAY`). "Explain simpler" and "Example" count too, since each one calls the model.
+- **Lazy generation for students.** Starting lesson N makes lesson N+1, as in M2's review. A personal course's next lesson is also started if a student reaches it before it was made; the app then says "getting this lesson ready".
+- **Separate `LearningApi`** Retrofit interface for the M3 endpoints, with a 120 s read timeout because free models can take a while to answer a doubt.
+- **Offline fake.** Debug builds in pretend mode get a built-in sample course ("The Cell", three lessons using all four question types) from `FakeLearningRepository`, with XP, hearts and streaks following the server's rules in memory. It doesn't include courses made with the fake notes flow.
+- **Formulas** are plain text with Unicode subscripts and superscripts, which the generator already outputs (H₂O, x²). The KaTeX WebView fallback is deferred until a real course needs it.
+- **Underlined terms** are found by matching each term's regional form in the regional line and its English form (whole words, any case) in the English line. Options that point to a term key are shown with the term's forms.
+- **Revise** shows "coming soon" (M7), as the PRD says.
+- **Libraries added:** `androidx.media3:media3-datasource` and `media3-database` (same version as `media3-exoplayer`, already in the stack) for the 50 MB on-phone audio cache.

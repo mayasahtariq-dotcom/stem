@@ -43,4 +43,13 @@ object NetworkFactory {
             .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
             .build()
             .create(StemApi::class.java)
+
+    /** Doubt answers come from a text model and can take a while, so reads wait longer. */
+    fun learningApi(baseUrl: String, client: OkHttpClient): LearningApi =
+        Retrofit.Builder()
+            .baseUrl(baseUrl)
+            .client(client.newBuilder().readTimeout(120, TimeUnit.SECONDS).build())
+            .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
+            .build()
+            .create(LearningApi::class.java)
 }

@@ -27,6 +27,10 @@ enum class ApiErrorCode {
     INVALID_QUESTION,
     AI_UNAVAILABLE,
     PHONE_IN_USE,
+    HEARTS_EMPTY,
+    DOUBT_LIMIT,
+    INVALID_ANSWER,
+    LESSON_NOT_STARTED,
     ;
 
     companion object {

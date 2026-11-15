@@ -63,4 +63,6 @@
     <string name="ds_cancel">रद्द करें</string>
     <string name="ds_done">हो गया</string>
     <string name="err_phone_in_use">यह फ़ोन नंबर पहले से किसी दूसरे खाते में है।</string>
+    <string name="err_hearts_empty">तुम्हारे दिल खत्म हो गए। थोड़ा आराम करो: हर 4 घंटे में एक दिल वापस आता है।</string>
+    <string name="err_doubt_limit">आज तुमने 20 सवाल पूछ लिए। कल और पूछना!</string>
 </resources>

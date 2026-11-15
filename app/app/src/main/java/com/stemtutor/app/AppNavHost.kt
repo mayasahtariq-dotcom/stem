@@ -45,6 +45,16 @@ import com.stemtutor.feature.onboarding.profile.ProfileRoute
 import com.stemtutor.feature.onboarding.splash.SplashRoute
 import com.stemtutor.feature.parent.ParentShell
 import com.stemtutor.feature.student.StudentShell
+import com.stemtutor.feature.student.doubt.DOUBT_QUESTION_ARG
+import com.stemtutor.feature.student.doubt.DOUBT_START_ARG
+import com.stemtutor.feature.student.doubt.DOUBT_TERM_ARG
+import com.stemtutor.feature.student.doubt.DoubtRoute
+import com.stemtutor.feature.student.goal.DailyGoalSetting
+import com.stemtutor.feature.student.learn.LessonPathRoute
+import com.stemtutor.feature.student.lesson.DoubtStart
+import com.stemtutor.feature.student.lesson.LESSON_ARG
+import com.stemtutor.feature.student.lesson.LessonPlayerRoute
+import com.stemtutor.feature.student.terms.GlossaryRoute
 import com.stemtutor.feature.student.join.JOIN_KEY_ARG
 import com.stemtutor.feature.student.join.JoinClassRoute
 import com.stemtutor.feature.student.join.ScanQrRoute
@@ -64,6 +74,11 @@ object Routes {
     const val STUDENT = "student"
     const val STUDENT_JOIN = "student/join?$JOIN_KEY_ARG={$JOIN_KEY_ARG}"
     const val STUDENT_SCAN = "student/scan"
+    const val STUDENT_PATH = "student/path/{courseId}"
+    const val STUDENT_LESSON = "student/lesson/{$LESSON_ARG}"
+    const val STUDENT_TERMS = "student/terms/{courseId}"
+    const val STUDENT_DOUBT =
+        "student/doubt/{courseId}?$DOUBT_QUESTION_ARG={$DOUBT_QUESTION_ARG}&$DOUBT_TERM_ARG={$DOUBT_TERM_ARG}&$DOUBT_START_ARG={$DOUBT_START_ARG}"
     const val TEACHER = "teacher"
     const val TEACHER_PROFILE = "teacher/profile"
     const val TEACHER_CREATE = "teacher/create"
@@ -79,6 +94,17 @@ object Routes {
     const val TEACHER_LESSON = "teacher/lesson/{$LESSON_ID_ARG}"
     const val TEACHER_QUESTION = "teacher/lesson/{$LESSON_ID_ARG}/question/{$QUESTION_ID_ARG}"
 
+    fun studentPath(courseId: String) = "student/path/$courseId"
+    fun studentLesson(lessonId: String) = "student/lesson/$lessonId"
+    fun studentTerms(courseId: String) = "student/terms/$courseId"
+    fun studentDoubt(courseId: String, questionId: String?, termKey: String?, start: DoubtStart): String {
+        val startArg = when (start) {
+            DoubtStart.NONE -> ""
+            DoubtStart.WHY -> "why"
+            DoubtStart.SIMPLER -> "simpler"
+        }
+        return "student/doubt/$courseId?$DOUBT_QUESTION_ARG=${questionId.orEmpty()}&$DOUBT_TERM_ARG=${termKey.orEmpty()}&$DOUBT_START_ARG=$startArg"
+    }
     fun join(key: String? = null) = if (key == null) "student/join" else "student/join?$JOIN_KEY_ARG=$key"
     fun notesUpload(personal: Boolean) = "notes/upload?$PERSONAL_ARG=$personal"
     fun notesCrop(pageId: String) = "notes/crop/$pageId"
@@ -127,8 +153,19 @@ fun AppNavHost(
             StudentShell(
                 onJoin = { navController.navigate(Routes.join()) },
                 onMakeCourse = { navController.navigate(Routes.notesUpload(personal = true)) },
+                onPlayLesson = { navController.navigate(Routes.studentLesson(it)) },
+                onOpenCourse = { navController.navigate(Routes.studentPath(it)) },
+                onOpenTerms = { navController.navigate(Routes.studentTerms(it)) },
                 refreshKey = refresh,
-                profile = { ProfileRoute(onboarding, extraContent = { DebugProfileExtras(navController) }) },
+                profile = {
+                    ProfileRoute(
+                        onboarding,
+                        extraContent = {
+                            DailyGoalSetting()
+                            DebugProfileExtras(navController)
+                        },
+                    )
+                },
             )
         }
         composable(
@@ -198,6 +235,7 @@ fun AppNavHost(
         }
 
         notesDestinations(navController)
+        learningDestinations(navController)
         teacherCourseDestinations(navController)
         debugDestinations(navController)
     }
@@ -288,6 +326,40 @@ private fun androidx.navigation.NavGraphBuilder.notesDestinations(navController:
             },
             onLeave = { navController.popBackStack() },
         )
+    }
+}
+
+/** Student learning (M3): lesson path, the lesson player, the glossary and doubt chat. */
+private fun androidx.navigation.NavGraphBuilder.learningDestinations(navController: NavHostController) {
+    val askDoubt: (String, String?, String?, DoubtStart) -> Unit = { courseId, questionId, termKey, start ->
+        navController.navigate(Routes.studentDoubt(courseId, questionId, termKey, start))
+    }
+    composable(Routes.STUDENT_PATH, arguments = listOf(navArgument("courseId") { type = NavType.StringType })) {
+        LessonPathRoute(
+            onPlay = { navController.navigate(Routes.studentLesson(it)) },
+            onTerms = { navController.navigate(Routes.studentTerms(it)) },
+            onBack = { navController.popBackStack() },
+        )
+    }
+    composable(Routes.STUDENT_LESSON, arguments = listOf(navArgument(LESSON_ARG) { type = NavType.StringType })) {
+        LessonPlayerRoute(onExit = { navController.popBackStack() }, onAskDoubt = askDoubt)
+    }
+    composable(Routes.STUDENT_TERMS, arguments = listOf(navArgument("courseId") { type = NavType.StringType })) {
+        GlossaryRoute(
+            onBack = { navController.popBackStack() },
+            onAskDoubt = { courseId, key -> askDoubt(courseId, null, key, DoubtStart.NONE) },
+        )
+    }
+    composable(
+        Routes.STUDENT_DOUBT,
+        arguments = listOf(
+            navArgument("courseId") { type = NavType.StringType },
+            navArgument(DOUBT_QUESTION_ARG) { type = NavType.StringType; defaultValue = "" },
+            navArgument(DOUBT_TERM_ARG) { type = NavType.StringType; defaultValue = "" },
+            navArgument(DOUBT_START_ARG) { type = NavType.StringType; defaultValue = "" },
+        ),
+    ) {
+        DoubtRoute(onBack = { navController.popBackStack() })
     }
 }
 

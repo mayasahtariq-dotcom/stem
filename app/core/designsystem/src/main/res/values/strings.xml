@@ -63,4 +63,6 @@
     <string name="ds_cancel">Cancel</string>
     <string name="ds_done">Done</string>
     <string name="err_phone_in_use">This phone number is already used by another account.</string>
+    <string name="err_hearts_empty">You\'re out of hearts. Take a break: a heart comes back every 4 hours.</string>
+    <string name="err_doubt_limit">You\'ve asked 20 doubts today. Ask more tomorrow!</string>
 </resources>

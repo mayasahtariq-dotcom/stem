@@ -23,6 +23,11 @@ dependencies {
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
 
+    // M3 Listen: plays lesson audio and keeps up to 50 MB of it on the phone.
+    implementation(libs.media3.exoplayer)
+    implementation(libs.media3.datasource)
+    implementation(libs.media3.database)
+
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)
 }

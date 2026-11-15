@@ -63,4 +63,6 @@
     <string name="ds_cancel">ರದ್ದುಮಾಡಿ</string>
     <string name="ds_done">ಮುಗಿಯಿತು</string>
     <string name="err_phone_in_use">ಈ ಫೋನ್ ನಂಬರ್ ಈಗಾಗಲೇ ಇನ್ನೊಂದು ಖಾತೆಯಲ್ಲಿದೆ.</string>
+    <string name="err_hearts_empty">ನಿಮ್ಮ ಹೃದಯಗಳು ಮುಗಿದಿವೆ. ಸ್ವಲ್ಪ ವಿಶ್ರಾಂತಿ ಪಡೆಯಿರಿ: ಪ್ರತಿ 4 ಗಂಟೆಗೆ ಒಂದು ಹೃದಯ ಮರಳಿ ಬರುತ್ತದೆ.</string>
+    <string name="err_doubt_limit">ಇಂದು ನೀವು 20 ಸಂದೇಹಗಳನ್ನು ಕೇಳಿದ್ದೀರಿ. ನಾಳೆ ಇನ್ನಷ್ಟು ಕೇಳಿ!</string>
 </resources>

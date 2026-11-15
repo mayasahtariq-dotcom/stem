@@ -304,3 +304,86 @@ Also to review: the sample course content in `backend/app/ai/fake_content.py` an
 | st_courses_soon | You can play lessons in the next update. | अगले अपडेट में तुम पाठ खेल सकोगे। | ಮುಂದಿನ ಅಪ್‌ಡೇಟ್‌ನಲ್ಲಿ ಪಾಠಗಳನ್ನು ಆಡಬಹುದು. | [ ] |
 
 | err_phone_in_use | This phone number is already used by another account. | यह फ़ोन नंबर पहले से किसी दूसरे खाते में है। | ಈ ಫೋನ್ ನಂಬರ್ ಈಗಾಗಲೇ ಇನ್ನೊಂದು ಖಾತೆಯಲ್ಲಿದೆ. | [ ] |
+
+
+## M3
+
+Files: `app/feature/student/src/main/res/values-{hi,kn}/strings.xml`, `app/core/designsystem/src/main/res/values-{hi,kn}/strings.xml`. Also the sample course and doubt answers in `FakeLearningRepository.kt` and `backend/app/ai/fake_content.py`.
+
+| Key | English | Hindi (draft) | Kannada (draft) | Reviewed |
+|---|---|---|---|---|
+| err_hearts_empty | You're out of hearts. Take a break: a heart comes back every 4 hours. | तुम्हारे दिल खत्म हो गए। थोड़ा आराम करो: हर 4 घंटे में एक दिल वापस आता है। | ನಿಮ್ಮ ಹೃದಯಗಳು ಮುಗಿದಿವೆ. ಸ್ವಲ್ಪ ವಿಶ್ರಾಂತಿ ಪಡೆಯಿರಿ: ಪ್ರತಿ 4 ಗಂಟೆಗೆ ಒಂದು ಹೃದಯ ಮರಳಿ ಬರುತ್ತದೆ. | [ ] |
+| err_doubt_limit | You've asked 20 doubts today. Ask more tomorrow! | आज तुमने 20 सवाल पूछ लिए। कल और पूछना! | ಇಂದು ನೀವು 20 ಸಂದೇಹಗಳನ್ನು ಕೇಳಿದ್ದೀರಿ. ನಾಳೆ ಇನ್ನಷ್ಟು ಕೇಳಿ! | [ ] |
+| ln_continue | Continue learning | पढ़ाई जारी रखो | ಕಲಿಕೆ ಮುಂದುವರಿಸಿ | [ ] |
+| ln_lesson_of | Lesson %1$d of %2$d | पाठ %1$d / %2$d | ಪಾಠ %1$d / %2$d | [ ] |
+| ln_daily_goal | Daily goal | आज का लक्ष्य | ಇಂದಿನ ಗುರಿ | [ ] |
+| ln_goal_progress | %1$d of %2$d XP | %2$d में से %1$d XP | %2$d ರಲ್ಲಿ %1$d XP | [ ] |
+| ln_goal_met | Goal reached! Well done. | लक्ष्य पूरा! शाबाश। | ಗುರಿ ತಲುಪಿದಿರಿ! ಭೇಷ್. | [ ] |
+| ln_new_lessons | %1$d new lessons | %1$d नए पाठ | %1$d ಹೊಸ ಪಾಠಗಳು | [ ] |
+| ln_percent_done | %1$d%% done | %1$d%% पूरा | %1$d%% ಮುಗಿದಿದೆ | [ ] |
+| ln_all_done | You've finished every lesson. Great work! | तुमने सारे पाठ पूरे कर लिए। बहुत बढ़िया! | ನೀವು ಎಲ್ಲಾ ಪಾಠಗಳನ್ನು ಮುಗಿಸಿದ್ದೀರಿ. ಭೇಷ್! | [ ] |
+| ln_no_courses | No lessons yet. Join a class or make a course from your notes. | अभी कोई पाठ नहीं। क्लास से जुड़ो या अपने नोट्स से कोर्स बनाओ। | ಇನ್ನೂ ಪಾಠಗಳಿಲ್ಲ. ತರಗತಿಗೆ ಸೇರಿ ಅಥವಾ ನಿಮ್ಮ ನೋಟ್ಸ್‌ನಿಂದ ಕೋರ್ಸ್ ಮಾಡಿ. | [ ] |
+| ln_locked_hint | Finish "%1$s" first | पहले "%1$s" पूरा करो | ಮೊದಲು "%1$s" ಮುಗಿಸಿ | [ ] |
+| ln_start | Start | शुरू | ಆರಂಭ | [ ] |
+| ln_getting_ready | Getting this lesson ready. Try again in a minute. | यह पाठ तैयार हो रहा है। एक मिनट बाद फिर कोशिश करो। | ಈ ಪಾಠ ಸಿದ್ಧವಾಗುತ್ತಿದೆ. ಒಂದು ನಿಮಿಷದ ನಂತರ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ. | [ ] |
+| ln_revise | Revise (coming soon) | दोहराओ (जल्द आ रहा है) | ಪುನರಾವರ್ತನೆ (ಶೀಘ್ರದಲ್ಲೇ) | [ ] |
+| ln_terms | Terms | शब्द | ಪದಗಳು | [ ] |
+| ln_check | Check | जाँचो | ಪರಿಶೀಲಿಸಿ | [ ] |
+| ln_next | Continue | आगे बढ़ो | ಮುಂದುವರಿಸಿ | [ ] |
+| ln_listen | Listen | सुनो | ಕೇಳಿ | [ ] |
+| ln_ask_doubt | Ask doubt | सवाल पूछो | ಸಂದೇಹ ಕೇಳಿ | [ ] |
+| ln_great | Great! | बहुत बढ़िया! | ತುಂಬಾ ಚೆನ್ನಾಗಿದೆ! | [ ] |
+| ln_xp_plus | +%1$d XP | +%1$d XP | +%1$d XP | [ ] |
+| ln_not_quite | Not quite | पूरा सही नहीं | ಸರಿಯಾಗಿಲ್ಲ | [ ] |
+| ln_correct_answer | Correct answer: %1$s | सही उत्तर: %1$s | ಸರಿಯಾದ ಉತ್ತರ: %1$s | [ ] |
+| ln_explain | Explain | समझाओ | ವಿವರಿಸಿ | [ ] |
+| ln_explain_simpler | Explain simpler | और आसान समझाओ | ಇನ್ನೂ ಸರಳವಾಗಿ ವಿವರಿಸಿ | [ ] |
+| ln_heart_lost | You lost a heart | एक दिल कम हुआ | ಒಂದು ಹೃದಯ ಕಡಿಮೆಯಾಯಿತು | [ ] |
+| ln_close_title | Leave the lesson? | पाठ छोड़ना है? | ಪಾಠ ಬಿಡಬೇಕೆ? | [ ] |
+| ln_close_body | You'll start this lesson again next time. | अगली बार यह पाठ फिर से शुरू होगा। | ಮುಂದಿನ ಬಾರಿ ಈ ಪಾಠ ಮತ್ತೆ ಮೊದಲಿನಿಂದ ಆರಂಭವಾಗುತ್ತದೆ. | [ ] |
+| ln_leave | Leave | छोड़ो | ಬಿಡಿ | [ ] |
+| ln_stay | Keep learning | पढ़ते रहो | ಕಲಿಯುತ್ತಿರಿ | [ ] |
+| ln_out_of_hearts | Out of hearts | दिल खत्म | ಹೃದಯಗಳು ಮುಗಿದಿವೆ | [ ] |
+| ln_refill_minutes | Next heart in %1$d minutes | अगला दिल %1$d मिनट में | ಮುಂದಿನ ಹೃದಯ %1$d ನಿಮಿಷಗಳಲ್ಲಿ | [ ] |
+| ln_refill_soon | A heart comes back every 4 hours. | हर 4 घंटे में एक दिल वापस आता है। | ಪ್ರತಿ 4 ಗಂಟೆಗೆ ಒಂದು ಹೃದಯ ಮರಳಿ ಬರುತ್ತದೆ. | [ ] |
+| ln_back_to_path | Back to lessons | पाठों पर वापस | ಪಾಠಗಳಿಗೆ ಹಿಂತಿರುಗಿ | [ ] |
+| ln_lesson_done | Lesson complete! | पाठ पूरा! | ಪಾಠ ಮುಗಿದಿದೆ! | [ ] |
+| ln_xp_earned | %1$d XP earned | %1$d XP मिले | %1$d XP ಗಳಿಸಿದಿರಿ | [ ] |
+| ln_accuracy | %1$d%% right first time | %1$d%% पहली बार में सही | %1$d%% ಮೊದಲ ಬಾರಿಗೆ ಸರಿ | [ ] |
+| ln_streak_up | %1$d day streak! | %1$d दिन की लगातार पढ़ाई! | %1$d ದಿನಗಳ ಸತತ ಕಲಿಕೆ! | [ ] |
+| ln_streak_days | %1$d day streak | %1$d दिन लगातार | %1$d ದಿನ ಸತತ | [ ] |
+| ln_true | True | सही | ಸರಿ | [ ] |
+| ln_false | False | गलत | ತಪ್ಪು | [ ] |
+| ln_match_hint | Tap a word, then its partner. | एक शब्द दबाओ, फिर उसका जोड़ा। | ಒಂದು ಪದ ಒತ್ತಿ, ನಂತರ ಅದರ ಜೋಡಿ. | [ ] |
+| ln_fill_hint | Tap the right symbol to fill the blank. | खाली जगह भरने के लिए सही चिह्न दबाओ। | ಖಾಲಿ ಜಾಗ ತುಂಬಲು ಸರಿಯಾದ ಚಿಹ್ನೆ ಒತ್ತಿ. | [ ] |
+| ln_try_again_tag | Let's try this one again | इसे फिर से करते हैं | ಇದನ್ನು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸೋಣ | [ ] |
+| ln_term | Term | शब्द | ಪದ | [ ] |
+| ln_think_of_it | Think of it like | ऐसे सोचो | ಹೀಗೆ ಯೋಚಿಸಿ | [ ] |
+| ln_formal | Formal: %1$s | औपचारिक: %1$s | ಔಪಚಾರಿಕ: %1$s | [ ] |
+| ln_say_it | Say it: %1$s | ऐसे बोलो: %1$s | ಹೀಗೆ ಹೇಳಿ: %1$s | [ ] |
+| ln_related | Related | जुड़े शब्द | ಸಂಬಂಧಿತ ಪದಗಳು | [ ] |
+| ln_save | Save | सेव करो | ಉಳಿಸಿ | [ ] |
+| ln_saved | Saved | सेव किया | ಉಳಿಸಲಾಗಿದೆ | [ ] |
+| ln_tab_saved | Saved | सेव किए | ಉಳಿಸಿದವು | [ ] |
+| ln_tab_all | All terms | सभी शब्द | ಎಲ್ಲಾ ಪದಗಳು | [ ] |
+| ln_search | Search in any language | किसी भी भाषा में खोजो | ಯಾವುದೇ ಭಾಷೆಯಲ್ಲಿ ಹುಡುಕಿ | [ ] |
+| ln_no_saved | No saved terms yet. Tap Save on a term card. | अभी कोई सेव किया शब्द नहीं। शब्द कार्ड पर सेव दबाओ। | ಇನ್ನೂ ಉಳಿಸಿದ ಪದಗಳಿಲ್ಲ. ಪದ ಕಾರ್ಡ್‌ನಲ್ಲಿ ಉಳಿಸಿ ಒತ್ತಿ. | [ ] |
+| ln_no_match | No terms match. | कोई शब्द नहीं मिला। | ಯಾವ ಪದವೂ ಸಿಗಲಿಲ್ಲ. | [ ] |
+| ln_doubt_title | Ask a doubt | सवाल पूछो | ಸಂದೇಹ ಕೇಳಿ | [ ] |
+| ln_doubt_about_question | About this question | इस सवाल के बारे में | ಈ ಪ್ರಶ್ನೆಯ ಬಗ್ಗೆ | [ ] |
+| ln_doubt_about_term | About: %1$s | इसके बारे में: %1$s | ಇದರ ಬಗ್ಗೆ: %1$s | [ ] |
+| ln_doubt_about_course | About this course | इस कोर्स के बारे में | ಈ ಕೋರ್ಸ್ ಬಗ್ಗೆ | [ ] |
+| ln_doubt_hint | Type your doubt | अपना सवाल लिखो | ನಿಮ್ಮ ಸಂದೇಹ ಬರೆಯಿರಿ | [ ] |
+| ln_send | Send | भेजो | ಕಳುಹಿಸಿ | [ ] |
+| ln_example | Example | उदाहरण | ಉದಾಹರಣೆ | [ ] |
+| ln_not_in_notes | Your notes don't cover this, so this is a general answer. | यह तुम्हारे नोट्स में नहीं है, इसलिए यह सामान्य जवाब है। | ಇದು ನಿಮ್ಮ ನೋಟ್ಸ್‌ನಲ್ಲಿ ಇಲ್ಲ, ಆದ್ದರಿಂದ ಇದು ಸಾಮಾನ್ಯ ಉತ್ತರ. | [ ] |
+| ln_doubts_left | %1$d doubts left today | आज %1$d सवाल बाकी | ಇಂದು %1$d ಸಂದೇಹಗಳು ಉಳಿದಿವೆ | [ ] |
+| ln_doubt_empty | Ask anything about your notes. I'll answer in both languages. | अपने नोट्स के बारे में कुछ भी पूछो। मैं दोनों भाषाओं में जवाब दूँगी। | ನಿಮ್ಮ ನೋಟ್ಸ್ ಬಗ್ಗೆ ಏನಾದರೂ ಕೇಳಿ. ನಾನು ಎರಡೂ ಭಾಷೆಗಳಲ್ಲಿ ಉತ್ತರಿಸುತ್ತೇನೆ. | [ ] |
+| ln_thinking | Thinking… | सोच रही हूँ… | ಯೋಚಿಸುತ್ತಿದ್ದೇನೆ… | [ ] |
+| ln_auto_why | Why is this the answer? | यह उत्तर क्यों है? | ಇದೇ ಉತ್ತರ ಏಕೆ? | [ ] |
+| ln_auto_simpler | Explain this more simply. | इसे और आसान तरीके से समझाओ। | ಇದನ್ನು ಇನ್ನೂ ಸರಳವಾಗಿ ವಿವರಿಸಿ. | [ ] |
+| ln_auto_example | Give me an example. | मुझे एक उदाहरण दो। | ನನಗೆ ಒಂದು ಉದಾಹರಣೆ ಕೊಡಿ. | [ ] |
+| ln_goal_setting | Daily goal | रोज़ का लक्ष्य | ದೈನಂದಿನ ಗುರಿ | [ ] |
+| ln_goal_n | %1$d XP | %1$d XP | %1$d XP | [ ] |
+| ln_close | Close | बंद करो | ಮುಚ್ಚಿ | [ ] |
+| ln_back | Back | वापस | ಹಿಂದೆ | [ ] |

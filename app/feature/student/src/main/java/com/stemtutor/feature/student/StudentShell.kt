@@ -24,10 +24,11 @@ import com.stemtutor.core.designsystem.theme.StemTutorTheme
 import com.stemtutor.feature.student.home.StudentClassTabScreen
 import com.stemtutor.feature.student.home.StudentClassesViewModel
 import com.stemtutor.feature.student.home.StudentHomeScreen
+import com.stemtutor.feature.student.learn.LessonPathRoute
 import com.stemtutor.core.designsystem.R as DsR
 
 /**
- * The student's main screen with the bottom bar: Home, Learn (coming soon until M3), Class and
+ * The student's main screen with the bottom bar: Home, Learn (the lesson path), Class and
  * Profile. [profile] is supplied by the app (the shared profile screen).
  */
 @Composable
@@ -35,6 +36,9 @@ fun StudentShell(
     onJoin: () -> Unit,
     profile: @Composable () -> Unit,
     onMakeCourse: () -> Unit = {},
+    onPlayLesson: (lessonId: String) -> Unit = {},
+    onOpenCourse: (courseId: String) -> Unit = {},
+    onOpenTerms: (courseId: String) -> Unit = {},
     refreshKey: Int = 0,
     viewModel: StudentClassesViewModel = hiltViewModel(),
 ) {
@@ -54,8 +58,15 @@ fun StudentShell(
     Scaffold(bottomBar = { BottomTabs(tabs, tab, { tab = it }) }) { padding ->
         Box(Modifier.fillMaxSize().padding(padding)) {
             when (tab) {
-                0 -> StudentHomeScreen(state, onJoin, viewModel::load, onMakeCourse = onMakeCourse)
-                1 -> LearnComingSoon()
+                0 -> StudentHomeScreen(
+                    state,
+                    onJoin,
+                    viewModel::load,
+                    onMakeCourse = onMakeCourse,
+                    onContinue = onPlayLesson,
+                    onOpenCourse = onOpenCourse,
+                )
+                1 -> LessonPathRoute(onPlay = onPlayLesson, onTerms = onOpenTerms)
                 2 -> StudentClassTabScreen(state, onJoin, viewModel::load)
                 else -> profile()
             }
