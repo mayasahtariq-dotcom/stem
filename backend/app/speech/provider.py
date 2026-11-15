@@ -1,5 +1,8 @@
-"""Speech provider interface (Sarvam now, swappable for Bhashini). M0 ships the fake only."""
+"""Speech provider interface (Sarvam now, swappable for Bhashini). Sarvam lives in
+app/speech/sarvam.py; the fake is used in tests and whenever no key is configured."""
 
+import io
+import struct
 from dataclasses import dataclass
 from typing import Literal, Protocol
 
@@ -21,6 +24,10 @@ class Transcript:
 
 
 class SpeechProvider(Protocol):
+    model: str
+
+    def voice_for(self, language: Language) -> str: ...
+
     def synthesize(
         self, text: str, language: Language, *, voice: str = "default", sample_rate_hz: int = 22050
     ) -> SynthesisResult: ...
@@ -33,17 +40,34 @@ class SpeechProvider(Protocol):
 class FakeSpeechProvider:
     """Deterministic, offline speech provider for tests and debug builds."""
 
+    model = "fake"
+
     def __init__(self, transcript: str = "") -> None:
         self._transcript = transcript
         self.synthesized: list[tuple[str, Language]] = []
+
+    def voice_for(self, language: Language) -> str:
+        return "fake"
 
     def synthesize(
         self, text: str, language: Language, *, voice: str = "default", sample_rate_hz: int = 22050
     ) -> SynthesisResult:
         self.synthesized.append((text, language))
-        # 100 ms of 16-bit mono silence.
-        silence = b"\x00\x00" * (sample_rate_hz // 10)
-        return SynthesisResult(audio=silence, sample_rate_hz=sample_rate_hz, media_type="audio/L16")
+        return SynthesisResult(
+            audio=silent_wav(sample_rate_hz), sample_rate_hz=sample_rate_hz, media_type="audio/wav"
+        )
 
     def transcribe(self, audio: bytes, language: Language, *, sample_rate_hz: int) -> Transcript:
         return Transcript(text=self._transcript, language=language, confidence=1.0)
+
+
+def silent_wav(sample_rate_hz: int = 22050, millis: int = 100) -> bytes:
+    """A short, playable WAV file of silence (16-bit mono)."""
+    frames = b"\x00\x00" * (sample_rate_hz * millis // 1000)
+    buf = io.BytesIO()
+    buf.write(b"RIFF" + struct.pack("<I", 36 + len(frames)) + b"WAVE")
+    buf.write(
+        b"fmt " + struct.pack("<IHHIIHH", 16, 1, 1, sample_rate_hz, sample_rate_hz * 2, 2, 16)
+    )
+    buf.write(b"data" + struct.pack("<I", len(frames)) + frames)
+    return buf.getvalue()

@@ -30,6 +30,10 @@ class Settings(BaseSettings):
         "nvidia/nemotron-3.5-super-vl:free,nvidia/nemotron-3-ultra-550b-a55b:free"
     )
     llm_questions_model: str = "nvidia/nemotron-3-ultra-550b-a55b:free,google/gemma-4-31b-it:free"
+    # Doubt chat answers: short, so a fast model is fine.
+    llm_doubt_model: str = (
+        "nvidia/nemotron-3.5-super-vl:free,nvidia/nemotron-3-ultra-550b-a55b:free"
+    )
     llm_timeout_seconds: float = 300.0  # free models can take minutes for a lesson
     # Rough cost estimate per million tokens, in US dollars, for the generation metrics.
     llm_price_input_per_mtok: float = 0.0
@@ -39,6 +43,23 @@ class Settings(BaseSettings):
     embedding_model: str = "BAAI/bge-m3"
     fake_embeddings: bool = False
     embedding_dim: int = 1024
+
+    # ---- Student learning (M3) ----------------------------------------------------------
+    doubts_per_day: int = 20
+
+    # ---- Speech (M3 Listen). Sarvam text-to-speech; fake while SARVAM_API_KEY is blank. ----
+    use_fake_speech: bool = False
+    sarvam_base_url: str = "https://api.sarvam.ai"
+    tts_model: str = "bulbul:v4-flash"
+    # Voice per language (Sarvam bulbul:v4-flash speaker IDs from its Voices guide).
+    tts_voice_hi: str = "ritu_hi_edtech"
+    tts_voice_kn: str = "chaitra_kn_narration"
+    tts_voice_en: str = "ritu_en_edtech"
+    # true: make all of a lesson's audio when it's published (PRD). false (default while
+    # testing on free credit): make each clip the first time someone taps Listen.
+    tts_pregenerate: bool = False
+    tts_max_chars: int = 2500
+    audio_requests_per_hour: int = 300
 
     # ---- Storage and jobs ------------------------------------------------------------------
     storage_backend: Literal["local", "supabase"] = "local"

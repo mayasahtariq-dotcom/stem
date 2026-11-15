@@ -511,6 +511,18 @@ def claim_next_lesson(services: Services, lesson_id: uuid.UUID) -> uuid.UUID | N
     return started
 
 
+def claim_lesson(services: Services, lesson_id: uuid.UUID) -> bool:
+    """Flips [lesson_id] itself from not_started to generating (first caller wins)."""
+    with _session(services) as s, s.begin():
+        started = s.execute(
+            update(Lesson)
+            .where(Lesson.id == lesson_id, Lesson.generation_status == "not_started")
+            .values(generation_status="generating")
+            .returning(Lesson.id)
+        ).scalar()
+    return started is not None
+
+
 def regenerate_question(services: Services, question_id: uuid.UUID) -> QuestionRow | None:
     """Replaces one question with a fresh version (teacher's Redo button)."""
     usage = Usage()

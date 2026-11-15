@@ -16,5 +16,5 @@ def test_fake_speech_is_deterministic() -> None:
     provider: SpeechProvider = FakeSpeechProvider(transcript="न्यूटन")
     result = provider.synthesize("नमस्ते", "hi", sample_rate_hz=8000)
     assert result.sample_rate_hz == 8000
-    assert len(result.audio) == 1600
+    assert len(result.audio) == 44 + 1600  # WAV header + 100 ms of 16-bit silence
     assert provider.transcribe(b"", "hi", sample_rate_hz=16000).text == "न्यूटन"

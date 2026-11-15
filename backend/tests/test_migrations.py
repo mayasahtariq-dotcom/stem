@@ -36,6 +36,7 @@ def _sql_statements(sql: str) -> list[str]:
         ("0001_users", "USERS_POLICIES", "users.sql"),
         ("0002_classrooms", "CLASSROOM_POLICIES", "classrooms.sql"),
         ("0003_courses", "COURSE_POLICIES", "courses.sql"),
+        ("0004_learning", "LEARNING_POLICIES", "learning.sql"),
     ],
 )
 def test_policy_file_matches_migration(migration: str, attr: str, policy_file: str) -> None:

@@ -106,7 +106,8 @@ def wipe(engine: Engine) -> None:
     with engine.begin() as conn:
         conn.execute(
             text(
-                "TRUNCATE course_assignments, terms, questions, lessons, units, courses,"
+                "TRUNCATE audio_cache, doubts, saved_terms, student_stats, lesson_progress,"
+                " answer_attempts, course_assignments, terms, questions, lessons, units, courses,"
                 " note_chunks, upload_pages, uploads, join_attempts, memberships, classrooms,"
                 " users, auth.users CASCADE"
             )

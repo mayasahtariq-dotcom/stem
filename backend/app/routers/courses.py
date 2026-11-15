@@ -224,6 +224,19 @@ async def local_storage_put(token: str, request: Request, services: ServicesDep)
     return Response(status_code=status.HTTP_204_NO_CONTENT)
 
 
+@router.get("/local-storage/{token}", include_in_schema=False)
+def local_storage_get(token: str, services: ServicesDep) -> Response:
+    """Development storage: serves a file (generated audio) for a link we signed."""
+    storage = services.storage
+    if not isinstance(storage, LocalStorage):
+        raise api_error(ErrorCode.NOT_FOUND)
+    path = storage.path_from_token(token)
+    if path is None or not storage.exists(path):
+        raise api_error(ErrorCode.NOT_FOUND)
+    media = {"mp3": "audio/mpeg", "wav": "audio/wav"}.get(path.rsplit(".", 1)[-1], "")
+    return Response(content=storage.read(path), media_type=media or "application/octet-stream")
+
+
 # ---- courses -------------------------------------------------------------------------------
 
 
@@ -596,7 +609,13 @@ def _own_classroom(db: Session, classroom_id: uuid.UUID, user_id: str) -> None:
 
 @router.post("/lessons/{lesson_id}/publish")
 def publish_lesson(
-    lesson_id: uuid.UUID, body: PublishRequest, user: Me, db: UserDb, service_db: ServiceDb
+    lesson_id: uuid.UUID,
+    body: PublishRequest,
+    user: Me,
+    db: UserDb,
+    service_db: ServiceDb,
+    services: ServicesDep,
+    background: BackgroundTasks,
 ) -> LessonSummary:
     lesson = service_db.get(Lesson, lesson_id)
     if lesson is None:
@@ -619,6 +638,9 @@ def publish_lesson(
     assert course_row is not None  # noqa: S101
     course_row.status = "published"
     db.flush()
+    if services.settings.tts_pregenerate:
+        # PRD: make all of the lesson's audio at publish time so Listen plays instantly.
+        background.add_task(services.jobs.enqueue, "pregenerate_audio", lesson_id=str(lesson_id))
     count = db.scalar(select(func.count()).where(QuestionRow.lesson_id == lesson_id)) or 0
     return LessonSummary(
         id=str(row.id),

@@ -12,6 +12,7 @@ from app.ai.embeddings import EmbeddingProvider, FakeEmbeddingProvider
 from app.ai.llm import FakeLLMProvider, LLMProvider, OpenAICompatibleLLMProvider
 from app.ai.ocr import FakeOcrProvider, OcrProvider
 from app.config import Settings, get_settings
+from app.speech.provider import FakeSpeechProvider, SpeechProvider
 from app.storage import LocalStorage, StorageProvider, SupabaseStorage
 
 
@@ -45,6 +46,7 @@ class Services:
     embeddings: EmbeddingProvider
     storage: StorageProvider
     jobs: JobRunner
+    speech: SpeechProvider
 
 
 def build_services(settings: Settings) -> Services:
@@ -79,12 +81,34 @@ def build_services(settings: Settings) -> Services:
             settings.local_storage_dir, settings.public_base_url, settings.supabase_jwt_secret
         )
     services = Services(
-        settings, ocr, llm, embeddings, storage, JobRunner(inline=settings.jobs_inline)
+        settings,
+        ocr,
+        llm,
+        embeddings,
+        storage,
+        JobRunner(inline=settings.jobs_inline),
+        build_speech(settings),
     )
     from app.ai.pipeline import register_jobs
+    from app.learning.audio import register_audio_jobs
 
     register_jobs(services)
+    register_audio_jobs(services)
     return services
+
+
+def build_speech(settings: Settings) -> SpeechProvider:
+    """Sarvam when a key is set; the fake otherwise (tests, development without a key)."""
+    if settings.use_fake_speech or not settings.sarvam_api_key:
+        return FakeSpeechProvider()
+    from app.speech.sarvam import SarvamSpeechProvider
+
+    return SarvamSpeechProvider(
+        settings.sarvam_api_key,
+        settings.tts_model,
+        {"hi": settings.tts_voice_hi, "kn": settings.tts_voice_kn, "en": settings.tts_voice_en},
+        base_url=settings.sarvam_base_url,
+    )
 
 
 def _fake_responder() -> Callable[[Any], str]:

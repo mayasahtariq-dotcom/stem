@@ -1,10 +1,11 @@
 import uuid
-from datetime import datetime
+from datetime import date, datetime
 from typing import Any
 
 from sqlalchemy import (
     BigInteger,
     CheckConstraint,
+    Date,
     DateTime,
     ForeignKey,
     Identity,
@@ -237,5 +238,117 @@ class CourseAssignment(Base):
     )
     due_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     assigned_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, server_default=func.now()
+    )
+
+
+# ---- M3: student learning ------------------------------------------------------------------
+
+
+class AnswerAttempt(Base):
+    __tablename__ = "answer_attempts"
+
+    id: Mapped[uuid.UUID] = mapped_column(
+        UUID(as_uuid=True), primary_key=True, server_default=text("gen_random_uuid()")
+    )
+    student_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("users.id"))
+    question_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("questions.id"))
+    lesson_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("lessons.id"))
+    correct: Mapped[bool] = mapped_column(nullable=False)
+    first_try: Mapped[bool] = mapped_column(nullable=False)
+    answer: Mapped[dict[str, Any]] = mapped_column(JSONB, nullable=False)
+    mode: Mapped[str] = mapped_column(Text, nullable=False, server_default="tap")
+    time_ms: Mapped[int] = mapped_column(nullable=False, server_default=text("0"))
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, server_default=func.now()
+    )
+
+
+class LessonProgress(Base):
+    __tablename__ = "lesson_progress"
+
+    student_id: Mapped[uuid.UUID] = mapped_column(
+        UUID(as_uuid=True), ForeignKey("users.id"), primary_key=True
+    )
+    lesson_id: Mapped[uuid.UUID] = mapped_column(
+        UUID(as_uuid=True), ForeignKey("lessons.id"), primary_key=True
+    )
+    status: Mapped[str] = mapped_column(Text, nullable=False, server_default="started")
+    best_accuracy: Mapped[float] = mapped_column(nullable=False, server_default=text("0"))
+    xp_earned: Mapped[int] = mapped_column(nullable=False, server_default=text("0"))
+    started_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, server_default=func.now()
+    )
+    completed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+
+
+class StudentStats(Base):
+    __tablename__ = "student_stats"
+
+    student_id: Mapped[uuid.UUID] = mapped_column(
+        UUID(as_uuid=True), ForeignKey("users.id"), primary_key=True
+    )
+    xp_total: Mapped[int] = mapped_column(nullable=False, server_default=text("0"))
+    hearts: Mapped[int] = mapped_column(SmallInteger, nullable=False, server_default=text("5"))
+    hearts_updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, server_default=func.now()
+    )
+    streak: Mapped[int] = mapped_column(nullable=False, server_default=text("0"))
+    longest_streak: Mapped[int] = mapped_column(nullable=False, server_default=text("0"))
+    last_active_date: Mapped[date | None] = mapped_column(Date)
+    daily_goal: Mapped[int] = mapped_column(SmallInteger, nullable=False, server_default="50")
+    xp_today: Mapped[int] = mapped_column(nullable=False, server_default=text("0"))
+    xp_today_date: Mapped[date | None] = mapped_column(Date)
+
+
+class SavedTerm(Base):
+    __tablename__ = "saved_terms"
+
+    student_id: Mapped[uuid.UUID] = mapped_column(
+        UUID(as_uuid=True), ForeignKey("users.id"), primary_key=True
+    )
+    course_id: Mapped[uuid.UUID] = mapped_column(
+        UUID(as_uuid=True), ForeignKey("courses.id"), primary_key=True
+    )
+    term_key: Mapped[str] = mapped_column(Text, primary_key=True)
+    saved_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, server_default=func.now()
+    )
+
+
+class Doubt(Base):
+    __tablename__ = "doubts"
+
+    id: Mapped[uuid.UUID] = mapped_column(
+        UUID(as_uuid=True), primary_key=True, server_default=text("gen_random_uuid()")
+    )
+    student_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("users.id"))
+    course_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("courses.id"))
+    question_id: Mapped[uuid.UUID | None] = mapped_column(
+        UUID(as_uuid=True), ForeignKey("questions.id")
+    )
+    term_key: Mapped[str | None] = mapped_column(Text)
+    mode: Mapped[str] = mapped_column(Text, nullable=False, server_default="ask")
+    text: Mapped[str] = mapped_column(Text, nullable=False)
+    answer: Mapped[dict[str, str]] = mapped_column(JSONB, nullable=False)
+    source_pages: Mapped[list[int]] = mapped_column(
+        ARRAY(SmallInteger), nullable=False, server_default="{}"
+    )
+    in_notes: Mapped[bool] = mapped_column(nullable=False, server_default="true")
+    prompt_version: Mapped[str] = mapped_column(Text, nullable=False)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, server_default=func.now()
+    )
+
+
+class AudioCache(Base):
+    __tablename__ = "audio_cache"
+
+    hash: Mapped[str] = mapped_column(Text, primary_key=True)
+    language: Mapped[str] = mapped_column(Text, nullable=False)
+    voice: Mapped[str] = mapped_column(Text, nullable=False)
+    model: Mapped[str] = mapped_column(Text, nullable=False)
+    storage_path: Mapped[str] = mapped_column(Text, nullable=False)
+    created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )

@@ -174,6 +174,8 @@ def lesson_questions() -> dict[str, Any]:
 def fake_llm_response(request: LLMRequest) -> str:
     """Answers each pipeline prompt with sample JSON, based on which prompt it is."""
     p = request.prompt
+    if "Student's doubt:" in p:
+        return json.dumps(fake_doubt_answer(p), ensure_ascii=False)
     if '"key_terms"' in p and "course outline" in p:
         return json.dumps(OUTLINE, ensure_ascii=False)
     if "term cards" in p:
@@ -188,3 +190,28 @@ def fake_llm_response(request: LLMRequest) -> str:
     if "practice questions" in p:
         return json.dumps(lesson_questions(), ensure_ascii=False)
     return "{}"
+
+
+def fake_doubt_answer(prompt: str) -> dict[str, Any]:
+    """A doubt answer: from the notes (page 1), or "not in your notes" when the doubt mentions
+    something the sample notes don't cover (the moon)."""
+    doubt = prompt.rsplit("Student's doubt:", 1)[-1].lower()
+    if "moon" in doubt:
+        return {
+            "answer": _tri(
+                "Your notes don't cover this, but the moon shines by reflecting sunlight.",
+                "आपके नोट्स में यह नहीं है, पर चाँद सूरज की रोशनी से चमकता है।",
+                "ನಿಮ್ಮ ನೋಟ್ಸ್‌ನಲ್ಲಿ ಇದು ಇಲ್ಲ, ಆದರೆ ಚಂದ್ರ ಸೂರ್ಯನ ಬೆಳಕಿನಿಂದ ಹೊಳೆಯುತ್ತಾನೆ.",
+            ),
+            "in_notes": False,
+            "source_pages": [],
+        }
+    return {
+        "answer": _tri(
+            "Mitochondria make energy for the cell, like a generator powers a village.",
+            "माइटोकॉन्ड्रिया कोशिका के लिए ऊर्जा बनाते हैं, जैसे जनरेटर गाँव को बिजली देता है।",
+            "ಮೈಟೊಕಾಂಡ್ರಿಯಾ ಜೀವಕೋಶಕ್ಕೆ ಶಕ್ತಿ ಮಾಡುತ್ತವೆ, ಜನರೇಟರ್ ಊರಿಗೆ ವಿದ್ಯುತ್ ಕೊಡುವಂತೆ.",
+        ),
+        "in_notes": True,
+        "source_pages": [1],
+    }

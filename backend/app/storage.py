@@ -33,12 +33,21 @@ class StorageProvider(Protocol):
 
     def exists(self, path: str) -> bool: ...
 
+    def write(self, path: str, data: bytes, content_type: str = "application/octet-stream") -> None:
+        """Saves a file from the server side (e.g. generated audio)."""
+        ...
+
+    def download_url(self, path: str) -> str:
+        """A short-lived link the app can fetch the file from."""
+        ...
+
 
 class LocalStorage:
     """Files under [root]. Upload links point at `PUT /local-storage/{token}` on this API; the
     token is an HMAC-signed path with an expiry, so only links we issued can write."""
 
     TTL_SECONDS = 15 * 60
+    DOWNLOAD_TTL_SECONDS = 24 * 60 * 60
 
     def __init__(self, root: str, public_base_url: str, secret: str) -> None:
         self.root = Path(root)
@@ -48,8 +57,8 @@ class LocalStorage:
     def _sign(self, payload: str) -> str:
         return hmac.new(self._secret, payload.encode(), hashlib.sha256).hexdigest()[:32]
 
-    def make_token(self, path: str, now: float | None = None) -> str:
-        expires = int((now or time.time()) + self.TTL_SECONDS)
+    def make_token(self, path: str, now: float | None = None, ttl: int | None = None) -> str:
+        expires = int((now or time.time()) + (ttl or self.TTL_SECONDS))
         payload = f"{path}|{expires}"
         return f"{payload.replace('/', '~')}|{self._sign(payload)}"
 
@@ -71,7 +80,11 @@ class LocalStorage:
             headers={"Content-Type": content_type},
         )
 
-    def write(self, path: str, data: bytes) -> None:
+    def download_url(self, path: str) -> str:
+        """Links to `GET /local-storage/{token}` on this API."""
+        return f"{self._base}/local-storage/{self.make_token(path, ttl=self.DOWNLOAD_TTL_SECONDS)}"
+
+    def write(self, path: str, data: bytes, content_type: str = "application/octet-stream") -> None:
         target = self.root / path
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_bytes(data)
@@ -117,6 +130,29 @@ class SupabaseStorage:
         if r.status_code >= 400:
             raise StorageError(f"missing {path}: {r.status_code}")
         return r.content
+
+    def write(self, path: str, data: bytes, content_type: str = "application/octet-stream") -> None:
+        # VERIFY against current Supabase docs: POST /object/{bucket}/{path}, x-upsert to replace.
+        r = httpx.post(
+            f"{self._base}/object/{self._bucket}/{path}",
+            content=data,
+            headers={**self._headers, "Content-Type": content_type, "x-upsert": "true"},
+            timeout=60,
+        )
+        if r.status_code >= 400:
+            raise StorageError(f"could not save {path}: {r.status_code}")
+
+    def download_url(self, path: str) -> str:
+        # VERIFY: POST /object/sign/{bucket}/{path} {"expiresIn": s} -> {"signedURL": "/object/..."}
+        r = httpx.post(
+            f"{self._base}/object/sign/{self._bucket}/{path}",
+            json={"expiresIn": 24 * 60 * 60},
+            headers=self._headers,
+            timeout=20,
+        )
+        if r.status_code >= 400:
+            raise StorageError(f"could not sign download: {r.status_code}")
+        return f"{self._base}{r.json().get('signedURL', '')}"
 
     def exists(self, path: str) -> bool:
         r = httpx.head(
