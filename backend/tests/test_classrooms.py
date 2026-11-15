@@ -250,3 +250,18 @@ def test_teacher_rls_sees_only_own_classrooms(people: Any, migrated_engine: Engi
         act_as(session, rao.id)
         visible = session.execute(text("SELECT id FROM classrooms")).scalars().all()
         assert {str(v) for v in visible} == {mine["id"]}
+
+
+def test_phone_used_by_another_account_is_a_clear_error(api: Any, migrated_engine: Engine) -> None:
+    from tests.conftest import Person
+
+    first = Person(api, migrated_engine, "+919000000077").setup("First", ["student"])
+    assert first.get("/me").json()["phone"] == "+919000000077"
+    second = Person(api, migrated_engine, "+919000000077")
+    r = second.api.put(
+        "/me",
+        json={"name": "Second", "roles": ["student"], "language_mode": "hindi"},
+        headers=second.headers,
+    )
+    assert r.status_code == 409
+    assert r.json() == {"detail": {"code": "PHONE_IN_USE"}}

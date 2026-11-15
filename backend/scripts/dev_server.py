@@ -54,7 +54,19 @@ def main() -> None:
     datadir = BACKEND / "var" / "pgdata"
     datadir.mkdir(parents=True, exist_ok=True)
     print("Starting the local database…")
-    server = getattr(pgserver, "get_server")(str(datadir), cleanup_mode="stop")  # noqa: B009
+    # pgserver waits only 10 s for Postgres; after an unclean stop, or with antivirus scanning
+    # the data files, start-up can take longer. Retry; a running server is reused.
+    import time
+
+    for attempt in range(8):
+        try:
+            server = getattr(pgserver, "get_server")(str(datadir), cleanup_mode="stop")  # noqa: B009
+            break
+        except Exception as exc:  # noqa: BLE001 - subprocess timeout from pg_ctl
+            if attempt == 7:
+                raise
+            print(f"  database still starting ({type(exc).__name__}); retrying…", flush=True)
+            time.sleep(10)
     db_url = str(server.get_uri()).replace("postgresql://", "postgresql+psycopg://", 1)
 
     ip = lan_ip()

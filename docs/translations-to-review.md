@@ -302,3 +302,5 @@ Also to review: the sample course content in `backend/app/ai/fake_content.py` an
 | st_my_courses | My courses | मेरे कोर्स | ನನ್ನ ಕೋರ್ಸ್‌ಗಳು | [ ] |
 | st_ai_made | AI-made | AI से बना | AI ನಿರ್ಮಿತ | [ ] |
 | st_courses_soon | You can play lessons in the next update. | अगले अपडेट में तुम पाठ खेल सकोगे। | ಮುಂದಿನ ಅಪ್‌ಡೇಟ್‌ನಲ್ಲಿ ಪಾಠಗಳನ್ನು ಆಡಬಹುದು. | [ ] |
+
+| err_phone_in_use | This phone number is already used by another account. | यह फ़ोन नंबर पहले से किसी दूसरे खाते में है। | ಈ ಫೋನ್ ನಂಬರ್ ಈಗಾಗಲೇ ಇನ್ನೊಂದು ಖಾತೆಯಲ್ಲಿದೆ. | [ ] |

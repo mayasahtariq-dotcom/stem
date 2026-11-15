@@ -29,5 +29,6 @@ fun AppError.messageRes(): Int = when (this) {
         ApiErrorCode.LESSON_NOT_READY -> R.string.err_lesson_not_ready
         ApiErrorCode.INVALID_QUESTION -> R.string.err_invalid_question
         ApiErrorCode.AI_UNAVAILABLE -> R.string.err_ai_unavailable
+        ApiErrorCode.PHONE_IN_USE -> R.string.err_phone_in_use
     }
 }

@@ -62,4 +62,5 @@
     <string name="ds_save">ಉಳಿಸಿ</string>
     <string name="ds_cancel">ರದ್ದುಮಾಡಿ</string>
     <string name="ds_done">ಮುಗಿಯಿತು</string>
+    <string name="err_phone_in_use">ಈ ಫೋನ್ ನಂಬರ್ ಈಗಾಗಲೇ ಇನ್ನೊಂದು ಖಾತೆಯಲ್ಲಿದೆ.</string>
 </resources>

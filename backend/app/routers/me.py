@@ -5,6 +5,7 @@ from fastapi import APIRouter, Depends
 from pydantic import BaseModel, Field, field_validator
 from sqlalchemy import Engine, select, text
 from sqlalchemy.dialects.postgresql import insert
+from sqlalchemy.exc import IntegrityError
 
 from app.auth import CurrentUser, get_current_user
 from app.config import Settings, get_settings
@@ -91,7 +92,12 @@ def put_me(
         raise api_error(ErrorCode.PROFILE_INCOMPLETE)
     values = {"name": body.name, "language_mode": body.language_mode, "roles": body.roles}
     stmt = insert(User).values(id=uuid.UUID(user.id), phone=phone or "", **values)
-    db.execute(stmt.on_conflict_do_update(index_elements=[User.id], set_=values))
+    try:
+        with db.begin_nested():
+            db.execute(stmt.on_conflict_do_update(index_elements=[User.id], set_=values))
+    except IntegrityError as exc:
+        # Another account already uses this phone number (phones are unique).
+        raise api_error(ErrorCode.PHONE_IN_USE) from exc
     row = db.scalar(
         select(User).where(User.id == uuid.UUID(user.id)).execution_options(populate_existing=True)
     )

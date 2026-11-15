@@ -26,6 +26,7 @@ enum class ApiErrorCode {
     LESSON_NOT_READY,
     INVALID_QUESTION,
     AI_UNAVAILABLE,
+    PHONE_IN_USE,
     ;
 
     companion object {

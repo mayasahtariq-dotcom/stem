@@ -62,4 +62,5 @@
     <string name="ds_save">सेव करें</string>
     <string name="ds_cancel">रद्द करें</string>
     <string name="ds_done">हो गया</string>
+    <string name="err_phone_in_use">यह फ़ोन नंबर पहले से किसी दूसरे खाते में है।</string>
 </resources>

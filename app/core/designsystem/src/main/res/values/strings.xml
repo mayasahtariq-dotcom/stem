@@ -62,4 +62,5 @@
     <string name="ds_save">Save</string>
     <string name="ds_cancel">Cancel</string>
     <string name="ds_done">Done</string>
+    <string name="err_phone_in_use">This phone number is already used by another account.</string>
 </resources>
