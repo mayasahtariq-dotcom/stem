@@ -1,9 +1,16 @@
 """The JSON shapes the AI must return, checked strictly. Invalid output gets one retry, then
 the item is marked as needing review (PRD M2)."""
 
+import re
 from typing import Annotated, Literal
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
+
+
+def slugify(v: str) -> str:
+    """Term keys: lowercase letters, digits and underscores ("Newton's law" -> "newtons_law")."""
+    words = re.sub(r"[^a-z0-9\s_]", "", v.lower().replace("-", " ").replace("/", " ")).split()
+    return "_".join(words) or "term"
 
 
 class Tri(BaseModel):
@@ -136,7 +143,7 @@ class KeyTerm(BaseModel):
     @field_validator("key")
     @classmethod
     def slug(cls, v: str) -> str:
-        return "_".join(v.lower().split())
+        return slugify(v)
 
 
 class Outline(BaseModel):
@@ -165,7 +172,7 @@ class Term(BaseModel):
     @field_validator("key")
     @classmethod
     def slug(cls, v: str) -> str:
-        return "_".join(v.lower().split())
+        return slugify(v)
 
 
 class TermCards(BaseModel):

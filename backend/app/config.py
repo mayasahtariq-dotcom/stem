@@ -24,9 +24,12 @@ class Settings(BaseSettings):
     llm_base_url: str = "https://openrouter.ai/api/v1"
     llm_api_key: str = ""
     # Model names are settings, never hard-coded (PRD). Chosen by the bake-off on real notes.
-    llm_outline_model: str = "qwen/qwen-2.5-72b-instruct"
-    llm_terms_model: str = "qwen/qwen-2.5-7b-instruct"
-    llm_questions_model: str = "qwen/qwen-2.5-72b-instruct"
+    # Each may be a comma-separated list, tried in order when a model is busy.
+    llm_outline_model: str = "nvidia/nemotron-3-ultra-550b-a55b:free,google/gemma-4-31b-it:free"
+    llm_terms_model: str = (
+        "nvidia/nemotron-3.5-super-vl:free,nvidia/nemotron-3-ultra-550b-a55b:free"
+    )
+    llm_questions_model: str = "nvidia/nemotron-3-ultra-550b-a55b:free,google/gemma-4-31b-it:free"
     llm_timeout_seconds: float = 120.0
     # Rough cost estimate per million tokens, in US dollars, for the generation metrics.
     llm_price_input_per_mtok: float = 0.0

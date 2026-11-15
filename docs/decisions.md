@@ -74,3 +74,11 @@ The user supplied a web prototype, `docs/design/mooshala-code.md` ("Mooshala"), 
 - **Library added:** `androidx.exifinterface`, a small AndroidX library, so phone photos aren't decoded sideways.
 - **Ready banner.** When generation finishes after the teacher left the screen, an in-app banner appears at the top of any screen. Push notifications replace it in M6.
 - **Page reordering:** long-press and drag a thumbnail sideways, or use the arrow buttons for accessibility.
+- **Free OpenRouter models (2026-11-15).** The user has a free OpenRouter account with no credit, so the defaults are free models, each step a list tried in order:
+  - **Outline and questions:** NVIDIA Nemotron 3 Ultra (550B), then Gemma 4 31B, then Nemotron 3.5 Super VL.
+  - **Term cards:** Nemotron 3.5 Super VL first.
+
+  Free models are often rate-limited, so the client moves to the next model on 429/5xx errors or empty replies (reasoning models can spend their budget thinking). `max_tokens` is now 12,000 to leave room for that.
+  - **Measured on sample physics notes:** outline in about 27 s; lesson 1 (10 questions) in about 144 s. That's well over the PRD's 60 s target. Paid or less-busy models would be faster; revisit before the pilot.
+- **HTTPS behind antivirus/network filters.** On the dev PC, Python's bundled certificate list rejected OpenRouter's certificate (likely a filter adding its own root certificate). The backend now uses the operating system's certificate store via `truststore`.
+- **Term keys** are cleaned to letters, digits and underscores (the model returned keys like `newton's_first_law` and `kg_m/s`).
