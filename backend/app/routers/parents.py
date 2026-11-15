@@ -530,6 +530,7 @@ def summary(
     weakest: dict[str, str] | None,
     pending: int,
     overdue: int,
+    total: int = 1,
 ) -> dict[str, str]:
     """Three short sentences in each language, read aloud by "Listen to summary"."""
     n, last = week.lessons_this_week, week.lessons_last_week
@@ -571,6 +572,8 @@ def summary(
             f"{pending} असाइनमेंट जल्द पूरे करने हैं।",
             f"{pending} ಅಸೈನ್‌ಮೆಂಟ್‌ಗಳನ್ನು ಶೀಘ್ರದಲ್ಲೇ ಮುಗಿಸಬೇಕು.",
         )
+    elif total == 0:
+        s3 = ("No assignments yet.", "अभी कोई असाइनमेंट नहीं है।", "ಇನ್ನೂ ಯಾವ ಅಸೈನ್‌ಮೆಂಟ್ ಇಲ್ಲ.")
     else:
         s3 = ("All assignments are done.", "सभी असाइनमेंट पूरे हो गए हैं।", "ಎಲ್ಲಾ ಅಸೈನ್‌ಮೆಂಟ್‌ಗಳು ಮುಗಿದಿವೆ.")
     return {lang: " ".join(s[i] for s in (s1, s2, s3)) for i, lang in enumerate(("en", "hi", "kn"))}
@@ -642,5 +645,6 @@ def child_dashboard(
             weakest[0].name if weakest else None,
             sum(1 for a in assignments if a.status == "pending"),
             sum(1 for a in assignments if a.status == "overdue"),
+            total=len(assignments),
         ),
     )

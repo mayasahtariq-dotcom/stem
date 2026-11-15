@@ -303,3 +303,14 @@ def test_term_mastery_reaches_the_app(api: Any, people: Any) -> None:
     assert again and all(0 < v <= 1 for v in again.values())
     terms = asha.get(f"/courses/{s['status']['course_id']}/terms").json()
     assert any(t["mastery"] for t in terms)
+
+
+def test_summary_says_when_there_are_no_assignments() -> None:
+    week = parents.WeekCard(
+        lessons_this_week=0, lessons_last_week=0, arrow="same", minutes_this_week=0, streak=0
+    )
+    acc = parents.AccuracyCard(this_week=None, last_week=None, word="steady")
+    none = parents.summary("Ravi", week, acc, None, pending=0, overdue=0, total=0)
+    assert none["en"].endswith("No assignments yet.")
+    done = parents.summary("Ravi", week, acc, None, pending=0, overdue=0, total=2)
+    assert done["en"].endswith("All assignments are done.") and done["kn"] and done["hi"]
