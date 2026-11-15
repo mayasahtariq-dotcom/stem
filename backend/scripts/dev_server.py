@@ -3,6 +3,7 @@
     cd backend
     .venv/Scripts/python scripts/dev_server.py            # real AI (needs the [ml] extra)
     .venv/Scripts/python scripts/dev_server.py --fake-ai  # sample course, no models
+    add --real-embeddings to also load BGE-M3 (2.2 GB download; doubt chat needs it in M3)
 
 It:
   1. starts an embedded Postgres in backend/var/pgdata (data is kept between runs),
@@ -36,6 +37,7 @@ def lan_ip() -> str:
 
 def main() -> None:
     fake_ai = "--fake-ai" in sys.argv
+    real_embeddings = "--real-embeddings" in sys.argv  # downloads BGE-M3 (2.2 GB); M3 needs it
     port = 8000
 
     # Use Windows' certificate store for every HTTPS call (model downloads, OpenRouter,
@@ -65,6 +67,7 @@ def main() -> None:
             "PUBLIC_BASE_URL": f"http://{ip}:{port}",
             "JOBS_INLINE": "true",
             "LOCAL_AUTH_STUB": "true",
+            "FAKE_EMBEDDINGS": "false" if real_embeddings else "true",
         }
     )
 

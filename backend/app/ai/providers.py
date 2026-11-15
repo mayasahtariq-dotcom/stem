@@ -60,8 +60,14 @@ def build_services(settings: Settings) -> Services:
         llm = OpenAICompatibleLLMProvider(
             settings.llm_base_url, settings.llm_api_key, settings.llm_timeout_seconds
         )
-        embeddings = SentenceTransformerEmbeddingProvider(
-            settings.embedding_model, settings.embedding_dim
+        # BGE-M3 is a 2.2 GB download and only needed for doubt chat (M3); development can
+        # keep fake embeddings (FAKE_EMBEDDINGS=true) while the OCR and text model are real.
+        embeddings = (
+            FakeEmbeddingProvider(settings.embedding_dim)
+            if settings.fake_embeddings
+            else SentenceTransformerEmbeddingProvider(
+                settings.embedding_model, settings.embedding_dim
+            )
         )
     storage: StorageProvider
     if settings.storage_backend == "supabase":  # pragma: no cover - needs Supabase

@@ -30,13 +30,14 @@ class Settings(BaseSettings):
         "nvidia/nemotron-3.5-super-vl:free,nvidia/nemotron-3-ultra-550b-a55b:free"
     )
     llm_questions_model: str = "nvidia/nemotron-3-ultra-550b-a55b:free,google/gemma-4-31b-it:free"
-    llm_timeout_seconds: float = 120.0
+    llm_timeout_seconds: float = 300.0  # free models can take minutes for a lesson
     # Rough cost estimate per million tokens, in US dollars, for the generation metrics.
     llm_price_input_per_mtok: float = 0.0
     llm_price_output_per_mtok: float = 0.0
     # Surya's layout model finds diagrams on note photos; slow on a CPU, so off by default.
     ocr_detect_diagrams: bool = False
     embedding_model: str = "BAAI/bge-m3"
+    fake_embeddings: bool = False
     embedding_dim: int = 1024
 
     # ---- Storage and jobs ------------------------------------------------------------------

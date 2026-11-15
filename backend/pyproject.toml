@@ -31,7 +31,10 @@ dev = [
 ml = [
     # 0.17.x: classic CPU models. 0.20+ needs a separate vLLM/llama.cpp inference server.
     "surya-ocr==0.17.1",
-    "sentence-transformers>=3.0",
+    # transformers 5 breaks Surya 0.17; keep the 4.x line and a matching sentence-transformers.
+    "transformers>=4.56,<5",
+    "sentence-transformers>=3.0,<6",
+    "requests>=2.31",
     "pillow>=10.0",
     "pypdfium2>=4.0",
 ]

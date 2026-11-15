@@ -88,3 +88,7 @@ The user supplied a web prototype, `docs/design/mooshala-code.md` ("Mooshala"), 
   - A local `auth.users` stand-in is filled when a user first saves their profile (`LOCAL_AUTH_STUB`, development only).
   - The debug app's **Profile → Server (testing)** switches between the built-in pretend AI and a server address, then restarts. Debug builds allow plain HTTP on the local network; release builds keep HTTPS only.
   - The CI-built APK gets the Supabase URL and the public anon key from repository secrets, which the user adds. Without them, "Real server" stays in pretend mode instead of crashing.
+- **Library pins for Surya 0.17 (2026-11-15).** Surya 0.17 fails under transformers 5 (`pad_token_id` error), so `transformers>=4.56,<5` and `sentence-transformers>=3,<6` are pinned. Surya also needs `requests`, which its package doesn't declare.
+- **Measured on the dev PC (CPU):** Surya loads in about 75 s and reads a page in about 150 s. On a typed trilingual test page, confidence was 0.99: English perfect, Hindi nearly (one anusvara lost), Kannada readable but with dropped conjuncts. A GPU, or a faster OCR choice, is needed before the pilot's "under 60 seconds" target is realistic.
+- **Embeddings are switchable.** `FAKE_EMBEDDINGS=true` keeps fake embeddings while the OCR and text model are real. The dev server uses this by default (`--real-embeddings` loads BGE-M3, a 2.2 GB download needed for doubt chat in M3).
+- **LLM timeout raised to 300 s** for slow free models.
