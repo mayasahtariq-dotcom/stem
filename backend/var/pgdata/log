@@ -1,0 +1,12 @@
+2026-11-15 05:04:06.032 GMT [4784] LOG:  starting PostgreSQL 16.2 on x86_64-pc-mingw64, compiled by gcc.exe (x86_64-posix-seh-rev2, Built by MinGW-W64 project) 12.2.0, 64-bit
+2026-11-15 05:04:06.034 GMT [4784] LOG:  listening on IPv4 address "127.0.0.1", port 54992
+2026-11-15 05:04:06.118 GMT [11792] LOG:  database system was shut down at 2026-11-15 05:04:03 GMT
+2026-11-15 05:04:06.178 GMT [4784] LOG:  database system is ready to accept connections
+2026-11-15 05:05:06.390 GMT [4784] LOG:  server process (PID 13928) was terminated by exception 0xC0000142
+2026-11-15 05:05:06.390 GMT [4784] HINT:  See C include file "ntstatus.h" for a description of the hexadecimal value.
+2026-11-15 05:05:06.390 GMT [4784] LOG:  terminating any other active server processes
+2026-11-15 05:05:06.463 GMT [4784] LOG:  all server processes terminated; reinitializing
+2026-11-15 05:05:06.597 GMT [4784] LOG:  startup process (PID 1996) was terminated by exception 0xC0000142
+2026-11-15 05:05:06.597 GMT [4784] HINT:  See C include file "ntstatus.h" for a description of the hexadecimal value.
+2026-11-15 05:05:06.597 GMT [4784] LOG:  aborting startup due to startup process failure
+2026-11-15 05:05:06.599 GMT [4784] LOG:  database system is shut down

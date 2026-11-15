@@ -51,30 +51,34 @@ class FakeOcrProvider:
 
 
 class SuryaOcrProvider:
-    """Surya OCR: text lines with confidence, plus layout boxes for figures (diagram positions).
+    """Surya OCR 0.17 (classic detection + recognition models, runs on a CPU with PyTorch).
 
-    VERIFY: Surya's Python API changed between releases (predictor classes in newer versions,
-    `run_ocr` in older ones). This supports both; check against the installed version.
+    Pinned to 0.17.x: from 0.20 Surya became a vision-language model that needs a separate
+    inference server (vLLM or llama.cpp). Lines come with a confidence score; the optional
+    layout model finds figures for diagram positions (slower, so off unless asked for).
     """
 
-    def __init__(self) -> None:
+    def __init__(self, detect_diagrams: bool = False) -> None:
         from surya.detection import DetectionPredictor
+        from surya.foundation import FoundationPredictor
         from surya.recognition import RecognitionPredictor
 
         self._det: Any = DetectionPredictor()
-        self._rec: Any = RecognitionPredictor()
-        try:
+        self._rec: Any = RecognitionPredictor(FoundationPredictor())
+        self._layout: Any = None
+        if detect_diagrams:
             from surya.layout import LayoutPredictor
+            from surya.settings import settings
 
-            self._layout: Any = LayoutPredictor()
-        except ImportError:  # pragma: no cover - optional
-            self._layout = None
+            self._layout = LayoutPredictor(
+                FoundationPredictor(checkpoint=settings.LAYOUT_MODEL_CHECKPOINT)
+            )
 
     def read(self, image: bytes) -> OcrPage:  # pragma: no cover - needs the [ml] extra
         from PIL import Image
 
         img = Image.open(io.BytesIO(image)).convert("RGB")
-        result = self._rec([img], det_predictor=self._det)[0]
+        result = self._rec([img], det_predictor=self._det, sort_lines=True)[0]
         lines = [line for line in result.text_lines if (line.text or "").strip()]
         text = "\n".join(line.text for line in lines)
         conf = sum(float(line.confidence or 0) for line in lines) / len(lines) if lines else 0.0

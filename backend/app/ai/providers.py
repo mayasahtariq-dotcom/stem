@@ -56,7 +56,7 @@ def build_services(settings: Settings) -> Services:
         from app.ai.embeddings import SentenceTransformerEmbeddingProvider
         from app.ai.ocr import SuryaOcrProvider
 
-        ocr = SuryaOcrProvider()
+        ocr = SuryaOcrProvider(detect_diagrams=settings.ocr_detect_diagrams)
         llm = OpenAICompatibleLLMProvider(
             settings.llm_base_url, settings.llm_api_key, settings.llm_timeout_seconds
         )

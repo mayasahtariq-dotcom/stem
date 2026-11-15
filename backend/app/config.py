@@ -34,6 +34,8 @@ class Settings(BaseSettings):
     # Rough cost estimate per million tokens, in US dollars, for the generation metrics.
     llm_price_input_per_mtok: float = 0.0
     llm_price_output_per_mtok: float = 0.0
+    # Surya's layout model finds diagrams on note photos; slow on a CPU, so off by default.
+    ocr_detect_diagrams: bool = False
     embedding_model: str = "BAAI/bge-m3"
     embedding_dim: int = 1024
 

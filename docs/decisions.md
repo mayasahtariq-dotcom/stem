@@ -82,3 +82,9 @@ The user supplied a web prototype, `docs/design/mooshala-code.md` ("Mooshala"), 
   - **Measured on sample physics notes:** outline in about 27 s; lesson 1 (10 questions) in about 144 s. That's well over the PRD's 60 s target. Paid or less-busy models would be faster; revisit before the pilot.
 - **HTTPS behind antivirus/network filters.** On the dev PC, Python's bundled certificate list rejected OpenRouter's certificate (likely a filter adding its own root certificate). The backend now uses the operating system's certificate store via `truststore`.
 - **Term keys** are cleaned to letters, digits and underscores (the model returned keys like `newton's_first_law` and `kg_m/s`).
+- **Surya pinned to 0.17.1 (2026-11-15).** From 0.20, Surya became a vision-language model that needs a separate inference server (vLLM on NVIDIA GPUs, or llama.cpp's `llama-server` on a CPU). Version 0.17.1 is the last with the classic detection and recognition models, which run on a CPU with PyTorch alone, so it's pinned. Diagram detection (Surya's layout model) is a separate, slower model, so it's off by default (`OCR_DETECT_DIAGRAMS=true` turns it on). Diagram positions stay empty until then.
+- **Testing against a PC backend.** `backend/scripts/dev_server.py` runs an embedded Postgres, applies migrations and serves the API on the PC's Wi-Fi address, with local storage and the real AI.
+  - Logins are still checked against the real Supabase project.
+  - A local `auth.users` stand-in is filled when a user first saves their profile (`LOCAL_AUTH_STUB`, development only).
+  - The debug app's **Profile → Server (testing)** switches between the built-in pretend AI and a server address, then restarts. Debug builds allow plain HTTP on the local network; release builds keep HTTPS only.
+  - The CI-built APK gets the Supabase URL and the public anon key from repository secrets, which the user adds. Without them, "Real server" stays in pretend mode instead of crashing.

@@ -29,7 +29,8 @@ dev = [
 
 # Real AI models (Surya OCR, BGE-M3 embeddings). Heavy (PyTorch); not installed in CI.
 ml = [
-    "surya-ocr>=0.6",
+    # 0.17.x: classic CPU models. 0.20+ needs a separate vLLM/llama.cpp inference server.
+    "surya-ocr==0.17.1",
     "sentence-transformers>=3.0",
     "pillow>=10.0",
     "pypdfium2>=4.0",
