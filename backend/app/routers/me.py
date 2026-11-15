@@ -3,12 +3,13 @@ from typing import Annotated, Literal
 
 from fastapi import APIRouter, Depends
 from pydantic import BaseModel, Field, field_validator
-from sqlalchemy import select
+from sqlalchemy import Engine, select, text
 from sqlalchemy.dialects.postgresql import insert
 
 from app.auth import CurrentUser, get_current_user
+from app.config import Settings, get_settings
 from app.db.models import User
-from app.db.session import UserDb
+from app.db.session import UserDb, get_engine
 from app.errors import ErrorCode, api_error
 
 router = APIRouter(tags=["me"])
@@ -74,7 +75,16 @@ def put_me(
     body: ProfileUpdate,
     user: Annotated[CurrentUser, Depends(get_current_user)],
     db: UserDb,
+    settings: Annotated[Settings, Depends(get_settings)],
+    engine: Annotated[Engine, Depends(get_engine)],
 ) -> MeResponse:
+    if settings.local_auth_stub:
+        # Development only: mirror the Supabase account into the local auth.users stand-in.
+        with engine.begin() as conn:
+            conn.execute(
+                text("INSERT INTO auth.users (id) VALUES (:id) ON CONFLICT DO NOTHING"),
+                {"id": user.id},
+            )
     phone = _phone_from_claims(user.claims)
     existing = db.scalar(select(User).where(User.id == uuid.UUID(user.id)))
     if existing is None and phone is None:

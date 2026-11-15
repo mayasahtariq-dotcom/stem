@@ -45,6 +45,9 @@ class Settings(BaseSettings):
     public_base_url: str = "http://localhost:8000"
     # true: run background jobs in-process (tests, development). false: procrastinate queue.
     jobs_inline: bool = True
+    # Local development against an embedded Postgres (scripts/dev_server.py): there is no real
+    # Supabase auth.users table, so signed-in users are added to the local stand-in first.
+    local_auth_stub: bool = False
 
 
 @lru_cache

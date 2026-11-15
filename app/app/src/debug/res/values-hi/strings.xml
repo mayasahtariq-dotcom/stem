@@ -14,4 +14,10 @@
     <string name="gallery_section_bubble">बोलने का बुलबुला और प्रगति</string>
     <string name="gallery_section_mascot">गाय और उसके पोज़</string>
     <string name="gallery_section_icons">स्टिकर आइकन</string>
+    <string name="dev_server_title">सर्वर (टेस्टिंग)</string>
+    <string name="dev_server_fake">नकली AI (ऐप में)</string>
+    <string name="dev_server_real">मेरे PC का असली सर्वर</string>
+    <string name="dev_server_url_hint">सर्वर का पता</string>
+    <string name="dev_server_url_invalid">http://192.168.1.5:8000/ जैसा पता लिखें</string>
+    <string name="dev_server_apply">सेव करें और फिर से खोलें</string>
 </resources>

@@ -55,7 +55,7 @@ ignore = ["B008"]
 
 [tool.ruff.lint.per-file-ignores]
 "tests/**" = ["S101", "S105", "S106"]
-"scripts/**" = ["T201"]
+"scripts/**" = ["T201", "S104", "E402", "I001"]
 
 [tool.mypy]
 python_version = "3.12"
@@ -64,7 +64,7 @@ plugins = ["pydantic.mypy"]
 exclude = ["alembic/", "scripts/"]
 
 [[tool.mypy.overrides]]
-module = ["procrastinate.*", "pgserver", "pgserver.*", "surya.*", "sentence_transformers.*", "PIL.*", "pypdf.*"]
+module = ["procrastinate.*", "pgserver", "pgserver.*", "surya.*", "sentence_transformers.*", "PIL.*", "pypdf.*", "pypdfium2.*"]
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]

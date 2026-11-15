@@ -14,4 +14,10 @@
     <string name="gallery_section_bubble">ಮಾತಿನ ಗುಳ್ಳೆ ಮತ್ತು ಪ್ರಗತಿ</string>
     <string name="gallery_section_mascot">ಹಸು ಮತ್ತು ಅದರ ಭಂಗಿಗಳು</string>
     <string name="gallery_section_icons">ಸ್ಟಿಕರ್ ಐಕಾನ್‌ಗಳು</string>
+    <string name="dev_server_title">ಸರ್ವರ್ (ಪರೀಕ್ಷೆ)</string>
+    <string name="dev_server_fake">ನಕಲಿ AI (ಆ್ಯಪ್‌ನಲ್ಲಿ)</string>
+    <string name="dev_server_real">ನನ್ನ PC ಯ ನಿಜವಾದ ಸರ್ವರ್</string>
+    <string name="dev_server_url_hint">ಸರ್ವರ್ ವಿಳಾಸ</string>
+    <string name="dev_server_url_invalid">http://192.168.1.5:8000/ ರೀತಿಯ ವಿಳಾಸ ಬರೆಯಿರಿ</string>
+    <string name="dev_server_apply">ಉಳಿಸಿ ಮತ್ತು ಮರುಪ್ರಾರಂಭಿಸಿ</string>
 </resources>

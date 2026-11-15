@@ -127,6 +127,11 @@ def _page_text(services: Services, page: UploadPage) -> tuple[str, float, list[d
         extracted = _pdf_text(data)
         if len(extracted.strip()) >= 20:
             return extracted, 1.0, []
+        images = _pdf_images(data)
+        if images:  # a scanned PDF: read each page image
+            pages = [services.ocr.read(img) for img in images]
+            text_ = "\n\n".join(p.text for p in pages)
+            return text_, round(sum(p.confidence for p in pages) / len(pages), 3), []
     result = services.ocr.read(data)
     diagrams = [{"x0": b.x0, "y0": b.y0, "x1": b.x1, "y1": b.y1} for b in result.diagrams]
     return result.text, result.confidence, diagrams
@@ -139,6 +144,22 @@ def _pdf_text(data: bytes) -> str:
         return "\n".join((p.extract_text() or "") for p in PdfReader(io.BytesIO(data)).pages)
     except Exception:  # noqa: BLE001 - unreadable PDF: fall back to OCR
         return ""
+
+
+def _pdf_images(data: bytes, max_pages: int = 10) -> list[bytes]:
+    """Renders a scanned PDF's pages to JPEG for OCR (needs pypdfium2 from the [ml] extra)."""
+    try:
+        import pypdfium2
+    except ImportError:
+        return []
+    out: list[bytes] = []
+    pdf = pypdfium2.PdfDocument(data)
+    for i in range(min(len(pdf), max_pages)):
+        image = pdf[i].render(scale=2).to_pil()
+        buf = io.BytesIO()
+        image.convert("RGB").save(buf, format="JPEG", quality=85)
+        out.append(buf.getvalue())
+    return out
 
 
 def notes_text(pages: list[UploadPage]) -> str:

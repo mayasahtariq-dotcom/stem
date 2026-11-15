@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Debug builds may talk to a test backend over plain HTTP on the local Wi-Fi
+         (scripts/dev_server.py). Release builds keep Android's default (HTTPS only). -->
+    <application android:usesCleartextTraffic="true" />
+</manifest>
