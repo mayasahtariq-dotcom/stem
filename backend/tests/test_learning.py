@@ -29,6 +29,9 @@ def class_course_with_student(api: Any, people: Any) -> tuple[Any, Any, dict[str
     status = make_course(api, teacher, classroom["id"])
     student = people("Asha", ["student"])
     assert student.post("/classrooms/join", {"key": classroom["join_key"]}).status_code == 201
+    # DPDP (M4): lessons need consent; the school has forms on file for this class.
+    consent = teacher.put(f"/classrooms/{classroom['id']}/school-consent", {"enabled": True})
+    assert consent.status_code == 200, consent.text
     r = teacher.post(
         f"/lessons/{status['first_lesson_id']}/publish", {"classroom_id": classroom["id"]}
     )

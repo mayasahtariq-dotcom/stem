@@ -41,6 +41,7 @@ from app.learning import rules
 from app.learning.audio import audio_url
 from app.routers.courses import LessonOut, _question_out, _readable_course
 from app.speech.sarvam import SpeechError
+from app.twin import service as twin
 
 router = APIRouter(tags=["learning"])
 Me = Annotated[CurrentUser, Depends(get_current_user)]
@@ -371,6 +372,35 @@ def home(user: Me, db: UserDb) -> HomeOut:
 # ---- playing a lesson ----------------------------------------------------------------------
 
 
+def require_consent(db: Session, service_db: Session, user_id: str, course: Course) -> None:
+    """DPDP (M4): students need a parent's approval, or a class whose school has collected
+    consent, before starting lessons. Course owners (teachers previewing) aren't students here."""
+    me = db.get(User, uuid.UUID(user_id))
+    if (
+        me is None
+        or "student" not in me.roles
+        or str(course.owner_id) == user_id
+        and not course.is_personal
+    ):
+        return
+    if me.consent_status == "approved":
+        return
+    if me.consent_status != "revoked":
+        school = service_db.scalar(
+            select(func.count())
+            .select_from(Membership)
+            .join(Classroom, Classroom.id == Membership.classroom_id)
+            .where(
+                Membership.student_id == me.id,
+                Membership.status == "active",
+                Classroom.school_consent.is_(True),
+            )
+        )
+        if school:
+            return
+    raise api_error(ErrorCode.CONSENT_REQUIRED)
+
+
 class StartOut(BaseModel):
     lesson: LessonOut
     stats: StatsOut
@@ -398,6 +428,7 @@ def start_lesson(
     background: BackgroundTasks,
 ) -> StartOut:
     lesson, course = _playable_lesson(db, service_db, lesson_id, user.id)
+    require_consent(db, service_db, user.id, course)
     if lesson.generation_status != "ready":
         if lesson.generation_status == "not_started" and course.is_personal:
             # A personal course's next lesson is made when the student reaches it.
@@ -467,7 +498,7 @@ def _hearts_empty(refill_at: datetime | None) -> HTTPException:
 
 
 @router.post("/attempts")
-def submit_attempt(body: AttemptIn, user: Me, db: UserDb) -> AttemptOut:
+def submit_attempt(body: AttemptIn, user: Me, db: UserDb, service_db: ServiceDb) -> AttemptOut:
     question = db.get(QuestionRow, body.question_id)  # RLS: only lessons this user may read
     if question is None:
         raise api_error(ErrorCode.NOT_FOUND)
@@ -499,6 +530,19 @@ def submit_attempt(body: AttemptIn, user: Me, db: UserDb) -> AttemptOut:
         )
     )
     db.flush()
+    lesson = db.get(Lesson, question.lesson_id)
+    if lesson is not None:
+        # The Student Twin learns from every answer (written by the backend only).
+        twin.record_attempt(
+            service_db,
+            student_id=uuid.UUID(user.id),
+            course_id=lesson.course_id,
+            question=question,
+            answer=body.answer,
+            correct=result.correct,
+            retry=body.retry,
+            at=at,
+        )
     return AttemptOut(
         correct=result.correct,
         correct_answer=result.correct_answer,
@@ -672,6 +716,7 @@ def ask_doubt(
     # Note chunks are readable only by the course owner under RLS; the student's access to
     # the course was checked above, so read them with the service session.
     notes = notes_context(services, service_db, course.upload_id, body.text)
+    learner = twin.doubt_context(service_db, sid, course.id, at)
     try:
         result = answer_doubt(
             services,
@@ -681,6 +726,7 @@ def ask_doubt(
             language_mode=me.language_mode if me else "hindi",
             grade=course.grade,
             mode=body.mode,
+            learner=learner,
         )
     except (NeedsReviewError, LLMError) as exc:
         raise api_error(ErrorCode.AI_UNAVAILABLE) from exc

@@ -41,6 +41,8 @@ class User(Base):
         ARRAY(Text), nullable=False, server_default=text("'{}'::text[]")
     )
     language_mode: Mapped[str] = mapped_column(Text, nullable=False, server_default="hindi")
+    # DPDP consent for students (M4): pending until a parent approves or the school confirms.
+    consent_status: Mapped[str] = mapped_column(Text, nullable=False, server_default="pending")
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
@@ -61,6 +63,9 @@ class Classroom(Base):
     join_key: Mapped[str] = mapped_column(Text, nullable=False, unique=True)
     expires_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     allowed_language_modes: Mapped[list[str]] = mapped_column(ARRAY(Text), nullable=False)
+    school_consent: Mapped[bool] = mapped_column(nullable=False, server_default="false")
+    school_consent_by: Mapped[uuid.UUID | None] = mapped_column(UUID(as_uuid=True))
+    school_consent_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
@@ -350,5 +355,103 @@ class AudioCache(Base):
     model: Mapped[str] = mapped_column(Text, nullable=False)
     storage_path: Mapped[str] = mapped_column(Text, nullable=False)
     created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, server_default=func.now()
+    )
+
+
+# ---- M4: parents, consent and the Student Twin ---------------------------------------------
+
+
+class ParentLink(Base):
+    __tablename__ = "parent_links"
+
+    id: Mapped[uuid.UUID] = mapped_column(
+        UUID(as_uuid=True), primary_key=True, server_default=text("gen_random_uuid()")
+    )
+    parent_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("users.id"))
+    student_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("users.id"))
+    status: Mapped[str] = mapped_column(Text, nullable=False, server_default="active")
+    linked_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, server_default=func.now()
+    )
+    consent_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    revoked_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+
+
+class LinkCode(Base):
+    __tablename__ = "link_codes"
+
+    code: Mapped[str] = mapped_column(Text, primary_key=True)
+    student_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("users.id"))
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, server_default=func.now()
+    )
+    expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+    used_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    used_by: Mapped[uuid.UUID | None] = mapped_column(UUID(as_uuid=True))
+
+
+class ConsentRecord(Base):
+    __tablename__ = "consent_records"
+
+    id: Mapped[uuid.UUID] = mapped_column(
+        UUID(as_uuid=True), primary_key=True, server_default=text("gen_random_uuid()")
+    )
+    student_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("users.id"))
+    source: Mapped[str] = mapped_column(Text, nullable=False)
+    parent_id: Mapped[uuid.UUID | None] = mapped_column(UUID(as_uuid=True))
+    classroom_id: Mapped[uuid.UUID | None] = mapped_column(UUID(as_uuid=True))
+    given_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, server_default=func.now()
+    )
+    revoked_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+
+
+class DeletionRequest(Base):
+    __tablename__ = "deletion_requests"
+
+    id: Mapped[uuid.UUID] = mapped_column(
+        UUID(as_uuid=True), primary_key=True, server_default=text("gen_random_uuid()")
+    )
+    student_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), nullable=False)
+    requested_by: Mapped[uuid.UUID | None] = mapped_column(UUID(as_uuid=True))
+    requested_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, server_default=func.now()
+    )
+    completed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+
+
+class TwinConcept(Base):
+    __tablename__ = "twin_concepts"
+
+    student_id: Mapped[uuid.UUID] = mapped_column(
+        UUID(as_uuid=True), ForeignKey("users.id"), primary_key=True
+    )
+    course_id: Mapped[uuid.UUID] = mapped_column(
+        UUID(as_uuid=True), ForeignKey("courses.id"), primary_key=True
+    )
+    kind: Mapped[str] = mapped_column(Text, primary_key=True)
+    key: Mapped[str] = mapped_column(Text, primary_key=True)
+    mastery: Mapped[float] = mapped_column(nullable=False)
+    half_life_days: Mapped[float] = mapped_column(nullable=False)
+    attempts: Mapped[int] = mapped_column(nullable=False, server_default=text("0"))
+    correct: Mapped[int] = mapped_column(nullable=False, server_default=text("0"))
+    last_seen_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    next_review_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+
+
+class TwinConfusion(Base):
+    __tablename__ = "twin_confusions"
+
+    student_id: Mapped[uuid.UUID] = mapped_column(
+        UUID(as_uuid=True), ForeignKey("users.id"), primary_key=True
+    )
+    course_id: Mapped[uuid.UUID] = mapped_column(
+        UUID(as_uuid=True), ForeignKey("courses.id"), primary_key=True
+    )
+    expected_key: Mapped[str] = mapped_column(Text, primary_key=True)
+    chosen_key: Mapped[str] = mapped_column(Text, primary_key=True)
+    count: Mapped[int] = mapped_column(nullable=False, server_default=text("1"))
+    last_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )

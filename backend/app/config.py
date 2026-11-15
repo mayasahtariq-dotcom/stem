@@ -46,6 +46,8 @@ class Settings(BaseSettings):
 
     # ---- Student learning (M3) ----------------------------------------------------------
     doubts_per_day: int = 20
+    # Teacher dashboard numbers are cached per classroom (PRD M4: five minutes). 0 turns it off.
+    dashboard_cache_seconds: int = 300
 
     # ---- Speech (M3 Listen). Sarvam text-to-speech; fake while SARVAM_API_KEY is blank. ----
     use_fake_speech: bool = False

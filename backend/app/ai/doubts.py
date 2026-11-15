@@ -69,6 +69,7 @@ def answer_doubt(
     language_mode: str,
     grade: int,
     mode: str,
+    learner: str = "",
 ) -> DoubtResult:
     prompt = prompts.load("doubt")
     valid_pages = {int(p) for p in _page_numbers(notes)}
@@ -82,6 +83,7 @@ def answer_doubt(
             about=about or "the course",
             notes=notes or "(no notes available)",
             doubt=doubt,
+            learner=learner or "nothing noted yet",
         ),
         DoubtReply,
         Usage(),

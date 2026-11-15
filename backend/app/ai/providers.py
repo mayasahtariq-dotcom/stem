@@ -91,9 +91,11 @@ def build_services(settings: Settings) -> Services:
     )
     from app.ai.pipeline import register_jobs
     from app.learning.audio import register_audio_jobs
+    from app.routers.parents import register_parent_jobs
 
     register_jobs(services)
     register_audio_jobs(services)
+    register_parent_jobs(services)
     return services
 
 

@@ -106,8 +106,10 @@ def wipe(engine: Engine) -> None:
     with engine.begin() as conn:
         conn.execute(
             text(
-                "TRUNCATE audio_cache, doubts, saved_terms, student_stats, lesson_progress,"
-                " answer_attempts, course_assignments, terms, questions, lessons, units, courses,"
+                "TRUNCATE twin_confusions, twin_concepts, deletion_requests, consent_records,"
+                " link_codes, parent_links, audio_cache, doubts, saved_terms, student_stats,"
+                " lesson_progress, answer_attempts, course_assignments, terms, questions, lessons,"
+                " units, courses,"
                 " note_chunks, upload_pages, uploads, join_attempts, memberships, classrooms,"
                 " users, auth.users CASCADE"
             )
@@ -135,6 +137,7 @@ def services(db_settings: Settings, tmp_path: Path) -> Services:
             "local_storage_dir": str(tmp_path / "uploads"),
             "public_base_url": "http://testserver",
             "jobs_inline": True,
+            "dashboard_cache_seconds": 0,
         }
     )
     return build_services(settings)
