@@ -141,3 +141,12 @@ The web app replays answers saved offline. `POST /attempts` and `POST /lessons/{
 - Don't store error responses, so a refused request can be retried.
 - Add `Idempotency-Key` to the CORS allowed headers.
 - Accept attempts that arrive late, after the lesson was started, in the order sent. The app sends a completion only after that lesson's answers.
+
+
+## Teacher analytics and materials (connected modes): please build
+
+The contracts are in `packages/api-client/src/pending-teacher.ts`, and the fakes are in `apps/web/src/mocks/teacher/state.ts`.
+- `GET /teacher/overview` returns `TeacherOverview`, the teacher's non-expired classes.
+- `GET /classrooms/{id}/insights` returns `ClassInsights`. The teacher must own the classroom.
+- `GET /teacher/materials` returns `Material[]`, the teacher's own uploads, with per-page file name and kind, class, and status (draft, processing, review or published).
+- Please add an optional `file_name` to `PageIn` and keep it per page.

@@ -2,7 +2,7 @@ import { http, HttpResponse } from "msw";
 import type { Schemas } from "@mooshala/api-client";
 import { fakeDb, userForToken } from "../fake-db";
 import { fakeNow, lessonById, questionById, removeFakeQuestion } from "../learning/state";
-import { courseById, courseOut, courseSummary, dashboard, lessonSummaryOut, nextId, ownsClassroom, studentDetail, teacherState, UPLOAD_LIMITS, uploadStatus } from "./state";
+import { classInsights, courseById, courseOut, courseSummary, dashboard, lessonSummaryOut, materials, newJoinKey, nextId, ownsClassroom, rosterOf, studentDetail, teacherOverview, teacherState, UPLOAD_LIMITS, uploadStatus } from "./state";
 
 /**
  * Fakes for the teacher endpoints that exist in the backend
@@ -57,6 +57,41 @@ export function makeTeacherHandlers(base: string) {
   };
 
   return [
+    // POST /classrooms exists in the backend (ClassroomCreate -> ClassroomOut).
+    http.post(`${base}/classrooms`, async ({ request }) => {
+      const t = teacher(request);
+      if (t.error) return t.error;
+      const body = (await request.json()) as Schemas["ClassroomCreate"];
+      const name = (body.name ?? "").trim();
+      if (!name || name.length > 80 || !["BI", "CH", "PH"].includes(body.subject) || !Number.isInteger(body.grade) || body.grade < 6 || body.grade > 12) return err(422, "VALIDATION");
+      const modes = body.allowed_language_modes?.length ? body.allowed_language_modes : (["hindi", "kannada"] as ("hindi" | "kannada")[]);
+      const id = nextId("class");
+      const c = { id, name, subject: body.subject, grade: body.grade, join_key: newJoinKey(body.subject, body.grade), teacher_name: t.user.name ?? "", student_count: 0, allowed_language_modes: modes };
+      fakeDb().classrooms.push(c);
+      teacherState().roster[id] = [];
+      teacherState().schoolConsent[id] = false;
+      const out: Schemas["ClassroomOut"] = { id, name, subject: c.subject, grade: c.grade, join_key: c.join_key, expires_at: null, allowed_language_modes: modes, student_count: 0, created_at: new Date(fakeNow()).toISOString() };
+      return json(out, { status: 201 });
+    }),
+
+    // MOCK ONLY (pending contracts in packages/api-client/src/pending-teacher.ts).
+    http.get(`${base}/teacher/overview`, ({ request }) => {
+      const t = teacher(request);
+      if (t.error) return t.error;
+      return json(teacherOverview(t.user.name));
+    }),
+    http.get(`${base}/classrooms/:id/insights`, ({ request, params }) => {
+      const t = teacher(request);
+      if (t.error) return t.error;
+      if (!ownsClassroom(t.user.name, String(params.id))) return err(404, "NOT_FOUND");
+      return json({ ...classInsights(String(params.id)), student_count: rosterOf(String(params.id)).length });
+    }),
+    http.get(`${base}/teacher/materials`, ({ request }) => {
+      const t = teacher(request);
+      if (t.error) return t.error;
+      return json(materials(t.user.id));
+    }),
+
     http.get(`${base}/classrooms/:id/dashboard`, ({ request, params }) => {
       const t = teacher(request);
       if (t.error) return t.error;
@@ -219,7 +254,8 @@ export function makeTeacherHandlers(base: string) {
       teacherState().uploads.set(id, {
         id,
         ownerId: u.id,
-        pages: body.pages.map((p) => ({ kind: p.kind, stored: p.kind === "text" })),
+        pages: body.pages.map((p) => ({ kind: p.kind, stored: p.kind === "text", name: (p as { file_name?: string }).file_name })),
+        createdAt: fakeNow(),
         subject: body.subject ?? "BI",
         grade: body.grade ?? 9,
         classroomId: body.classroom_id ?? null,

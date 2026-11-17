@@ -22,14 +22,14 @@ async function asRavi() {
 describe("teacher overview", () => {
   it("shows this week's tiles, who needs help and weak topics from the dashboard", async () => {
     renderWithProviders(<OverviewRoute />, { services: await asRavi() });
-    expect(await screen.findByText("Class 9-A Science")).toBeInTheDocument();
-    expect(screen.getByText("Active this week")).toBeInTheDocument();
+    expect(await screen.findByText("Active this week")).toBeInTheDocument();
+    expect(screen.getAllByText("Class 9-A Science").length).toBeGreaterThan(0);
     expect(screen.getByTestId("join-key")).toHaveTextContent(DEMO.validKey);
     // Dev (overdue, low accuracy) is listed before the idle students.
     const help = screen.getByText("Needs help").closest("div")!;
     const names = within(help).getAllByRole("button").map((b) => b.textContent);
     expect(names[0]).toContain("Dev");
-    expect(screen.getByText("Mitochondria")).toBeInTheDocument();
+    expect(screen.getAllByText("Mitochondria").length).toBeGreaterThan(0);
     fireEvent.click(within(help).getAllByRole("button")[0]!);
     expect(router.push).toHaveBeenCalledWith("/teacher/students/s-dev");
   });

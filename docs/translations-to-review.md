@@ -1172,3 +1172,67 @@ File: `apps/web/messages/{hi,kn}.json` (keys are `namespace.key`).
 | lesson.savedOfflineTitle | Saved on this phone | इस फ़ोन पर सुरक्षित | ಈ ಫೋನ್‌ನಲ್ಲಿ ಉಳಿಸಲಾಗಿದೆ | [ ] |
 | lesson.savedOfflineBody | You're offline. We'll check this answer and add your XP when you're back online. | आप ऑफ़लाइन हैं। इंटरनेट आने पर यह जवाब जाँचकर XP जोड़ देंगे। | ನೀವು ಆಫ್‌ಲೈನ್‌ನಲ್ಲಿದ್ದೀರಿ. ಇಂಟರ್ನೆಟ್ ಬಂದಾಗ ಈ ಉತ್ತರ ಪರಿಶೀಲಿಸಿ XP ಸೇರಿಸುತ್ತೇವೆ. | [ ] |
 | lesson.savedOfflineDone | Lesson finished offline. {n} answers are saved on this phone; your XP and rewards arrive when you're back online. | पाठ ऑफ़लाइन पूरा हुआ। {n} जवाब इस फ़ोन पर सुरक्षित हैं; इंटरनेट आने पर XP और इनाम मिलेंगे। | ಪಾಠ ಆಫ್‌ಲೈನ್‌ನಲ್ಲಿ ಮುಗಿಯಿತು. {n} ಉತ್ತರಗಳು ಈ ಫೋನ್‌ನಲ್ಲಿ ಉಳಿದಿವೆ; ಇಂಟರ್ನೆಟ್ ಬಂದಾಗ XP ಮತ್ತು ಬಹುಮಾನ ಸಿಗುತ್ತವೆ. | [ ] |
+
+## Connected modes (classes, analytics, materials)
+
+| Key | English | Hindi | Kannada | Reviewed |
+|---|---|---|---|---|
+| nav.classes | Classes | कक्षाएँ | ತರಗತಿಗಳು | [ ] |
+| role.studentHint | Learn science on your own 3D farm: lessons, quizzes, XP and streaks. | अपने 3D खेत पर विज्ञान सीखो: पाठ, क्विज़, XP और स्ट्रीक। | ನಿಮ್ಮ 3D ತೋಟದಲ್ಲಿ ವಿಜ್ಞಾನ ಕಲಿಯಿರಿ: ಪಾಠ, ರಸಪ್ರಶ್ನೆ, XP ಮತ್ತು ಸ್ಟ್ರೀಕ್. | [ ] |
+| role.teacherHint | Create classes, share a join code, upload notes and see how every student is doing. | कक्षा बनाइए, जुड़ने का कोड दीजिए, नोट्स अपलोड कीजिए और हर छात्र की प्रगति देखिए। | ತರಗತಿ ರಚಿಸಿ, ಸೇರುವ ಕೋಡ್ ಹಂಚಿ, ಟಿಪ್ಪಣಿ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ ಮತ್ತು ಪ್ರತಿ ವಿದ್ಯಾರ್ಥಿಯ ಪ್ರಗತಿ ನೋಡಿ. | [ ] |
+| role.parentHint | Connect with your child's code and follow their learning, strengths and what to practise. | बच्चे के कोड से जुड़िए और उसकी पढ़ाई, ताकत और अभ्यास की बातें देखिए। | ಮಗುವಿನ ಕೋಡ್‌ನಿಂದ ಸಂಪರ್ಕಿಸಿ ಮತ್ತು ಅವರ ಕಲಿಕೆ, ಸಾಮರ್ಥ್ಯ ಮತ್ತು ಅಭ್ಯಾಸ ನೋಡಿ. | [ ] |
+| myClasses.title | My classes | मेरी कक्षाएँ | ನನ್ನ ತರಗತಿಗಳು | [ ] |
+| myClasses.none | You haven't joined a class yet. Ask your teacher for the class code. | अभी किसी कक्षा में नहीं जुड़े। अपने शिक्षक से कक्षा कोड माँगो। | ಇನ್ನೂ ಯಾವುದೇ ತರಗತಿಗೆ ಸೇರಿಲ್ಲ. ಶಿಕ್ಷಕರಿಂದ ತರಗತಿ ಕೋಡ್ ಕೇಳಿ. | [ ] |
+| myClasses.join | Join a class with a code | कोड से कक्षा में जुड़ो | ಕೋಡ್ ಬಳಸಿ ತರಗತಿಗೆ ಸೇರಿ | [ ] |
+| classes.title | Classes | कक्षाएँ | ತರಗತಿಗಳು | [ ] |
+| classes.newClass | Create a class | नई कक्षा बनाइए | ಹೊಸ ತರಗತಿ ರಚಿಸಿ | [ ] |
+| classes.empty | No classes yet. Create one to get a join code for your students. | अभी कोई कक्षा नहीं। छात्रों के लिए कोड पाने को एक कक्षा बनाइए। | ಇನ್ನೂ ತರಗತಿ ಇಲ್ಲ. ವಿದ್ಯಾರ್ಥಿಗಳ ಕೋಡ್‌ಗಾಗಿ ಒಂದು ರಚಿಸಿ. | [ ] |
+| classes.joinCode | Class join code | कक्षा में जुड़ने का कोड | ತರಗತಿ ಸೇರುವ ಕೋಡ್ | [ ] |
+| classes.joinCodeHint | Students type this in Student mode (Profile, Join a class). It's different from a parent's link code. | छात्र इसे छात्र मोड में डालते हैं (प्रोफ़ाइल, कक्षा में जुड़ो)। यह अभिभावक कोड से अलग है। | ವಿದ್ಯಾರ್ಥಿಗಳು ಇದನ್ನು ವಿದ್ಯಾರ್ಥಿ ಮೋಡ್‌ನಲ್ಲಿ ಹಾಕುತ್ತಾರೆ (ಪ್ರೊಫೈಲ್, ತರಗತಿಗೆ ಸೇರಿ). ಇದು ಪೋಷಕರ ಕೋಡ್‌ಗಿಂತ ಬೇರೆ. | [ ] |
+| classes.copy | Copy | कॉपी | ನಕಲಿಸಿ | [ ] |
+| classes.copied | Copied {code} | {code} कॉपी हुआ | {code} ನಕಲಿಸಲಾಗಿದೆ | [ ] |
+| classes.expired | Expired | समाप्त | ಅವಧಿ ಮುಗಿದಿದೆ | [ ] |
+| classes.studentsN | {n} students joined | {n} छात्र जुड़े | {n} ವಿದ್ಯಾರ್ಥಿಗಳು ಸೇರಿದ್ದಾರೆ | [ ] |
+| classes.open | Open class | कक्षा खोलिए | ತರಗತಿ ತೆರೆಯಿರಿ | [ ] |
+| classes.className | Class name | कक्षा का नाम | ತರಗತಿಯ ಹೆಸರು | [ ] |
+| classes.nameMissing | Give the class a name. | कक्षा का नाम लिखिए। | ತರಗತಿಗೆ ಹೆಸರು ನೀಡಿ. | [ ] |
+| classes.languages | Languages | भाषाएँ | ಭಾಷೆಗಳು | [ ] |
+| classes.hindi | Hindi | हिन्दी | ಹಿಂದಿ | [ ] |
+| classes.kannada | Kannada | कन्नड़ | ಕನ್ನಡ | [ ] |
+| classes.create | Create class | कक्षा बनाइए | ತರಗತಿ ರಚಿಸಿ | [ ] |
+| classes.createdTitle | {name} is ready | {name} तैयार है | {name} ಸಿದ್ಧವಾಗಿದೆ | [ ] |
+| classes.createdToast | Class created: {name} | कक्षा बनी: {name} | ತರಗತಿ ರಚಿಸಲಾಗಿದೆ: {name} | [ ] |
+| classes.backToClasses | All classes | सभी कक्षाएँ | ಎಲ್ಲಾ ತರಗತಿಗಳು | [ ] |
+| classes.classScore | Class quiz score | कक्षा का क्विज़ स्कोर | ತರಗತಿಯ ರಸಪ್ರಶ್ನೆ ಅಂಕ | [ ] |
+| classes.completion | Lessons completed | पूरे हुए पाठ | ಪೂರ್ಣಗೊಂಡ ಪಾಠಗಳು | [ ] |
+| classes.joined | Students who joined | जुड़े हुए छात्र | ಸೇರಿದ ವಿದ್ಯಾರ್ಥಿಗಳು | [ ] |
+| classes.noneJoined | Nobody has joined yet. Share the join code. | अभी कोई नहीं जुड़ा। कोड साझा कीजिए। | ಇನ್ನೂ ಯಾರೂ ಸೇರಿಲ್ಲ. ಕೋಡ್ ಹಂಚಿ. | [ ] |
+| classes.trend | Quiz score, last 6 weeks | क्विज़ स्कोर, पिछले 6 हफ़्ते | ರಸಪ್ರಶ್ನೆ ಅಂಕ, ಕಳೆದ 6 ವಾರ | [ ] |
+| classes.noData | No answers yet. | अभी कोई जवाब नहीं। | ಇನ್ನೂ ಉತ್ತರಗಳಿಲ್ಲ. | [ ] |
+| classes.topics | By chapter | अध्याय के अनुसार | ಅಧ್ಯಾಯದ ಪ್ರಕಾರ | [ ] |
+| classes.missed | Most often answered wrong | सबसे ज़्यादा गलत हुए सवाल | ಹೆಚ್ಚು ತಪ್ಪಾದ ಪ್ರಶ್ನೆಗಳು | [ ] |
+| classes.noMissed | No tricky questions yet. | अभी कोई कठिन सवाल नहीं। | ಇನ್ನೂ ಕಠಿಣ ಪ್ರಶ್ನೆಗಳಿಲ್ಲ. | [ ] |
+| classes.missedRate | {pct}% got this wrong ({n} answers) | {pct}% ने गलत किया ({n} जवाब) | {pct}% ತಪ್ಪು ಮಾಡಿದ್ದಾರೆ ({n} ಉತ್ತರ) | [ ] |
+| allClasses.title | All your classes | आपकी सभी कक्षाएँ | ನಿಮ್ಮ ಎಲ್ಲಾ ತರಗತಿಗಳು | [ ] |
+| allClasses.classes | Classes | कक्षाएँ | ತರಗತಿಗಳು | [ ] |
+| allClasses.students | Students | छात्र | ವಿದ್ಯಾರ್ಥಿಗಳು | [ ] |
+| allClasses.avgScore | Average quiz score | औसत क्विज़ स्कोर | ಸರಾಸರಿ ರಸಪ್ರಶ್ನೆ ಅಂಕ | [ ] |
+| allClasses.completion | Lessons completed | पूरे हुए पाठ | ಪೂರ್ಣಗೊಂಡ ಪಾಠಗಳು | [ ] |
+| allClasses.byClass | Score by class | कक्षा के अनुसार स्कोर | ತರಗತಿಯ ಪ್ರಕಾರ ಅಂಕ | [ ] |
+| allClasses.bySubject | By subject | विषय के अनुसार | ವಿಷಯದ ಪ್ರಕಾರ | [ ] |
+| allClasses.doingWell | Doing well | अच्छा कर रहे हैं | ಚೆನ್ನಾಗಿ ಮಾಡುತ್ತಿದ್ದಾರೆ | [ ] |
+| allClasses.needsAttention | Need attention | ध्यान चाहिए | ಗಮನ ಬೇಕು | [ ] |
+| allClasses.recent | Recent activity | हाल की गतिविधि | ಇತ್ತೀಚಿನ ಚಟುವಟಿಕೆ | [ ] |
+| allClasses.noneYet | Nothing yet. | अभी कुछ नहीं। | ಇನ್ನೂ ಏನೂ ಇಲ್ಲ. | [ ] |
+| allClasses.finished | {name} finished “{lesson}” | {name} ने “{lesson}” पूरा किया | {name} “{lesson}” ಮುಗಿಸಿದರು | [ ] |
+| materials.title | Uploaded materials | अपलोड की गई सामग्री | ಅಪ್‌ಲೋಡ್ ಮಾಡಿದ ಸಾಮಗ್ರಿ | [ ] |
+| materials.upload | Upload notes, PDF or text | नोट्स, PDF या टेक्स्ट अपलोड कीजिए | ಟಿಪ್ಪಣಿ, PDF ಅಥವಾ ಪಠ್ಯ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ | [ ] |
+| materials.empty | Nothing uploaded yet. Students only see material after you review and publish it. | अभी कुछ अपलोड नहीं। जाँचकर प्रकाशित करने के बाद ही छात्र देखते हैं। | ಇನ್ನೂ ಏನೂ ಅಪ್‌ಲೋಡ್ ಆಗಿಲ್ಲ. ಪರಿಶೀಲಿಸಿ ಪ್ರಕಟಿಸಿದ ನಂತರವೇ ವಿದ್ಯಾರ್ಥಿಗಳು ನೋಡುತ್ತಾರೆ. | [ ] |
+| materials.kind_photo | Handwritten photo | हाथ से लिखे नोट्स की फ़ोटो | ಕೈಬರಹದ ಫೋಟೋ | [ ] |
+| materials.kind_pdf | PDF | PDF | PDF | [ ] |
+| materials.kind_text | Text | टेक्स्ट | ಪಠ್ಯ | [ ] |
+| materials.status_draft | Not started | शुरू नहीं | ಆರಂಭವಾಗಿಲ್ಲ | [ ] |
+| materials.status_processing | Making lessons | पाठ बन रहे हैं | ಪಾಠ ತಯಾರಾಗುತ್ತಿದೆ | [ ] |
+| materials.status_review | Waiting for your review | आपकी जाँच बाकी | ನಿಮ್ಮ ಪರಿಶೀಲನೆಗೆ ಕಾಯುತ್ತಿದೆ | [ ] |
+| materials.status_published | Published | प्रकाशित | ಪ್ರಕಟಿಸಲಾಗಿದೆ | [ ] |
+| materials.review | Review | जाँचिए | ಪರಿಶೀಲಿಸಿ | [ ] |

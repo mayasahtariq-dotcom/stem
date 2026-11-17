@@ -35,7 +35,8 @@ export interface FakeCourse {
 export interface FakeUpload {
   id: string;
   ownerId: string;
-  pages: { kind: "photo" | "pdf" | "text"; stored: boolean }[];
+  pages: { kind: "photo" | "pdf" | "text"; stored: boolean; name?: string }[];
+  createdAt?: number;
   subject: "BI" | "CH" | "PH";
   grade: number;
   classroomId: string | null;
@@ -212,9 +213,156 @@ export function studentRow(s: RosterStudent): Schemas["StudentRow"] {
   };
 }
 
+/**
+ * Everyone in a class: the seeded roster plus real accounts that joined with
+ * the class key, so a student who joins shows up for the teacher at once.
+ */
+export function rosterOf(classroomId: string): RosterStudent[] {
+  const out = [...(st.roster[classroomId] ?? [])];
+  const db = fakeDb();
+  for (const [userId, ids] of db.memberships) {
+    if (!ids.has(classroomId) || out.some((r) => r.id === userId)) continue;
+    const u = [...db.users.values()].find((x) => x.id === userId);
+    out.push({ id: userId, name: u?.name ?? "Student", joinedAt: new Date(fakeNow()).toISOString() });
+  }
+  return out;
+}
+
+/** Join keys look like BI09-K4X2: subject, grade, four letters/digits; unique. */
+export function newJoinKey(subject: string, grade: number): string {
+  const ALPHA = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
+  const taken = new Set(fakeDb().classrooms.map((c) => c.join_key));
+  for (let n = st.seq * 7919; ; n += 104729) {
+    let tail = "";
+    for (let k = n, i = 0; i < 4; i++, k = Math.floor(k / ALPHA.length) + i * 13) tail += ALPHA[k % ALPHA.length];
+    const key = `${subject}${String(grade).padStart(2, "0")}-${tail}`;
+    if (!taken.has(key)) return key;
+  }
+}
+
+/** Class-level analytics the dashboard API doesn't cover (pending contract: TeacherInsights). */
+export function classInsights(classroomId: string) {
+  const roster = rosterOf(classroomId);
+  const rows = roster.map(studentRow);
+  const lessons = fakeLessons(COURSE_ID);
+  // Most-missed questions: real first-try answers of members, plus the seeded class's history.
+  const tally = new Map<string, { wrong: number; total: number }>();
+  for (const r of roster) {
+    if (r.seed) continue;
+    for (const a of learner(r.id).attempts.filter((x) => x.firstTry)) {
+      const t = tally.get(a.questionId) ?? { wrong: 0, total: 0 };
+      t.total++;
+      if (!a.correct) t.wrong++;
+      tally.set(a.questionId, t);
+    }
+  }
+  if (roster.some((r) => r.seed)) {
+    for (const [qid, wrong, total] of [["q-2-1", 9, 21], ["q-3-2", 7, 18], ["q-2-3", 5, 19]] as const) {
+      const t = tally.get(qid) ?? { wrong: 0, total: 0 };
+      tally.set(qid, { wrong: t.wrong + wrong, total: t.total + total });
+    }
+  }
+  const prompt = (qid: string) => {
+    for (const l of lessons) {
+      const q = l.questions.find((x) => x.id === qid);
+      if (q) return { prompt: (q.content.prompt ?? q.content.statement) as Tri, lesson: l.title };
+    }
+    return null;
+  };
+  const missed = [...tally.entries()]
+    .filter(([, t]) => t.wrong > 0)
+    .map(([qid, t]) => ({ question_id: qid, ...prompt(qid)!, wrong_rate: Math.round((t.wrong / t.total) * 100) / 100, answers: t.total }))
+    .filter((m) => m.prompt)
+    .sort((a, b) => b.wrong_rate - a.wrong_rate)
+    .slice(0, 5);
+  const withAcc = rows.filter((r) => r.accuracy !== null);
+  const acc = withAcc.length ? withAcc.reduce((n, r) => n + r.accuracy!, 0) / withAcc.length : null;
+  const done = roster.reduce((n, r) => n + studentStats(r).done, 0);
+  return {
+    classroom_id: classroomId,
+    accuracy: acc === null ? null : Math.round(acc * 100) / 100,
+    completion: roster.length && lessons.length ? Math.round((done / (roster.length * lessons.length)) * 100) / 100 : 0,
+    // Weekly class accuracy, oldest first (seeded history leading to this week's real number).
+    trend: acc === null ? [] : [-0.12, -0.08, -0.09, -0.04, -0.02, 0].map((d, i) => ({ week: i - 5, accuracy: Math.max(0, Math.min(1, Math.round((acc + d) * 100) / 100)) })),
+    topics: UNITS.map((u, i) => ({ name: u.title, accuracy: acc === null ? null : Math.max(0, Math.min(1, Math.round((acc + [0.06, -0.09, -0.14][i % 3]!) * 100) / 100)) })),
+    doing_well: rows.filter((r) => (r.accuracy ?? 0) >= 0.8).sort((a, b) => (b.accuracy ?? 0) - (a.accuracy ?? 0)).slice(0, 5),
+    needs_attention: rows.filter((r) => r.behind || r.idle).slice(0, 5),
+    missed,
+  };
+}
+
+/** Recent things students did (completed lessons and answers), newest first. */
+export function recentActivity(classroomIds: string[]) {
+  const out: { student: string; kind: "lesson" | "answers"; title: Tri; accuracy: number | null; at: string }[] = [];
+  const seen = new Set<string>();
+  for (const cid of classroomIds) {
+    for (const r of rosterOf(cid)) {
+      if (seen.has(r.id)) continue;
+      seen.add(r.id);
+      if (r.seed) {
+        if (r.seed.idleDays > 3) continue;
+        const l = fakeLessons(COURSE_ID)[Math.max(0, r.seed.done - 1)];
+        if (l) out.push({ student: r.name, kind: "lesson", title: l.title, accuracy: r.seed.accuracy, at: new Date(fakeNow() - (r.seed.idleDays * 24 + 3 + r.name.length) * 3_600_000).toISOString() });
+        continue;
+      }
+      const l = learner(r.id);
+      for (const [lessonId, p] of l.progress) {
+        const lesson = fakeLessons(COURSE_ID).find((x) => x.id === lessonId) ?? allFakeLessons().find((x) => x.id === lessonId);
+        if (!lesson) continue;
+        if (p.completedAt) out.push({ student: r.name, kind: "lesson", title: lesson.title, accuracy: p.bestAccuracy, at: new Date(p.completedAt).toISOString() });
+      }
+    }
+  }
+  return out.sort((a, b) => b.at.localeCompare(a.at)).slice(0, 8);
+}
+
+/** The teacher's whole picture across classes (pending contract: TeacherOverview). */
+export function teacherOverview(teacherName: string | null) {
+  const classes = fakeDb().classrooms.filter((c) => c.teacher_name === teacherName && !c.expired);
+  const per = classes.map((c) => ({ c, ins: classInsights(c.id), roster: rosterOf(c.id) }));
+  const students = new Set(per.flatMap((p) => p.roster.map((r) => r.id)));
+  const accs = per.map((p) => p.ins.accuracy).filter((a): a is number => a !== null);
+  return {
+    class_count: classes.length,
+    student_count: students.size,
+    accuracy: accs.length ? Math.round((accs.reduce((a, b) => a + b, 0) / accs.length) * 100) / 100 : null,
+    completion: per.length ? Math.round((per.reduce((n, p) => n + p.ins.completion, 0) / per.length) * 100) / 100 : 0,
+    classes: per.map((p) => ({ id: p.c.id, name: p.c.name, subject: p.c.subject, grade: p.c.grade, join_key: p.c.join_key, student_count: p.roster.length, accuracy: p.ins.accuracy, completion: p.ins.completion })),
+    subjects: (["BI", "CH", "PH"] as const)
+      .map((sub) => {
+        const xs = per.filter((p) => p.c.subject === sub && p.ins.accuracy !== null);
+        return { subject: sub, accuracy: xs.length ? Math.round((xs.reduce((n, p) => n + p.ins.accuracy!, 0) / xs.length) * 100) / 100 : null, classes: per.filter((p) => p.c.subject === sub).length };
+      })
+      .filter((x) => x.classes > 0),
+    doing_well: per.flatMap((p) => p.ins.doing_well).slice(0, 5),
+    needs_attention: per.flatMap((p) => p.ins.needs_attention).slice(0, 5),
+    recent: recentActivity(classes.map((c) => c.id)),
+  };
+}
+
+/** Uploaded materials with file names and where they stand (pending contract: Material). */
+export function materials(ownerId: string) {
+  return [...st.uploads.values()]
+    .filter((u) => u.ownerId === ownerId)
+    .map((u) => {
+      const course = u.courseId ? courseById(u.courseId) : null;
+      const cls = u.classroomId ? fakeDb().classrooms.find((c) => c.id === u.classroomId) : null;
+      return {
+        id: u.id,
+        files: u.pages.map((p, i) => ({ name: p.name ?? `Page ${i + 1}`, kind: p.kind })),
+        classroom: cls ? cls.name : null,
+        subject: u.subject,
+        course_id: course?.id ?? null,
+        status: course ? (course.status === "published" ? "published" : "review") : u.startedAt ? "processing" : "draft",
+        created_at: new Date(u.createdAt ?? fakeNow()).toISOString(),
+      };
+    })
+    .sort((a, b) => b.created_at.localeCompare(a.created_at));
+}
+
 export function dashboard(classroomId: string): Schemas["DashboardOut"] {
   const c = fakeDb().classrooms.find((x) => x.id === classroomId)!;
-  const students = (st.roster[classroomId] ?? []).map(studentRow);
+  const students = rosterOf(classroomId).map(studentRow);
   const withAcc = students.filter((s) => s.accuracy !== null);
   return {
     classroom_id: c.id,
@@ -240,7 +388,7 @@ export function dashboard(classroomId: string): Schemas["DashboardOut"] {
 }
 
 export function studentDetail(classroomId: string, studentId: string): Schemas["StudentDetailOut"] | null {
-  const s = (st.roster[classroomId] ?? []).find((x) => x.id === studentId);
+  const s = rosterOf(classroomId).find((x) => x.id === studentId);
   if (!s) return null;
   const x = studentStats(s);
   const real = !s.seed ? learner(s.id) : null;

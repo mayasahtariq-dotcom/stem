@@ -3,7 +3,7 @@
  * pages; photos (JPG) up to 12 MB, PDFs up to 10 MB; typed text can't be empty.
  */
 export const UPLOAD_RULES = { maxPages: 10, photoBytes: 12 * 1024 * 1024, pdfBytes: 10 * 1024 * 1024 };
-export const ACCEPT = "image/jpeg,application/pdf";
+export const ACCEPT = "image/jpeg,application/pdf,text/plain,.txt";
 
 export type PageKind = "photo" | "pdf" | "text";
 
@@ -23,6 +23,8 @@ export type PageProblem = "wrongType" | "tooLarge" | "emptyText";
 export function kindForFile(file: Pick<File, "type" | "name">): PageKind | null {
   if (file.type === "image/jpeg" || /\.jpe?g$/i.test(file.name)) return "photo";
   if (file.type === "application/pdf" || /\.pdf$/i.test(file.name)) return "pdf";
+  // A text document becomes a typed page (its text is read in the browser).
+  if (file.type === "text/plain" || /\.txt$/i.test(file.name)) return "text";
   return null;
 }
 

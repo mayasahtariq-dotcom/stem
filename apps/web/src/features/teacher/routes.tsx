@@ -26,6 +26,11 @@ import { CourseDetailScreen } from "./CourseDetailScreen";
 import { CoursesScreen } from "./CoursesScreen";
 import { LessonReviewScreen } from "./LessonReviewScreen";
 import { OverviewScreen } from "./OverviewScreen";
+import { AllClassesPanel, MaterialsPanel } from "./OverviewPanels";
+import { ClassDetailScreen, ClassesScreen } from "./ClassesScreen";
+import { useClassInsights, useCreateClass, useMaterials, useTeacherOverview } from "./insights-api";
+import { useClassStore } from "./class-store";
+import type { Schemas } from "@mooshala/api-client";
 import { optionLabels, publishBlock, reviewItems } from "./review";
 import { StudentDetailScreen } from "./StudentDetailScreen";
 import { StudentsScreen } from "./StudentsScreen";
@@ -46,16 +51,109 @@ export function OverviewRoute() {
   const { classes, classId } = useSelectedClass();
   const dash = useDashboard(classId);
   const consent = useSchoolConsent(classId);
+  const all = useTeacherOverview();
+  const locale = useLocale();
   return (
-    <OverviewScreen
-      data={dash.data}
+    <>
+      {classes.data && classes.data.length > 0 && (
+        <AllClassesPanel
+          data={all.data}
+          loading={all.isLoading}
+          error={all.error}
+          onRetry={() => void all.refetch()}
+          formatTime={(iso) =>
+            new Intl.DateTimeFormat(locale === "kn" ? "kn-IN" : "hi-IN", {
+              day: "numeric",
+              month: "short",
+              hour: "numeric",
+              minute: "2-digit",
+              timeZone: "Asia/Kolkata",
+            }).format(new Date(iso))
+          }
+        />
+      )}
+      <OverviewScreen
+        data={dash.data}
+        loading={classes.isLoading || dash.isLoading}
+        error={classes.error ?? dash.error}
+        noClasses={classes.data?.length === 0}
+        consentSaving={consent.isPending}
+        onToggleConsent={(enabled) =>
+          consent.mutate(enabled, {
+            onSuccess: () => toast("success", t(enabled ? "consentSavedOn" : "consentSavedOff")),
+            onError,
+          })
+        }
+        onOpenStudent={(id) => router.push(`/teacher/students/${id}`)}
+        onRetry={() => void (classes.error ? classes.refetch() : dash.refetch())}
+      />
+    </>
+  );
+}
+
+async function copyCode(code: string, done: () => void) {
+  try {
+    await navigator.clipboard.writeText(code);
+  } catch {
+    /* clipboard blocked: the code is on screen to read out */
+  }
+  done();
+}
+
+export function ClassesRoute() {
+  const t = useBilingual("classes");
+  const onError = useErrorToast();
+  const { classes } = useSelectedClass();
+  const create = useCreateClass();
+  const setClassId = useClassStore((s) => s.setClassId);
+  const [created, setCreated] = useState<Schemas["ClassroomOut"] | null>(null);
+  return (
+    <ClassesScreen
+      classes={classes.data}
+      loading={classes.isLoading}
+      error={classes.error}
+      onRetry={() => void classes.refetch()}
+      creating={create.isPending}
+      created={created}
+      onCloseCreated={() => setCreated(null)}
+      onCreate={(c) =>
+        create.mutate(c, {
+          onSuccess: (out) => {
+            setCreated(out);
+            setClassId(out.id);
+            toast("success", t("createdToast", { name: out.name }));
+          },
+          onError,
+        })
+      }
+      onCopy={(code) => void copyCode(code, () => toast("success", t("copied", { code })))}
+    />
+  );
+}
+
+export function ClassDetailRoute({ classId }: { classId: string }) {
+  const t = useBilingual("classes");
+  const router = useRouter();
+  const { classes } = useSelectedClass();
+  const setClassId = useClassStore((s) => s.setClassId);
+  const dash = useDashboard(classId);
+  const insights = useClassInsights(classId);
+  const classroom = classes.data?.find((c) => c.id === classId) ?? null;
+  return (
+    <ClassDetailScreen
+      classroom={classroom}
+      insights={insights.data}
+      students={dash.data?.students}
       loading={classes.isLoading || dash.isLoading}
-      error={classes.error ?? dash.error}
-      noClasses={classes.data?.length === 0}
-      consentSaving={consent.isPending}
-      onToggleConsent={(enabled) => consent.mutate(enabled, { onSuccess: () => toast("success", t(enabled ? "consentSavedOn" : "consentSavedOff")), onError })}
-      onOpenStudent={(id) => router.push(`/teacher/students/${id}`)}
-      onRetry={() => void (classes.error ? classes.refetch() : dash.refetch())}
+      error={
+        classes.error ?? dash.error ?? (classes.data && !classroom ? new Error("NOT_FOUND") : null)
+      }
+      onRetry={() => void (classes.refetch(), dash.refetch(), insights.refetch())}
+      onCopy={(code) => void copyCode(code, () => toast("success", t("copied", { code })))}
+      onOpenStudent={(id) => {
+        setClassId(classId);
+        router.push(`/teacher/students/${id}`);
+      }}
     />
   );
 }
@@ -97,14 +195,36 @@ export function StudentDetailRoute({ studentId }: { studentId: string }) {
       error={classes.error ?? detail.error}
       onBack={() => router.push("/teacher/students")}
       onRetry={() => void detail.refetch()}
-      formatDate={(iso) => new Intl.DateTimeFormat(locale === "kn" ? "kn-IN" : "hi-IN", { day: "numeric", month: "short", timeZone: "Asia/Kolkata" }).format(new Date(iso))}
+      formatDate={(iso) =>
+        new Intl.DateTimeFormat(locale === "kn" ? "kn-IN" : "hi-IN", {
+          day: "numeric",
+          month: "short",
+          timeZone: "Asia/Kolkata",
+        }).format(new Date(iso))
+      }
     />
   );
 }
 
 export function CoursesRoute() {
   const courses = useCourses();
-  return <CoursesScreen courses={courses.data} loading={courses.isLoading} error={courses.error} onRetry={() => void courses.refetch()} />;
+  const materials = useMaterials();
+  return (
+    <>
+      <MaterialsPanel
+        items={materials.data}
+        loading={materials.isLoading}
+        error={materials.error}
+        onRetry={() => void materials.refetch()}
+      />
+      <CoursesScreen
+        courses={courses.data}
+        loading={courses.isLoading}
+        error={courses.error}
+        onRetry={() => void courses.refetch()}
+      />
+    </>
+  );
 }
 
 export function CourseDetailRoute({ courseId }: { courseId: string }) {
@@ -126,12 +246,23 @@ export function CourseDetailRoute({ courseId }: { courseId: string }) {
       renaming={rename.isPending}
       onPublish={(lessonId) => {
         if (publish.isPending) return; // one publish at a time: no double taps
-        publish.mutate({ lessonId, classroomId: course.data?.is_personal ? null : classId || null }, { onSuccess: () => toast("success", t("published")), onError });
+        publish.mutate(
+          { lessonId, classroomId: course.data?.is_personal ? null : classId || null },
+          { onSuccess: () => toast("success", t("published")), onError },
+        );
       }}
-      onAssign={(ids, dueAt) => assign.mutate({ classroom_ids: ids, due_at: dueAt }, { onSuccess: () => toast("success", t("assigned")), onError })}
+      onAssign={(ids, dueAt) =>
+        assign.mutate(
+          { classroom_ids: ids, due_at: dueAt },
+          { onSuccess: () => toast("success", t("assigned")), onError },
+        )
+      }
       onRename={(en) => {
         const cur = (course.data?.title ?? {}) as Partial<Tri>;
-        rename.mutate({ en, hi: cur.en === en ? (cur.hi ?? en) : en, kn: cur.en === en ? (cur.kn ?? en) : en }, { onError });
+        rename.mutate(
+          { en, hi: cur.en === en ? (cur.hi ?? en) : en, kn: cur.en === en ? (cur.kn ?? en) : en },
+          { onError },
+        );
       }}
       onRetry={() => void course.refetch()}
     />
@@ -149,7 +280,13 @@ export function LessonReviewRoute({ courseId, lessonId }: { courseId: string; le
   const regen = useRegenerateQuestion(lessonId, courseId);
   const publish = usePublishLesson(courseId);
   const terms = (lesson.data?.terms ?? {}) as TermMap;
-  const busyId = save.isPending ? save.variables.id : reject.isPending ? reject.variables : regen.isPending ? regen.variables : null;
+  const busyId = save.isPending
+    ? save.variables.id
+    : reject.isPending
+      ? reject.variables
+      : regen.isPending
+        ? regen.variables
+        : null;
   return (
     <LessonReviewScreen
       courseId={courseId}
@@ -172,12 +309,27 @@ export function LessonReviewRoute({ courseId, lessonId }: { courseId: string; le
           return false;
         }
       }}
-      onApprove={(item) => save.mutate({ id: item.id, question: item.content }, { onSuccess: () => toast("success", t("questionApproved")), onError })}
-      onReject={(item) => reject.mutate(item.id, { onSuccess: () => toast("info", t("questionRejected")), onError })}
-      onRegenerate={(item) => regen.mutate(item.id, { onSuccess: () => toast("success", t("questionRegenerated")), onError })}
+      onApprove={(item) =>
+        save.mutate(
+          { id: item.id, question: item.content },
+          { onSuccess: () => toast("success", t("questionApproved")), onError },
+        )
+      }
+      onReject={(item) =>
+        reject.mutate(item.id, { onSuccess: () => toast("info", t("questionRejected")), onError })
+      }
+      onRegenerate={(item) =>
+        regen.mutate(item.id, {
+          onSuccess: () => toast("success", t("questionRegenerated")),
+          onError,
+        })
+      }
       onPublish={() => {
         if (publish.isPending || lesson.data?.published) return;
-        publish.mutate({ lessonId, classroomId: course.data?.is_personal ? null : classId || null }, { onSuccess: () => toast("success", t("published")), onError });
+        publish.mutate(
+          { lessonId, classroomId: course.data?.is_personal ? null : classId || null },
+          { onSuccess: () => toast("success", t("published")), onError },
+        );
       }}
       onRetry={() => void lesson.refetch()}
     />
@@ -193,7 +345,11 @@ export function UploadRoute() {
   const [pages, setPages] = useState<PageDraft[]>([]);
   const [typed, setTyped] = useState("");
   const [meta, setMeta] = useState<UploadMeta | null>(null);
-  const current: UploadMeta = meta ?? { subject: classes.data?.find((c) => c.id === classId)?.subject ?? "BI", grade: classes.data?.find((c) => c.id === classId)?.grade ?? 9, classroomId: classId || null };
+  const current: UploadMeta = meta ?? {
+    subject: classes.data?.find((c) => c.id === classId)?.subject ?? "BI",
+    grade: classes.data?.find((c) => c.id === classId)?.grade ?? 9,
+    classroomId: classId || null,
+  };
   return (
     <UploadScreen
       pages={pages}
@@ -204,18 +360,39 @@ export function UploadRoute() {
       pollError={upload.pollError}
       onTyped={setTyped}
       onAddTyped={() => {
-        setPages((x) => [...x, { key: `p${pageSeq++}`, kind: "text", name: `${t("typedPage").english}: ${typed.trim().slice(0, 40)}`, size: typed.length, text: typed }]);
-        setTyped("");
-      }}
-      onFiles={(files) =>
         setPages((x) => [
           ...x,
-          ...files.map((f) => {
-            const kind = kindForFile(f);
-            return { key: `p${pageSeq++}`, kind: kind ?? "photo", name: f.name, size: f.size, file: f, unsupported: !kind } satisfies PageDraft;
-          }),
-        ])
-      }
+          {
+            key: `p${pageSeq++}`,
+            kind: "text",
+            name: `${t("typedPage").english}: ${typed.trim().slice(0, 40)}`,
+            size: typed.length,
+            text: typed,
+          },
+        ]);
+        setTyped("");
+      }}
+      onFiles={(files) => {
+        const drafts = files.map((f) => {
+          const kind = kindForFile(f);
+          return {
+            key: `p${pageSeq++}`,
+            kind: kind ?? "photo",
+            name: f.name,
+            size: f.size,
+            file: kind === "text" ? undefined : f,
+            unsupported: !kind,
+          } satisfies PageDraft;
+        });
+        setPages((x) => [...x, ...drafts]);
+        // Text documents: read the words in, so they upload as a typed page.
+        drafts.forEach((d, i) => {
+          if (d.kind !== "text") return;
+          void files[i]!.text().then((text) =>
+            setPages((x) => x.map((p) => (p.key === d.key ? { ...p, text } : p))),
+          );
+        });
+      }}
       onRemove={(key) => setPages((x) => x.filter((p) => p.key !== key))}
       onMeta={setMeta}
       onSubmit={() => void upload.submit(pages, current)}

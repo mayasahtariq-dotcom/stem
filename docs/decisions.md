@@ -259,3 +259,22 @@ Spec: the Mooshala Web PRD (uploaded to the project) and `docs/web/p2-frontend-p
 - **All motion stops with reduced motion**, and the counts drop on the low quality tier.
 - **The camera is lower**, so the sky and rainbow show (maxPolarAngle went from 0.42π to 0.46π).
 - **Golu (the cow) moved to the foreground.** Golu now stands at (8, 11.5) at twice the herd's size, facing the barn, and the waiting pot moves with Golu. Cows got Holstein patches on the back and rump. This is the only layout change, and it was made because the user asked for the cow as the main foreground character.
+
+
+## Connected modes: classes, analytics and materials (2026-11-17)
+
+- **Student mode is unchanged**, apart from a new "My classes" card on the profile. The card links to the existing join flow (`/join`: code, preview, join).
+- **Teachers have a Classes section** at `/teacher/classes`:
+  - Create a class through `POST /classrooms`, which the backend already has.
+  - Each class gets a unique join code, such as BI08-XXXX, with a copy button.
+  - A class page shows the code, the roster, the class score, completion, a 6-week trend, scores by chapter and the most-missed questions.
+- **The fake roster is the seeded roster plus real accounts** that joined with the code (`rosterOf`). A student who joins appears for the teacher straight away, with their real answers.
+- **Pending contracts** in `packages/api-client/src/pending-teacher.ts`, served by the fakes:
+  - `GET /teacher/overview`: totals across classes, by class and subject, doing well, needs attention, recent activity
+  - `GET /classrooms/{id}/insights`
+  - `GET /teacher/materials`
+  - The most-missed questions are computed from real first-try answers. For the seeded class they're topped up with seeded history.
+  - The trend and chapter scores are synthetic around the real class accuracy (fake only).
+- **Uploads accept .txt files**, read in the browser as a typed page. The upload also sends `file_name` for each page, a requested addition to PageIn, so the Materials list can show file names and formats. Its statuses are draft, processing, review and published.
+- **Mode visibility:** the sign-in card has a Student / Teacher / Parent switch, and every top bar shows a mode badge. The role page cards have illustrations and purposes.
+- **Not built:** the student app has no video, reading or interactive lesson types (it has four quiz question types inside lessons). The new teacher screens have no Storybook stories yet.

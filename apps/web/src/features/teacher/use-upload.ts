@@ -45,7 +45,8 @@ export function useUpload() {
         created = unwrap(
           await api.POST("/uploads", {
             body: {
-              pages: pages.map((p) => (p.kind === "text" ? { kind: "text" as const, text: p.text ?? "" } : { kind: p.kind, size_bytes: p.size })),
+              // file_name is a requested addition to PageIn (backend-handoff.md): the materials list shows it.
+              pages: pages.map((p) => ({ ...(p.kind === "text" ? { kind: "text" as const, text: p.text ?? "" } : { kind: p.kind, size_bytes: p.size }), file_name: p.name })),
               subject: meta.subject,
               grade: meta.grade,
               classroom_id: meta.classroomId,

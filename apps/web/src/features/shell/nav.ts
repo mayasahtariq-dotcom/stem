@@ -27,6 +27,7 @@ export const NAV: Record<Role, NavItem[]> = {
   ],
   teacher: [
     { key: "overview", label: "overview", icon: "chart", href: "/teacher", phase: 1 },
+    { key: "classes", label: "classes", icon: "school", href: "/teacher/classes", phase: 3 },
     { key: "students", label: "students", icon: "people", href: "/teacher/students", phase: 3 },
     { key: "courses", label: "courses", icon: "books", href: "/teacher/courses", phase: 3 },
     { key: "calls", label: "calls", icon: "speaker", href: "/teacher/calls", phase: 5 },

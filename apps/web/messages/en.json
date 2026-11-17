@@ -71,11 +71,11 @@
   "role": {
     "title": "Who are you?",
     "student": "Student",
-    "studentHint": "I want to learn and play",
+    "studentHint": "Learn science on your own 3D farm: lessons, quizzes, XP and streaks.",
     "teacher": "Teacher",
-    "teacherHint": "I teach a class",
+    "teacherHint": "Create classes, share a join code, upload notes and see how every student is doing.",
     "parent": "Parent",
-    "parentHint": "I want to follow my child"
+    "parentHint": "Connect with your child's code and follow their learning, strengths and what to practise."
   },
   "login": {
     "welcome": "Welcome to the farm!",
@@ -213,7 +213,8 @@
     "calls": "Calls",
     "classSwitcher": "Class",
     "noClasses": "No classes yet",
-    "teacherNav": "Teacher sections"
+    "teacherNav": "Teacher sections",
+    "classes": "Classes"
   },
   "teacher": {
     "title": "Teacher",
@@ -695,5 +696,68 @@
     "syncing": "Back online. Sending {n} saved...",
     "dropped": "{n} saved answers couldn't be counted (for example, hearts ran out first).",
     "ok": "OK"
+  },
+  "myClasses": {
+    "title": "My classes",
+    "none": "You haven't joined a class yet. Ask your teacher for the class code.",
+    "join": "Join a class with a code"
+  },
+  "classes": {
+    "title": "Classes",
+    "newClass": "Create a class",
+    "empty": "No classes yet. Create one to get a join code for your students.",
+    "joinCode": "Class join code",
+    "joinCodeHint": "Students type this in Student mode (Profile, Join a class). It's different from a parent's link code.",
+    "copy": "Copy",
+    "copied": "Copied {code}",
+    "expired": "Expired",
+    "studentsN": "{n} students joined",
+    "open": "Open class",
+    "className": "Class name",
+    "nameMissing": "Give the class a name.",
+    "languages": "Languages",
+    "hindi": "Hindi",
+    "kannada": "Kannada",
+    "create": "Create class",
+    "createdTitle": "{name} is ready",
+    "createdToast": "Class created: {name}",
+    "backToClasses": "All classes",
+    "classScore": "Class quiz score",
+    "completion": "Lessons completed",
+    "joined": "Students who joined",
+    "noneJoined": "Nobody has joined yet. Share the join code.",
+    "trend": "Quiz score, last 6 weeks",
+    "noData": "No answers yet.",
+    "topics": "By chapter",
+    "missed": "Most often answered wrong",
+    "noMissed": "No tricky questions yet.",
+    "missedRate": "{pct}% got this wrong ({n} answers)"
+  },
+  "allClasses": {
+    "title": "All your classes",
+    "classes": "Classes",
+    "students": "Students",
+    "avgScore": "Average quiz score",
+    "completion": "Lessons completed",
+    "byClass": "Score by class",
+    "bySubject": "By subject",
+    "doingWell": "Doing well",
+    "needsAttention": "Need attention",
+    "recent": "Recent activity",
+    "noneYet": "Nothing yet.",
+    "finished": "{name} finished “{lesson}”"
+  },
+  "materials": {
+    "title": "Uploaded materials",
+    "upload": "Upload notes, PDF or text",
+    "empty": "Nothing uploaded yet. Students only see material after you review and publish it.",
+    "kind_photo": "Handwritten photo",
+    "kind_pdf": "PDF",
+    "kind_text": "Text",
+    "status_draft": "Not started",
+    "status_processing": "Making lessons",
+    "status_review": "Waiting for your review",
+    "status_published": "Published",
+    "review": "Review"
   }
 }

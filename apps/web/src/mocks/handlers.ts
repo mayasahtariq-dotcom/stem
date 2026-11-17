@@ -5,6 +5,7 @@ import { DEMO, fakeDb, userForToken, type FakeClassroom } from "./fake-db";
 import { makeLearningHandlers } from "./learning/handlers";
 import { makeGameHandlers } from "./game/handlers";
 import { makeTeacherHandlers } from "./teacher/handlers";
+import { rosterOf } from "./teacher/state";
 import { makeParentHandlers } from "./parent/handlers";
 import { makeCallHandlers } from "./calls/handlers";
 
@@ -96,7 +97,7 @@ export function makeHandlers(base = FAKE_API_BASE_URL) {
           join_key: c.join_key,
           expires_at: c.expired ? "2026-11-01T00:00:00Z" : null,
           allowed_language_modes: c.allowed_language_modes,
-          student_count: c.student_count,
+          student_count: rosterOf(c.id).length,
           created_at: "2026-11-01T09:00:00Z",
         }));
       return HttpResponse.json(out);
