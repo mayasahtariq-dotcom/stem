@@ -771,6 +771,7 @@ def ask_doubt(
         text=body.text,
         answer=result.answer,
         source_pages=result.source_pages,
+        created_at=at,
         in_notes=result.in_notes,
         prompt_version=result.prompt_version,
     )
