@@ -44,3 +44,40 @@ export function cloudX(t: number, startX: number, speed: number, span = 160): nu
 
 /** Bounce for the current lesson marker (0..1). */
 export const bounce = (t: number) => Math.abs(Math.sin(t * 2.2));
+
+/**
+ * A butterfly's flight across the whole farm: a wide, slow Lissajous loop
+ * with a bobbing height, so it wanders between the pond, barn and field.
+ * Returns position offsets and the heading (radians, for rotation.y).
+ */
+export function wanderPath(t: number, seed: number, spanX = 16, spanZ = 12): { x: number; y: number; z: number; heading: number } {
+  const w1 = 0.11 + (seed % 5) * 0.017;
+  const w2 = 0.083 + (seed % 3) * 0.021;
+  const p = seed * 1.91;
+  const x = Math.sin(t * w1 + p) * spanX + Math.sin(t * w1 * 3.7 + p) * 1.6;
+  const z = Math.sin(t * w2 + p * 1.3) * spanZ + Math.cos(t * w2 * 2.9 + p) * 1.4;
+  const y = 1.6 + Math.sin(t * 0.9 + p) * 0.6 + Math.sin(t * 2.3 + p) * 0.25;
+  const vx = Math.cos(t * w1 + p) * spanX * w1 + Math.cos(t * w1 * 3.7 + p) * 1.6 * w1 * 3.7;
+  const vz = Math.cos(t * w2 + p * 1.3) * spanZ * w2 - Math.sin(t * w2 * 2.9 + p) * 1.4 * w2 * 2.9;
+  return { x, y, z, heading: Math.atan2(vx, vz) };
+}
+
+/**
+ * A soap bubble drifting up from the meadow: rises at its own speed, sways,
+ * and starts again near the grass after `height` metres (never stops, no state).
+ */
+export function bubbleAt(t: number, seed: number, height = 16): { x: number; y: number; z: number; scale: number } {
+  const speed = 0.35 + (seed % 4) * 0.08;
+  const cycle = (t * speed + seed * 3.3) % height;
+  const loop = Math.floor((t * speed + seed * 3.3) / height);
+  const angle = seed * 2.4 + loop * 1.7;
+  const radius = 4 + ((seed * 7 + loop * 5) % 14);
+  return {
+    // Centred behind Golu over the farmstead, so none float into the camera.
+    x: -2 + Math.cos(angle) * radius + Math.sin(t * 0.7 + seed) * 0.8,
+    y: 0.8 + cycle,
+    z: -2 + Math.sin(angle) * radius * 0.8 + Math.cos(t * 0.55 + seed) * 0.8,
+    // Pops in at the bottom and fades out near the top.
+    scale: Math.min(1, cycle / 1.2) * Math.min(1, (height - cycle) / 1.5),
+  };
+}

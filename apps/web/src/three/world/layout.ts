@@ -11,7 +11,8 @@ export const PLACES = {
   lab: { x: -12, z: -1, rotationY: 0.9 },
   signboard: { x: 3.4, z: 3.2, rotationY: -0.3 },
   market: { x: 13, z: 10, rotationY: -2.2 },
-  golu: { x: -4.5, z: 3.5, rotationY: 0.6 },
+  // Golu stands in the foreground on the path, looking up at the barn.
+  golu: { x: 8, z: 11.5, rotationY: -2.6 },
   windmill: { x: -11, z: -9, rotationY: 0.5 },
 } as const;
 

@@ -244,3 +244,18 @@ Spec: the Mooshala Web PRD (uploaded to the project) and `docs/web/p2-frontend-p
 - **No duplicate rewards.** Every outbox item has an `Idempotency-Key`. The fake backend (`mocks/idempotency.ts`) answers a replayed key with the first response and doesn't run it again. The real backend must do the same; see backend-handoff.
 - **Items belong to one user.** On a shared school computer, the next student never sends somebody else's saved answers.
 - **A saved lesson resumes offline from the cached lesson.** A new lesson can't be started offline, because the server opens the attempt window.
+
+
+## Farm visual upgrade (2026-11-17)
+
+- **The user's AI-generated reference image is the visual target.** It was used for the look only; the scene, layout, assets and functions were kept.
+- **New visuals** (`apps/web/src/three/world/atmosphere.tsx`):
+  - a gradient sky dome with a sun glow
+  - big horizon clouds and rolling distant hills for depth
+  - a rainbow
+  - butterflies that fly all over the farm (`wanderPath`)
+  - soap bubbles with a rim sheen that drift up and loop forever (`bubbleAt`)
+  - brighter, warmer sun and haze
+- **All motion stops with reduced motion**, and the counts drop on the low quality tier.
+- **The camera is lower**, so the sky and rainbow show (maxPolarAngle went from 0.42π to 0.46π).
+- **Golu (the cow) moved to the foreground.** Golu now stands at (8, 11.5) at twice the herd's size, facing the barn, and the waiting pot moves with Golu. Cows got Holstein patches on the back and rump. This is the only layout change, and it was made because the user asked for the cow as the main foreground character.

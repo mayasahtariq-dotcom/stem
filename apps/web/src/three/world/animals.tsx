@@ -44,6 +44,19 @@ export function Cow({ offset = 0, reducedMotion, bell, scale = 1, outfit, champi
         <boxGeometry args={[0.02, 0.45, 0.6]} />
         <Std c={color.ink} />
       </mesh>
+      {/* Holstein patches on the back and rump, seen from behind */}
+      <mesh position={[0.15, 1.61, -0.35]}>
+        <boxGeometry args={[0.6, 0.02, 0.65]} />
+        <Std c={color.ink} />
+      </mesh>
+      <mesh position={[-0.25, 1.61, 0.45]}>
+        <boxGeometry args={[0.45, 0.02, 0.45]} />
+        <Std c={color.ink} />
+      </mesh>
+      <mesh position={[-0.2, 1.3, -0.96]}>
+        <boxGeometry args={[0.45, 0.4, 0.02]} />
+        <Std c={color.ink} />
+      </mesh>
       {[[-0.38, 0.65], [0.38, 0.65], [-0.38, -0.65], [0.38, -0.65]].map(([x, z]) => (
         <mesh key={`${x}${z}`} castShadow position={[x!, 0.38, z!]}>
           <boxGeometry args={[0.22, 0.76, 0.22]} />

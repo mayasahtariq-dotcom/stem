@@ -8,6 +8,7 @@ import { preloadFarmAssets } from "../assets/FarmModel";
 import type { QualitySettings } from "../engine/quality";
 import { Chicken, Cow, Duck } from "./animals";
 import { Farmhouse, Lab, MarketStall, Signboard } from "./buildings";
+import { Bubbles, DistantHills, HorizonClouds, Rainbow, SkyDome, WanderingButterflies } from "./atmosphere";
 import { Decorations } from "./decorations";
 import { Interactable } from "./Interactable";
 import { GoluPot } from "./pot";
@@ -57,7 +58,7 @@ function PortraitFit() {
 }
 
 /** Next to Golu, where a waiting pot sits. */
-const POT_SPOT = { x: -2.3, z: 5.4 };
+const POT_SPOT = { x: PLACES.golu.x - 2.4, z: PLACES.golu.z - 0.8 };
 
 const at = (x: number, z: number): [number, number, number] => [x, terrainHeight(x, z), z];
 
@@ -77,7 +78,8 @@ export function FarmWorld({ quality, scene = EMPTY_SCENE, selected, onSelect, re
   const stations = scene.stations.length ? scene.stations : [];
   const positions = stationPositions(stations.length);
   const flowers = flowerSpots(scene.flowerCount);
-  const mascotScale = scene.mascot.stage === "calf" ? 0.75 : scene.mascot.stage === "cow" ? 1 : 1.15;
+  // Golu is the hero of the farm: bigger than the herd, in the foreground.
+  const mascotScale = (scene.mascot.stage === "calf" ? 0.75 : scene.mascot.stage === "cow" ? 1 : 1.15) * 2;
   const place = (id: keyof typeof PLACES) => ({ id, position: at(PLACES[id].x, PLACES[id].z), rotationY: PLACES[id].rotationY, selected: selected === id, onSelect: select, reducedMotion });
 
   return (
@@ -98,6 +100,10 @@ export function FarmWorld({ quality, scene = EMPTY_SCENE, selected, onSelect, re
         shadow-camera-bottom={-LIGHTING.sun.shadowBounds}
       />
 
+      <SkyDome />
+      <DistantHills count={quality.tier === "low" ? 12 : 22} />
+      <Rainbow />
+      <HorizonClouds count={quality.tier === "low" ? 5 : 9} reducedMotion={reducedMotion} />
       <Terrain segments={segments} receiveShadow={quality.shadows} />
       {quality.tier !== "low" && <GrassTufts count={grass} />}
       <Stream reducedMotion={reducedMotion} />
@@ -150,6 +156,8 @@ export function FarmWorld({ quality, scene = EMPTY_SCENE, selected, onSelect, re
         <Flower key={i} position={p} bloomed={i < scene.bloomedFlowers} hue={i} reducedMotion={reducedMotion} />
       ))}
       <Butterflies home={[1, 9]} count={quality.tier === "low" ? 2 : 4} reducedMotion={reducedMotion} />
+      <WanderingButterflies count={quality.tier === "low" ? 3 : quality.tier === "medium" ? 6 : 9} reducedMotion={reducedMotion} />
+      <Bubbles count={quality.tier === "low" ? 6 : quality.tier === "medium" ? 12 : 18} reducedMotion={reducedMotion} />
       <Decorations items={scene.decorations} />
 
       {/* Pasture with the herd */}
