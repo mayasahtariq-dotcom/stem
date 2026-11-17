@@ -4,8 +4,11 @@ import android.content.Context
 import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -28,6 +31,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import com.stemtutor.app.di.DevServerSettings
 import com.stemtutor.app.gallery.GalleryRoute
 import com.stemtutor.app.prototype.PrototypeScreen
@@ -68,6 +72,24 @@ fun DebugProfileExtras(navController: NavHostController) {
     ServerSetting()
     ChunkyButton(R.string.gallery_title, { navController.navigate(GALLERY) }, Modifier.fillMaxWidth(), ChunkyButtonStyle.White)
     ChunkyButton(R.string.prototype_title, { navController.navigate(PROTOTYPE) }, Modifier.fillMaxWidth(), ChunkyButtonStyle.White)
+}
+
+/** Debug builds only: a chip on every screen that opens the Mooshala web prototype in one tap. */
+@Composable
+fun DebugOverlay(navController: NavHostController, modifier: Modifier) {
+    val route = navController.currentBackStackEntryAsState().value?.destination?.route
+    if (route == PROTOTYPE) return
+    Box(
+        modifier
+            .statusBarsPadding()
+            .padding(12.dp)
+            .clip(RoundedCornerShape(50))
+            .background(StemColors.White)
+            .clickable { navController.navigate(PROTOTYPE) }
+            .padding(horizontal = 14.dp, vertical = 8.dp),
+    ) {
+        BilingualText(R.string.prototype_title, size = BilingualTextSize.Small)
+    }
 }
 
 /**

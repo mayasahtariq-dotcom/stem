@@ -270,6 +270,8 @@ fun AppNavHost(
         debugDestinations(navController)
     }
 
+    DebugOverlay(navController, Modifier.align(Alignment.TopEnd))
+
     notice?.let { n ->
         ReadyBanner(
             onOpen = {
