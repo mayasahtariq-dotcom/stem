@@ -1,13 +1,14 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useRef, useState, type FormEvent } from "react";
-import { BilingualText, ChunkyButton, TextField } from "@/components/ui";
+import { BilingualText, ChunkyButton, StickerIcon, TextField, type StickerIconName } from "@/components/ui";
 import { toast } from "@/components/ui/Toast";
 import { AuthFrame } from "@/features/onboarding/AuthFrame";
 import { useBilingual, type BilingualString } from "@/lib/i18n/use-bilingual";
 import { useServices } from "@/lib/services";
 import { ROUTES } from "./routing";
-import { AuthError, type Session } from "./types";
+import { AuthError, ROLES, type Role, type Session } from "./types";
+import { cn } from "@/lib/utils/cn";
 import { otpSchema, phoneSchema, toE164 } from "./validation";
 
 export const RESEND_SECONDS = 30;
@@ -86,10 +87,48 @@ export interface PhoneLoginScreenProps {
   onSend: () => void;
   onVerify: () => void;
   onChangeNumber: () => void;
+  /** Student, teacher or parent mode, picked right on the sign-in card. */
+  role?: Role | null;
+  onRoleChange?: (r: Role) => void;
+}
+
+const ROLE_ICON: Record<Role, StickerIconName> = { student: "backpack", teacher: "teacher", parent: "people" };
+
+/** Three-way switch for which mode to open after sign-in. */
+export function RoleSwitch({ role, onChange }: { role: Role | null; onChange: (r: Role) => void }) {
+  const r = useBilingual("role");
+  return (
+    <div role="radiogroup" aria-label={r("title").english} className="grid grid-cols-3 gap-2" data-testid="login-role-switch">
+      {ROLES.map((x) => {
+        const label = r(x);
+        const on = role === x;
+        return (
+          <button
+            key={x}
+            type="button"
+            role="radio"
+            aria-checked={on}
+            aria-label={label.english}
+            onClick={() => onChange(x)}
+            className={cn(
+              "flex min-h-14 flex-col items-center justify-center gap-0.5 rounded-card border-2 px-1 py-2 font-bold",
+              on ? "border-grass-strong bg-grass/20 text-ink" : "border-line bg-white text-ink hover:border-grass",
+            )}
+          >
+            <StickerIcon name={ROLE_ICON[x]} size={26} />
+            <span className="font-regional text-sm leading-tight">{label.regional}</span>
+            <span className="text-xs font-medium text-stone" lang="en">
+              {label.english}
+            </span>
+          </button>
+        );
+      })}
+    </div>
+  );
 }
 
 /** Stateless phone OTP screen. */
-export function PhoneLoginScreen({ state, onPhoneChange, onCodeChange, onSend, onVerify, onChangeNumber }: PhoneLoginScreenProps) {
+export function PhoneLoginScreen({ state, onPhoneChange, onCodeChange, onSend, onVerify, onChangeNumber, role, onRoleChange }: PhoneLoginScreenProps) {
   const t = useBilingual("login");
   const codeRef = useRef<HTMLInputElement>(null);
   const err = (code: string | null): BilingualString | null => (code ? t(code) : null);
@@ -111,6 +150,7 @@ export function PhoneLoginScreen({ state, onPhoneChange, onCodeChange, onSend, o
       golu={{ pose: state.step === "phone" ? "wave" : "thumbs", says: t("welcome") }}
     >
       <form onSubmit={submit} noValidate className="flex flex-col gap-4">
+        {state.step === "phone" && onRoleChange && <RoleSwitch role={role ?? null} onChange={onRoleChange} />}
         {state.step === "phone" ? (
           <TextField
             label={t("phoneLabel")}

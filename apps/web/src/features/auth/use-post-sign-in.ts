@@ -24,7 +24,8 @@ export function usePostSignIn() {
   const qc = useQueryClient();
   const { api } = useServices();
   const { completeSignIn } = useAuth();
-  const lastRole = useAppStore((s) => s.lastRole);
+  // The mode picked before sign-in wins; otherwise the last one used here.
+  const lastRole = useAppStore((s) => s.draftRole ?? s.lastRole);
   const t = useBilingual("login");
 
   return useCallback(
