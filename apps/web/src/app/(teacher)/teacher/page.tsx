@@ -1,6 +1,6 @@
 "use client";
-import { Placeholder } from "@/features/shell/Placeholder";
+import { OverviewRoute } from "@/features/teacher/routes";
 
 export default function TeacherOverviewPage() {
-  return <Placeholder ns="teacher" k="placeholder" />;
+  return <OverviewRoute />;
 }

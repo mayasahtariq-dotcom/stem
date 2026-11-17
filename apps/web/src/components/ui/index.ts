@@ -14,3 +14,4 @@ export * from "./Spinner";
 export * from "./StickerIcon";
 export * from "./TextField";
 export * from "./Toast";
+export * from "./Pill";

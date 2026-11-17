@@ -48,7 +48,7 @@ test("teacher and parent land in their own shells; roles are enforced", async ({
   await page.waitForURL("**/login");
   await loginByOtp(page, DEMO.parent);
   await page.waitForURL("**/parent");
-  await expect(page.getByText(/Linking your child/)).toBeVisible();
+  await expect(page.getByText(/No child linked yet/)).toBeVisible();
 });
 
 test("a new user names themselves and joins a class", async ({ page }) => {

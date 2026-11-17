@@ -1,9 +1,10 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, type ReactNode } from "react";
+import type { ReactNode } from "react";
 import { BilingualText, StickerIcon } from "@/components/ui";
-import { useTeacherClassrooms } from "@/features/classroom/api";
+import { useSelectedClass } from "@/features/teacher/api";
+import { useClassStore } from "@/features/teacher/class-store";
 import { useBilingual } from "@/lib/i18n/use-bilingual";
 import { cn } from "@/lib/utils/cn";
 import { HudControls } from "./HudControls";
@@ -14,9 +15,8 @@ export function TeacherShell({ children }: { children: ReactNode }) {
   const n = useBilingual("nav");
   const c = useBilingual("common");
   const pathname = usePathname();
-  const classes = useTeacherClassrooms();
-  const [classId, setClassId] = useState<string>("");
-  const selected = classId || classes.data?.[0]?.id || "";
+  const { classes, classId: selected } = useSelectedClass();
+  const setClassId = useClassStore((s) => s.setClassId);
 
   return (
     <div className="min-h-dvh bg-cloud">
@@ -48,7 +48,7 @@ export function TeacherShell({ children }: { children: ReactNode }) {
         </div>
         <nav aria-label={n("teacherNav").english} className="mx-auto flex max-w-[1440px] gap-1 overflow-x-auto px-4">
           {NAV.teacher.map((item) => {
-            const active = pathname === item.href;
+            const active = item.href === "/teacher" ? pathname === item.href : pathname.startsWith(item.href);
             const available = isAvailable(item);
             const cls = cn(
               "flex min-h-11 items-center gap-2 border-b-4 px-4 font-bold",

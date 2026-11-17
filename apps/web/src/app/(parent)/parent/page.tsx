@@ -1,6 +1,6 @@
 "use client";
-import { Placeholder } from "@/features/shell/Placeholder";
+import { ParentHomeRoute } from "@/features/parent/routes";
 
 export default function ParentHomePage() {
-  return <Placeholder ns="parent" k="placeholder" />;
+  return <ParentHomeRoute />;
 }

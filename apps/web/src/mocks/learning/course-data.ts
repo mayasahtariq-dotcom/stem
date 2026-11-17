@@ -61,14 +61,28 @@ const BANK: Q[][] = [
   ],
 ];
 
+export interface FakeQuestion {
+  id: string;
+  position: number;
+  type: string;
+  content: Q;
+  source_page: number;
+  call_safe: boolean;
+  /** Review metadata the teacher sees (backend Question columns). */
+  confidence?: number;
+  flag_reason?: string | null;
+  teacher_edited?: boolean;
+}
+
 export interface FakeLesson {
   id: string;
+  courseId: string;
   unit: number;
   position: number;
   title: Tri;
   generation_status: "ready" | "generating";
   published: boolean;
-  questions: { id: string; position: number; type: string; content: Q; source_page: number; call_safe: boolean }[];
+  questions: FakeQuestion[];
 }
 
 const LESSON_TITLES: Tri[] = [
@@ -96,6 +110,7 @@ export function buildLessons(): FakeLesson[] {
     const qs = [...bank, extra[0]!, extra[2]!];
     return {
       id: `lesson-${i + 1}`,
+      courseId: COURSE_ID,
       unit: i < 3 ? 0 : 1,
       position: i + 1,
       title,

@@ -2,6 +2,7 @@ import { http, HttpResponse } from "msw";
 import type { Schemas } from "@mooshala/api-client";
 import { fakeDb, userForToken } from "../fake-db";
 import { COURSE_ID, COURSE_TITLE, UNITS, termContent, TERMS } from "./course-data";
+import { mayStartLessons } from "../parent/state";
 import { fakeNow, coursesFor, fakeLessons, finishLessonStreak, grade, learner, lessonById, loseHeart, questionById, RULES, statsOut } from "./state";
 
 /**
@@ -41,15 +42,15 @@ export function buildPath(userId: string): Schemas["PathOut"] {
   return { course_id: COURSE_ID, title: COURSE_TITLE, subject: "BI", is_personal: false, units, done_count: done.size, lesson_count: ordered.length, current_lesson_id: current?.id ?? null };
 }
 
-const lessonOut = (id: string): Schemas["LessonOut"] => {
+export const lessonOut = (id: string): Schemas["LessonOut"] => {
   const l = lessonById(id)!;
   return {
     id: l.id,
-    course_id: COURSE_ID,
+    course_id: l.courseId,
     title: l.title,
     generation_status: l.generation_status,
     published: l.published,
-    questions: l.questions.map((q) => ({ id: q.id, position: q.position, type: q.type, content: q.content, source_page: q.source_page, confidence: 0.92, flag_reason: null, call_safe: q.call_safe, teacher_edited: false })),
+    questions: l.questions.map((q) => ({ id: q.id, position: q.position, type: q.type, content: q.content, source_page: q.source_page, confidence: q.confidence ?? 0.92, flag_reason: q.flag_reason ?? null, call_safe: q.call_safe, teacher_edited: q.teacher_edited ?? false })),
     terms: Object.fromEntries(Object.keys(TERMS).map((k) => [k, termContent(k)])),
   };
 };
@@ -112,7 +113,7 @@ export function makeLearningHandlers(base: string) {
       if (!u) return err(401, "UNAUTHORIZED");
       const l = lessonById(String(params.id));
       if (!l) return err(404, "NOT_FOUND");
-      if (!u.roles.includes("teacher") && !readable(u.id, COURSE_ID)) return err(404, "NOT_FOUND");
+      if (!u.roles.includes("teacher") && !readable(u.id, l.courseId)) return err(404, "NOT_FOUND");
       if (!u.roles.includes("teacher") && !l.published) return err(403, "LESSON_NOT_PUBLISHED");
       return json(lessonOut(l.id));
     }),
@@ -121,9 +122,10 @@ export function makeLearningHandlers(base: string) {
       const u = auth(request);
       if (!u) return err(401, "UNAUTHORIZED");
       const l = lessonById(String(params.id));
-      if (!l || !readable(u.id, COURSE_ID)) return err(404, "NOT_FOUND");
+      if (!l || !readable(u.id, l.courseId)) return err(404, "NOT_FOUND");
       if (!l.published) return err(403, "LESSON_NOT_PUBLISHED");
       if (l.generation_status !== "ready") return err(409, "LESSON_NOT_READY");
+      if (u.roles.includes("student") && !mayStartLessons(u.id)) return err(403, "CONSENT_REQUIRED");
       const s = learner(u.id);
       const prev = s.progress.get(l.id);
       s.progress.set(l.id, { startedAt: fakeNow(), completedAt: prev?.completedAt, bestAccuracy: prev?.bestAccuracy ?? 0 });

@@ -72,7 +72,15 @@ registerFakeStore("learning", () => ({ lessons, learners }), (v) => {
   learners = v.learners;
 });
 
-export const fakeLessons = () => lessons;
+/** Lessons of one course, in order (defaults to the seeded class course). */
+export const fakeLessons = (courseId: string = COURSE_ID) => lessons.filter((l) => l.courseId === courseId);
+export const allFakeLessons = () => lessons;
+export function addFakeLessons(more: FakeLesson[]) {
+  lessons.push(...more);
+}
+export function removeFakeQuestion(id: string) {
+  for (const l of lessons) l.questions = l.questions.filter((q) => q.id !== id);
+}
 export const lessonById = (id: string) => lessons.find((l) => l.id === id);
 export const questionById = (id: string) => {
   for (const l of lessons) {

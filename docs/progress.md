@@ -149,3 +149,16 @@ Demo: `docs/demos/web-phase-2.md`. Deviations: `docs/decisions.md` ("Web Phase 2
 - [x] Interrupted lessons resume; failed answers are kept and resent.
 - [x] Tests: path, four question types, answer shapes, session rules, XP/streak/hearts parity with the backend rules, terms, doubts, persistence, 3D scene and interaction; Playwright student journey.
 - [ ] Game endpoints built by the backend (`docs/web/backend-handoff.md`).
+
+## Web Phase 3: Teacher and parent
+
+Demo: `docs/demos/web-phase-3.md`. Deviations: `docs/decisions.md` ("Web Phase 3").
+
+- [x] Teacher overview: tiles, who needs help, weak topics, class key, school consent toggle.
+- [x] Students list (filter, search, sort) and student detail (lessons, weakest concepts, mix-ups, trend).
+- [x] Courses list, course detail (rename, assign with due date, per-lesson publish).
+- [x] Upload from JPG/PDF/typed notes with validation, per-page progress and retry, then the AI pipeline steps; no success shown before the server confirms.
+- [x] Lesson review: flags and confidence, approve, edit, regenerate, reject with confirmation, publish once.
+- [x] Parent: link by code with preview, consent approve/pause, unlink, deletion request, weekly summary with Listen, support areas, milestones, assignments, farm picture.
+- [x] Student profile: make a parent link code, see and remove linked parents.
+- [x] Tests: review/upload/student rules, teacher and parent flows against the fakes, stories with axe in hi and kn, Playwright teacher and parent journeys with axe (desktop and phone).

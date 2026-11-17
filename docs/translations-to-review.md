@@ -785,3 +785,245 @@ File: `apps/web/messages/{hi,kn}.json` (keys are `namespace.key`).
 | errors.WEEKLY_CAP_REACHED | This student has used this week's call minutes. | इस छात्र के इस हफ़्ते के कॉल मिनट पूरे हो गए। | ಈ ವಿದ್ಯಾರ್ಥಿಯ ಈ ವಾರದ ಕರೆ ನಿಮಿಷಗಳು ಮುಗಿದಿವೆ. | [ ] |
 | farm.barn | Learning barn | सीखने का खलिहान | ಕಲಿಕೆಯ ಕೊಟ್ಟಿಗೆ | [ ] |
 | common.resetDemo | Reset demo data | डेमो डेटा फिर से शुरू करो | ಡೆಮೊ ಡೇಟಾ ಮರುಹೊಂದಿಸಿ | [ ] |
+
+## Web Phase 3 (teacher and parent)
+
+| Key | English | Hindi | Kannada | Reviewed |
+|---|---|---|---|---|
+| common.save | Save | सेव करें | ಉಳಿಸಿ | [ ] |
+| common.cancel | Cancel | रद्द करें | ರದ್ದು ಮಾಡಿ | [ ] |
+| teacher.overviewTitle | Class overview | कक्षा का सार | ತರಗತಿಯ ಸಾರಾಂಶ | [ ] |
+| teacher.thisWeek | This week | इस हफ़्ते | ಈ ವಾರ | [ ] |
+| teacher.activeThisWeek | Active this week | इस हफ़्ते सक्रिय | ಈ ವಾರ ಸಕ್ರಿಯ | [ ] |
+| teacher.classAccuracy | Class accuracy | कक्षा की सटीकता | ತರಗತಿಯ ನಿಖರತೆ | [ ] |
+| teacher.behind | Need a nudge | थोड़ी मदद चाहिए | ಸ್ವಲ್ಪ ಸಹಾಯ ಬೇಕು | [ ] |
+| teacher.behindShort | Behind | पीछे | ಹಿಂದೆ | [ ] |
+| teacher.coursesAssigned | Courses assigned | दिए गए कोर्स | ನೀಡಿದ ಕೋರ್ಸ್‌ಗಳು | [ ] |
+| teacher.noStudents | No students yet. Share the class key {key} so they can join. | अभी कोई छात्र नहीं। कक्षा की कुंजी {key} साझा करें ताकि वे जुड़ सकें। | ಇನ್ನೂ ವಿದ್ಯಾರ್ಥಿಗಳಿಲ್ಲ. ಸೇರಲು ತರಗತಿ ಕೀ {key} ಹಂಚಿಕೊಳ್ಳಿ. | [ ] |
+| teacher.needsHelp | Needs help | मदद चाहिए | ಸಹಾಯ ಬೇಕು | [ ] |
+| teacher.nobodyBehind | Everyone is on track this week. | इस हफ़्ते सब ठीक चल रहे हैं। | ಈ ವಾರ ಎಲ್ಲರೂ ಸರಿಯಾಗಿ ಸಾಗುತ್ತಿದ್ದಾರೆ. | [ ] |
+| teacher.idleDays | Idle {n} days | {n} दिन से निष्क्रिय | {n} ದಿನಗಳಿಂದ ನಿಷ್ಕ್ರಿಯ | [ ] |
+| teacher.overdueN | {n} overdue | {n} बाकी | {n} ಬಾಕಿ | [ ] |
+| teacher.weakTopics | Weak topics | कमज़ोर विषय | ದುರ್ಬಲ ವಿಷಯಗಳು | [ ] |
+| teacher.noWeakTopics | Not enough answers yet to spot weak topics. | कमज़ोर विषय देखने के लिए अभी पर्याप्त जवाब नहीं। | ದುರ್ಬಲ ವಿಷಯ ತಿಳಿಯಲು ಇನ್ನೂ ಸಾಕಷ್ಟು ಉತ್ತರಗಳಿಲ್ಲ. | [ ] |
+| teacher.lowMastery | {n} students struggling · {attempts} answers | {n} छात्रों को कठिनाई · {attempts} जवाब | {n} ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಕಷ್ಟ · {attempts} ಉತ್ತರಗಳು | [ ] |
+| teacher.joinKey | Class key | कक्षा की कुंजी | ತರಗತಿ ಕೀ | [ ] |
+| teacher.joinKeyHint | Students type this key to join your class. | छात्र यह कुंजी लिखकर आपकी कक्षा में जुड़ते हैं। | ವಿದ್ಯಾರ್ಥಿಗಳು ಈ ಕೀ ಬರೆದು ನಿಮ್ಮ ತರಗತಿಗೆ ಸೇರುತ್ತಾರೆ. | [ ] |
+| teacher.schoolConsent | School consent | स्कूल की सहमति | ಶಾಲೆಯ ಒಪ್ಪಿಗೆ | [ ] |
+| teacher.schoolConsentHint | Turn on only if your school has collected parents' consent on paper. Students can then learn before a parent links. | इसे तभी चालू करें जब स्कूल ने माता-पिता की सहमति लिखित में ली हो। तब छात्र माता-पिता के जुड़ने से पहले सीख सकते हैं। | ಶಾಲೆ ಪೋಷಕರ ಒಪ್ಪಿಗೆಯನ್ನು ಲಿಖಿತವಾಗಿ ಪಡೆದಿದ್ದರೆ ಮಾತ್ರ ಆನ್ ಮಾಡಿ. ಆಗ ಪೋಷಕರು ಸೇರುವ ಮೊದಲೇ ವಿದ್ಯಾರ್ಥಿಗಳು ಕಲಿಯಬಹುದು. | [ ] |
+| teacher.consentOn | On | चालू | ಆನ್ | [ ] |
+| teacher.consentOff | Off | बंद | ಆಫ್ | [ ] |
+| teacher.turnOn | Turn on | चालू करें | ಆನ್ ಮಾಡಿ | [ ] |
+| teacher.turnOff | Turn off | बंद करें | ಆಫ್ ಮಾಡಿ | [ ] |
+| teacher.consentSavedOn | School consent is on. | स्कूल की सहमति चालू है। | ಶಾಲೆಯ ಒಪ್ಪಿಗೆ ಆನ್ ಆಗಿದೆ. | [ ] |
+| teacher.consentSavedOff | School consent is off. | स्कूल की सहमति बंद है। | ಶಾಲೆಯ ಒಪ್ಪಿಗೆ ಆಫ್ ಆಗಿದೆ. | [ ] |
+| teacher.studentsTitle | Students | छात्र | ವಿದ್ಯಾರ್ಥಿಗಳು | [ ] |
+| teacher.filter | Show | दिखाएँ | ತೋರಿಸು | [ ] |
+| teacher.allStudents | Everyone | सभी | ಎಲ್ಲರೂ | [ ] |
+| teacher.search | Search by name | नाम से खोजें | ಹೆಸರಿನಿಂದ ಹುಡುಕಿ | [ ] |
+| teacher.sortBy | Sort by | क्रम | ಕ್ರಮ | [ ] |
+| teacher.sortName | Name | नाम | ಹೆಸರು | [ ] |
+| teacher.sortAccuracy | Lowest accuracy | सबसे कम सटीकता | ಕಡಿಮೆ ನಿಖರತೆ | [ ] |
+| teacher.sortStreak | Longest streak | सबसे लंबी लगातार | ಉದ್ದದ ಸರಣಿ | [ ] |
+| teacher.noStudentsYet | No students have joined this class yet. | इस कक्षा में अभी कोई छात्र नहीं जुड़ा। | ಈ ತರಗತಿಗೆ ಇನ್ನೂ ಯಾರೂ ಸೇರಿಲ್ಲ. | [ ] |
+| teacher.noMatch | No student matches. | कोई छात्र नहीं मिला। | ಯಾವ ವಿದ್ಯಾರ್ಥಿಯೂ ಸಿಗಲಿಲ್ಲ. | [ ] |
+| teacher.colName | Name | नाम | ಹೆಸರು | [ ] |
+| teacher.colLesson | Current lesson | अभी का पाठ | ಈಗಿನ ಪಾಠ | [ ] |
+| teacher.colAccuracy | Accuracy | सटीकता | ನಿಖರತೆ | [ ] |
+| teacher.colStreak | Streak | लगातार दिन | ಸತತ ದಿನಗಳು | [ ] |
+| teacher.colStatus | Status | स्थिति | ಸ್ಥಿತಿ | [ ] |
+| teacher.onTrack | On track | ठीक चल रहा | ಸರಿಯಾಗಿದೆ | [ ] |
+| teacher.backToStudents | Back to students | छात्रों पर वापस | ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಹಿಂತಿರುಗಿ | [ ] |
+| teacher.trend_improving | Improving | सुधर रहा है | ಸುಧಾರಿಸುತ್ತಿದೆ | [ ] |
+| teacher.trend_steady | Steady | स्थिर | ಸ್ಥಿರ | [ ] |
+| teacher.trend_needs_practice | Needs practice | अभ्यास चाहिए | ಅಭ್ಯಾಸ ಬೇಕು | [ ] |
+| teacher.lessonsDone | Lessons done | पूरे पाठ | ಮುಗಿದ ಪಾಠಗಳು | [ ] |
+| teacher.lastActive | Last active | आख़िरी बार सक्रिय | ಕೊನೆಯ ಬಾರಿ ಸಕ್ರಿಯ | [ ] |
+| teacher.usualTime | Usual time | आम समय | ಸಾಮಾನ್ಯ ಸಮಯ | [ ] |
+| teacher.lessonResults | Lesson results | पाठ के नतीजे | ಪಾಠದ ಫಲಿತಾಂಶ | [ ] |
+| teacher.noLessonsYet | No lessons yet. | अभी कोई पाठ नहीं। | ಇನ್ನೂ ಪಾಠಗಳಿಲ್ಲ. | [ ] |
+| teacher.weakestConcepts | Needs more practice | और अभ्यास चाहिए | ಇನ್ನಷ್ಟು ಅಭ್ಯಾಸ ಬೇಕು | [ ] |
+| teacher.confusions | Often mixed up | अक्सर उलझन | ಆಗಾಗ ಗೊಂದಲ | [ ] |
+| teacher.noConfusions | No common mix-ups yet. | अभी कोई आम उलझन नहीं। | ಇನ್ನೂ ಸಾಮಾನ್ಯ ಗೊಂದಲಗಳಿಲ್ಲ. | [ ] |
+| teacher.confusedWith | Picked {chosenEn} instead of {expectedEn} ({n} times) | {expected} की जगह {chosen} चुना ({n} बार) | {expected} ಬದಲು {chosen} ಆರಿಸಿದರು ({n} ಬಾರಿ) | [ ] |
+| teacher.coursesTitle | Courses | कोर्स | ಕೋರ್ಸ್‌ಗಳು | [ ] |
+| teacher.newCourse | New course from notes | नोट्स से नया कोर्स | ಟಿಪ್ಪಣಿಯಿಂದ ಹೊಸ ಕೋರ್ಸ್ | [ ] |
+| teacher.noCourses | No courses yet. Upload your notes and Mooshala makes the lessons. | अभी कोई कोर्स नहीं। अपने नोट्स अपलोड करें, मूशाला पाठ बनाएगा। | ಇನ್ನೂ ಕೋರ್ಸ್ ಇಲ್ಲ. ನಿಮ್ಮ ಟಿಪ್ಪಣಿ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ, ಮೂಶಾಲಾ ಪಾಠ ಮಾಡುತ್ತದೆ. | [ ] |
+| teacher.statusPublished | Published | प्रकाशित | ಪ್ರಕಟಿತ | [ ] |
+| teacher.statusDraft | Draft | ड्राफ़्ट | ಕರಡು | [ ] |
+| teacher.gradeN | Class {n} | कक्षा {n} | ತರಗತಿ {n} | [ ] |
+| teacher.personal | Just for me | सिर्फ़ मेरे लिए | ನನಗೆ ಮಾತ್ರ | [ ] |
+| teacher.aiMade | Made by AI | AI ने बनाया | AI ಮಾಡಿದ್ದು | [ ] |
+| teacher.publishedOf | {n} of {total} lessons published | {total} में से {n} पाठ प्रकाशित | {total} ರಲ್ಲಿ {n} ಪಾಠ ಪ್ರಕಟಿತ | [ ] |
+| teacher.backToCourses | Back to courses | कोर्स पर वापस | ಕೋರ್ಸ್‌ಗಳಿಗೆ ಹಿಂತಿರುಗಿ | [ ] |
+| teacher.backToCourse | Back to the course | कोर्स पर वापस | ಕೋರ್ಸ್‌ಗೆ ಹಿಂತಿರುಗಿ | [ ] |
+| teacher.courseTitle | Course name (English) | कोर्स का नाम (अंग्रेज़ी) | ಕೋರ್ಸ್ ಹೆಸರು (ಇಂಗ್ಲಿಷ್) | [ ] |
+| teacher.titleRequired | Please give the course a name. | कृपया कोर्स का नाम दें। | ದಯವಿಟ್ಟು ಕೋರ್ಸ್‌ಗೆ ಹೆಸರು ಕೊಡಿ. | [ ] |
+| teacher.rename | Rename | नाम बदलें | ಹೆಸರು ಬದಲಿಸಿ | [ ] |
+| teacher.questionsN | {n} questions | {n} प्रश्न | {n} ಪ್ರಶ್ನೆಗಳು | [ ] |
+| teacher.editedN | {n} edited | {n} बदले गए | {n} ಬದಲಿಸಲಾಗಿದೆ | [ ] |
+| teacher.flaggedN | {n} to check | {n} जाँचने हैं | {n} ಪರಿಶೀಲಿಸಬೇಕು | [ ] |
+| teacher.assignedTo | Assigned to {classes} | {classes} को दिया गया | {classes} ಗೆ ನೀಡಲಾಗಿದೆ | [ ] |
+| teacher.notAssigned | Not assigned to a class yet. | अभी किसी कक्षा को नहीं दिया। | ಇನ್ನೂ ಯಾವ ತರಗತಿಗೂ ನೀಡಿಲ್ಲ. | [ ] |
+| teacher.assign | Assign | दें | ನೀಡಿ | [ ] |
+| teacher.assignTitle | Assign to classes | कक्षाओं को दें | ತರಗತಿಗಳಿಗೆ ನೀಡಿ | [ ] |
+| teacher.assignHint | Students in these classes will see the published lessons. | इन कक्षाओं के छात्र प्रकाशित पाठ देखेंगे। | ಈ ತರಗತಿಗಳ ವಿದ್ಯಾರ್ಥಿಗಳು ಪ್ರಕಟಿತ ಪಾಠ ನೋಡುತ್ತಾರೆ. | [ ] |
+| teacher.dueDate | Due date (optional) | अंतिम तारीख (वैकल्पिक) | ಕೊನೆಯ ದಿನಾಂಕ (ಐಚ್ಛಿಕ) | [ ] |
+| teacher.assigned | Course assigned. | कोर्स दे दिया गया। | ಕೋರ್ಸ್ ನೀಡಲಾಗಿದೆ. | [ ] |
+| teacher.noLessons | This course has no lessons yet. | इस कोर्स में अभी कोई पाठ नहीं। | ಈ ಕೋರ್ಸ್‌ನಲ್ಲಿ ಇನ್ನೂ ಪಾಠಗಳಿಲ್ಲ. | [ ] |
+| teacher.generating | Being made | बन रहा है | ತಯಾರಾಗುತ್ತಿದೆ | [ ] |
+| teacher.review | Review | जाँचें | ಪರಿಶೀಲಿಸಿ | [ ] |
+| teacher.publish | Publish | प्रकाशित करें | ಪ್ರಕಟಿಸಿ | [ ] |
+| teacher.published | Lesson published. Your students can play it now. | पाठ प्रकाशित हुआ। छात्र अब इसे खेल सकते हैं। | ಪಾಠ ಪ್ರಕಟವಾಯಿತು. ವಿದ್ಯಾರ್ಥಿಗಳು ಈಗ ಆಡಬಹುದು. | [ ] |
+| teacher.reviewFlaggedFirst | Check the flagged questions first. | पहले चिह्नित प्रश्न जाँचें। | ಮೊದಲು ಗುರುತಿಸಿದ ಪ್ರಶ್ನೆಗಳನ್ನು ಪರಿಶೀಲಿಸಿ. | [ ] |
+| teacher.lessonLive | This lesson is live for your students. | यह पाठ आपके छात्रों के लिए चालू है। | ಈ ಪಾಠ ನಿಮ್ಮ ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಲಭ್ಯವಿದೆ. | [ ] |
+| teacher.flaggedLeft | {n} questions need your check before publishing. | प्रकाशित करने से पहले {n} प्रश्न जाँचने हैं। | ಪ್ರಕಟಿಸುವ ಮೊದಲು {n} ಪ್ರಶ್ನೆ ಪರಿಶೀಲಿಸಬೇಕು. | [ ] |
+| teacher.readyToPublish | Everything is checked. Ready to publish. | सब जाँच लिया। प्रकाशित करने के लिए तैयार। | ಎಲ್ಲಾ ಪರಿಶೀಲಿಸಲಾಗಿದೆ. ಪ್ರಕಟಿಸಲು ಸಿದ್ಧ. | [ ] |
+| teacher.block_notReady | This lesson is still being made. | यह पाठ अभी बन रहा है। | ಈ ಪಾಠ ಇನ್ನೂ ತಯಾರಾಗುತ್ತಿದೆ. | [ ] |
+| teacher.block_noQuestions | Add or keep at least one question to publish. | प्रकाशित करने के लिए कम से कम एक प्रश्न रखें। | ಪ್ರಕಟಿಸಲು ಕನಿಷ್ಠ ಒಂದು ಪ್ರಶ್ನೆ ಇರಲಿ. | [ ] |
+| teacher.block_flagged | Check the flagged questions first. | पहले चिह्नित प्रश्न जाँचें। | ಮೊದಲು ಗುರುತಿಸಿದ ಪ್ರಶ್ನೆಗಳನ್ನು ಪರಿಶೀಲಿಸಿ. | [ ] |
+| teacher.noQuestionsLeft | No questions left in this lesson. | इस पाठ में कोई प्रश्न नहीं बचा। | ಈ ಪಾಠದಲ್ಲಿ ಯಾವ ಪ್ರಶ್ನೆಯೂ ಉಳಿದಿಲ್ಲ. | [ ] |
+| teacher.type_multiple_choice | Pick one | एक चुनो | ಒಂದನ್ನು ಆರಿಸಿ | [ ] |
+| teacher.type_true_false | True or false | सही या गलत | ಸರಿ ಅಥವಾ ತಪ್ಪು | [ ] |
+| teacher.type_fill_formula | Fill the formula | सूत्र भरो | ಸೂತ್ರ ತುಂಬಿ | [ ] |
+| teacher.type_match_pairs | Match pairs | जोड़े मिलाओ | ಜೋಡಿ ಹೊಂದಿಸಿ | [ ] |
+| teacher.page | Notes p. {n} | नोट्स पृ. {n} | ಟಿಪ್ಪಣಿ ಪು. {n} | [ ] |
+| teacher.edited | Edited by you | आपने बदला | ನೀವು ಬದಲಿಸಿದ್ದು | [ ] |
+| teacher.confidence | AI sure: {n} | AI का भरोसा: {n} | AI ಖಚಿತತೆ: {n} | [ ] |
+| teacher.flagReason | Please check | कृपया जाँचें | ದಯವಿಟ್ಟು ಪರಿಶೀಲಿಸಿ | [ ] |
+| teacher.correctAnswer | Correct answer | सही जवाब | ಸರಿಯಾದ ಉತ್ತರ | [ ] |
+| teacher.approve | Looks right | सही है | ಸರಿಯಾಗಿದೆ | [ ] |
+| teacher.edit | Edit | बदलें | ಬದಲಿಸಿ | [ ] |
+| teacher.regenerate | Make a new one | नया बनाएँ | ಹೊಸದು ಮಾಡಿ | [ ] |
+| teacher.reject | Remove | हटाएँ | ತೆಗೆಯಿರಿ | [ ] |
+| teacher.rejectTitle | Remove this question? | यह प्रश्न हटाएँ? | ಈ ಪ್ರಶ್ನೆ ತೆಗೆಯಬೇಕೆ? | [ ] |
+| teacher.rejectHint | Students won't see it. This can't be undone. | छात्र इसे नहीं देखेंगे। यह वापस नहीं होगा। | ವಿದ್ಯಾರ್ಥಿಗಳು ಇದನ್ನು ನೋಡುವುದಿಲ್ಲ. ಇದನ್ನು ಹಿಂಪಡೆಯಲಾಗದು. | [ ] |
+| teacher.questionSaved | Question saved. | प्रश्न सेव हुआ। | ಪ್ರಶ್ನೆ ಉಳಿಸಲಾಗಿದೆ. | [ ] |
+| teacher.questionApproved | Marked as checked. | जाँचा हुआ माना गया। | ಪರಿಶೀಲಿಸಲಾಗಿದೆ ಎಂದು ಗುರುತಿಸಲಾಗಿದೆ. | [ ] |
+| teacher.questionRejected | Question removed. | प्रश्न हटाया गया। | ಪ್ರಶ್ನೆ ತೆಗೆಯಲಾಗಿದೆ. | [ ] |
+| teacher.questionRegenerated | Here's a new version. Please check it. | यह नया रूप है। कृपया जाँचें। | ಇದು ಹೊಸ ರೂಪ. ದಯವಿಟ್ಟು ಪರಿಶೀಲಿಸಿ. | [ ] |
+| teacher.fieldPrompt | Question | प्रश्न | ಪ್ರಶ್ನೆ | [ ] |
+| teacher.fieldStatement | Statement | कथन | ಹೇಳಿಕೆ | [ ] |
+| teacher.fieldFormula | Formula (use __ for the blank) | सूत्र (खाली जगह के लिए __) | ಸೂತ್ರ (ಖಾಲಿಗೆ __ ಬಳಸಿ) | [ ] |
+| teacher.fieldExplanation | Explanation | व्याख्या | ವಿವರಣೆ | [ ] |
+| teacher.true | True | सही | ಸರಿ | [ ] |
+| teacher.false | False | गलत | ತಪ್ಪು | [ ] |
+| teacher.pairsFixed | Pairs come from the notes and can't be changed here. Remove the question if a pair is off. | जोड़े नोट्स से आते हैं और यहाँ नहीं बदलते। कोई जोड़ा गड़बड़ हो तो प्रश्न हटाएँ। | ಜೋಡಿಗಳು ಟಿಪ್ಪಣಿಯಿಂದ ಬರುತ್ತವೆ, ಇಲ್ಲಿ ಬದಲಾಗದು. ಜೋಡಿ ತಪ್ಪಿದ್ದರೆ ಪ್ರಶ್ನೆ ತೆಗೆಯಿರಿ. | [ ] |
+| teacher.problem_promptMissing | Write the question in English. | प्रश्न अंग्रेज़ी में लिखें। | ಪ್ರಶ್ನೆಯನ್ನು ಇಂಗ್ಲಿಷ್‌ನಲ್ಲಿ ಬರೆಯಿರಿ. | [ ] |
+| teacher.problem_statementMissing | Write the statement in English. | कथन अंग्रेज़ी में लिखें। | ಹೇಳಿಕೆಯನ್ನು ಇಂಗ್ಲಿಷ್‌ನಲ್ಲಿ ಬರೆಯಿರಿ. | [ ] |
+| teacher.problem_formulaBlank | The formula needs a __ blank. | सूत्र में __ खाली जगह चाहिए। | ಸೂತ್ರದಲ್ಲಿ __ ಖಾಲಿ ಬೇಕು. | [ ] |
+| teacher.problem_chipMissing | Pick the answer from the chips. | जवाब चिप्स में से चुनें। | ಉತ್ತರವನ್ನು ಚಿಪ್‌ಗಳಿಂದ ಆರಿಸಿ. | [ ] |
+| teacher.uploadTitle | Make a course from your notes | अपने नोट्स से कोर्स बनाएँ | ನಿಮ್ಮ ಟಿಪ್ಪಣಿಯಿಂದ ಕೋರ್ಸ್ ಮಾಡಿ | [ ] |
+| teacher.subject | Subject | विषय | ವಿಷಯ | [ ] |
+| teacher.subjectBI | Biology | जीव विज्ञान | ಜೀವಶಾಸ್ತ್ರ | [ ] |
+| teacher.subjectCH | Chemistry | रसायन विज्ञान | ರಸಾಯನಶಾಸ್ತ್ರ | [ ] |
+| teacher.subjectPH | Physics | भौतिकी | ಭೌತಶಾಸ್ತ್ರ | [ ] |
+| teacher.grade | Class | कक्षा | ತರಗತಿ | [ ] |
+| teacher.forClass | For | किसके लिए | ಯಾರಿಗಾಗಿ | [ ] |
+| teacher.addPages | Add pages (up to {max}) | पेज जोड़ें ({max} तक) | ಪುಟ ಸೇರಿಸಿ ({max} ವರೆಗೆ) | [ ] |
+| teacher.pageRules | Photos as JPG (up to 12 MB each), PDFs up to 10 MB, or type the notes. | फ़ोटो JPG में (हर एक 12 MB तक), PDF 10 MB तक, या नोट्स टाइप करें। | ಫೋಟೋ JPG ಆಗಿ (ಪ್ರತಿ 12 MB ವರೆಗೆ), PDF 10 MB ವರೆಗೆ, ಅಥವಾ ಟಿಪ್ಪಣಿ ಟೈಪ್ ಮಾಡಿ. | [ ] |
+| teacher.addFiles | Add photos or PDF | फ़ोटो या PDF जोड़ें | ಫೋಟೋ ಅಥವಾ PDF ಸೇರಿಸಿ | [ ] |
+| teacher.typeNotes | Or type your notes | या अपने नोट्स टाइप करें | ಅಥವಾ ನಿಮ್ಮ ಟಿಪ್ಪಣಿ ಟೈಪ್ ಮಾಡಿ | [ ] |
+| teacher.addTyped | Add as a page | पेज के रूप में जोड़ें | ಪುಟವಾಗಿ ಸೇರಿಸಿ | [ ] |
+| teacher.typedPage | Typed notes | टाइप किए नोट्स | ಟೈಪ್ ಮಾಡಿದ ಟಿಪ್ಪಣಿ | [ ] |
+| teacher.pagesList | Pages to upload | अपलोड होने वाले पेज | ಅಪ್‌ಲೋಡ್ ಆಗುವ ಪುಟಗಳು | [ ] |
+| teacher.pageWrongType | Only JPG or PDF | सिर्फ़ JPG या PDF | JPG ಅಥವಾ PDF ಮಾತ್ರ | [ ] |
+| teacher.pageTooLarge | Too large | बहुत बड़ी | ತುಂಬಾ ದೊಡ್ಡದು | [ ] |
+| teacher.pageEmpty | Empty | खाली | ಖಾಲಿ | [ ] |
+| teacher.removePage | Remove page {n} | पेज {n} हटाएँ | ಪುಟ {n} ತೆಗೆಯಿರಿ | [ ] |
+| teacher.form_tooManyPages | At most {max} pages at a time. | एक बार में ज़्यादा से ज़्यादा {max} पेज। | ಒಮ್ಮೆಗೆ ಗರಿಷ್ಠ {max} ಪುಟಗಳು. | [ ] |
+| teacher.form_pageProblem | Fix or remove the marked pages first. | पहले चिह्नित पेज ठीक करें या हटाएँ। | ಮೊದಲು ಗುರುತಿಸಿದ ಪುಟಗಳನ್ನು ಸರಿಪಡಿಸಿ ಅಥವಾ ತೆಗೆಯಿರಿ. | [ ] |
+| teacher.form_gradeRange | Pick a class from 6 to 12. | 6 से 12 तक की कक्षा चुनें। | 6 ರಿಂದ 12ರ ತರಗತಿ ಆರಿಸಿ. | [ ] |
+| teacher.makeCourse | Make the course from {n} pages | {n} पेज से कोर्स बनाएँ | {n} ಪುಟಗಳಿಂದ ಕೋರ್ಸ್ ಮಾಡಿ | [ ] |
+| teacher.uploadingPages | Uploading your pages | आपके पेज अपलोड हो रहे हैं | ನಿಮ್ಮ ಪುಟಗಳು ಅಪ್‌ಲೋಡ್ ಆಗುತ್ತಿವೆ | [ ] |
+| teacher.pageProgress | Page {n} upload | पेज {n} अपलोड | ಪುಟ {n} ಅಪ್‌ಲೋಡ್ | [ ] |
+| teacher.pageDone | Uploaded | अपलोड हुआ | ಅಪ್‌ಲೋಡ್ ಆಯಿತು | [ ] |
+| teacher.retryPage | Try this page again | यह पेज फिर भेजें | ಈ ಪುಟ ಮತ್ತೆ ಕಳುಹಿಸಿ | [ ] |
+| teacher.pageFailedHint | A page didn't reach the server. Nothing is lost; try it again. | एक पेज सर्वर तक नहीं पहुँचा। कुछ नहीं खोया, फिर भेजें। | ಒಂದು ಪುಟ ಸರ್ವರ್ ತಲುಪಲಿಲ್ಲ. ಏನೂ ಕಳೆದಿಲ್ಲ, ಮತ್ತೆ ಕಳುಹಿಸಿ. | [ ] |
+| teacher.retryStart | Start again | फिर शुरू करें | ಮತ್ತೆ ಪ್ರಾರಂಭಿಸಿ | [ ] |
+| teacher.aiWorking | Mooshala is reading your notes… | मूशाला आपके नोट्स पढ़ रहा है… | ಮೂಶಾಲಾ ನಿಮ್ಮ ಟಿಪ್ಪಣಿ ಓದುತ್ತಿದೆ… | [ ] |
+| teacher.courseReady | Your first lesson is ready to review. | आपका पहला पाठ जाँचने के लिए तैयार है। | ನಿಮ್ಮ ಮೊದಲ ಪಾಠ ಪರಿಶೀಲನೆಗೆ ಸಿದ್ಧ. | [ ] |
+| teacher.courseFailed | We couldn't make lessons from these notes. | इन नोट्स से पाठ नहीं बन सके। | ಈ ಟಿಪ್ಪಣಿಯಿಂದ ಪಾಠ ಮಾಡಲಾಗಲಿಲ್ಲ. | [ ] |
+| teacher.tryAgainUpload | Try different pages | दूसरे पेज आज़माएँ | ಬೇರೆ ಪುಟ ಪ್ರಯತ್ನಿಸಿ | [ ] |
+| teacher.reviewFirstLesson | Review the first lesson | पहला पाठ जाँचें | ಮೊದಲ ಪಾಠ ಪರಿಶೀಲಿಸಿ | [ ] |
+| teacher.step_queued | In the queue | कतार में | ಸರತಿಯಲ್ಲಿ | [ ] |
+| teacher.step_reading | Reading the pages | पेज पढ़ रहा है | ಪುಟ ಓದುತ್ತಿದೆ | [ ] |
+| teacher.step_chunking | Splitting into topics | विषयों में बाँट रहा है | ವಿಷಯಗಳಾಗಿ ವಿಭಜಿಸುತ್ತಿದೆ | [ ] |
+| teacher.step_outlining | Planning the lessons | पाठों की योजना | ಪಾಠಗಳ ಯೋಜನೆ | [ ] |
+| teacher.step_terms | Finding key words | मुख्य शब्द ढूँढ रहा है | ಮುಖ್ಯ ಪದ ಹುಡುಕುತ್ತಿದೆ | [ ] |
+| teacher.step_lesson_1 | Writing lesson 1 | पाठ 1 लिख रहा है | ಪಾಠ 1 ಬರೆಯುತ್ತಿದೆ | [ ] |
+| teacher.step_ready | Ready | तैयार | ಸಿದ್ಧ | [ ] |
+| parent.homeTitle | Your children | आपके बच्चे | ನಿಮ್ಮ ಮಕ್ಕಳು | [ ] |
+| parent.noChildren | No child linked yet. Ask your child for the code on their profile page. | अभी कोई बच्चा नहीं जुड़ा। बच्चे से उसके प्रोफ़ाइल पेज का कोड माँगें। | ಇನ್ನೂ ಯಾವ ಮಗುವೂ ಜೋಡಣೆಯಾಗಿಲ್ಲ. ಮಗುವಿನ ಪ್ರೊಫೈಲ್ ಪುಟದ ಕೋಡ್ ಕೇಳಿ. | [ ] |
+| parent.consent_pending | Waiting for your approval | आपकी मंज़ूरी बाकी | ನಿಮ್ಮ ಒಪ್ಪಿಗೆ ಬಾಕಿ | [ ] |
+| parent.consent_approved | Approved | मंज़ूर | ಒಪ್ಪಲಾಗಿದೆ | [ ] |
+| parent.consent_revoked | Paused | रुका हुआ | ತಡೆಹಿಡಿಯಲಾಗಿದೆ | [ ] |
+| parent.linkTitle | Link a child | बच्चे को जोड़ें | ಮಗುವನ್ನು ಜೋಡಿಸಿ | [ ] |
+| parent.linkHint | Type the six-letter code from your child's Mooshala profile. Codes work once and last 24 hours. | बच्चे की मूशाला प्रोफ़ाइल का छह अक्षर का कोड लिखें। कोड एक बार चलता है और 24 घंटे रहता है। | ಮಗುವಿನ ಮೂಶಾಲಾ ಪ್ರೊಫೈಲ್‌ನ ಆರು ಅಕ್ಷರದ ಕೋಡ್ ಬರೆಯಿರಿ. ಕೋಡ್ ಒಮ್ಮೆ ಮಾತ್ರ, 24 ಗಂಟೆ ಇರುತ್ತದೆ. | [ ] |
+| parent.codeLabel | Link code | जोड़ने का कोड | ಜೋಡಣೆ ಕೋಡ್ | [ ] |
+| parent.checkingCode | Checking the code… | कोड जाँच रहे हैं… | ಕೋಡ್ ಪರಿಶೀಲಿಸುತ್ತಿದೆ… | [ ] |
+| parent.isThisYourChild | Is this your child, {name}? | क्या यह आपका बच्चा {name} है? | ಇದು ನಿಮ್ಮ ಮಗು {name} ಆ? | [ ] |
+| parent.yesLink | Yes, link | हाँ, जोड़ें | ಹೌದು, ಜೋಡಿಸಿ | [ ] |
+| parent.linked | {name} is linked. | {name} जुड़ गए। | {name} ಜೋಡಣೆಯಾಯಿತು. | [ ] |
+| parent.backToChildren | Back to your children | बच्चों पर वापस | ಮಕ್ಕಳಿಗೆ ಹಿಂತಿರುಗಿ | [ ] |
+| parent.consentTitle | Your permission | आपकी अनुमति | ನಿಮ್ಮ ಅನುಮತಿ | [ ] |
+| parent.consentBody_pending | Mooshala needs your OK to save {name}'s answers and progress so lessons can adapt. You can change this any time. | पाठों को ढालने के लिए मूशाला को {name} के जवाब और प्रगति सहेजने की आपकी अनुमति चाहिए। आप इसे कभी भी बदल सकते हैं। | ಪಾಠಗಳನ್ನು ಹೊಂದಿಸಲು {name} ಅವರ ಉತ್ತರ ಮತ್ತು ಪ್ರಗತಿ ಉಳಿಸಲು ಮೂಶಾಲಾಗೆ ನಿಮ್ಮ ಅನುಮತಿ ಬೇಕು. ನೀವು ಯಾವಾಗ ಬೇಕಾದರೂ ಬದಲಿಸಬಹುದು. | [ ] |
+| parent.consentBody_approved | You approved. {name} can keep learning. Pausing stops new lessons until you approve again. | आपने मंज़ूरी दी है। {name} सीखते रह सकते हैं। रोकने पर नए पाठ तब तक रुकेंगे जब तक आप फिर मंज़ूरी न दें। | ನೀವು ಒಪ್ಪಿದ್ದೀರಿ. {name} ಕಲಿಯುತ್ತಿರಬಹುದು. ತಡೆದರೆ ಮತ್ತೆ ಒಪ್ಪುವವರೆಗೆ ಹೊಸ ಪಾಠ ನಿಲ್ಲುತ್ತದೆ. | [ ] |
+| parent.consentBody_revoked | Learning is paused for {name}. Approve to let them continue. | {name} के लिए सीखना रुका है। जारी रखने के लिए मंज़ूरी दें। | {name} ಅವರಿಗೆ ಕಲಿಕೆ ತಡೆಹಿಡಿಯಲಾಗಿದೆ. ಮುಂದುವರಿಸಲು ಒಪ್ಪಿಗೆ ನೀಡಿ. | [ ] |
+| parent.iApprove | I approve | मैं मंज़ूरी देता/देती हूँ | ನಾನು ಒಪ್ಪುತ್ತೇನೆ | [ ] |
+| parent.revoke | Pause learning | सीखना रोकें | ಕಲಿಕೆ ತಡೆಹಿಡಿಯಿರಿ | [ ] |
+| parent.approved | Thank you. Learning is on. | धन्यवाद। सीखना चालू है। | ಧನ್ಯವಾದ. ಕಲಿಕೆ ಆನ್ ಆಗಿದೆ. | [ ] |
+| parent.revoked | Learning is paused. | सीखना रुक गया है। | ಕಲಿಕೆ ತಡೆಹಿಡಿಯಲಾಗಿದೆ. | [ ] |
+| parent.summaryTitle | This week in short | इस हफ़्ते संक्षेप में | ಈ ವಾರ ಸಂಕ್ಷಿಪ್ತವಾಗಿ | [ ] |
+| parent.listen | Listen | सुनें | ಕೇಳಿ | [ ] |
+| parent.noActivity | {name} hasn't started learning yet. Progress shows up here after the first lesson. | {name} ने अभी सीखना शुरू नहीं किया। पहले पाठ के बाद प्रगति यहाँ दिखेगी। | {name} ಇನ್ನೂ ಕಲಿಕೆ ಆರಂಭಿಸಿಲ್ಲ. ಮೊದಲ ಪಾಠದ ನಂತರ ಪ್ರಗತಿ ಇಲ್ಲಿ ಕಾಣುತ್ತದೆ. | [ ] |
+| parent.thisWeek | This week | इस हफ़्ते | ಈ ವಾರ | [ ] |
+| parent.lessonsThisWeek | Lessons this week (last week {last}) | इस हफ़्ते के पाठ (पिछले हफ़्ते {last}) | ಈ ವಾರದ ಪಾಠಗಳು (ಕಳೆದ ವಾರ {last}) | [ ] |
+| parent.minutes | Minutes learning | सीखने के मिनट | ಕಲಿಕೆಯ ನಿಮಿಷಗಳು | [ ] |
+| parent.streak | Days in a row | लगातार दिन | ಸತತ ದಿನಗಳು | [ ] |
+| parent.word_improving | Accuracy improving | सटीकता सुधर रही है | ನಿಖರತೆ ಸುಧಾರಿಸುತ್ತಿದೆ | [ ] |
+| parent.word_steady | Accuracy steady | सटीकता स्थिर | ನಿಖರತೆ ಸ್ಥಿರ | [ ] |
+| parent.word_needs_practice | Needs more practice | और अभ्यास चाहिए | ಇನ್ನಷ್ಟು ಅಭ್ಯಾಸ ಬೇಕು | [ ] |
+| parent.supportAreas | Where to help | कहाँ मदद करें | ಎಲ್ಲಿ ಸಹಾಯ ಮಾಡಬೇಕು | [ ] |
+| parent.subjectBI | Biology | जीव विज्ञान | ಜೀವಶಾಸ್ತ್ರ | [ ] |
+| parent.subjectCH | Chemistry | रसायन विज्ञान | ರಸಾಯನಶಾಸ್ತ್ರ | [ ] |
+| parent.subjectPH | Physics | भौतिकी | ಭೌತಶಾಸ್ತ್ರ | [ ] |
+| parent.strongest | Strong at {topicEn} | {topic} में अच्छे | {topic} ನಲ್ಲಿ ಉತ್ತಮ | [ ] |
+| parent.needsPractice | Practise {topicEn} together | {topic} का साथ में अभ्यास करें | {topic} ಅನ್ನು ಒಟ್ಟಿಗೆ ಅಭ್ಯಾಸ ಮಾಡಿ | [ ] |
+| parent.achievements | Milestones | उपलब्धियाँ | ಸಾಧನೆಗಳು | [ ] |
+| parent.ach_streak3 | 3 days in a row | लगातार 3 दिन | ಸತತ 3 ದಿನ | [ ] |
+| parent.ach_streak7 | A full week | पूरा हफ़्ता | ಪೂರ್ಣ ವಾರ | [ ] |
+| parent.ach_lessons3 | 3 lessons this week | इस हफ़्ते 3 पाठ | ಈ ವಾರ 3 ಪಾಠ | [ ] |
+| parent.ach_accuracy80 | 80% correct | 80% सही | 80% ಸರಿ | [ ] |
+| parent.ach_allDone | All assignments done | सारे असाइनमेंट पूरे | ಎಲ್ಲಾ ಅಸೈನ್‌ಮೆಂಟ್ ಮುಗಿದಿದೆ | [ ] |
+| parent.earned | earned | मिली | ಗಳಿಸಿದೆ | [ ] |
+| parent.notYet | not yet | अभी नहीं | ಇನ್ನೂ ಇಲ್ಲ | [ ] |
+| parent.assignments | Assignments | असाइनमेंट | ಅಸೈನ್‌ಮೆಂಟ್‌ಗಳು | [ ] |
+| parent.noAssignments | No assignments yet. | अभी कोई असाइनमेंट नहीं। | ಇನ್ನೂ ಅಸೈನ್‌ಮೆಂಟ್ ಇಲ್ಲ. | [ ] |
+| parent.due | Due {date} | अंतिम तारीख {date} | ಕೊನೆಯ ದಿನ {date} | [ ] |
+| parent.status_done | Done | पूरा | ಮುಗಿದಿದೆ | [ ] |
+| parent.status_pending | To do | बाकी | ಬಾಕಿ | [ ] |
+| parent.status_overdue | Late | देर | ತಡ | [ ] |
+| parent.farmTitle | {name}'s farm this week | इस हफ़्ते का खेत | ಈ ವಾರದ ಹೊಲ | [ ] |
+| parent.farmHint | One crop for each lesson this week, one flower for each day in a row. | इस हफ़्ते हर पाठ के लिए एक फ़सल, लगातार हर दिन के लिए एक फूल। | ಈ ವಾರದ ಪ್ರತಿ ಪಾಠಕ್ಕೆ ಒಂದು ಬೆಳೆ, ಸತತ ಪ್ರತಿ ದಿನಕ್ಕೆ ಒಂದು ಹೂವು. | [ ] |
+| parent.farmAlt | {crops} crops and {flowers} flowers | {crops} फ़सलें और {flowers} फूल | {crops} ಬೆಳೆಗಳು ಮತ್ತು {flowers} ಹೂವುಗಳು | [ ] |
+| parent.privacyTitle | Privacy | निजता | ಗೌಪ್ಯತೆ | [ ] |
+| parent.unlink | Unlink this child | इस बच्चे को हटाएँ | ಈ ಮಗುವನ್ನು ಬೇರ್ಪಡಿಸಿ | [ ] |
+| parent.unlinked | Unlinked. | हटा दिया गया। | ಬೇರ್ಪಡಿಸಲಾಗಿದೆ. | [ ] |
+| parent.deleteData | Delete my child's data | मेरे बच्चे का डेटा मिटाएँ | ನನ್ನ ಮಗುವಿನ ಡೇಟಾ ಅಳಿಸಿ | [ ] |
+| parent.deletionRequested | Deletion requested. All data will be gone by {date}. | मिटाने का अनुरोध भेजा। {date} तक सारा डेटा मिट जाएगा। | ಅಳಿಸುವ ವಿನಂತಿ ಕಳುಹಿಸಲಾಗಿದೆ. {date} ರೊಳಗೆ ಎಲ್ಲಾ ಡೇಟಾ ಅಳಿಯುತ್ತದೆ. | [ ] |
+| parent.confirm_revoke | Pause learning? | सीखना रोकें? | ಕಲಿಕೆ ತಡೆಹಿಡಿಯಬೇಕೆ? | [ ] |
+| parent.confirm_revoke_hint | Your child can't start lessons until you approve again. | आपकी दोबारा मंज़ूरी तक बच्चा पाठ शुरू नहीं कर पाएगा। | ನೀವು ಮತ್ತೆ ಒಪ್ಪುವವರೆಗೆ ಮಗು ಪಾಠ ಆರಂಭಿಸಲಾಗದು. | [ ] |
+| parent.confirm_unlink | Unlink this child? | इस बच्चे को हटाएँ? | ಈ ಮಗುವನ್ನು ಬೇರ್ಪಡಿಸಬೇಕೆ? | [ ] |
+| parent.confirm_unlink_hint | You'll stop seeing their progress. They can share a new code later. | आप उनकी प्रगति नहीं देख पाएँगे। वे बाद में नया कोड दे सकते हैं। | ನೀವು ಅವರ ಪ್ರಗತಿ ನೋಡುವುದಿಲ್ಲ. ನಂತರ ಹೊಸ ಕೋಡ್ ಕೊಡಬಹುದು. | [ ] |
+| parent.confirm_delete | Delete all of your child's data? | बच्चे का सारा डेटा मिटाएँ? | ಮಗುವಿನ ಎಲ್ಲಾ ಡೇಟಾ ಅಳಿಸಬೇಕೆ? | [ ] |
+| parent.confirm_delete_hint | Learning stops now and everything is erased within 7 days. This can't be undone. | सीखना अभी रुकेगा और 7 दिन में सब मिट जाएगा। यह वापस नहीं होगा। | ಕಲಿಕೆ ಈಗಲೇ ನಿಲ್ಲುತ್ತದೆ, 7 ದಿನದಲ್ಲಿ ಎಲ್ಲವೂ ಅಳಿಯುತ್ತದೆ. ಹಿಂಪಡೆಯಲಾಗದು. | [ ] |
+| parent.yesContinue | Yes, continue | हाँ, आगे बढ़ें | ಹೌದು, ಮುಂದುವರಿಸಿ | [ ] |
+| parent.studentPanelTitle | Link a parent | माता-पिता को जोड़ें | ಪೋಷಕರನ್ನು ಜೋಡಿಸಿ | [ ] |
+| parent.studentPanelHint | Make a code and give it to your parent. They type it in the Mooshala parent app. | कोड बनाओ और माता-पिता को दो। वे इसे मूशाला में लिखेंगे। | ಕೋಡ್ ಮಾಡಿ ಪೋಷಕರಿಗೆ ಕೊಡಿ. ಅವರು ಮೂಶಾಲಾದಲ್ಲಿ ಬರೆಯುತ್ತಾರೆ. | [ ] |
+| parent.makeCode | Make a code | कोड बनाओ | ಕೋಡ್ ಮಾಡಿ | [ ] |
+| parent.codeExpires | Works once, until {time} | एक बार चलेगा, {time} तक | ಒಮ್ಮೆ ಮಾತ್ರ, {time} ವರೆಗೆ | [ ] |
+| parent.parentApproved | Approved | मंज़ूर | ಒಪ್ಪಿದ್ದಾರೆ | [ ] |
+| parent.parentNotYet | Not approved yet | अभी मंज़ूरी नहीं | ಇನ್ನೂ ಒಪ್ಪಿಲ್ಲ | [ ] |
+| parent.removeParent | Remove {name} | {name} को हटाओ | {name} ಅವರನ್ನು ತೆಗೆಯಿರಿ | [ ] |
+| parent.parentsLoadFailed | Couldn't load your parents. Try again later. | माता-पिता की सूची नहीं खुली। बाद में कोशिश करो। | ಪೋಷಕರ ಪಟ್ಟಿ ತೆರೆಯಲಿಲ್ಲ. ನಂತರ ಪ್ರಯತ್ನಿಸಿ. | [ ] |

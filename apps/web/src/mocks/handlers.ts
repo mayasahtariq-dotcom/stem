@@ -4,6 +4,8 @@ import { FAKE_API_BASE_URL } from "@/lib/env";
 import { DEMO, fakeDb, userForToken, type FakeClassroom } from "./fake-db";
 import { makeLearningHandlers } from "./learning/handlers";
 import { makeGameHandlers } from "./game/handlers";
+import { makeTeacherHandlers } from "./teacher/handlers";
+import { makeParentHandlers } from "./parent/handlers";
 
 const err = (status: number, code: string) => HttpResponse.json({ detail: { code } }, { status });
 
@@ -49,6 +51,8 @@ function checkJoin(userId: string, language: string | null | undefined, key: str
 export function makeHandlers(base = FAKE_API_BASE_URL) {
   return [
     ...makeLearningHandlers(base),
+    ...makeTeacherHandlers(base),
+    ...makeParentHandlers(base),
     // MOCK ONLY: endpoints the backend hasn't built yet.
     ...makeGameHandlers(base),
     http.get(`${base}/me`, ({ request }) => {
