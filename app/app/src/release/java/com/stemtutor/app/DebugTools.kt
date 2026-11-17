@@ -2,7 +2,6 @@ package com.stemtutor.app
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavGraphBuilder
-import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 
 /** Release builds have no debug screens. */
@@ -12,7 +11,3 @@ fun NavGraphBuilder.debugDestinations(navController: NavHostController) = Unit
 @Suppress("UNUSED_PARAMETER")
 @Composable
 fun DebugProfileExtras(navController: NavHostController) = Unit
-
-@Suppress("UNUSED_PARAMETER")
-@Composable
-fun DebugOverlay(navController: NavHostController, modifier: Modifier) = Unit
