@@ -150,3 +150,8 @@ The contracts are in `packages/api-client/src/pending-teacher.ts`, and the fakes
 - `GET /classrooms/{id}/insights` returns `ClassInsights`. The teacher must own the classroom.
 - `GET /teacher/materials` returns `Material[]`, the teacher's own uploads, with per-page file name and kind, class, and status (draft, processing, review or published).
 - Please add an optional `file_name` to `PageIn` and keep it per page.
+
+## Class notes (pending)
+- `POST /classrooms/{id}/notes` (teacher who owns the class) with `{title, body?, file?: {name, type, data_url}}` → 201 `ClassNote`. Needs a title and either text or a file; 422 `VALIDATION`, 413 `FILE_TOO_LARGE`.
+- `GET /teacher/notes` → the teacher's notes, newest first. `GET /me/notes` → notes from the classes the caller is a member of.
+- Types are in `packages/api-client/src/pending-notes.ts`. Store files in object storage and return a signed `url`.

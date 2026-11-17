@@ -219,7 +219,8 @@
     "classSwitcher": "Class",
     "noClasses": "No classes yet",
     "teacherNav": "Teacher sections",
-    "classes": "Classes"
+    "classes": "Classes",
+    "notes": "Notes"
   },
   "teacher": {
     "title": "Teacher",
@@ -764,5 +765,28 @@
     "status_review": "Waiting for your review",
     "status_published": "Published",
     "review": "Review"
+  },
+  "notes": {
+    "teacherTitle": "Class notes",
+    "studentTitle": "Notes from your teacher",
+    "shareTitle": "Share notes with a class",
+    "forClass": "For class",
+    "titleLabel": "Title",
+    "bodyLabel": "Notes (type here)",
+    "fileLabel": "Attach a photo, PDF or text file (optional, up to 1.5 MB)",
+    "share": "Share with class",
+    "shared": "Notes you shared",
+    "sharedToast": "Notes shared. Your students can see them now.",
+    "teacherEmpty": "You haven't shared any notes yet.",
+    "studentEmpty": "No notes yet. Notes your teacher shares will appear here.",
+    "joinClass": "Join a class",
+    "noClasses": "Make a class first, then share notes with it.",
+    "makeClass": "Make a class",
+    "classMissing": "Pick a class.",
+    "titleMissing": "Give the notes a title.",
+    "contentMissing": "Type some notes or attach a file.",
+    "fileTooBig": "That file is too large. Keep it under 1.5 MB.",
+    "open": "Open",
+    "download": "Download"
   }
 }

@@ -34,3 +34,4 @@ export function createApiClient(opts: CreateApiClientOptions): ApiClient {
 export * from "./pending-game";
 export * from "./pending-calls";
 export * from "./pending-teacher";
+export * from "./pending-notes";

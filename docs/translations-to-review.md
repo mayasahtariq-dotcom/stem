@@ -1246,3 +1246,30 @@ File: `apps/web/messages/{hi,kn}.json` (keys are `namespace.key`).
 | login.wrongMode_parent | This number isn't a parent account. Pick its mode above, or use a parent number. | यह नंबर अभिभावक खाता नहीं है। ऊपर सही मोड चुनें या अभिभावक नंबर डालें। | ಈ ಸಂಖ್ಯೆ ಪೋಷಕರ ಖಾತೆ ಅಲ್ಲ. ಮೇಲೆ ಸರಿಯಾದ ಮೋಡ್ ಆರಿಸಿ ಅಥವಾ ಪೋಷಕರ ಸಂಖ್ಯೆ ಬಳಸಿ. | [ ] |
 | login.demoNumber | Demo number for this mode: {phone} | इस मोड का डेमो नंबर: {phone} | ಈ ಮೋಡ್‌ನ ಡೆಮೊ ಸಂಖ್ಯೆ: {phone} | [ ] |
 | login.useDemo | Use it | इसे लें | ಬಳಸಿ | [ ] |
+
+## Class notes
+
+| Key | English | Hindi | Kannada | Reviewed |
+|---|---|---|---|---|
+| nav.notes | Notes | नोट्स | ಟಿಪ್ಪಣಿಗಳು | [ ] |
+| notes.teacherTitle | Class notes | कक्षा के नोट्स | ತರಗತಿ ಟಿಪ್ಪಣಿಗಳು | [ ] |
+| notes.studentTitle | Notes from your teacher | आपके शिक्षक के नोट्स | ನಿಮ್ಮ ಶಿಕ್ಷಕರ ಟಿಪ್ಪಣಿಗಳು | [ ] |
+| notes.shareTitle | Share notes with a class | कक्षा के साथ नोट्स साझा करें | ತರಗತಿಯೊಂದಿಗೆ ಟಿಪ್ಪಣಿ ಹಂಚಿಕೊಳ್ಳಿ | [ ] |
+| notes.forClass | For class | किस कक्षा के लिए | ಯಾವ ತರಗತಿಗೆ | [ ] |
+| notes.titleLabel | Title | शीर्षक | ಶೀರ್ಷಿಕೆ | [ ] |
+| notes.bodyLabel | Notes (type here) | नोट्स (यहाँ लिखें) | ಟಿಪ್ಪಣಿ (ಇಲ್ಲಿ ಬರೆಯಿರಿ) | [ ] |
+| notes.fileLabel | Attach a photo, PDF or text file (optional, up to 1.5 MB) | फ़ोटो, PDF या टेक्स्ट फ़ाइल जोड़ें (वैकल्पिक, 1.5 MB तक) | ಫೋಟೋ, PDF ಅಥವಾ ಪಠ್ಯ ಫೈಲ್ ಸೇರಿಸಿ (ಐಚ್ಛಿಕ, 1.5 MB ವರೆಗೆ) | [ ] |
+| notes.share | Share with class | कक्षा के साथ साझा करें | ತರಗತಿಯೊಂದಿಗೆ ಹಂಚಿಕೊಳ್ಳಿ | [ ] |
+| notes.shared | Notes you shared | आपके साझा किए नोट्स | ನೀವು ಹಂಚಿಕೊಂಡ ಟಿಪ್ಪಣಿಗಳು | [ ] |
+| notes.sharedToast | Notes shared. Your students can see them now. | नोट्स साझा हो गए। अब छात्र इन्हें देख सकते हैं। | ಟಿಪ್ಪಣಿ ಹಂಚಿಕೊಳ್ಳಲಾಗಿದೆ. ಈಗ ವಿದ್ಯಾರ್ಥಿಗಳು ನೋಡಬಹುದು. | [ ] |
+| notes.teacherEmpty | You haven't shared any notes yet. | आपने अभी तक कोई नोट्स साझा नहीं किए। | ನೀವು ಇನ್ನೂ ಯಾವುದೇ ಟಿಪ್ಪಣಿ ಹಂಚಿಕೊಂಡಿಲ್ಲ. | [ ] |
+| notes.studentEmpty | No notes yet. Notes your teacher shares will appear here. | अभी कोई नोट्स नहीं। शिक्षक के साझा किए नोट्स यहाँ दिखेंगे। | ಇನ್ನೂ ಟಿಪ್ಪಣಿ ಇಲ್ಲ. ಶಿಕ್ಷಕರು ಹಂಚಿಕೊಂಡದ್ದು ಇಲ್ಲಿ ಕಾಣಿಸುತ್ತದೆ. | [ ] |
+| notes.joinClass | Join a class | कक्षा से जुड़ें | ತರಗತಿಗೆ ಸೇರಿ | [ ] |
+| notes.noClasses | Make a class first, then share notes with it. | पहले एक कक्षा बनाएँ, फिर उसके साथ नोट्स साझा करें। | ಮೊದಲು ತರಗತಿ ಮಾಡಿ, ನಂತರ ಟಿಪ್ಪಣಿ ಹಂಚಿಕೊಳ್ಳಿ. | [ ] |
+| notes.makeClass | Make a class | कक्षा बनाएँ | ತರಗತಿ ಮಾಡಿ | [ ] |
+| notes.classMissing | Pick a class. | एक कक्षा चुनें। | ಒಂದು ತರಗತಿ ಆರಿಸಿ. | [ ] |
+| notes.titleMissing | Give the notes a title. | नोट्स को शीर्षक दें। | ಟಿಪ್ಪಣಿಗೆ ಶೀರ್ಷಿಕೆ ಕೊಡಿ. | [ ] |
+| notes.contentMissing | Type some notes or attach a file. | कुछ नोट्स लिखें या फ़ाइल जोड़ें। | ಸ್ವಲ್ಪ ಬರೆಯಿರಿ ಅಥವಾ ಫೈಲ್ ಸೇರಿಸಿ. | [ ] |
+| notes.fileTooBig | That file is too large. Keep it under 1.5 MB. | यह फ़ाइल बहुत बड़ी है। 1.5 MB से छोटी रखें। | ಈ ಫೈಲ್ ತುಂಬಾ ದೊಡ್ಡದು. 1.5 MB ಒಳಗೆ ಇಡಿ. | [ ] |
+| notes.open | Open | खोलें | ತೆರೆಯಿರಿ | [ ] |
+| notes.download | Download | डाउनलोड | ಡೌನ್‌ಲೋಡ್ | [ ] |

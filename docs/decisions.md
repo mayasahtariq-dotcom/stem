@@ -282,3 +282,8 @@ Spec: the Mooshala Web PRD (uploaded to the project) and `docs/web/p2-frontend-p
 ## Mode screen opens the mode directly (demo build)
 - The user asked to remove the phone step: picking Student, Teacher or Parent on "Who are you?" now signs straight into that mode's demo account (Asha, Ravi Sir, Meena) when fakes are on. With a real backend it still goes to phone login.
 - Phone OTP and school-computer login stay reachable at /login for testing. This is a demo convenience, not real authentication.
+
+## Class notes (teacher shares, students read)
+- The user asked for teachers to upload notes and students to view them. Teachers get a Notes page (/teacher/notes): pick a class, add a title, type notes and/or attach one photo, PDF or text file (up to 1.5 MB in the demo). Students get a Notes item in their menu (/farm/notes) listing notes from every class they are in.
+- This is separate from the AI course upload, which turns pages into lessons. Notes are shared as is.
+- Not in the backend yet: `POST /classrooms/{id}/notes`, `GET /teacher/notes`, `GET /me/notes` (packages/api-client/src/pending-notes.ts). The fake backend keeps files as data URLs; a real backend should store them in object storage and return signed URLs.
