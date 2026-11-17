@@ -116,3 +116,19 @@ Numbers from the spec the server should apply: 5 gems per finished lesson, 20 pe
 | `GET /game/badges` | spec | `Badge[]`: `id, name Tri, rule Tri, icon, earned_at, progress, goal` |
 | `POST /game/pots/{id}/open` | spec | → `{pot_id, reward {kind gems|sticker|outfit, amount, item}, stats}`; `POT_ALREADY_OPENED` (409). Contents fixed per pot on the server. |
 
+
+
+## Call-mode endpoints the web app mocks (Phase 5): please build
+
+The web expects these call-mode endpoints (contract in `packages/api-client/src/pending-calls.ts`; the reference behaviour is the fake in `apps/web/src/mocks/calls/`):
+
+- `GET /classrooms/{id}/call-students` returns `CallStudent[]`. The teacher must own the classroom.
+- `POST /classrooms/{id}/call-students` takes `{name, parent_phone, language, window:{start,end}, days}`, with "HH:MM" times in IST. It returns 201 `CallStudent`, or one of:
+  - 422 VALIDATION, for a phone that isn't +91 plus 6–9 and 9 digits, a window outside 09:00–21:00 or shorter than 30 minutes, or Sunday
+  - 409 DUPLICATE_PHONE
+  - It starts the consent call or SMS to the parent, so the status starts as `waiting_consent`.
+- `PATCH /call-students/{id}` takes `{paused?, language?, window?, days?}` and returns `CallStudent`.
+- `POST /call-students/{id}/call-now` returns 202 `CallSession` with state `dialing`, or 409 with one of CALL_IN_PROGRESS, CALLS_PAUSED, CONSENT_PENDING, WEEKLY_CAP_REACHED or OUTSIDE_CALL_HOURS (checked in that order). It must never return `connected` synchronously.
+- `GET /call-students/{id}/call` returns the latest `CallSession`. State only moves forward: dialing, then ringing, then connected, then completed, no_answer or failed. On no_answer it sets `retry_at` 20 minutes later, for at most 2 retries, then the student becomes `not_reachable`.
+- `GET /call-students/{id}/twin` returns `CallTwin` (lessons_heard, last_topic, strong, weak, and summary as en/hi/kn).
+- `CallStudent` exposes only `phone_last4`, never the full number. `minutes_this_week` resets Monday 00:00 IST, and `weekly_cap_minutes` is 15.

@@ -197,3 +197,34 @@ Spec: the Mooshala Web PRD (uploaded to the project) and `docs/web/p2-frontend-p
 - **Badges are collectibles** on the profile shelf, each worth 50 gems once (spec). Badges Asha earned before the gems ledger existed are seeded at 0 gems so the demo balance stays 140.
 - **Golu Pot** is a 3D clay pot next to Golu that wobbles while one is waiting (one per finished lesson). What's inside is decided by the server and fixed per pot (reopening can't reroll); the UI shows no odds or probabilities anywhere.
 - **Mascot growth** (calf 0 XP, cow 500, champion 2,000; next stage 8,000 shown as the top) is shown in 3D (size, champion bell colour) and on the profile with progress to the next stage, all from `GameStats.mascot`.
+
+
+## Web Phase 5: Call mode (2026-11-17)
+
+- **The call-mode contract is pending.** The backend has no call-student endpoints. The web uses the contract in `packages/api-client/src/pending-calls.ts` (types plus `CALL_PATHS`) through `services.pending`. In fake mode MSW serves it from `apps/web/src/mocks/calls`. With real services the Calls page shows its error state. The endpoints are:
+  - POST/GET `/classrooms/{id}/call-students`
+  - PATCH `/call-students/{id}`
+  - POST `/call-students/{id}/call-now`
+  - GET `/call-students/{id}/call`
+  - GET `/call-students/{id}/twin`
+- **The rules are shared, pure code.** `apps/web/src/features/calls/rules.ts` holds them, and both the console and the fake use them:
+  - the window must sit inside 9 am to 9 pm IST, default 5 to 7 pm, at least 30 minutes, end after start
+  - days are Monday to Saturday
+  - a 15-minute weekly cap, with the week starting Monday 00:00 IST
+  - an unanswered call is retried after 20 minutes, at most twice, then the student is "Not reachable"
+  - phone numbers are Indian mobiles (6 to 9 then 9 digits), accepting +91 or a leading 0
+  - The 30-minute minimum window is our own choice (the spec gives none); it stops windows too short to ever be called.
+- **The order of block reasons:** CALL_IN_PROGRESS, CALLS_PAUSED, CONSENT_PENDING, WEEKLY_CAP_REACHED, OUTSIDE_CALL_HOURS. The console disables "Call now" only for reasons it can see in the server's status (`statusBlock`). It does not check the time window itself, because the server owns the clock and answers OUTSIDE_CALL_HOURS.
+- **"Connected" only comes from the server.** "Call now" shows only the state the server returned (202 with `dialing`), then polls `GET /call-students/{id}/call` every second while the call is live. The shown state only moves forward, by rank: dialing, then ringing, then connected, then a final state. A poll may skip a step (dialing straight to no_answer). A stale or out-of-order reply is ignored, as is a reply about an older call (compared by `started_at`). A second tap is ignored while the request is pending or a call is live, and the server also answers 409 CALL_IN_PROGRESS.
+- **Statuses and error codes.** There are seven student statuses: waiting_consent, scheduled, in_call, retry_pending, not_reachable, paused and cap_reached. The UI labels include "Waiting for consent" and "Not reachable". It uses only the existing error codes: DUPLICATE_PHONE, CALL_IN_PROGRESS, OUTSIDE_CALL_HOURS, CONSENT_PENDING, WEEKLY_CAP_REACHED, CALLS_PAUSED.
+- **The duplicate-phone check (fake)** rejects a phone that matches another call student in the same class, or an app user who is a member of the class.
+- **Fake-only demo conventions** (`mocks/calls/state.ts`; not product behaviour):
+  - A phone ending in 0 never answers.
+  - A new student's consent arrives one minute after they are added.
+  - Every completed call bills 2 minutes.
+  - Timing: dialing 2 s, ringing 3 s, connected 12 s.
+  - The seed is Lakshmi (4 minutes used), Raju (waiting for consent), Meera (not reachable) and Sunil (at the cap).
+  - A fake-only **demo clock** (`PUT /__demo/clock`, the "Pretend it's 6 pm" card) moves the fake clock to the next 6 pm IST on a calling day, so calls can be tried at any hour. The card appears only when `NEXT_PUBLIC_USE_FAKES` is on.
+- **Call query keys** (`callKeys`) live in `features/calls/api.ts`, not in the shared query-keys.ts, so this phase doesn't conflict with parallel work.
+- **The nav was not edited.** The Calls section is at `/teacher/calls` (plus `/teacher/calls/new`); the nav entry and CURRENT_PHASE bump are left to the merge.
+- **Phone e2e clicks.** As in the other specs, the phone e2e project presses buttons by focus plus Enter, because Pixel 7 emulation lets neighbouring labels intercept pointer clicks.

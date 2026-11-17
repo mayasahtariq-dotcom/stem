@@ -174,3 +174,15 @@ Demo: `docs/demos/web-phase-4.md`. Deviations: `docs/decisions.md` ("Web Phase 4
 - [x] Golu's growth stages in 3D and on the profile.
 - [x] Tests: game rules, fake contract (claims, ranking, badge gems, pots), quest/league/profile/pot flows, stories with axe, Playwright game journey.
 - [ ] Game endpoints built by the backend (`docs/web/backend-handoff.md`).
+
+
+## Web Phase 5: Call mode
+
+Demo: `docs/demos/web-phase-5.md`. Deviations: `docs/decisions.md` ("Web Phase 5").
+
+- [x] Calls section at /teacher/calls: student list with status, window, days, language and minutes used
+- [x] Add a student without the app: name, +91 phone validation, language, window (default 5 to 7 pm, inside 9 am to 9 pm IST), Mon to Sat, duplicate-phone check, confirmation step
+- [x] Call console: Call now polls the server and never shows "connected" early; repeat taps are blocked; pause and resume; weekly cap of 15 minutes; retries after 20 minutes, twice; Not reachable; Waiting for consent; learning summary ("twin")
+- [x] Errors enforced: OUTSIDE_CALL_HOURS, CONSENT_PENDING, WEEKLY_CAP_REACHED, CALLS_PAUSED, CALL_IN_PROGRESS, DUPLICATE_PHONE
+- [x] Stories (11, axe-tested in hi and kn), unit tests for the rules, integration tests against the fakes, e2e/calls.spec.ts (phone and desktop)
+- [ ] Real backend endpoints (pending; see backend-handoff)

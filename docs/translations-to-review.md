@@ -1076,3 +1076,86 @@ File: `apps/web/messages/{hi,kn}.json` (keys are `namespace.key`).
 | game.potGems | {n} gems inside! | अंदर {n} रत्न! | ಒಳಗೆ {n} ರತ್ನ! | [ ] |
 | game.potSticker | A new sticker for your collection! | आपके संग्रह के लिए नया स्टिकर! | ನಿಮ್ಮ ಸಂಗ್ರಹಕ್ಕೆ ಹೊಸ ಸ್ಟಿಕ್ಕರ್! | [ ] |
 | game.close | Close | बंद करो | ಮುಚ್ಚಿ | [ ] |
+
+## Web Phase 5 (call mode)
+
+| Key | English | Hindi | Kannada | Reviewed |
+|---|---|---|---|---|
+| calls.title | Phone lessons | फ़ोन पाठ | ಫೋನ್ ಪಾಠಗಳು | [ ] |
+| calls.addStudent | Add student without app | बिना ऐप वाला छात्र जोड़ें | ಆ್ಯಪ್ ಇಲ್ಲದ ವಿದ್ಯಾರ್ಥಿ ಸೇರಿಸಿ | [ ] |
+| calls.noClass | Make a class first to add phone students. | फ़ोन वाले छात्र जोड़ने के लिए पहले कक्षा बनाएँ। | ಫೋನ್ ವಿದ್ಯಾರ್ಥಿಗಳನ್ನು ಸೇರಿಸಲು ಮೊದಲು ತರಗತಿ ಮಾಡಿ. | [ ] |
+| calls.rulesHint | Mooshala calls between 9 am and 9 pm, Monday to Saturday, up to 15 minutes a week. A missed call is tried again after 20 minutes, twice. | मूशाला सुबह 9 से रात 9 बजे तक, सोमवार से शनिवार, हफ़्ते में 15 मिनट तक कॉल करता है। छूटी कॉल 20 मिनट बाद दो बार फिर की जाती है। | ಮೂಶಾಲಾ ಬೆಳಿಗ್ಗೆ 9 ರಿಂದ ರಾತ್ರಿ 9 ರವರೆಗೆ, ಸೋಮವಾರದಿಂದ ಶನಿವಾರ, ವಾರಕ್ಕೆ 15 ನಿಮಿಷದವರೆಗೆ ಕರೆ ಮಾಡುತ್ತದೆ. ತಪ್ಪಿದ ಕರೆಯನ್ನು 20 ನಿಮಿಷದ ನಂತರ ಎರಡು ಬಾರಿ ಮತ್ತೆ ಮಾಡಲಾಗುತ್ತದೆ. | [ ] |
+| calls.demoClock | Demo clock: {now} | डेमो घड़ी: {now} | ಡೆಮೊ ಗಡಿಯಾರ: {now} | [ ] |
+| calls.demoEvening | Pretend it's 6 pm | मान लो शाम 6 बजे हैं | ಸಂಜೆ 6 ಎಂದು ಭಾವಿಸಿ | [ ] |
+| calls.demoReal | Real time | असली समय | ನಿಜವಾದ ಸಮಯ | [ ] |
+| calls.demoMoved | Demo clock moved to 6 pm. | डेमो घड़ी शाम 6 बजे पर। | ಡೆಮೊ ಗಡಿಯಾರ ಸಂಜೆ 6ಕ್ಕೆ. | [ ] |
+| calls.empty | No phone students yet. Add a student who learns by phone calls. | अभी कोई फ़ोन वाला छात्र नहीं। फ़ोन कॉल से सीखने वाला छात्र जोड़ें। | ಇನ್ನೂ ಫೋನ್ ವಿದ್ಯಾರ್ಥಿಗಳಿಲ್ಲ. ಫೋನ್ ಕರೆಯಿಂದ ಕಲಿಯುವ ವಿದ್ಯಾರ್ಥಿಯನ್ನು ಸೇರಿಸಿ. | [ ] |
+| calls.listLabel | Phone students | फ़ोन वाले छात्र | ಫೋನ್ ವಿದ್ಯಾರ್ಥಿಗಳು | [ ] |
+| calls.consoleLabel | Call console | कॉल कंसोल | ಕರೆ ಕನ್ಸೋಲ್ | [ ] |
+| calls.pickStudent | Pick a student to see their calls. | कॉल देखने के लिए छात्र चुनें। | ಕರೆಗಳನ್ನು ನೋಡಲು ವಿದ್ಯಾರ್ಥಿಯನ್ನು ಆರಿಸಿ. | [ ] |
+| calls.status_waiting_consent | Waiting for consent | सहमति का इंतज़ार | ಒಪ್ಪಿಗೆಗಾಗಿ ಕಾಯುತ್ತಿದೆ | [ ] |
+| calls.status_scheduled | Scheduled | तय है | ನಿಗದಿಯಾಗಿದೆ | [ ] |
+| calls.status_in_call | On a call | कॉल पर | ಕರೆಯಲ್ಲಿ | [ ] |
+| calls.status_retry_pending | Will try again | फिर कोशिश होगी | ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಲಾಗುವುದು | [ ] |
+| calls.status_not_reachable | Not reachable | संपर्क नहीं हो सका | ಸಂಪರ್ಕಿಸಲಾಗಲಿಲ್ಲ | [ ] |
+| calls.status_paused | Paused | रुका हुआ | ತಡೆಹಿಡಿಯಲಾಗಿದೆ | [ ] |
+| calls.status_cap_reached | Week's minutes used | हफ़्ते के मिनट पूरे | ವಾರದ ನಿಮಿಷಗಳು ಮುಗಿದಿವೆ | [ ] |
+| calls.detail_waiting_consent | We sent the parent a consent message. Calls start once they agree. | माता-पिता को सहमति संदेश भेजा है। उनके मानने पर कॉल शुरू होंगी। | ಪೋಷಕರಿಗೆ ಒಪ್ಪಿಗೆ ಸಂದೇಶ ಕಳುಹಿಸಲಾಗಿದೆ. ಅವರು ಒಪ್ಪಿದ ನಂತರ ಕರೆಗಳು ಆರಂಭ. | [ ] |
+| calls.detail_scheduled | Calls happen in the chosen time. | कॉल चुने गए समय में होंगी। | ಆರಿಸಿದ ಸಮಯದಲ್ಲಿ ಕರೆಗಳು ಆಗುತ್ತವೆ. | [ ] |
+| calls.detail_next | Next call: {time} | अगली कॉल: {time} | ಮುಂದಿನ ಕರೆ: {time} | [ ] |
+| calls.detail_in_call | A call is happening now. | अभी कॉल चल रही है। | ಈಗ ಕರೆ ನಡೆಯುತ್ತಿದೆ. | [ ] |
+| calls.detail_retry | Nobody answered. Trying again at {time}. | किसी ने नहीं उठाया। {time} पर फिर कोशिश। | ಯಾರೂ ಉತ್ತರಿಸಲಿಲ್ಲ. {time} ಕ್ಕೆ ಮತ್ತೆ ಪ್ರಯತ್ನ. | [ ] |
+| calls.detail_not_reachable | Three calls in a row went unanswered. Check the number with the parent, then call again. | लगातार तीन कॉल नहीं उठीं। माता-पिता से नंबर जाँचें, फिर कॉल करें। | ಸತತ ಮೂರು ಕರೆಗಳಿಗೆ ಉತ್ತರ ಸಿಗಲಿಲ್ಲ. ಪೋಷಕರೊಂದಿಗೆ ಸಂಖ್ಯೆ ಪರಿಶೀಲಿಸಿ, ನಂತರ ಮತ್ತೆ ಕರೆ ಮಾಡಿ. | [ ] |
+| calls.detail_paused | Calls are paused. Resume to start them again. | कॉल रुकी हैं। फिर शुरू करने के लिए चालू करें। | ಕರೆಗಳು ತಡೆಹಿಡಿಯಲಾಗಿದೆ. ಮತ್ತೆ ಆರಂಭಿಸಲು ಮುಂದುವರಿಸಿ. | [ ] |
+| calls.detail_cap | This week's {cap} minutes are used. Calls start again on Monday. | इस हफ़्ते के {cap} मिनट पूरे हुए। सोमवार से फिर कॉल होंगी। | ಈ ವಾರದ {cap} ನಿಮಿಷಗಳು ಮುಗಿದಿವೆ. ಸೋಮವಾರದಿಂದ ಮತ್ತೆ ಕರೆಗಳು. | [ ] |
+| calls.lang_hindi | Hindi | हिन्दी | ಹಿಂದಿ | [ ] |
+| calls.lang_kannada | Kannada | कन्नड़ | ಕನ್ನಡ | [ ] |
+| calls.minutesUsed | {n} of {cap} minutes this week | इस हफ़्ते {cap} में से {n} मिनट | ಈ ವಾರ {cap} ರಲ್ಲಿ {n} ನಿಮಿಷ | [ ] |
+| calls.call_dialing | Dialling… (try {attempt}) | नंबर मिला रहे हैं… (कोशिश {attempt}) | ಡಯಲ್ ಮಾಡುತ್ತಿದೆ… (ಪ್ರಯತ್ನ {attempt}) | [ ] |
+| calls.call_ringing | Ringing… | घंटी बज रही है… | ರಿಂಗ್ ಆಗುತ್ತಿದೆ… | [ ] |
+| calls.call_connected | Connected. The lesson is playing. | जुड़ गया। पाठ चल रहा है। | ಸಂಪರ್ಕವಾಯಿತು. ಪಾಠ ನಡೆಯುತ್ತಿದೆ. | [ ] |
+| calls.call_completed | Call finished ({n} min). | कॉल पूरी हुई ({n} मिनट)। | ಕರೆ ಮುಗಿಯಿತು ({n} ನಿಮಿಷ). | [ ] |
+| calls.call_no_answer | No answer (try {attempt} of 3). | जवाब नहीं मिला (3 में से कोशिश {attempt})। | ಉತ್ತರ ಸಿಗಲಿಲ್ಲ (3 ರಲ್ಲಿ ಪ್ರಯತ್ನ {attempt}). | [ ] |
+| calls.call_failed | The call didn't go through. | कॉल नहीं लग सकी। | ಕರೆ ಹೋಗಲಿಲ್ಲ. | [ ] |
+| calls.noLiveCall | No call right now. | अभी कोई कॉल नहीं। | ಈಗ ಯಾವ ಕರೆಯೂ ಇಲ್ಲ. | [ ] |
+| calls.callNow | Call now | अभी कॉल करें | ಈಗ ಕರೆ ಮಾಡಿ | [ ] |
+| calls.pause | Pause calls | कॉल रोकें | ಕರೆಗಳನ್ನು ತಡೆಹಿಡಿಯಿರಿ | [ ] |
+| calls.resume | Resume calls | कॉल फिर शुरू करें | ಕರೆಗಳನ್ನು ಮುಂದುವರಿಸಿ | [ ] |
+| calls.pausedToast | Calls paused. | कॉल रोकी गईं। | ಕರೆಗಳನ್ನು ತಡೆಹಿಡಿಯಲಾಗಿದೆ. | [ ] |
+| calls.resumedToast | Calls resumed. | कॉल फिर शुरू। | ಕರೆಗಳು ಮುಂದುವರಿದಿವೆ. | [ ] |
+| calls.twinTitle | What we know from calls | कॉल से क्या पता चला | ಕರೆಗಳಿಂದ ತಿಳಿದದ್ದು | [ ] |
+| calls.twinFailed | Couldn't load this right now. | अभी यह नहीं खुल सका। | ಈಗ ಇದನ್ನು ತೆರೆಯಲಾಗಲಿಲ್ಲ. | [ ] |
+| calls.twinWeak | Needs practice: {topicsEn} | अभ्यास चाहिए: {topics} | ಅಭ್ಯಾಸ ಬೇಕು: {topics} | [ ] |
+| calls.mon | Mon | सोम | ಸೋಮ | [ ] |
+| calls.tue | Tue | मंगल | ಮಂಗಳ | [ ] |
+| calls.wed | Wed | बुध | ಬುಧ | [ ] |
+| calls.thu | Thu | गुरु | ಗುರು | [ ] |
+| calls.fri | Fri | शुक्र | ಶುಕ್ರ | [ ] |
+| calls.sat | Sat | शनि | ಶನಿ | [ ] |
+| calls.backToCalls | Back to phone lessons | फ़ोन पाठ पर वापस | ಫೋನ್ ಪಾಠಗಳಿಗೆ ಹಿಂತಿರುಗಿ | [ ] |
+| calls.addTitle | Add a student without the app | बिना ऐप वाला छात्र जोड़ें | ಆ್ಯಪ್ ಇಲ್ಲದ ವಿದ್ಯಾರ್ಥಿಯನ್ನು ಸೇರಿಸಿ | [ ] |
+| calls.addHint | They'll learn by phone calls to a parent's number, as part of {cls}. | वे {cls} के हिस्से के रूप में माता-पिता के नंबर पर फ़ोन कॉल से सीखेंगे। | ಅವರು {cls} ಭಾಗವಾಗಿ ಪೋಷಕರ ಸಂಖ್ಯೆಗೆ ಫೋನ್ ಕರೆಗಳ ಮೂಲಕ ಕಲಿಯುತ್ತಾರೆ. | [ ] |
+| calls.studentName | Student's name | छात्र का नाम | ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು | [ ] |
+| calls.parentPhone | Parent's phone number | माता-पिता का फ़ोन नंबर | ಪೋಷಕರ ಫೋನ್ ಸಂಖ್ಯೆ | [ ] |
+| calls.phoneHint | Ten digits. We ask the parent's consent by SMS first. | दस अंक। पहले SMS से माता-पिता की सहमति लेंगे। | ಹತ್ತು ಅಂಕಿಗಳು. ಮೊದಲು SMS ಮೂಲಕ ಪೋಷಕರ ಒಪ್ಪಿಗೆ ಕೇಳುತ್ತೇವೆ. | [ ] |
+| calls.language | Lesson language | पाठ की भाषा | ಪಾಠದ ಭಾಷೆ | [ ] |
+| calls.window | Call time | कॉल का समय | ಕರೆಯ ಸಮಯ | [ ] |
+| calls.from | From | से | ಇಂದ | [ ] |
+| calls.to | To | तक | ವರೆಗೆ | [ ] |
+| calls.windowHint | Between 9 am and 9 pm, at least 30 minutes. Most families prefer 5 to 7 pm. | सुबह 9 से रात 9 के बीच, कम से कम 30 मिनट। ज़्यादातर परिवार शाम 5 से 7 पसंद करते हैं। | ಬೆಳಿಗ್ಗೆ 9 ರಿಂದ ರಾತ್ರಿ 9 ರ ನಡುವೆ, ಕನಿಷ್ಠ 30 ನಿಮಿಷ. ಹೆಚ್ಚಿನ ಕುಟುಂಬಗಳು ಸಂಜೆ 5 ರಿಂದ 7 ಇಷ್ಟಪಡುತ್ತವೆ. | [ ] |
+| calls.days | Call days | कॉल के दिन | ಕರೆಯ ದಿನಗಳು | [ ] |
+| calls.noSunday | No calls on Sundays. | रविवार को कॉल नहीं। | ಭಾನುವಾರ ಕರೆಗಳಿಲ್ಲ. | [ ] |
+| calls.problem_nameMissing | Please write the student's name. | कृपया छात्र का नाम लिखें। | ದಯವಿಟ್ಟು ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು ಬರೆಯಿರಿ. | [ ] |
+| calls.problem_phoneInvalid | Enter a 10-digit mobile number starting with 6, 7, 8 or 9. | 6, 7, 8 या 9 से शुरू होने वाला 10 अंकों का मोबाइल नंबर लिखें। | 6, 7, 8 ಅಥವಾ 9 ರಿಂದ ಆರಂಭವಾಗುವ 10 ಅಂಕಿಯ ಮೊಬೈಲ್ ಸಂಖ್ಯೆ ಬರೆಯಿರಿ. | [ ] |
+| calls.problem_format | Pick a start and an end time. | शुरू और खत्म का समय चुनें। | ಆರಂಭ ಮತ್ತು ಮುಕ್ತಾಯ ಸಮಯ ಆರಿಸಿ. | [ ] |
+| calls.problem_outsideHours | Calls must be between 9 am and 9 pm. | कॉल सुबह 9 से रात 9 के बीच ही हो सकती हैं। | ಕರೆಗಳು ಬೆಳಿಗ್ಗೆ 9 ರಿಂದ ರಾತ್ರಿ 9 ರ ನಡುವೆ ಮಾತ್ರ. | [ ] |
+| calls.problem_endBeforeStart | The end time must be after the start time. | खत्म का समय शुरू के बाद होना चाहिए। | ಮುಕ್ತಾಯ ಸಮಯ ಆರಂಭದ ನಂತರ ಇರಬೇಕು. | [ ] |
+| calls.problem_tooShort | Give at least 30 minutes. | कम से कम 30 मिनट दें। | ಕನಿಷ್ಠ 30 ನಿಮಿಷ ಕೊಡಿ. | [ ] |
+| calls.problem_noDays | Pick at least one day. | कम से कम एक दिन चुनें। | ಕನಿಷ್ಠ ಒಂದು ದಿನ ಆರಿಸಿ. | [ ] |
+| calls.problem_sunday | Calls can't be on Sundays. | रविवार को कॉल नहीं हो सकतीं। | ಭಾನುವಾರ ಕರೆಗಳು ಸಾಧ್ಯವಿಲ್ಲ. | [ ] |
+| calls.next | Next | आगे | ಮುಂದೆ | [ ] |
+| calls.confirmTitle | Check the details | जानकारी जाँचें | ವಿವರಗಳನ್ನು ಪರಿಶೀಲಿಸಿ | [ ] |
+| calls.confirmHint | After saving, we send the parent a consent SMS. No call is made until they agree. | सेव करने के बाद माता-पिता को सहमति का SMS जाएगा। उनके मानने तक कोई कॉल नहीं होगी। | ಉಳಿಸಿದ ನಂತರ ಪೋಷಕರಿಗೆ ಒಪ್ಪಿಗೆ SMS ಹೋಗುತ್ತದೆ. ಅವರು ಒಪ್ಪುವವರೆಗೆ ಯಾವ ಕರೆಯೂ ಆಗದು. | [ ] |
+| calls.confirmSave | Yes, add this student | हाँ, यह छात्र जोड़ें | ಹೌದು, ಈ ವಿದ್ಯಾರ್ಥಿಯನ್ನು ಸೇರಿಸಿ | [ ] |
+| calls.edit | Change details | जानकारी बदलें | ವಿವರ ಬದಲಿಸಿ | [ ] |
+| calls.added | {name} is added. Waiting for the parent's consent. | {name} जुड़ गए। माता-पिता की सहमति का इंतज़ार। | {name} ಸೇರಿಸಲಾಗಿದೆ. ಪೋಷಕರ ಒಪ್ಪಿಗೆಗಾಗಿ ಕಾಯುತ್ತಿದೆ. | [ ] |
