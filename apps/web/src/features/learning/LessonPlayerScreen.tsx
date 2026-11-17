@@ -133,6 +133,33 @@ export function LessonPlayerScreen({
     );
   }
 
+  if (session.phase === "done" && session.completedOffline)
+    return (
+      <section
+        aria-labelledby="lesson-done-offline"
+        data-testid="lesson-done-offline"
+        className="mx-auto flex h-full max-w-md flex-col items-center justify-center gap-5 overflow-y-auto p-6 text-center"
+      >
+        <FarmChest size={110} />
+        <BilingualText
+          as="h1"
+          size="2xl"
+          align="center"
+          text={t("doneTitle")}
+          className="[&>span:first-child]:font-extrabold"
+        />
+        <p id="lesson-done-offline" className="sr-only">
+          {t("doneTitle").english}
+        </p>
+        <SpeechBubble>
+          <BilingualText align="center" text={t("savedOfflineDone", { n: session.queuedCount ?? 0 })} />
+        </SpeechBubble>
+        <ChunkyButton block size="lg" onClick={onExit} data-testid="lesson-finish">
+          <BilingualText as="span" align="center" tone="inverse" text={t("backToFarm")} />
+        </ChunkyButton>
+      </section>
+    );
+
   if (session.phase === "completing" || session.phase === "completeError")
     return (
       <div className="grid h-full place-items-center p-6">
@@ -220,8 +247,8 @@ export function LessonPlayerScreen({
               id={question.id}
               content={question.content}
               terms={lesson.terms}
-              result={result}
-              busy={busy}
+              result={result?.queued ? null : result}
+              busy={busy || Boolean(result?.queued)}
               onAnswer={model.submit}
             />
           </>
@@ -261,7 +288,8 @@ export function LessonPlayerScreen({
         )}
       </main>
 
-      {result && (
+      {result?.queued && <QueuedSheet onNext={model.next} />}
+      {result && !result.queued && (
         <FeedbackSheet
           correct={result.correct}
           xp={result.xpDelta}
@@ -277,6 +305,33 @@ export function LessonPlayerScreen({
         />
       )}
     </div>
+  );
+}
+
+/** Offline: the answer is saved on the phone; no grade until it syncs. */
+function QueuedSheet({ onNext }: { onNext: () => void }) {
+  const t = useBilingual("lesson");
+  return (
+    <section
+      role="status"
+      aria-live="polite"
+      data-testid="feedback-sheet"
+      data-queued="true"
+      className="motion-safe:animate-[pop-in_.25s_ease-out] relative border-t-4 border-sky bg-sky-soft p-4 pb-[max(16px,env(safe-area-inset-bottom))]"
+    >
+      <div className="mx-auto flex max-w-2xl flex-col gap-3">
+        <div className="flex items-center gap-3">
+          <StickerIcon name="backpack" size={56} />
+          <div className="flex flex-1 flex-col gap-1">
+            <BilingualText as="h2" size="xl" text={t("savedOfflineTitle")} />
+            <BilingualText size="sm" text={t("savedOfflineBody")} />
+          </div>
+        </div>
+        <ChunkyButton block size="lg" onClick={onNext} autoFocus data-testid="feedback-continue">
+          <BilingualText as="span" align="center" tone="inverse" text={t("continue")} />
+        </ChunkyButton>
+      </div>
+    </section>
   );
 }
 

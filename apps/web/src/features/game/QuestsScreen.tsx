@@ -25,7 +25,7 @@ export function QuestsScreen(p: QuestsScreenProps) {
   if (p.loading || !p.quests) return <LoadingState className="h-full" />;
   const qs = sortQuests(p.quests);
   return (
-    <div className="mx-auto flex max-w-xl flex-col gap-4 px-4 pb-32 pt-20">
+    <div className="mx-auto flex max-w-xl flex-col gap-4 px-4 pb-32 pt-20 laptop:max-w-4xl laptop:px-8 laptop:pb-12 laptop:pt-8">
       <WoodPanel>
         <div className="flex items-center gap-3">
           <StickerIcon name="quests" size={40} />

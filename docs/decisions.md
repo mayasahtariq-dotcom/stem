@@ -228,3 +228,19 @@ Spec: the Mooshala Web PRD (uploaded to the project) and `docs/web/p2-frontend-p
 - **Call query keys** (`callKeys`) live in `features/calls/api.ts`, not in the shared query-keys.ts, so this phase doesn't conflict with parallel work.
 - **The nav was not edited.** The Calls section is at `/teacher/calls` (plus `/teacher/calls/new`); the nav entry and CURRENT_PHASE bump are left to the merge.
 - **Phone e2e clicks.** As in the other specs, the phone e2e project presses buttons by focus plus Enter, because Pixel 7 emulation lets neighbouring labels intercept pointer clicks.
+
+
+## Web Phase 6: Pilot readiness, demo cut (2026-11-17)
+
+- **The scope was trimmed for a presentation.** The user asked for a demo-ready build quickly. Phase 6 shipped the offline answer queue and a desktop website layout. PWA install, notifications and preferences, and the deep accessibility and 3D performance audits are **not done yet** (see `docs/web/pilot-readiness.md`).
+- **Laptops and desktops get a website layout.** From the `laptop` breakpoint (1024 px), the student shell shows a fixed white top bar with the brand, the section links (regional plus English) and the stats. The page sits below the bar, and the wooden bottom dock is hidden. Phones and tablets keep the game HUD and dock. The student pages widen to `max-w-4xl` on laptops. The teacher and parent shells were already website layouts.
+- **Offline answers go to an outbox, never graded on the device.** The answer key isn't sent to the browser, so an offline answer can't be graded locally.
+  - Offline, or while older items still wait (to keep their order), answers and lesson completions are saved in an on-device outbox (`lib/offline/outbox.ts`, localStorage).
+  - The player moves on with a neutral "Saved on this phone" sheet. It records no grade, no retry, no combo and no heart.
+  - A lesson finished offline shows a "rewards arrive when you're back online" screen.
+- **When the outbox sends:** on start, on reconnect, when the tab becomes visible, and every 30 s while items wait. It sends oldest first.
+  - A network error or 5xx stops the run, and the items wait for the next one.
+  - A 4xx drops the item and counts it (for example, hearts ran out first). The banner then says how many answers couldn't be counted.
+- **No duplicate rewards.** Every outbox item has an `Idempotency-Key`. The fake backend (`mocks/idempotency.ts`) answers a replayed key with the first response and doesn't run it again. The real backend must do the same; see backend-handoff.
+- **Items belong to one user.** On a shared school computer, the next student never sends somebody else's saved answers.
+- **A saved lesson resumes offline from the cached lesson.** A new lesson can't be started offline, because the server opens the attempt window.

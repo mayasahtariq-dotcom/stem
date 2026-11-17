@@ -1159,3 +1159,16 @@ File: `apps/web/messages/{hi,kn}.json` (keys are `namespace.key`).
 | calls.confirmSave | Yes, add this student | हाँ, यह छात्र जोड़ें | ಹೌದು, ಈ ವಿದ್ಯಾರ್ಥಿಯನ್ನು ಸೇರಿಸಿ | [ ] |
 | calls.edit | Change details | जानकारी बदलें | ವಿವರ ಬದಲಿಸಿ | [ ] |
 | calls.added | {name} is added. Waiting for the parent's consent. | {name} जुड़ गए। माता-पिता की सहमति का इंतज़ार। | {name} ಸೇರಿಸಲಾಗಿದೆ. ಪೋಷಕರ ಒಪ್ಪಿಗೆಗಾಗಿ ಕಾಯುತ್ತಿದೆ. | [ ] |
+
+## Web Phase 6 (offline)
+
+| Key | English | Hindi | Kannada | Reviewed |
+|---|---|---|---|---|
+| offline.offline | You're offline. You can keep playing a lesson you already started. | आप ऑफ़लाइन हैं। जो पाठ शुरू किया है, वह खेलते रहिए। | ನೀವು ಆಫ್‌ಲೈನ್‌ನಲ್ಲಿದ್ದೀರಿ. ಶುರು ಮಾಡಿದ ಪಾಠವನ್ನು ಮುಂದುವರಿಸಬಹುದು. | [ ] |
+| offline.offlineSaved | You're offline. {n} saved on this phone; they'll be checked when you're back online. | आप ऑफ़लाइन हैं। {n} जवाब इस फ़ोन पर सुरक्षित हैं; इंटरनेट आने पर जाँचे जाएँगे। | ನೀವು ಆಫ್‌ಲೈನ್‌ನಲ್ಲಿದ್ದೀರಿ. {n} ಉತ್ತರಗಳು ಈ ಫೋನ್‌ನಲ್ಲಿ ಉಳಿದಿವೆ; ಇಂಟರ್ನೆಟ್ ಬಂದಾಗ ಪರಿಶೀಲಿಸಲಾಗುತ್ತದೆ. | [ ] |
+| offline.syncing | Back online. Sending {n} saved... | इंटरनेट आ गया। {n} सुरक्षित जवाब भेज रहे हैं... | ಇಂಟರ್ನೆಟ್ ಬಂತು. ಉಳಿಸಿದ {n} ಕಳುಹಿಸುತ್ತಿದ್ದೇವೆ... | [ ] |
+| offline.dropped | {n} saved answers couldn't be counted (for example, hearts ran out first). | {n} सुरक्षित जवाब गिने नहीं जा सके (जैसे पहले ही दिल खत्म हो गए थे)। | ಉಳಿಸಿದ {n} ಉತ್ತರಗಳನ್ನು ಎಣಿಸಲಾಗಲಿಲ್ಲ (ಉದಾ: ಮೊದಲೇ ಹೃದಯಗಳು ಮುಗಿದಿದ್ದವು). | [ ] |
+| offline.ok | OK | ठीक है | ಸರಿ | [ ] |
+| lesson.savedOfflineTitle | Saved on this phone | इस फ़ोन पर सुरक्षित | ಈ ಫೋನ್‌ನಲ್ಲಿ ಉಳಿಸಲಾಗಿದೆ | [ ] |
+| lesson.savedOfflineBody | You're offline. We'll check this answer and add your XP when you're back online. | आप ऑफ़लाइन हैं। इंटरनेट आने पर यह जवाब जाँचकर XP जोड़ देंगे। | ನೀವು ಆಫ್‌ಲೈನ್‌ನಲ್ಲಿದ್ದೀರಿ. ಇಂಟರ್ನೆಟ್ ಬಂದಾಗ ಈ ಉತ್ತರ ಪರಿಶೀಲಿಸಿ XP ಸೇರಿಸುತ್ತೇವೆ. | [ ] |
+| lesson.savedOfflineDone | Lesson finished offline. {n} answers are saved on this phone; your XP and rewards arrive when you're back online. | पाठ ऑफ़लाइन पूरा हुआ। {n} जवाब इस फ़ोन पर सुरक्षित हैं; इंटरनेट आने पर XP और इनाम मिलेंगे। | ಪಾಠ ಆಫ್‌ಲೈನ್‌ನಲ್ಲಿ ಮುಗಿಯಿತು. {n} ಉತ್ತರಗಳು ಈ ಫೋನ್‌ನಲ್ಲಿ ಉಳಿದಿವೆ; ಇಂಟರ್ನೆಟ್ ಬಂದಾಗ XP ಮತ್ತು ಬಹುಮಾನ ಸಿಗುತ್ತವೆ. | [ ] |

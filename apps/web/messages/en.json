@@ -500,7 +500,10 @@
     "matchProgress": "{done} of {total} pairs matched",
     "matchLeft": "Parts",
     "matchRight": "Matches",
-    "matchNoHeart": "Mixed-up pairs don't cost a heart. Keep going!"
+    "matchNoHeart": "Mixed-up pairs don't cost a heart. Keep going!",
+    "savedOfflineTitle": "Saved on this phone",
+    "savedOfflineBody": "You're offline. We'll check this answer and add your XP when you're back online.",
+    "savedOfflineDone": "Lesson finished offline. {n} answers are saved on this phone; your XP and rewards arrive when you're back online."
   },
   "path": {
     "unit": "Chapter {n}: {titleEn}"
@@ -685,5 +688,12 @@
     "confirmSave": "Yes, add this student",
     "edit": "Change details",
     "added": "{name} is added. Waiting for the parent's consent."
+  },
+  "offline": {
+    "offline": "You're offline. You can keep playing a lesson you already started.",
+    "offlineSaved": "You're offline. {n} saved on this phone; they'll be checked when you're back online.",
+    "syncing": "Back online. Sending {n} saved...",
+    "dropped": "{n} saved answers couldn't be counted (for example, hearts ran out first).",
+    "ok": "OK"
   }
 }

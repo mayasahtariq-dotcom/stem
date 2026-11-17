@@ -21,7 +21,7 @@ export function LeagueScreen(p: LeagueScreenProps) {
   if (!l.enabled) return <EmptyState message={t("leagueOff")} className="h-full" />;
   const left = timeLeft(l.week_ends_at, p.now);
   return (
-    <div className="mx-auto flex max-w-xl flex-col gap-4 px-4 pb-32 pt-20">
+    <div className="mx-auto flex max-w-xl flex-col gap-4 px-4 pb-32 pt-20 laptop:max-w-4xl laptop:px-8 laptop:pb-12 laptop:pt-8">
       <WoodPanel>
         <div className="flex items-center gap-3">
           <StickerIcon name="trophy" size={40} />

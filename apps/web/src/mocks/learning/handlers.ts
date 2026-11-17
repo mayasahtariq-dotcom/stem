@@ -2,6 +2,7 @@ import { http, HttpResponse } from "msw";
 import type { Schemas } from "@mooshala/api-client";
 import { fakeDb, userForToken } from "../fake-db";
 import { COURSE_ID, COURSE_TITLE, UNITS, termContent, TERMS } from "./course-data";
+import { idempotent } from "../idempotency";
 import { mayStartLessons } from "../parent/state";
 import { fakeNow, coursesFor, fakeLessons, finishLessonStreak, grade, learner, lessonById, loseHeart, questionById, RULES, statsOut } from "./state";
 
@@ -136,46 +137,50 @@ export function makeLearningHandlers(base: string) {
     http.post(`${base}/attempts`, async ({ request }) => {
       const u = auth(request);
       if (!u) return err(401, "UNAUTHORIZED");
-      const body = (await request.json()) as Schemas["AttemptIn"];
-      const found = questionById(body.question_id);
-      if (!found) return err(404, "NOT_FOUND");
-      const s = learner(u.id);
-      let result;
-      try {
-        result = grade(found.question.type, found.question.content, body.answer as Record<string, unknown>);
-      } catch {
-        return err(422, "INVALID_ANSWER");
-      }
-      if (s.hearts <= 0 && result.costsHeart) return err(409, "HEARTS_EMPTY", { refill_at: statsOut(s).refill_at });
-      const xp = result.correct ? (body.retry ? RULES.xpRetry : RULES.xpFirstTry) : 0;
-      const heartLost = !result.correct && result.costsHeart;
-      if (heartLost) loseHeart(s);
-      s.xpTotal += xp;
-      s.xpToday += xp;
-      s.attempts.push({ lessonId: found.lesson.id, questionId: found.question.id, correct: result.correct, firstTry: !body.retry, at: fakeNow() });
-      const out: Schemas["AttemptOut"] = { correct: result.correct, correct_answer: result.correct_answer, explanation: (found.question.content.explanation as Record<string, string>) ?? {}, xp_delta: xp, heart_lost: heartLost, stats: statsOut(s) };
-      return json(out);
+      return idempotent(request, u.id, async () => {
+        const body = (await request.json()) as Schemas["AttemptIn"];
+        const found = questionById(body.question_id);
+        if (!found) return err(404, "NOT_FOUND");
+        const s = learner(u.id);
+        let result;
+        try {
+          result = grade(found.question.type, found.question.content, body.answer as Record<string, unknown>);
+        } catch {
+          return err(422, "INVALID_ANSWER");
+        }
+        if (s.hearts <= 0 && result.costsHeart) return err(409, "HEARTS_EMPTY", { refill_at: statsOut(s).refill_at });
+        const xp = result.correct ? (body.retry ? RULES.xpRetry : RULES.xpFirstTry) : 0;
+        const heartLost = !result.correct && result.costsHeart;
+        if (heartLost) loseHeart(s);
+        s.xpTotal += xp;
+        s.xpToday += xp;
+        s.attempts.push({ lessonId: found.lesson.id, questionId: found.question.id, correct: result.correct, firstTry: !body.retry, at: fakeNow() });
+        const out: Schemas["AttemptOut"] = { correct: result.correct, correct_answer: result.correct_answer, explanation: (found.question.content.explanation as Record<string, string>) ?? {}, xp_delta: xp, heart_lost: heartLost, stats: statsOut(s) };
+        return json(out);
+      });
     }),
 
     http.post(`${base}/lessons/:id/complete`, ({ request, params }) => {
       const u = auth(request);
       if (!u) return err(401, "UNAUTHORIZED");
-      const l = lessonById(String(params.id));
-      if (!l) return err(404, "NOT_FOUND");
-      const s = learner(u.id);
-      const p = s.progress.get(l.id);
-      if (!p) return err(409, "LESSON_NOT_STARTED");
-      const attempts = s.attempts.filter((a) => a.lessonId === l.id && a.at >= p.startedAt);
-      const first = attempts.filter((a) => a.firstTry);
-      const accuracy = first.length ? first.filter((a) => a.correct).length / first.length : 0;
-      const answerXp = attempts.reduce((n, a) => n + (a.correct ? (a.firstTry ? RULES.xpFirstTry : RULES.xpRetry) : 0), 0);
-      const extended = finishLessonStreak(s);
-      s.xpTotal += RULES.xpLessonBonus;
-      s.xpToday += RULES.xpLessonBonus;
-      p.completedAt = fakeNow();
-      p.bestAccuracy = Math.max(p.bestAccuracy, accuracy);
-      const out: Schemas["CompleteOut"] = { xp_earned: answerXp + RULES.xpLessonBonus, accuracy: Math.round(accuracy * 1000) / 1000, streak: s.streak, streak_extended: extended, stats: statsOut(s) };
-      return json(out);
+      return idempotent(request, u.id, () => {
+        const l = lessonById(String(params.id));
+        if (!l) return err(404, "NOT_FOUND");
+        const s = learner(u.id);
+        const p = s.progress.get(l.id);
+        if (!p) return err(409, "LESSON_NOT_STARTED");
+        const attempts = s.attempts.filter((a) => a.lessonId === l.id && a.at >= p.startedAt);
+        const first = attempts.filter((a) => a.firstTry);
+        const accuracy = first.length ? first.filter((a) => a.correct).length / first.length : 0;
+        const answerXp = attempts.reduce((n, a) => n + (a.correct ? (a.firstTry ? RULES.xpFirstTry : RULES.xpRetry) : 0), 0);
+        const extended = finishLessonStreak(s);
+        s.xpTotal += RULES.xpLessonBonus;
+        s.xpToday += RULES.xpLessonBonus;
+        p.completedAt = fakeNow();
+        p.bestAccuracy = Math.max(p.bestAccuracy, accuracy);
+        const out: Schemas["CompleteOut"] = { xp_earned: answerXp + RULES.xpLessonBonus, accuracy: Math.round(accuracy * 1000) / 1000, streak: s.streak, streak_extended: extended, stats: statsOut(s) };
+        return json(out);
+      });
     }),
 
     http.get(`${base}/courses/:id/terms`, ({ request, params }) => {

@@ -132,3 +132,12 @@ The web expects these call-mode endpoints (contract in `packages/api-client/src/
 - `GET /call-students/{id}/call` returns the latest `CallSession`. State only moves forward: dialing, then ringing, then connected, then completed, no_answer or failed. On no_answer it sets `retry_at` 20 minutes later, for at most 2 retries, then the student becomes `not_reachable`.
 - `GET /call-students/{id}/twin` returns `CallTwin` (lessons_heard, last_topic, strong, weak, and summary as en/hi/kn).
 - `CallStudent` exposes only `phone_last4`, never the full number. `minutes_this_week` resets Monday 00:00 IST, and `weekly_cap_minutes` is 15.
+
+
+## Offline sync (Phase 6): please support `Idempotency-Key`
+
+The web app replays answers saved offline. `POST /attempts` and `POST /lessons/{id}/complete` may carry an `Idempotency-Key` header (a UUID).
+- For the same user and key, run the request once, store the 2xx response, and return it unchanged on every replay (XP, hearts, streak and lesson bonus are paid once).
+- Don't store error responses, so a refused request can be retried.
+- Add `Idempotency-Key` to the CORS allowed headers.
+- Accept attempts that arrive late, after the lesson was started, in the order sent. The app sends a completion only after that lesson's answers.

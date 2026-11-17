@@ -5,7 +5,10 @@ import type { Schemas } from "@mooshala/api-client";
 import { unwrap } from "@/lib/api/client";
 import { asApiError, type ApiError } from "@/lib/api/errors";
 import { queryKeys } from "@/lib/api/query-keys";
+import { isOnline } from "@/lib/offline/online";
+import { pendingFor, useOutbox } from "@/lib/offline/outbox";
 import { useServices } from "@/lib/services";
+import type { Profile } from "@/features/auth/types";
 import { sounds } from "@/lib/sound/sound-manager";
 import { answerPayload, toPlayableLesson, type Answer, type PlayableLesson, type PlayableQuestion } from "./content";
 import { currentQuestionId, isRetry, sessionReducer, startSession, type SessionEvent, type SessionState } from "./session";
@@ -33,6 +36,11 @@ const EMPTY: SessionState = startSession("", []);
  * or resumes a saved session (GET /lessons/{id}, so the server's attempt window
  * isn't reset), sends each answer to POST /attempts, and finishes with
  * POST /lessons/{id}/complete. The screen stays stateless.
+ *
+ * Offline (or while older answers still wait in the outbox, so order is kept),
+ * answers and the completion go to the outbox instead and the player moves on;
+ * the server grades them on sync. A saved session resumes from the cached
+ * lesson when the network is down.
  */
 export function useLessonPlayer(lessonId: string): LessonPlayerModel {
   const { api } = useServices();
@@ -53,13 +61,20 @@ export function useLessonPlayer(lessonId: string): LessonPlayerModel {
         const saved = store.getState().resumable(lessonId);
         let out: Schemas["LessonOut"];
         if (saved) {
-          out = unwrap(await api.GET("/lessons/{lesson_id}", { params: { path: { lesson_id: lessonId } } }));
+          try {
+            out = unwrap(await api.GET("/lessons/{lesson_id}", { params: { path: { lesson_id: lessonId } } }));
+          } catch (e) {
+            const cached = qc.getQueryData<Schemas["LessonOut"]>(queryKeys.lesson(lessonId));
+            if (asApiError(e).code !== "NETWORK" || !cached) throw e;
+            out = cached;
+          }
         } else {
           const started = unwrap(await api.POST("/lessons/{lesson_id}/start", { params: { path: { lesson_id: lessonId } } }));
           qc.setQueryData(queryKeys.stats, started.stats);
           out = started.lesson;
         }
         if (cancelled) return;
+        qc.setQueryData(queryKeys.lesson(lessonId), out);
         const playable = toPlayableLesson(out);
         const ids = new Set(playable.questions.map((q) => q.id));
         // A saved session is only reused if the lesson still has the same questions.
@@ -83,20 +98,36 @@ export function useLessonPlayer(lessonId: string): LessonPlayerModel {
     else store.getState().save({ courseId: lesson.courseId, title: lesson.title, session, savedAt: Date.now() });
   }, [lesson, lessonId, session, store]);
 
+  const userId = useCallback(() => qc.getQueryData<Profile>(queryKeys.me)?.id ?? null, [qc]);
+  /** True when this step must go to the outbox: offline, or older items still wait. */
+  const mustQueue = useCallback(() => {
+    const id = userId();
+    return Boolean(id) && (!isOnline() || pendingFor(useOutbox.getState().items, id).length > 0);
+  }, [userId]);
+
   const send = useCallback(
     async (answer: Record<string, unknown>, retry: boolean, questionId: string) => {
+      const body = { question_id: questionId, answer, retry, time_ms: Math.min(3_600_000, Date.now() - shownAt.current) };
+      const queue = () => {
+        const id = userId();
+        if (!id) return false;
+        useOutbox.getState().enqueue({ kind: "attempt", userId: id, lessonId, body });
+        dispatch({ type: "queued" });
+        return true;
+      };
+      if (mustQueue() && queue()) return;
       try {
-        const res = unwrap(await api.POST("/attempts", { body: { question_id: questionId, answer, retry, time_ms: Math.min(3_600_000, Date.now() - shownAt.current) } }));
+        const res = unwrap(await api.POST("/attempts", { body }));
         qc.setQueryData(queryKeys.stats, res.stats);
         sounds.play(res.correct ? "pop" : "tap");
         dispatch({ type: "graded", result: { correct: res.correct, correctAnswer: res.correct_answer, explanation: res.explanation, xpDelta: res.xp_delta, heartLost: res.heart_lost } });
       } catch (e) {
         const err = asApiError(e);
         if (err.code === "HEARTS_EMPTY") dispatch({ type: "heartsEmpty", refillAt: (err.details.refill_at as string | null) ?? null });
-        else dispatch({ type: "submitFailed" });
+        else if (!(err.code === "NETWORK" && queue())) dispatch({ type: "submitFailed" });
       }
     },
-    [api, qc],
+    [api, lessonId, mustQueue, qc, userId],
   );
 
   const submit = useCallback(
@@ -120,6 +151,17 @@ export function useLessonPlayer(lessonId: string): LessonPlayerModel {
   const finish = useCallback(async () => {
     if (completing.current) return;
     completing.current = true;
+    const queue = () => {
+      const id = userId();
+      if (!id) return false;
+      useOutbox.getState().enqueue({ kind: "complete", userId: id, lessonId });
+      dispatch({ type: "completeQueued" });
+      return true;
+    };
+    if (mustQueue() && queue()) {
+      completing.current = false;
+      return;
+    }
     try {
       const res = unwrap(await api.POST("/lessons/{lesson_id}/complete", { params: { path: { lesson_id: lessonId } } }));
       qc.setQueryData(queryKeys.stats, res.stats);
@@ -127,12 +169,12 @@ export function useLessonPlayer(lessonId: string): LessonPlayerModel {
       void qc.invalidateQueries({ queryKey: queryKeys.home });
       void qc.invalidateQueries({ queryKey: ["courses"] });
       void qc.invalidateQueries({ queryKey: ["game"] });
-    } catch {
-      dispatch({ type: "completeFailed" });
+    } catch (e) {
+      if (!(asApiError(e).code === "NETWORK" && queue())) dispatch({ type: "completeFailed" });
     } finally {
       completing.current = false;
     }
-  }, [api, lessonId, qc]);
+  }, [api, lessonId, mustQueue, qc, userId]);
 
   useEffect(() => {
     if (session.phase === "completing") void finish();

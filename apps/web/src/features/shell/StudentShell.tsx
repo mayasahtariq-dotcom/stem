@@ -12,8 +12,10 @@ import { HudControls } from "./HudControls";
 import { NAV, isAvailable } from "./nav";
 
 /**
- * Student shell: the 3D farm fills the viewport; UI floats over it as a game
- * HUD (top) and a wooden signpost dock (bottom). No dashboard sidebar.
+ * Student shell. On phones and tablets the 3D farm fills the viewport and UI
+ * floats over it as a game HUD (top) and a wooden signpost dock (bottom). On
+ * laptops and desktops it becomes a website: a fixed top bar with the brand,
+ * section links and stats, and the page below it. No dashboard sidebar.
  */
 export function StudentShell({ children }: { children: ReactNode }) {
   const profile = useProfile();
@@ -28,15 +30,42 @@ export function StudentShell({ children }: { children: ReactNode }) {
   if (immersive) return <div className="relative h-dvh w-full overflow-hidden bg-white">{children}</div>;
   return (
     <div className="relative h-dvh w-full overflow-hidden bg-sky-soft">
-      <main className="absolute inset-0">{children}</main>
+      <main className="absolute inset-0 laptop:top-[72px]">{children}</main>
 
-      <header className="pointer-events-none absolute inset-x-0 top-0 z-20 flex items-start justify-between gap-2 p-3 tablet:p-4">
-        <div className="pointer-events-auto flex min-h-11 items-center gap-2 rounded-full bg-white/95 py-1 pl-1 pr-4 shadow-float-1">
+      <header className="pointer-events-none absolute inset-x-0 top-0 z-20 flex items-start justify-between gap-2 p-3 tablet:p-4 laptop:pointer-events-auto laptop:h-[72px] laptop:items-center laptop:gap-6 laptop:border-b-2 laptop:border-line laptop:bg-white laptop:px-6 laptop:py-0">
+        <div className="pointer-events-auto flex min-h-11 items-center gap-2 rounded-full bg-white/95 py-1 pl-1 pr-4 shadow-float-1 laptop:shadow-none">
           <span className="grid size-10 place-items-center overflow-hidden rounded-full bg-sun-soft">
             <GoluMascot pose="wave" size={40} animated={false} />
           </span>
-          <span className="hidden max-w-[30vw] truncate font-bold tablet:inline">{profile.data?.name ?? ""}</span>
+          <span className="hidden max-w-[30vw] truncate font-bold tablet:inline laptop:hidden">{profile.data?.name ?? ""}</span>
+          <span className="hidden text-xl font-extrabold text-grass-strong laptop:inline">{c("appName").regional}</span>
         </div>
+        <nav aria-label={n("studentNav").english} className="hidden flex-1 laptop:block">
+          <ul className="flex items-center gap-1">
+            {NAV.student.filter(isAvailable).map((item) => {
+              const active = pathname === item.href;
+              const label = n(item.label);
+              return (
+                <li key={item.key}>
+                  <Link
+                    href={item.href}
+                    aria-current={active ? "page" : undefined}
+                    className={cn(
+                      "flex min-h-11 items-center gap-2 rounded-full px-3 font-bold hover:bg-sun-soft",
+                      active ? "bg-sun-soft text-ink" : "text-ink/80",
+                    )}
+                  >
+                    <StickerIcon name={item.icon} size={22} />
+                    <span className="font-regional">{label.regional}</span>
+                    <span className="text-sm font-medium text-stone" lang="en">
+                      {label.english}
+                    </span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
         <div className="pointer-events-auto flex flex-wrap items-center justify-end gap-1.5">
           {stats.data && (
             <>
@@ -50,7 +79,7 @@ export function StudentShell({ children }: { children: ReactNode }) {
         </div>
       </header>
 
-      <nav aria-label={n("studentNav").english} className="pointer-events-none absolute inset-x-0 bottom-0 z-20 flex justify-center p-3 pb-[max(12px,env(safe-area-inset-bottom))]">
+      <nav aria-label={n("studentNav").english} className="pointer-events-none absolute inset-x-0 bottom-0 z-20 flex justify-center laptop:hidden p-3 pb-[max(12px,env(safe-area-inset-bottom))]">
         <ul className="wood-grain pointer-events-auto flex gap-1 rounded-panel p-1.5 [box-shadow:0_6px_0_var(--color-wood-dark),var(--shadow-float-2)]">
           {NAV.student.map((item) => {
             const active = pathname === item.href;

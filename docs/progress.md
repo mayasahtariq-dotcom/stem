@@ -186,3 +186,17 @@ Demo: `docs/demos/web-phase-5.md`. Deviations: `docs/decisions.md` ("Web Phase 5
 - [x] Errors enforced: OUTSIDE_CALL_HOURS, CONSENT_PENDING, WEEKLY_CAP_REACHED, CALLS_PAUSED, CALL_IN_PROGRESS, DUPLICATE_PHONE
 - [x] Stories (11, axe-tested in hi and kn), unit tests for the rules, integration tests against the fakes, e2e/calls.spec.ts (phone and desktop)
 - [ ] Real backend endpoints (pending; see backend-handoff)
+
+
+## Web Phase 6: Pilot readiness (demo cut)
+
+Demo: `docs/demos/web-phase-6.md`. Deviations: `docs/decisions.md` ("Web Phase 6"). Honest status: `docs/web/pilot-readiness.md`.
+
+- [x] Desktop website layout for the student area (top bar with links on laptops, dock only on phones and tablets).
+- [x] Offline outbox: answers and completions saved on the device, sent in order on reconnect, with idempotency keys, so rewards are never paid twice. Per-user, so a shared computer is safe.
+- [x] Offline banner (offline, syncing, couldn't be counted) and an offline lesson-finish screen.
+- [x] Tests: outbox replay pays once (answer and lesson bonus), stops on network errors, drops refused items, ignores other users' items, and a full offline lesson synced on reconnect.
+- [ ] PWA install (manifest, service worker, app-shell cache).
+- [ ] Notifications and notification preferences (needs a Web Push backend and a VAPID key).
+- [ ] Deep accessibility audit (axe already runs on every story and e2e journey) and 3D performance audit on a low-end phone.
+- [ ] Not pilot ready yet: see `docs/web/pilot-readiness.md`.

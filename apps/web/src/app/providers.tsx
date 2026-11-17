@@ -3,6 +3,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { useEffect, useState, type ReactNode } from "react";
 import { Toaster } from "@/components/ui/Toast";
 import { useRestoreSession } from "@/features/auth/hooks";
+import { OfflineBanner } from "@/features/offline/OfflineBanner";
 import { makeQueryClient } from "@/lib/api/query-client";
 import { createServices } from "@/lib/create-services";
 import { env } from "@/lib/env";
@@ -58,6 +59,7 @@ export function AppProviders({ children, services: injected }: { children: React
         {fakesReady && (
           <>
             <SessionBootstrap />
+            <OfflineBanner />
             {children}
           </>
         )}

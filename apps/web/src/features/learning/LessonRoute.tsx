@@ -25,7 +25,7 @@ export function LessonRoute({ lessonId, completeExtras }: { lessonId: string; co
         onExit={() => router.push("/farm")}
         onSpeak={(text) => void speak(text)}
         formatTime={(iso) => formatClock(iso, locale)}
-        completeExtras={model.session?.phase === "done" ? completeExtras?.(lessonId) : undefined}
+        completeExtras={model.session?.phase === "done" && model.session.complete ? completeExtras?.(lessonId) : undefined}
       />
     </div>
   );

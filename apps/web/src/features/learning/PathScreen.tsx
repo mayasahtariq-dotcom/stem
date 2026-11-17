@@ -30,7 +30,7 @@ export function PathScreen({ home, path, onRetry }: { home: { data?: Schemas["Ho
     );
   const p = path.data;
   return (
-    <div className="mx-auto flex max-w-xl flex-col gap-5 px-4 pb-32 pt-20">
+    <div className="mx-auto flex max-w-xl flex-col gap-5 px-4 pb-32 pt-20 laptop:max-w-4xl laptop:px-8 laptop:pb-12 laptop:pt-8">
       <header className="flex flex-col gap-2">
         <BilingualText as="h1" size="2xl" text={tri(p.title as never)} />
         <ProgressBar value={p.lesson_count ? p.done_count / p.lesson_count : 0} label={f("courseProgress", { done: p.done_count, total: p.lesson_count }).english} />

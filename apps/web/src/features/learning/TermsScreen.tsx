@@ -47,7 +47,7 @@ export function TermsScreen(p: TermsScreenProps) {
   if (p.loading || !p.terms) return <LoadingState className="h-full" />;
   const open = p.openKey ? p.terms.find((x) => x.key === p.openKey) : null;
   return (
-    <div className="mx-auto flex max-w-xl flex-col gap-4 px-4 pb-32 pt-20">
+    <div className="mx-auto flex max-w-xl flex-col gap-4 px-4 pb-32 pt-20 laptop:max-w-4xl laptop:px-8 laptop:pb-12 laptop:pt-8">
       <BilingualText as="h1" size="2xl" text={t("title")} />
       <TextField label={t("search")} value={p.query} onChange={(e) => p.onQuery(e.target.value)} type="search" inputMode="search" />
       <div className="flex gap-2" role="group" aria-label={t("filter").english}>

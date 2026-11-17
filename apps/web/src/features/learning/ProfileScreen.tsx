@@ -47,7 +47,7 @@ export function ProfileScreen(p: ProfileScreenProps) {
       { icon: "calendar", value: `${p.game.freezes}/${p.game.max_freezes}`, label: t("freezes") },
     );
   return (
-    <div className="mx-auto flex max-w-xl flex-col gap-5 px-4 pb-32 pt-20">
+    <div className="mx-auto flex max-w-xl flex-col gap-5 px-4 pb-32 pt-20 laptop:max-w-4xl laptop:px-8 laptop:pb-12 laptop:pt-8">
       <header className="flex items-center gap-3">
         <GoluMascot pose="cool" size={80} />
         <div>

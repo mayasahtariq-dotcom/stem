@@ -44,7 +44,7 @@ export function AskScreen(p: AskScreenProps) {
   };
   const lastQuestion = [...p.messages].reverse().find((m) => m.from === "golu" && m.answer)?.question;
   return (
-    <div className="mx-auto flex h-full max-w-xl flex-col px-4 pb-28 pt-20">
+    <div className="mx-auto flex h-full max-w-xl flex-col px-4 pb-28 pt-20 laptop:max-w-4xl laptop:px-8 laptop:pb-8 laptop:pt-8">
       <header className="flex items-center gap-3 pb-3">
         <GoluMascot pose="question" size={64} />
         <div className="flex flex-col">

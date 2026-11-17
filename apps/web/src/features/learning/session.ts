@@ -6,6 +6,8 @@
  * - Questions play in order. A question answered "not quite" comes back once
  *   at the end of the lesson as a retry (Android PRD M3: wrong answers return).
  * - A retry answered wrong again moves on, so a lesson always ends.
+ * - Offline, an answer is saved to the outbox instead ("queued"): the
+ *   player moves on without a grade, and the server grades it on sync.
  * - The combo flame counts correct answers in a row (display only; the
  *   backend has no combo XP yet, see docs/decisions.md).
  */
@@ -17,6 +19,8 @@ export interface AttemptResult {
   explanation: Record<string, string>;
   xpDelta: number;
   heartLost: boolean;
+  /** Saved offline: the server grades it when the phone is back online. */
+  queued?: boolean;
 }
 
 export interface CompleteResult {
@@ -43,17 +47,23 @@ export interface SessionState {
   xpFromAnswers: number;
   refillAt: string | null;
   complete: CompleteResult | null;
+  /** Answers saved offline in this session (graded later by the server). */
+  queuedCount?: number;
+  /** The lesson was finished offline; its rewards arrive after sync. */
+  completedOffline?: boolean;
 }
 
 export type SessionEvent =
   | { type: "submit"; answer: Record<string, unknown> }
   | { type: "graded"; result: AttemptResult }
+  | { type: "queued" }
   | { type: "submitFailed" }
   | { type: "heartsEmpty"; refillAt: string | null }
   | { type: "next" }
   | { type: "completeStarted" }
   | { type: "completed"; result: CompleteResult }
-  | { type: "completeFailed" };
+  | { type: "completeFailed" }
+  | { type: "completeQueued" };
 
 export function startSession(lessonId: string, questionIds: string[]): SessionState {
   return { lessonId, queue: [...questionIds], originalCount: questionIds.length, index: 0, retries: [], firstTry: {}, phase: "answering", last: null, pendingAnswer: null, combo: 0, bestCombo: 0, xpFromAnswers: 0, refillAt: null, complete: null };
@@ -97,6 +107,12 @@ export function sessionReducer(s: SessionState, e: SessionEvent): SessionState {
         xpFromAnswers: s.xpFromAnswers + e.result.xpDelta,
       };
     }
+    case "queued": {
+      // Offline: no grade yet, so no retry, combo change or first-try record.
+      if (s.phase !== "submitting") return s;
+      const last: AttemptResult = { correct: false, correctAnswer: {}, explanation: {}, xpDelta: 0, heartLost: false, queued: true };
+      return { ...s, phase: "feedback", last, pendingAnswer: null, queuedCount: (s.queuedCount ?? 0) + 1 };
+    }
     case "next": {
       if (s.phase !== "feedback") return s;
       const index = s.index + 1;
@@ -108,5 +124,7 @@ export function sessionReducer(s: SessionState, e: SessionEvent): SessionState {
       return { ...s, phase: "done", complete: e.result };
     case "completeFailed":
       return { ...s, phase: "completeError" };
+    case "completeQueued":
+      return s.phase === "completing" || s.phase === "completeError" ? { ...s, phase: "done", complete: null, completedOffline: true } : s;
   }
 }
