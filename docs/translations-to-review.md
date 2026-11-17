@@ -1027,3 +1027,52 @@ File: `apps/web/messages/{hi,kn}.json` (keys are `namespace.key`).
 | parent.parentNotYet | Not approved yet | अभी मंज़ूरी नहीं | ಇನ್ನೂ ಒಪ್ಪಿಲ್ಲ | [ ] |
 | parent.removeParent | Remove {name} | {name} को हटाओ | {name} ಅವರನ್ನು ತೆಗೆಯಿರಿ | [ ] |
 | parent.parentsLoadFailed | Couldn't load your parents. Try again later. | माता-पिता की सूची नहीं खुली। बाद में कोशिश करो। | ಪೋಷಕರ ಪಟ್ಟಿ ತೆರೆಯಲಿಲ್ಲ. ನಂತರ ಪ್ರಯತ್ನಿಸಿ. | [ ] |
+
+## Web Phase 4 (game layer)
+
+| Key | English | Hindi | Kannada | Reviewed |
+|---|---|---|---|---|
+| farm.pot | Golu Pot | गोलू मटका | ಗೋಲು ಮಡಕೆ | [ ] |
+| farm.openNoticeboard | Village fair noticeboard | गाँव के मेले का नोटिसबोर्ड | ಊರ ಜಾತ್ರೆಯ ಸೂಚನಾ ಫಲಕ | [ ] |
+| farm.openQuests | Quest board | काम का बोर्ड | ಕೆಲಸಗಳ ಫಲಕ | [ ] |
+| game.questsTitle | Quest board | काम का बोर्ड | ಕೆಲಸಗಳ ಫಲಕ | [ ] |
+| game.questsHint | Finish a job, then claim your gems. Each job pays once. | काम पूरा करो, फिर रत्न लो। हर काम एक बार ही इनाम देता है। | ಕೆಲಸ ಮುಗಿಸಿ, ನಂತರ ರತ್ನ ಪಡೆಯಿರಿ. ಪ್ರತಿ ಕೆಲಸ ಒಮ್ಮೆ ಮಾತ್ರ ಬಹುಮಾನ ನೀಡುತ್ತದೆ. | [ ] |
+| game.noQuests | No jobs on the board right now. Come back tomorrow. | अभी बोर्ड पर कोई काम नहीं। कल फिर आना। | ಈಗ ಫಲಕದಲ್ಲಿ ಕೆಲಸವಿಲ್ಲ. ನಾಳೆ ಬನ್ನಿ. | [ ] |
+| game.questProgress | {n} of {goal} | {goal} में से {n} | {goal} ರಲ್ಲಿ {n} | [ ] |
+| game.endsHours | Ends in {h} h | {h} घंटे में खत्म | {h} ಗಂಟೆಯಲ್ಲಿ ಮುಗಿಯುತ್ತದೆ | [ ] |
+| game.endsDays | Ends in {d} d {h} h | {d} दिन {h} घंटे में खत्म | {d} ದಿನ {h} ಗಂಟೆಯಲ್ಲಿ ಮುಗಿಯುತ್ತದೆ | [ ] |
+| game.claim | Claim {n} gems | {n} रत्न लो | {n} ರತ್ನ ಪಡೆಯಿರಿ | [ ] |
+| game.claimed | Claimed | ले लिए | ಪಡೆದಿದ್ದೀರಿ | [ ] |
+| game.claimedToast | +{n} gems! | +{n} रत्न! | +{n} ರತ್ನ! | [ ] |
+| game.reward | {n} gems | {n} रत्न | {n} ರತ್ನ | [ ] |
+| game.leagueTitle | Village fair | गाँव का मेला | ಊರ ಜಾತ್ರೆ | [ ] |
+| game.leagueHint | This week's learning XP. The fair closes in {d} d {h} h; the top {up} move up. | इस हफ़्ते का सीखने का XP। मेला {d} दिन {h} घंटे में बंद होगा; ऊपर के {up} आगे बढ़ेंगे। | ಈ ವಾರದ ಕಲಿಕೆಯ XP. ಜಾತ್ರೆ {d} ದಿನ {h} ಗಂಟೆಯಲ್ಲಿ ಮುಗಿಯುತ್ತದೆ; ಮೇಲಿನ {up} ಜನ ಮುಂದೆ ಹೋಗುತ್ತಾರೆ. | [ ] |
+| game.leagueFair | Only XP from lessons counts here. Gems never change your place. | यहाँ सिर्फ़ पाठों का XP गिना जाता है। रत्नों से जगह नहीं बदलती। | ಇಲ್ಲಿ ಪಾಠಗಳ XP ಮಾತ್ರ ಎಣಿಕೆ. ರತ್ನಗಳಿಂದ ಸ್ಥಾನ ಬದಲಾಗದು. | [ ] |
+| game.leagueOff | Your teacher has turned the fair off for this class. | आपके शिक्षक ने इस कक्षा के लिए मेला बंद किया है। | ನಿಮ್ಮ ಶಿಕ್ಷಕರು ಈ ತರಗತಿಗೆ ಜಾತ್ರೆ ಆಫ್ ಮಾಡಿದ್ದಾರೆ. | [ ] |
+| game.leagueEmpty | Nobody has joined the fair yet this week. | इस हफ़्ते अभी कोई मेले में नहीं आया। | ಈ ವಾರ ಇನ್ನೂ ಯಾರೂ ಜಾತ್ರೆಗೆ ಬಂದಿಲ್ಲ. | [ ] |
+| game.weeklyXp | {n} XP this week | इस हफ़्ते {n} XP | ಈ ವಾರ {n} XP | [ ] |
+| game.callOnly | learns by phone call | फ़ोन कॉल से सीखता है | ಫೋನ್ ಕರೆಯಿಂದ ಕಲಿಯುತ್ತಾರೆ | [ ] |
+| game.tier_bronze | Bronze stall | काँसे की दुकान | ಕಂಚಿನ ಅಂಗಡಿ | [ ] |
+| game.tier_silver | Silver stall | चाँदी की दुकान | ಬೆಳ್ಳಿಯ ಅಂಗಡಿ | [ ] |
+| game.tier_gold | Gold stall | सोने की दुकान | ಚಿನ್ನದ ಅಂಗಡಿ | [ ] |
+| game.tier_ruby | Ruby stall | माणिक की दुकान | ಮಾಣಿಕ್ಯದ ಅಂಗಡಿ | [ ] |
+| game.tier_diamond | Diamond stall | हीरे की दुकान | ವಜ್ರದ ಅಂಗಡಿ | [ ] |
+| game.stage_calf | Golu the calf | बछड़ा गोलू | ಕರು ಗೋಲು | [ ] |
+| game.stage_cow | Golu the cow | गाय गोलू | ಹಸು ಗೋಲು | [ ] |
+| game.stage_champion | Champion Golu | चैंपियन गोलू | ಚಾಂಪಿಯನ್ ಗೋಲು | [ ] |
+| game.toNextStage | {xp} of {next} XP to grow | बढ़ने के लिए {next} में से {xp} XP | ಬೆಳೆಯಲು {next} ರಲ್ಲಿ {xp} XP | [ ] |
+| game.stageTop | Golu is fully grown. Well done! | गोलू पूरा बड़ा हो गया। शाबाश! | ಗೋಲು ಪೂರ್ತಿ ಬೆಳೆದಿದೆ. ಭೇಷ್! | [ ] |
+| game.badgesTitle | Badge collection | बैज संग्रह | ಬ್ಯಾಡ್ಜ್ ಸಂಗ್ರಹ | [ ] |
+| game.badgesFailed | Badges couldn't load. Try again later. | बैज नहीं खुले। बाद में कोशिश करो। | ಬ್ಯಾಡ್ಜ್‌ಗಳು ತೆರೆಯಲಿಲ್ಲ. ನಂತರ ಪ್ರಯತ್ನಿಸಿ. | [ ] |
+| game.badgesLoading | Getting your badges… | आपके बैज ला रहे हैं… | ನಿಮ್ಮ ಬ್ಯಾಡ್ಜ್ ತರುತ್ತಿದೆ… | [ ] |
+| game.noBadges | No badges yet. | अभी कोई बैज नहीं। | ಇನ್ನೂ ಬ್ಯಾಡ್ಜ್ ಇಲ್ಲ. | [ ] |
+| game.badgeProgress | {n} of {goal} | {goal} में से {n} | {goal} ರಲ್ಲಿ {n} | [ ] |
+| game.locked | Not earned yet | अभी नहीं मिला | ಇನ್ನೂ ಸಿಕ್ಕಿಲ್ಲ | [ ] |
+| game.potTitle | Golu Pot | गोलू मटका | ಗೋಲು ಮಡಕೆ | [ ] |
+| game.potHint | You earned {n} pots by finishing lessons. Open one to see what's inside! | पाठ पूरे करके आपको {n} मटके मिले। एक खोलकर देखो अंदर क्या है! | ಪಾಠ ಮುಗಿಸಿ {n} ಮಡಕೆ ಗಳಿಸಿದ್ದೀರಿ. ಒಂದನ್ನು ತೆರೆದು ಒಳಗೇನಿದೆ ನೋಡಿ! | [ ] |
+| game.potEmpty | No pots waiting. Finish a lesson to earn one. | कोई मटका नहीं बचा। पाठ पूरा करके मटका पाओ। | ಯಾವ ಮಡಕೆಯೂ ಉಳಿದಿಲ್ಲ. ಪಾಠ ಮುಗಿಸಿ ಒಂದನ್ನು ಗಳಿಸಿ. | [ ] |
+| game.openPot | Open the pot | मटका खोलो | ಮಡಕೆ ತೆರೆಯಿರಿ | [ ] |
+| game.openNext | Open the next pot | अगला मटका खोलो | ಮುಂದಿನ ಮಡಕೆ ತೆರೆಯಿರಿ | [ ] |
+| game.potGems | {n} gems inside! | अंदर {n} रत्न! | ಒಳಗೆ {n} ರತ್ನ! | [ ] |
+| game.potSticker | A new sticker for your collection! | आपके संग्रह के लिए नया स्टिकर! | ನಿಮ್ಮ ಸಂಗ್ರಹಕ್ಕೆ ಹೊಸ ಸ್ಟಿಕ್ಕರ್! | [ ] |
+| game.close | Close | बंद करो | ಮುಚ್ಚಿ | [ ] |

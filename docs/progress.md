@@ -162,3 +162,15 @@ Demo: `docs/demos/web-phase-3.md`. Deviations: `docs/decisions.md` ("Web Phase 3
 - [x] Parent: link by code with preview, consent approve/pause, unlink, deletion request, weekly summary with Listen, support areas, milestones, assignments, farm picture.
 - [x] Student profile: make a parent link code, see and remove linked parents.
 - [x] Tests: review/upload/student rules, teacher and parent flows against the fakes, stories with axe in hi and kn, Playwright teacher and parent journeys with axe (desktop and phone).
+
+## Web Phase 4: Game layer
+
+Demo: `docs/demos/web-phase-4.md`. Deviations: `docs/decisions.md` ("Web Phase 4").
+
+- [x] Village fair noticeboard (weekly XP league, promote/demote zones, call-only marker, never ranked by gems).
+- [x] Quest board with daily and weekly quests; claim once (duplicate claims refused).
+- [x] Badge collection on the profile.
+- [x] Golu Pot as a 3D pot on the farm; server-decided contents, no odds shown, opens once.
+- [x] Golu's growth stages in 3D and on the profile.
+- [x] Tests: game rules, fake contract (claims, ranking, badge gems, pots), quest/league/profile/pot flows, stories with axe, Playwright game journey.
+- [ ] Game endpoints built by the backend (`docs/web/backend-handoff.md`).

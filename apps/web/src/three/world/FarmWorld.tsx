@@ -10,6 +10,7 @@ import { Chicken, Cow, Duck } from "./animals";
 import { Farmhouse, Lab, MarketStall, Signboard } from "./buildings";
 import { Decorations } from "./decorations";
 import { Interactable } from "./Interactable";
+import { GoluPot } from "./pot";
 import { flowerSpots, PASTURE, PLACES, stationPositions } from "./layout";
 import { Barn, CropField, Fence, HayBale, Tree, Windmill } from "./objects";
 import { Bush, Butterflies, Clouds, Flower, GrassTufts, PondRipples, Stream, WindClock } from "./nature";
@@ -54,6 +55,9 @@ function PortraitFit() {
   }, [aspect, camera]);
   return null;
 }
+
+/** Next to Golu, where a waiting pot sits. */
+const POT_SPOT = { x: -2.3, z: 5.4 };
 
 const at = (x: number, z: number): [number, number, number] => [x, terrainHeight(x, z), z];
 
@@ -119,6 +123,11 @@ export function FarmWorld({ quality, scene = EMPTY_SCENE, selected, onSelect, re
       <Interactable {...place("golu")}>
         <Cow bell reducedMotion={reducedMotion} scale={mascotScale} outfit={scene.mascot.outfit} champion={scene.mascot.stage === "champion"} offset={0.7} />
       </Interactable>
+      {scene.potWaiting && (
+        <Interactable id="pot" position={at(POT_SPOT.x, POT_SPOT.z)} rotationY={0} selected={selected === "pot"} onSelect={select} reducedMotion={reducedMotion}>
+          <GoluPot reducedMotion={Boolean(reducedMotion)} />
+        </Interactable>
+      )}
       <Interactable {...place("windmill")}>
         <Windmill reducedMotion={reducedMotion} />
       </Interactable>

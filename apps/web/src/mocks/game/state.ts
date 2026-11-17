@@ -46,6 +46,8 @@ onFakeDbReset(() => {
   users = new Map();
   const asha = blank();
   asha.ledger.push({ key: "seed", amount: 135, at: 0 });
+  // Badges Asha earned before the gems ledger existed (counted in the seed).
+  for (const id of ["first-lesson", "streak-3", "xp-100"]) asha.ledger.push({ key: `badge:${id}`, amount: 0, at: 0 });
   asha.owned.add("deco-sunflowers");
   asha.freezes = 1;
   users.set("u-asha", asha);

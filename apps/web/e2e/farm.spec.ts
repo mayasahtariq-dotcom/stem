@@ -24,6 +24,6 @@ test("3D farm: renders, takes pointer input, and offers keyboard access to place
   await expect(page.getByRole("dialog", { name: "Learning barn" })).toBeVisible();
   await page.screenshot({ path: info.outputPath("farm.png") });
 
-  // Student nav: later-phase items are present but disabled.
-  await expect(page.getByRole("link", { name: /Quests \(Coming soon\)/ })).toHaveAttribute("aria-disabled", "true");
+  // Student nav: the quest board and the fair are open from Phase 4.
+  await expect(page.getByRole("link", { name: /Quests/ }).first()).toHaveAttribute("href", "/farm/quests");
 });

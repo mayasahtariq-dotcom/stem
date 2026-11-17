@@ -74,6 +74,12 @@ export interface Badge {
   goal: number | null;
 }
 
+/** POST /game/quests/{id}/claim (assumed) */
+export interface QuestClaimed {
+  quest: Quest;
+  stats: GameStats;
+}
+
 export interface PotReward {
   kind: "gems" | "sticker" | "outfit";
   amount: number | null;

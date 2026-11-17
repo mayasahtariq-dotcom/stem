@@ -105,3 +105,14 @@ The web spec names `GET /game/stats`, `GET /game/quests`, `GET /game/league`, `P
 | `PUT /game/mascot/outfit` | assumed | `{outfit: string or null}` → `GameStats` |
 
 Numbers from the spec the server should apply: 5 gems per finished lesson, 20 per quest, 50 per badge, a streak freeze costs 100 gems and at most two are stored, the gems ledger is append-only. Shop prices in the mock are placeholders.
+
+### Phase 4 additions (game layer)
+
+| Endpoint | Status | Shape |
+|---|---|---|
+| `GET /game/quests` | spec | `Quest[]`: `id, period daily|weekly, kind, title Tri, progress, goal, reward_gems, state active|complete|claimed, ends_at` |
+| `POST /game/quests/{id}/claim` | assumed | → `{quest, stats: GameStats}`; errors `ALREADY_CLAIMED`, `QUEST_NOT_COMPLETE` (409) |
+| `GET /game/league` | spec | `League`: `enabled, tier, week_ends_at, promote_count, demote_count, members[{rank, name, weekly_xp, is_self, call_only}]`, ranked by weekly XP only |
+| `GET /game/badges` | spec | `Badge[]`: `id, name Tri, rule Tri, icon, earned_at, progress, goal` |
+| `POST /game/pots/{id}/open` | spec | → `{pot_id, reward {kind gems|sticker|outfit, amount, item}, stats}`; `POT_ALREADY_OPENED` (409). Contents fixed per pot on the server. |
+

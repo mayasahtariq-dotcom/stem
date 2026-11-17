@@ -2,6 +2,7 @@ import { http, HttpResponse } from "msw";
 import { GAME_PATHS, type GameStats, type ShopItem } from "@mooshala/api-client";
 import { userForToken } from "../fake-db";
 import { GAME_RULES, SHOP, gameStats, gameUser, gems } from "./state";
+import { badges, bookBadges, claimQuest, league, openPot, quests } from "./progress";
 
 /**
  * MOCK ONLY: game endpoints the backend hasn't built (see state.ts and
@@ -13,12 +14,48 @@ const auth = (request: Request) => {
   return h.startsWith("Bearer ") ? userForToken(h.slice(7)) : null;
 };
 const json = <T,>(body: T) => HttpResponse.json(body as never);
+const ERR_STATUS = { NOT_FOUND: 404, ALREADY_CLAIMED: 409, QUEST_NOT_COMPLETE: 409, POT_ALREADY_OPENED: 409 } as const;
 
 export function makeGameHandlers(base: string) {
   return [
     http.get(`${base}${GAME_PATHS.stats}`, ({ request }) => {
       const u = auth(request);
-      return u ? json<GameStats>(gameStats(u.id)) : err(401, "UNAUTHORIZED");
+      if (!u) return err(401, "UNAUTHORIZED");
+      bookBadges(u.id, gameUser(u.id));
+      return json<GameStats>(gameStats(u.id));
+    }),
+
+    http.get(`${base}${GAME_PATHS.quests}`, ({ request }) => {
+      const u = auth(request);
+      return u ? json(quests(u.id)) : err(401, "UNAUTHORIZED");
+    }),
+
+    http.post(`${base}/game/quests/:id/claim`, ({ request, params }) => {
+      const u = auth(request);
+      if (!u) return err(401, "UNAUTHORIZED");
+      const r = claimQuest(u.id, String(params.id));
+      if ("error" in r) return err(ERR_STATUS[r.error], r.error);
+      return json({ quest: r.quest, stats: gameStats(u.id) });
+    }),
+
+    http.get(`${base}${GAME_PATHS.league}`, ({ request }) => {
+      const u = auth(request);
+      return u ? json(league(u.id)) : err(401, "UNAUTHORIZED");
+    }),
+
+    http.get(`${base}${GAME_PATHS.badges}`, ({ request }) => {
+      const u = auth(request);
+      if (!u) return err(401, "UNAUTHORIZED");
+      bookBadges(u.id, gameUser(u.id));
+      return json(badges(u.id));
+    }),
+
+    http.post(`${base}/game/pots/:id/open`, ({ request, params }) => {
+      const u = auth(request);
+      if (!u) return err(401, "UNAUTHORIZED");
+      const r = openPot(u.id, String(params.id));
+      if ("error" in r) return err(ERR_STATUS[r.error], r.error);
+      return json(r);
     }),
 
     http.post(`${base}${GAME_PATHS.freeze}`, ({ request }) => {

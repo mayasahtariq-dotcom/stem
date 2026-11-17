@@ -4,7 +4,8 @@ import Link from "next/link";
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { BilingualText, ErrorState, GoluMascot, LoadingState, SpeechBubble, StickerIcon, toast } from "@/components/ui";
 import { useProfile } from "@/features/auth/hooks";
-import { useBuyFreeze, useBuyItem, useShop } from "@/features/game/api";
+import { useBuyFreeze, useBuyItem, useOpenPot, useShop } from "@/features/game/api";
+import { PotPanel } from "@/features/game/PotPanel";
 import { useStats } from "@/features/learning/api";
 import { useLessonSessions } from "@/features/learning/session-store";
 import { asApiError } from "@/lib/api/errors";
@@ -42,6 +43,7 @@ export function FarmView({ sceneExtras, renderPanel }: { sceneExtras?: ReactNode
   const buyFreeze = useBuyFreeze();
   const buyItem = useBuyItem();
   const resume = useLessonSessions((s) => s.latest());
+  const openPot = useOpenPot();
 
   const select = (id: string) => {
     setSelected(id);
@@ -74,7 +76,23 @@ export function FarmView({ sceneExtras, renderPanel }: { sceneExtras?: ReactNode
     return t(id);
   };
 
-  const panel = selected ? (renderPanel?.(selected, close) ?? (selected.startsWith("lesson:") ? <LessonPanel id={selected.slice(7)} data={data} actions={actions} /> : <PlacePanel place={selected} data={data} actions={actions} />)) : null;
+  const potPanel = (
+    <PotPanel
+      potsWaiting={game.data?.pending_pots.length ?? 0}
+      opening={openPot.isPending}
+      opened={openPot.data ?? null}
+      error={openPot.error}
+      onOpen={() => {
+        const id = game.data?.pending_pots[0];
+        if (id && !openPot.isPending) openPot.mutate(id, { onSuccess: () => sounds.play("pop") });
+      }}
+      onClose={() => {
+        openPot.reset();
+        close();
+      }}
+    />
+  );
+  const panel = selected ? (renderPanel?.(selected, close) ?? (selected === "pot" ? potPanel : selected.startsWith("lesson:") ? <LessonPanel id={selected.slice(7)} data={data} actions={actions} /> : <PlacePanel place={selected} data={data} actions={actions} />)) : null;
 
   return (
     <div className="relative h-full w-full">
@@ -136,7 +154,7 @@ export function FarmView({ sceneExtras, renderPanel }: { sceneExtras?: ReactNode
 
       {/* Keyboard and screen-reader access to every place and lesson the 3D scene offers. */}
       <nav aria-label={t("places").english} className="sr-only focus-within:not-sr-only focus-within:absolute focus-within:inset-x-3 focus-within:top-20 focus-within:z-30 focus-within:flex focus-within:flex-wrap focus-within:gap-2">
-        {[...FARM_PLACES, ...scene.stations.map((s) => `lesson:${s.id}`)].map((p) => (
+        {[...FARM_PLACES, ...(scene.potWaiting ? ["pot"] : []), ...scene.stations.map((s) => `lesson:${s.id}`)].map((p) => (
           <button key={p} type="button" onClick={() => select(p)} className="min-h-11 rounded-button bg-white px-3 font-bold shadow-float-1">
             {placeLabel(p).regional} · {placeLabel(p).english}
           </button>

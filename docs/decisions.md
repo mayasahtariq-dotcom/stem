@@ -188,3 +188,12 @@ Spec: the Mooshala Web PRD (uploaded to the project) and `docs/web/p2-frontend-p
 - **Demo seed:** class 9-A has school consent on (so Asha can learn before a parent links); turning it off in the teacher overview pauses her lessons until Meena approves. Parent codes: `K7M4PX` (Asha), `EXP1RD` (expired), `FULL22` (child with two parents already).
 - **Parent farm picture** is derived only from dashboard numbers (one crop per lesson this week, one flower per streak day), and milestones are read off the same data. No invented probabilities or scores.
 - **Class switcher** selection is kept in a small persisted store so every teacher page reads the same class.
+
+## Web Phase 4: Game layer (2026-11-17)
+
+- **Still mocked: the backend has no game service.** Quests, the league, badges and Golu Pots use the spec's `GET /game/quests`, `GET /game/league`, `GET /game/badges` and `POST /game/pots/{id}/open`, plus the assumed `POST /game/quests/{id}/claim` (→ `{quest, stats}`). Payloads are in `packages/api-client/src/pending-game.ts` and the fakes in `apps/web/src/mocks/game/progress.ts`. With real services these panels show their error states; lessons never depend on them.
+- **League = the village fair noticeboard,** ranked only by XP earned from lessons this week (Monday to Sunday, India time), never by gems; promote and demote zones come from the server. Call-only learners are marked with a phone. Reached from the signboard and the dock.
+- **Quests pay once.** The claim button locks while a request is in flight and the server refuses a second claim (`ALREADY_CLAIMED`) or an unfinished one (`QUEST_NOT_COMPLETE`). Quest goals in the fake are placeholders; 20 gems per quest is the spec's number.
+- **Badges are collectibles** on the profile shelf, each worth 50 gems once (spec). Badges Asha earned before the gems ledger existed are seeded at 0 gems so the demo balance stays 140.
+- **Golu Pot** is a 3D clay pot next to Golu that wobbles while one is waiting (one per finished lesson). What's inside is decided by the server and fixed per pot (reopening can't reroll); the UI shows no odds or probabilities anywhere.
+- **Mascot growth** (calf 0 XP, cow 500, champion 2,000; next stage 8,000 shown as the top) is shown in 3D (size, champion bell colour) and on the profile with progress to the next stage, all from `GameStats.mascot`.

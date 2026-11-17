@@ -169,6 +169,8 @@ export function PlacePanel({ place, data, actions }: { place: string; data: Farm
               <span className="font-bold">{cl.name}</span> · {cl.teacher_name}
             </p>
           ))}
+          <LinkButton href="/farm/league" text={t("openNoticeboard")} variant="white" testId="open-league" />
+          <LinkButton href="/farm/quests" text={t("openQuests")} variant="white" testId="open-quests" />
         </PanelFrame>
       );
     case "farmhouse":

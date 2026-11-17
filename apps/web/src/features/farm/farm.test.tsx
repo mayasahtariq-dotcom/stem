@@ -74,6 +74,17 @@ describe("FarmView destinations", () => {
     expect(await within(panel).findByText("20 gems")).toBeInTheDocument();
   });
 
+  it("a Golu Pot waits after a lesson; the server decides what's inside and it opens once", async () => {
+    await renderFarm();
+    open(/Golu Pot/);
+    const panel = await screen.findByTestId("pot-panel");
+    fireEvent.click(within(panel).getByTestId("open-pot"));
+    expect(await within(panel).findByTestId("pot-reward")).toBeInTheDocument();
+    expect(gameUser("u-asha").openedPots.size).toBe(1);
+    expect(within(panel).queryByTestId("open-pot")).not.toBeInTheDocument();
+    expect(within(panel).queryByText(/%/)).not.toBeInTheDocument(); // no odds shown
+  });
+
   it("the farmhouse opens the word book and the lab opens Golu's doubt chat", async () => {
     await renderFarm();
     open(/Farmhouse study/);
