@@ -1,9 +1,8 @@
 import { expect, test } from "@playwright/test";
-import { DEMO, chooseLanguageAndRole, expectFarmRendered, loginByOtp } from "./helpers";
+import { chooseLanguageAndRole, expectFarmRendered } from "./helpers";
 
 test("3D farm: renders, takes pointer input, and offers keyboard access to places", async ({ page }, info) => {
   await chooseLanguageAndRole(page, /हिन्दी/, /Student/);
-  await loginByOtp(page, DEMO.student);
   await page.waitForURL("**/farm");
   await expectFarmRendered(page);
 

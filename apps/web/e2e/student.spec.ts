@@ -1,9 +1,8 @@
 import { expect, test } from "@playwright/test";
-import { DEMO, chooseLanguageAndRole, expectFarmRendered, loginByOtp, openPlace, playLesson } from "./helpers";
+import { chooseLanguageAndRole, expectFarmRendered, openPlace, playLesson } from "./helpers";
 
 test("student core: farm → lesson → feedback → rewards → terms → doubt", async ({ page }, info) => {
   await chooseLanguageAndRole(page, /हिन्दी/, /Student/);
-  await loginByOtp(page, DEMO.student);
   await page.waitForURL("**/farm");
   await expectFarmRendered(page);
   await expect(page.getByRole("img", { name: "3 day streak" })).toBeVisible();

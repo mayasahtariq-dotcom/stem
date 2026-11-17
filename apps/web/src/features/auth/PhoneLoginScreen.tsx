@@ -90,6 +90,8 @@ export interface PhoneLoginScreenProps {
   /** Student, teacher or parent mode, picked right on the sign-in card. */
   role?: Role | null;
   onRoleChange?: (r: Role) => void;
+  /** Demo only (fake backend): the sample number for the picked mode. */
+  demoPhone?: string | null;
 }
 
 const ROLE_ICON: Record<Role, StickerIconName> = { student: "backpack", teacher: "teacher", parent: "people" };
@@ -128,7 +130,7 @@ export function RoleSwitch({ role, onChange }: { role: Role | null; onChange: (r
 }
 
 /** Stateless phone OTP screen. */
-export function PhoneLoginScreen({ state, onPhoneChange, onCodeChange, onSend, onVerify, onChangeNumber, role, onRoleChange }: PhoneLoginScreenProps) {
+export function PhoneLoginScreen({ state, onPhoneChange, onCodeChange, onSend, onVerify, onChangeNumber, role, onRoleChange, demoPhone }: PhoneLoginScreenProps) {
   const t = useBilingual("login");
   const codeRef = useRef<HTMLInputElement>(null);
   const err = (code: string | null): BilingualString | null => (code ? t(code) : null);
@@ -151,6 +153,14 @@ export function PhoneLoginScreen({ state, onPhoneChange, onCodeChange, onSend, o
     >
       <form onSubmit={submit} noValidate className="flex flex-col gap-4">
         {state.step === "phone" && onRoleChange && <RoleSwitch role={role ?? null} onChange={onRoleChange} />}
+        {state.step === "phone" && demoPhone && (
+          <div className="flex flex-wrap items-center gap-2 rounded-card border-2 border-dashed border-sun bg-sun-soft px-3 py-2" data-testid="demo-phone">
+            <BilingualText size="sm" text={t("demoNumber", { phone: demoPhone })} className="flex-1" />
+            <ChunkyButton type="button" size="sm" variant="white" onClick={() => onPhoneChange(demoPhone)}>
+              <BilingualText as="span" size="sm" text={t("useDemo")} />
+            </ChunkyButton>
+          </div>
+        )}
         {state.step === "phone" ? (
           <TextField
             label={t("phoneLabel")}

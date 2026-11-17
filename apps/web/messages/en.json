@@ -101,7 +101,12 @@
     "class_key_not_found": "No class has this key. Check it with your teacher.",
     "network": "No internet connection. Check it and try again.",
     "unavailable": "This way of signing in isn't ready yet. Use a phone number.",
-    "unknown": "Something went wrong. Let's try again."
+    "unknown": "Something went wrong. Let's try again.",
+    "wrongMode_student": "This number isn't a student account. Pick its mode above, or use a student number.",
+    "wrongMode_teacher": "This number isn't a teacher account. Pick its mode above, or use a teacher number.",
+    "wrongMode_parent": "This number isn't a parent account. Pick its mode above, or use a parent number.",
+    "demoNumber": "Demo number for this mode: {phone}",
+    "useDemo": "Use it"
   },
   "school": {
     "title": "School computer sign-in",

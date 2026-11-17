@@ -1,9 +1,8 @@
 import { expect, test } from "@playwright/test";
-import { chooseLanguageAndRole, DEMO, expectFarmRendered, loginByOtp, openPlace } from "./helpers";
+import { chooseLanguageAndRole, expectFarmRendered, openPlace } from "./helpers";
 
 test("game: open a Golu Pot, claim a quest once, village fair, badges and Golu's growth", async ({ page }) => {
   await chooseLanguageAndRole(page, /हिन्दी/, /Student/);
-  await loginByOtp(page, DEMO.student);
   await page.waitForURL("**/farm");
   await expectFarmRendered(page);
 

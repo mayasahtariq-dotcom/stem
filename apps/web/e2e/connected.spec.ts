@@ -1,9 +1,8 @@
 import { expect, test } from "@playwright/test";
-import { DEMO, chooseLanguageAndRole, loginByOtp } from "./helpers";
+import { chooseLanguageAndRole } from "./helpers";
 
 test("one platform: teacher creates a class, student joins with its code, teacher sees the student", async ({ page }) => {
   await chooseLanguageAndRole(page, /हिन्दी/, /Teacher/);
-  await loginByOtp(page, DEMO.teacher);
   await page.waitForURL("**/teacher");
   await expect(page.getByTestId("role-badge")).toHaveAttribute("data-role", "teacher");
   await expect(page.getByTestId("all-classes")).toBeVisible();
@@ -23,9 +22,6 @@ test("one platform: teacher creates a class, student joins with its code, teache
   await page.getByRole("button", { name: /Sign out/ }).click();
   await page.waitForURL("**/role");
   await page.getByRole("button", { name: /Student/ }).click();
-  await page.waitForURL("**/login");
-  await expect(page.getByTestId("login-role-switch").getByRole("radio", { name: "Student" })).toHaveAttribute("aria-checked", "true");
-  await loginByOtp(page, DEMO.student);
   await page.waitForURL("**/farm");
   await expect(page.getByTestId("role-badge")).toHaveAttribute("data-role", "student");
   await page.goto("/farm/profile");
@@ -42,9 +38,6 @@ test("one platform: teacher creates a class, student joins with its code, teache
   await page.getByRole("button", { name: /Sign out/ }).click();
   await page.waitForURL("**/role");
   await page.getByRole("button", { name: /Teacher/ }).click();
-  await page.waitForURL("**/login");
-  await expect(page.getByTestId("login-role-switch").getByRole("radio", { name: "Teacher" })).toHaveAttribute("aria-checked", "true");
-  await loginByOtp(page, DEMO.teacher);
   await page.waitForURL("**/teacher");
   await page.goto("/teacher/classes");
   await page.getByRole("listitem").filter({ hasText: "Class 8-B Science" }).getByRole("link").click();

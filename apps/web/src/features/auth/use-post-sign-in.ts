@@ -23,7 +23,7 @@ export function usePostSignIn() {
   const params = useSearchParams();
   const qc = useQueryClient();
   const { api } = useServices();
-  const { completeSignIn } = useAuth();
+  const { completeSignIn, signOut } = useAuth();
   // The mode picked before sign-in wins; otherwise the last one used here.
   const lastRole = useAppStore((s) => s.draftRole ?? s.lastRole);
   const t = useBilingual("login");
@@ -36,6 +36,14 @@ export function usePostSignIn() {
         writeLanguageCookie(profile.languageMode);
         router.refresh();
       }
+      // The mode picked before sign-in must match the account: never open
+      // another mode silently (e.g. Teacher picked, student number entered).
+      const picked = useAppStore.getState().draftRole;
+      if (picked && profile.registered && !profile.roles.includes(picked)) {
+        await signOut();
+        toast("error", t(`wrongMode_${picked}`));
+        return;
+      }
       toast("success", t("signedIn"));
       const next = params.get("next");
       // Only same-app paths, and only into a role the user has.
@@ -44,6 +52,6 @@ export function usePostSignIn() {
       if (profile.registered && safeNext && (!needed || profile.roles.includes(needed))) router.replace(safeNext);
       else router.replace(nextRouteFor(profile, lastRole));
     },
-    [api, completeSignIn, lastRole, params, qc, router, t],
+    [api, completeSignIn, lastRole, params, qc, router, signOut, t],
   );
 }

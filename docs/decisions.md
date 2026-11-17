@@ -278,3 +278,7 @@ Spec: the Mooshala Web PRD (uploaded to the project) and `docs/web/p2-frontend-p
 - **Uploads accept .txt files**, read in the browser as a typed page. The upload also sends `file_name` for each page, a requested addition to PageIn, so the Materials list can show file names and formats. Its statuses are draft, processing, review and published.
 - **Mode visibility:** the sign-in card has a Student / Teacher / Parent switch, and every top bar shows a mode badge. The role page cards have illustrations and purposes.
 - **Not built:** the student app has no video, reading or interactive lesson types (it has four quiz question types inside lessons). The new teacher screens have no Storybook stories yet.
+
+## Mode screen opens the mode directly (demo build)
+- The user asked to remove the phone step: picking Student, Teacher or Parent on "Who are you?" now signs straight into that mode's demo account (Asha, Ravi Sir, Meena) when fakes are on. With a real backend it still goes to phone login.
+- Phone OTP and school-computer login stay reachable at /login for testing. This is a demo convenience, not real authentication.

@@ -1236,3 +1236,13 @@ File: `apps/web/messages/{hi,kn}.json` (keys are `namespace.key`).
 | materials.status_review | Waiting for your review | आपकी जाँच बाकी | ನಿಮ್ಮ ಪರಿಶೀಲನೆಗೆ ಕಾಯುತ್ತಿದೆ | [ ] |
 | materials.status_published | Published | प्रकाशित | ಪ್ರಕಟಿಸಲಾಗಿದೆ | [ ] |
 | materials.review | Review | जाँचिए | ಪರಿಶೀಲಿಸಿ | [ ] |
+
+## Mode check at sign-in
+
+| Key | English | Hindi | Kannada | Reviewed |
+|---|---|---|---|---|
+| login.wrongMode_student | This number isn't a student account. Pick its mode above, or use a student number. | यह नंबर छात्र खाता नहीं है। ऊपर सही मोड चुनें या छात्र नंबर डालें। | ಈ ಸಂಖ್ಯೆ ವಿದ್ಯಾರ್ಥಿ ಖಾತೆ ಅಲ್ಲ. ಮೇಲೆ ಸರಿಯಾದ ಮೋಡ್ ಆರಿಸಿ ಅಥವಾ ವಿದ್ಯಾರ್ಥಿ ಸಂಖ್ಯೆ ಬಳಸಿ. | [ ] |
+| login.wrongMode_teacher | This number isn't a teacher account. Pick its mode above, or use a teacher number. | यह नंबर शिक्षक खाता नहीं है। ऊपर सही मोड चुनें या शिक्षक नंबर डालें। | ಈ ಸಂಖ್ಯೆ ಶಿಕ್ಷಕರ ಖಾತೆ ಅಲ್ಲ. ಮೇಲೆ ಸರಿಯಾದ ಮೋಡ್ ಆರಿಸಿ ಅಥವಾ ಶಿಕ್ಷಕರ ಸಂಖ್ಯೆ ಬಳಸಿ. | [ ] |
+| login.wrongMode_parent | This number isn't a parent account. Pick its mode above, or use a parent number. | यह नंबर अभिभावक खाता नहीं है। ऊपर सही मोड चुनें या अभिभावक नंबर डालें। | ಈ ಸಂಖ್ಯೆ ಪೋಷಕರ ಖಾತೆ ಅಲ್ಲ. ಮೇಲೆ ಸರಿಯಾದ ಮೋಡ್ ಆರಿಸಿ ಅಥವಾ ಪೋಷಕರ ಸಂಖ್ಯೆ ಬಳಸಿ. | [ ] |
+| login.demoNumber | Demo number for this mode: {phone} | इस मोड का डेमो नंबर: {phone} | ಈ ಮೋಡ್‌ನ ಡೆಮೊ ಸಂಖ್ಯೆ: {phone} | [ ] |
+| login.useDemo | Use it | इसे लें | ಬಳಸಿ | [ ] |

@@ -23,11 +23,12 @@ it("language choice is stored (not taken from the browser) and leads to the role
   expect(router.push).toHaveBeenCalledWith("/role");
 });
 
-it("role choice leads to login", async () => {
+it("choosing a mode opens that mode straight away (demo sign-in, no phone step)", async () => {
   renderWithProviders(<RolePage />);
   await userEvent.click(screen.getByRole("button", { name: /Teacher/ }));
   expect(useAppStore.getState().draftRole).toBe("teacher");
-  expect(router.push).toHaveBeenCalledWith("/login");
+  await waitFor(() => expect(router.replace).toHaveBeenCalledWith("/teacher"));
+  expect(router.push).not.toHaveBeenCalledWith("/login");
 });
 
 it("a new student names themselves, which creates the profile, then joins a class", async () => {

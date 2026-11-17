@@ -1,5 +1,5 @@
 import { expect, type Page, test } from "@playwright/test";
-import { chooseLanguageAndRole, DEMO, loginByOtp } from "./helpers";
+import { chooseLanguageAndRole } from "./helpers";
 
 /** Phone emulation lets neighbouring labels steal clicks; press buttons by keyboard. */
 async function press(page: Page, testId: string) {
@@ -9,7 +9,6 @@ async function press(page: Page, testId: string) {
 
 test("call mode: add a student without the app, then place a call that connects only when the server says so", async ({ page }) => {
   await chooseLanguageAndRole(page, /हिन्दी/, /Teacher/);
-  await loginByOtp(page, DEMO.teacher);
   await page.waitForURL("**/teacher");
 
   await page.goto("/teacher/calls/new");

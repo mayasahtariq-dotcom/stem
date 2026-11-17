@@ -1,6 +1,6 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test, type Page } from "@playwright/test";
-import { chooseLanguageAndRole, DEMO, loginByOtp } from "./helpers";
+import { chooseLanguageAndRole, DEMO } from "./helpers";
 
 async function expectNoSeriousAxe(page: Page) {
   const results = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"]).analyze();
@@ -10,7 +10,6 @@ async function expectNoSeriousAxe(page: Page) {
 
 test("teacher: dashboard → review flagged questions → publish → upload notes", async ({ page }) => {
   await chooseLanguageAndRole(page, /हिन्दी/, /Teacher/);
-  await loginByOtp(page, DEMO.teacher);
   await page.waitForURL("**/teacher");
   await expect(page.getByText("Active this week")).toBeVisible();
   await expect(page.getByTestId("join-key")).toHaveText(DEMO.key);
@@ -50,7 +49,6 @@ test("teacher: dashboard → review flagged questions → publish → upload not
 
 test("parent: link a child by code → approve consent → weekly summary", async ({ page }) => {
   await chooseLanguageAndRole(page, /ಕನ್ನಡ/, /Parent/);
-  await loginByOtp(page, DEMO.parent);
   await page.waitForURL("**/parent");
   await expect(page.getByText(/No child linked yet/)).toBeVisible();
   await page.getByTestId("link-code").fill("EXP1RD");

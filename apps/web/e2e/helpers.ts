@@ -8,7 +8,16 @@ export async function chooseLanguageAndRole(page: Page, language: RegExp, role: 
   await page.getByRole("button", { name: language }).click();
   await page.waitForURL("**/role");
   await page.getByRole("button", { name: role }).click();
-  await page.waitForURL("**/login");
+}
+
+/** Picking a mode on /role opens it straight away (demo account), so phone login is tested from /login directly. */
+export async function openPhoneLogin(page: Page, language: RegExp, role: "Student" | "Teacher" | "Parent") {
+  await page.goto("/");
+  await page.waitForURL("**/language");
+  await page.getByRole("button", { name: language }).click();
+  await page.waitForURL("**/role");
+  await page.goto("/login");
+  await page.getByTestId("login-role-switch").getByRole("radio", { name: role }).click();
 }
 
 export async function loginByOtp(page: Page, phone: string) {

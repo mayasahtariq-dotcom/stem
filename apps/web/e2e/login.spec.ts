@@ -1,8 +1,14 @@
 import { expect, test } from "@playwright/test";
-import { DEMO, chooseLanguageAndRole, expectFarmRendered, loginByOtp } from "./helpers";
+import { DEMO, chooseLanguageAndRole, expectFarmRendered, loginByOtp, openPhoneLogin } from "./helpers";
+
+test("picking Student on the mode screen opens the farm straight away", async ({ page }) => {
+  await chooseLanguageAndRole(page, /हिन्दी/, /Student/);
+  await page.waitForURL("**/farm");
+  await expect(page.getByTestId("role-badge")).toHaveAttribute("data-role", "student");
+});
 
 test("student logs in by phone OTP and lands on the 3D farm", async ({ page }) => {
-  await chooseLanguageAndRole(page, /हिन्दी/, /Student/);
+  await openPhoneLogin(page, /हिन्दी/, "Student");
   await page.getByLabel(/Phone number/).fill("12345");
   await page.getByRole("button", { name: /Send code/ }).click();
   await expect(page.getByText("Enter a 10-digit mobile number.")).toBeVisible();
@@ -13,7 +19,7 @@ test("student logs in by phone OTP and lands on the 3D farm", async ({ page }) =
 });
 
 test("wrong code says 'Not quite', never 'Wrong'", async ({ page }) => {
-  await chooseLanguageAndRole(page, /ಕನ್ನಡ/, /Student/);
+  await openPhoneLogin(page, /ಕನ್ನಡ/, "Student");
   await page.getByLabel(/Phone number/).fill(DEMO.student);
   await page.getByRole("button", { name: /Send code/ }).click();
   await page.getByLabel(/6-digit code/).fill("111111");
@@ -23,7 +29,7 @@ test("wrong code says 'Not quite', never 'Wrong'", async ({ page }) => {
 });
 
 test("student logs in on a school computer with class key and name", async ({ page }) => {
-  await chooseLanguageAndRole(page, /हिन्दी/, /Student/);
+  await openPhoneLogin(page, /हिन्दी/, "Student");
   await page.getByRole("link", { name: /school computer/i }).click();
   await page.waitForURL("**/login/school");
   await page.getByLabel(/Class key/).fill("bi09k4x2");
@@ -36,7 +42,6 @@ test("student logs in on a school computer with class key and name", async ({ pa
 
 test("teacher and parent land in their own shells; roles are enforced", async ({ page }) => {
   await chooseLanguageAndRole(page, /हिन्दी/, /Teacher/);
-  await loginByOtp(page, DEMO.teacher);
   await page.waitForURL("**/teacher");
   await expect(page.getByRole("navigation", { name: "Teacher sections" })).toBeVisible();
   await expect(page.getByRole("combobox", { name: "Class" })).toContainText("Class 9-A Science");
@@ -47,14 +52,12 @@ test("teacher and parent land in their own shells; roles are enforced", async ({
   await page.getByRole("button", { name: /Sign out/ }).click();
   await page.waitForURL("**/role");
   await page.getByRole("button", { name: /Parent/ }).click();
-  await page.waitForURL("**/login");
-  await loginByOtp(page, DEMO.parent);
   await page.waitForURL("**/parent");
   await expect(page.getByText(/No child linked yet/)).toBeVisible();
 });
 
 test("a new user names themselves and joins a class", async ({ page }) => {
-  await chooseLanguageAndRole(page, /ಕನ್ನಡ/, /Student/);
+  await openPhoneLogin(page, /ಕನ್ನಡ/, "Student");
   await loginByOtp(page, "9123456780");
   await page.waitForURL("**/welcome");
   await page.getByLabel(/Your name/).fill("Kiran");
