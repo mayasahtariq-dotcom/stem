@@ -66,7 +66,7 @@ export function HudControls({ tone = "game" }: { tone?: "game" | "plain" }) {
               onClick={async () => {
                 setOpen(false);
                 await signOut();
-                router.replace(ROUTES.login);
+                router.replace(ROUTES.role);
               }}
             >
               <BilingualText as="span" align="center" text={c("signOut")} size="sm" />

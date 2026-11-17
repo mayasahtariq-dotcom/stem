@@ -40,11 +40,11 @@ describe("EntryGate (app start)", () => {
     await waitFor(() => expect(router.replace).toHaveBeenCalledWith("/language"));
   });
 
-  it("goes to login when a language is stored but nobody is signed in", async () => {
+  it("goes to the mode picker when a language is stored but nobody is signed in", async () => {
     document.cookie = "mooshala_lang=kannada; path=/";
     useAuthStore.getState().setSession(null);
     renderWithProviders(<EntryGate />);
-    await waitFor(() => expect(router.replace).toHaveBeenCalledWith("/login"));
+    await waitFor(() => expect(router.replace).toHaveBeenCalledWith("/role"));
   });
 
   it("sends a returning parent home", async () => {

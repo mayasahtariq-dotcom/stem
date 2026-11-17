@@ -21,8 +21,10 @@ test("one platform: teacher creates a class, student joins with its code, teache
   // Student joins from the profile with that code.
   await page.getByRole("button", { name: "Menu" }).click();
   await page.getByRole("button", { name: /Sign out/ }).click();
+  await page.waitForURL("**/role");
+  await page.getByRole("button", { name: /Student/ }).click();
   await page.waitForURL("**/login");
-  await page.getByTestId("login-role-switch").getByRole("radio", { name: "Student" }).click();
+  await expect(page.getByTestId("login-role-switch").getByRole("radio", { name: "Student" })).toHaveAttribute("aria-checked", "true");
   await loginByOtp(page, DEMO.student);
   await page.waitForURL("**/farm");
   await expect(page.getByTestId("role-badge")).toHaveAttribute("data-role", "student");
@@ -38,8 +40,10 @@ test("one platform: teacher creates a class, student joins with its code, teache
   // The teacher now sees Asha in the new class.
   await page.getByRole("button", { name: "Menu" }).click();
   await page.getByRole("button", { name: /Sign out/ }).click();
+  await page.waitForURL("**/role");
+  await page.getByRole("button", { name: /Teacher/ }).click();
   await page.waitForURL("**/login");
-  await page.getByTestId("login-role-switch").getByRole("radio", { name: "Teacher" }).click();
+  await expect(page.getByTestId("login-role-switch").getByRole("radio", { name: "Teacher" })).toHaveAttribute("aria-checked", "true");
   await loginByOtp(page, DEMO.teacher);
   await page.waitForURL("**/teacher");
   await page.goto("/teacher/classes");

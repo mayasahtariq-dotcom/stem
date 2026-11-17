@@ -17,7 +17,8 @@ export function EntryGate() {
   useEffect(() => {
     if (status === "restoring") return;
     if (status === "signedOut") {
-      router.replace(readLanguageCookie() ? ROUTES.login : ROUTES.language);
+      // Signed out: always start at "who are you?" (student, teacher or parent).
+      router.replace(readLanguageCookie() ? ROUTES.role : ROUTES.language);
       return;
     }
     if (profile.data) router.replace(nextRouteFor(profile.data, lastRole));

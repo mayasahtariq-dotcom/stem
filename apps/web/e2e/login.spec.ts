@@ -45,6 +45,8 @@ test("teacher and parent land in their own shells; roles are enforced", async ({
 
   await page.getByRole("button", { name: "Menu" }).click();
   await page.getByRole("button", { name: /Sign out/ }).click();
+  await page.waitForURL("**/role");
+  await page.getByRole("button", { name: /Parent/ }).click();
   await page.waitForURL("**/login");
   await loginByOtp(page, DEMO.parent);
   await page.waitForURL("**/parent");
