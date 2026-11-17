@@ -19,5 +19,4 @@
     <string name="dev_server_url_hint">Server address</string>
     <string name="dev_server_url_invalid">Type an address like http://192.168.1.5:8000/</string>
     <string name="dev_server_apply">Save and restart</string>
-    <string name="prototype_title">Design prototype (web)</string>
 </resources>

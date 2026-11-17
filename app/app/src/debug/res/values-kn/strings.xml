@@ -20,5 +20,4 @@
     <string name="dev_server_url_hint">ಸರ್ವರ್ ವಿಳಾಸ</string>
     <string name="dev_server_url_invalid">http://192.168.1.5:8000/ ರೀತಿಯ ವಿಳಾಸ ಬರೆಯಿರಿ</string>
     <string name="dev_server_apply">ಉಳಿಸಿ ಮತ್ತು ಮರುಪ್ರಾರಂಭಿಸಿ</string>
-    <string name="prototype_title">ವಿನ್ಯಾಸ ಪ್ರೋಟೋಟೈಪ್ (ವೆಬ್)</string>
 </resources>

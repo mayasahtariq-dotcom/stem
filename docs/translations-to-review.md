@@ -27,7 +27,6 @@ Files: `app/core/designsystem/src/main/res/values-{hi,kn}/strings.xml`, `app/app
 | ds_sample_continue | Continue | आगे बढ़ें | ಮುಂದುವರಿಸಿ | [ ] |
 | ds_sample_skip | Skip | छोड़ें | ಬಿಟ್ಟುಬಿಡಿ | [ ] |
 | gallery_title | Component gallery | कंपोनेंट गैलरी | ಕಾಂಪೊನೆಂಟ್ ಗ್ಯಾಲರಿ | [ ] |
-| prototype_title | Design prototype (web) | डिज़ाइन प्रोटोटाइप (वेब) | ವಿನ್ಯಾಸ ಪ್ರೋಟೋಟೈಪ್ (ವೆಬ್) | [ ] |
 | gallery_section_text | Bilingual text | दो भाषाओं में लिखावट | ಎರಡು ಭಾಷೆಯ ಪಠ್ಯ | [ ] |
 | gallery_section_buttons | Buttons | बटन | ಬಟನ್‌ಗಳು | [ ] |
 | gallery_section_options | Answer options (tap one) | जवाब के विकल्प (एक चुनें) | ಉತ್ತರದ ಆಯ್ಕೆಗಳು (ಒಂದನ್ನು ಆರಿಸಿ) | [ ] |
