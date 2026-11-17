@@ -30,3 +30,15 @@ Thumbs.db
 
 # Local development data (embedded Postgres, uploaded pages)
 backend/var/
+
+# Web (pnpm workspace: apps/, packages/)
+node_modules/
+.next/
+.turbo/
+dist/
+storybook-static/
+playwright-report/
+test-results/
+*.tsbuildinfo
+next-env.d.ts
+.env.local

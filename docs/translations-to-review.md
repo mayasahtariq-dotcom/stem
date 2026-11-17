@@ -483,3 +483,135 @@ Files: `values-{hi,kn}/strings.xml` in `app/feature/teacher`, `app/feature/paren
 | pa_delete_confirm | Delete all of your child's data? This can't be undone. | बच्चे का सारा डेटा मिटाएँ? इसे वापस नहीं किया जा सकता। | ಮಗುವಿನ ಎಲ್ಲಾ ಡೇಟಾ ಅಳಿಸಬೇಕೆ? ಇದನ್ನು ಹಿಂಪಡೆಯಲಾಗುವುದಿಲ್ಲ. | [ ] |
 | pa_yes | Yes | हाँ | ಹೌದು | [ ] |
 | pa_no | No | नहीं | ಇಲ್ಲ | [ ] |
+
+
+## Web Phase 1 (Mooshala Web)
+
+File: `apps/web/messages/{hi,kn}.json` (keys are `namespace.key`).
+
+| Key | English | Hindi (draft) | Kannada (draft) | Reviewed |
+|---|---|---|---|---|
+| common.appName | Mooshala | मूशाला | ಮೂಶಾಲಾ | [ ] |
+| common.loading | Getting things ready… | तैयारी हो रही है… | ಸಿದ್ಧವಾಗುತ್ತಿದೆ… | [ ] |
+| common.retry | Try again | फिर से कोशिश करें | ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ | [ ] |
+| common.continue | Continue | आगे बढ़ें | ಮುಂದುವರಿಯಿರಿ | [ ] |
+| common.back | Back | पीछे | ಹಿಂದೆ | [ ] |
+| common.signOut | Sign out | साइन आउट | ಸೈನ್ ಔಟ್ | [ ] |
+| common.soundOn | Sound on | आवाज़ चालू | ಧ್ವನಿ ಆನ್ | [ ] |
+| common.soundOff | Sound off | आवाज़ बंद | ಧ್ವನಿ ಆಫ್ | [ ] |
+| common.comingSoon | Coming soon | जल्द आ रहा है | ಶೀಘ್ರದಲ್ಲೇ ಬರಲಿದೆ | [ ] |
+| common.notFound | We couldn't find this page. | यह पेज नहीं मिला। | ಈ ಪುಟ ಸಿಗಲಿಲ್ಲ. | [ ] |
+| common.goHome | Go home | होम पर जाएँ | ಮುಖಪುಟಕ್ಕೆ ಹೋಗಿ | [ ] |
+| common.somethingWrong | Something went wrong. Let's try again. | कुछ गड़बड़ हो गई। चलो फिर से कोशिश करें। | ಏನೋ ತಪ್ಪಾಯಿತು. ಮತ್ತೆ ಪ್ರಯತ್ನಿಸೋಣ. | [ ] |
+| errors.UNAUTHORIZED | Please sign in again. | कृपया फिर से साइन इन करें। | ದಯವಿಟ್ಟು ಮತ್ತೆ ಸೈನ್ ಇನ್ ಮಾಡಿ. | [ ] |
+| errors.PROFILE_INCOMPLETE | Please finish setting up your profile. | कृपया अपनी प्रोफ़ाइल पूरी करें। | ದಯವಿಟ್ಟು ನಿಮ್ಮ ಪ್ರೊಫೈಲ್ ಪೂರ್ಣಗೊಳಿಸಿ. | [ ] |
+| errors.NOT_A_TEACHER | This part is for teachers. | यह हिस्सा शिक्षकों के लिए है। | ಈ ಭಾಗ ಶಿಕ್ಷಕರಿಗಾಗಿ. | [ ] |
+| errors.NOT_A_STUDENT | This part is for students. | यह हिस्सा विद्यार्थियों के लिए है। | ಈ ಭಾಗ ವಿದ್ಯಾರ್ಥಿಗಳಿಗಾಗಿ. | [ ] |
+| errors.NOT_A_PARENT | This part is for parents. | यह हिस्सा माता-पिता के लिए है। | ಈ ಭಾಗ ಪೋಷಕರಿಗಾಗಿ. | [ ] |
+| errors.NOT_FOUND | We couldn't find that. | यह नहीं मिला। | ಅದು ಸಿಗಲಿಲ್ಲ. | [ ] |
+| errors.KEY_NOT_FOUND | No class has this key. Check it with your teacher. | इस कुंजी वाली कोई कक्षा नहीं है। अपने शिक्षक से जाँच लें। | ಈ ಕೀ ಇರುವ ತರಗತಿ ಇಲ್ಲ. ನಿಮ್ಮ ಶಿಕ್ಷಕರೊಂದಿಗೆ ಪರಿಶೀಲಿಸಿ. | [ ] |
+| errors.KEY_EXPIRED | This class key has expired. Ask your teacher for a new one. | यह कक्षा कुंजी पुरानी हो गई है। शिक्षक से नई कुंजी माँगें। | ಈ ತರಗತಿ ಕೀ ಅವಧಿ ಮುಗಿದಿದೆ. ಶಿಕ್ಷಕರಿಂದ ಹೊಸ ಕೀ ಕೇಳಿ. | [ ] |
+| errors.ALREADY_MEMBER | You are already in this class. | तुम पहले से इस कक्षा में हो। | ನೀನು ಈಗಾಗಲೇ ಈ ತರಗತಿಯಲ್ಲಿ ಇದ್ದೀಯ. | [ ] |
+| errors.LANGUAGE_NOT_ALLOWED | This class doesn't use your language. | इस कक्षा में तुम्हारी भाषा नहीं है। | ಈ ತರಗತಿಯಲ್ಲಿ ನಿನ್ನ ಭಾಷೆ ಇಲ್ಲ. | [ ] |
+| errors.TOO_MANY_ATTEMPTS | Too many tries. Please wait a while and try again. | बहुत ज़्यादा कोशिशें हो गईं। थोड़ी देर बाद फिर कोशिश करें। | ತುಂಬಾ ಪ್ರಯತ್ನಗಳಾಗಿವೆ. ಸ್ವಲ್ಪ ಸಮಯದ ನಂತರ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ. | [ ] |
+| errors.PHONE_IN_USE | This phone number is already in use. | यह फ़ोन नंबर पहले से इस्तेमाल में है। | ಈ ಫೋನ್ ಸಂಖ್ಯೆ ಈಗಾಗಲೇ ಬಳಕೆಯಲ್ಲಿದೆ. | [ ] |
+| errors.CONSENT_REQUIRED | A parent needs to give consent first. | पहले माता-पिता की सहमति चाहिए। | ಮೊದಲು ಪೋಷಕರ ಒಪ್ಪಿಗೆ ಬೇಕು. | [ ] |
+| errors.VALIDATION | Some details aren't right. Please check them. | कुछ जानकारी सही नहीं है। कृपया जाँच लें। | ಕೆಲವು ವಿವರಗಳು ಸರಿಯಿಲ್ಲ. ದಯವಿಟ್ಟು ಪರಿಶೀಲಿಸಿ. | [ ] |
+| errors.NETWORK | No internet connection. Check it and try again. | इंटरनेट नहीं है। जाँच कर फिर कोशिश करें। | ಇಂಟರ್ನೆಟ್ ಇಲ್ಲ. ಪರಿಶೀಲಿಸಿ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ. | [ ] |
+| errors.SERVER | Our server is having trouble. Please try again soon. | हमारे सर्वर में दिक्कत है। थोड़ी देर में फिर कोशिश करें। | ನಮ್ಮ ಸರ್ವರ್‌ನಲ್ಲಿ ತೊಂದರೆ ಇದೆ. ಸ್ವಲ್ಪ ಹೊತ್ತಿನಲ್ಲಿ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ. | [ ] |
+| errors.UNKNOWN | Something went wrong. Let's try again. | कुछ गड़बड़ हो गई। चलो फिर से कोशिश करें। | ಏನೋ ತಪ್ಪಾಯಿತು. ಮತ್ತೆ ಪ್ರಯತ್ನಿಸೋಣ. | [ ] |
+| language.title | Choose your language | अपनी भाषा चुनें | ನಿಮ್ಮ ಭಾಷೆಯನ್ನು ಆರಿಸಿ | [ ] |
+| language.subtitle | English will always show below. | नीचे अंग्रेज़ी हमेशा दिखेगी। | ಕೆಳಗೆ ಇಂಗ್ಲಿಷ್ ಯಾವಾಗಲೂ ಕಾಣಿಸುತ್ತದೆ. | [ ] |
+| language.hindi | हिन्दी + English | हिन्दी + English | हिन्दी + English | [ ] |
+| language.kannada | ಕನ್ನಡ + English | ಕನ್ನಡ + English | ಕನ್ನಡ + English | [ ] |
+| role.title | Who are you? | तुम कौन हो? | ನೀವು ಯಾರು? | [ ] |
+| role.student | Student | विद्यार्थी | ವಿದ್ಯಾರ್ಥಿ | [ ] |
+| role.studentHint | I want to learn and play | मुझे सीखना और खेलना है | ನಾನು ಕಲಿಯಲು ಮತ್ತು ಆಡಲು ಬಯಸುತ್ತೇನೆ | [ ] |
+| role.teacher | Teacher | शिक्षक | ಶಿಕ್ಷಕ | [ ] |
+| role.teacherHint | I teach a class | मैं कक्षा पढ़ाता/पढ़ाती हूँ | ನಾನು ತರಗತಿಗೆ ಕಲಿಸುತ್ತೇನೆ | [ ] |
+| role.parent | Parent | माता-पिता | ಪೋಷಕರು | [ ] |
+| role.parentHint | I want to follow my child | मैं अपने बच्चे की प्रगति देखना चाहता/चाहती हूँ | ನನ್ನ ಮಗುವಿನ ಪ್ರಗತಿ ನೋಡಲು ಬಯಸುತ್ತೇನೆ | [ ] |
+| login.welcome | Welcome to the farm! | खेत में तुम्हारा स्वागत है! | ಹೊಲಕ್ಕೆ ಸ್ವಾಗತ! | [ ] |
+| login.phoneTitle | Enter your phone number | अपना फ़ोन नंबर डालें | ನಿಮ್ಮ ಫೋನ್ ಸಂಖ್ಯೆ ನಮೂದಿಸಿ | [ ] |
+| login.phoneLabel | Phone number | फ़ोन नंबर | ಫೋನ್ ಸಂಖ್ಯೆ | [ ] |
+| login.phoneHint | We will send a 6-digit code by SMS. | हम SMS से 6 अंकों का कोड भेजेंगे। | ನಾವು SMS ಮೂಲಕ 6 ಅಂಕಿಯ ಕೋಡ್ ಕಳುಹಿಸುತ್ತೇವೆ. | [ ] |
+| login.sendCode | Send code | कोड भेजें | ಕೋಡ್ ಕಳುಹಿಸಿ | [ ] |
+| login.codeTitle | Enter the 6-digit code | 6 अंकों का कोड डालें | 6 ಅಂಕಿಯ ಕೋಡ್ ನಮೂದಿಸಿ | [ ] |
+| login.codeSentTo | Sent to {phone} | {phone} पर भेजा गया | {phone} ಗೆ ಕಳುಹಿಸಲಾಗಿದೆ | [ ] |
+| login.codeLabel | 6-digit code | 6 अंकों का कोड | 6 ಅಂಕಿಯ ಕೋಡ್ | [ ] |
+| login.verify | Verify | जाँचें | ಪರಿಶೀಲಿಸಿ | [ ] |
+| login.resendIn | Resend code in {seconds}s | {seconds} सेकंड में फिर से कोड भेजें | {seconds} ಸೆಕೆಂಡುಗಳಲ್ಲಿ ಮತ್ತೆ ಕೋಡ್ ಕಳುಹಿಸಿ | [ ] |
+| login.resend | Resend code | कोड फिर से भेजें | ಕೋಡ್ ಮತ್ತೆ ಕಳುಹಿಸಿ | [ ] |
+| login.changeNumber | Change number | नंबर बदलें | ಸಂಖ್ಯೆ ಬದಲಿಸಿ | [ ] |
+| login.codeSent | Code sent! | कोड भेज दिया! | ಕೋಡ್ ಕಳುಹಿಸಲಾಗಿದೆ! | [ ] |
+| login.signedIn | You're in! Welcome. | तुम अंदर आ गए! स्वागत है। | ನೀನು ಒಳಗೆ ಬಂದೆ! ಸ್ವಾಗತ. | [ ] |
+| login.schoolComputer | On a school computer? Use a class key | स्कूल के कंप्यूटर पर हो? कक्षा कुंजी से आएँ | ಶಾಲೆಯ ಕಂಪ್ಯೂಟರ್‌ನಲ್ಲಿ ಇದ್ದೀರಾ? ತರಗತಿ ಕೀ ಬಳಸಿ | [ ] |
+| login.usePhone | Use a phone number instead | फ़ोन नंबर से आएँ | ಫೋನ್ ಸಂಖ್ಯೆ ಬಳಸಿ | [ ] |
+| login.invalid_phone | Enter a 10-digit mobile number. | 10 अंकों का मोबाइल नंबर डालें। | 10 ಅಂಕಿಯ ಮೊಬೈಲ್ ಸಂಖ್ಯೆ ನಮೂದಿಸಿ. | [ ] |
+| login.invalid_code | Not quite. Check the code and try again. | पूरी तरह सही नहीं। कोड जाँच कर फिर कोशिश करें। | ಸ್ವಲ್ಪ ತಪ್ಪಿದೆ. ಕೋಡ್ ಪರಿಶೀಲಿಸಿ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ. | [ ] |
+| login.code_expired | This code has expired. Ask for a new one. | यह कोड पुराना हो गया है। नया कोड माँगें। | ಈ ಕೋಡ್ ಅವಧಿ ಮುಗಿದಿದೆ. ಹೊಸ ಕೋಡ್ ಕೇಳಿ. | [ ] |
+| login.rate_limited | Too many tries. Please wait a while and try again. | बहुत ज़्यादा कोशिशें हो गईं। थोड़ी देर बाद फिर कोशिश करें। | ತುಂಬಾ ಪ್ರಯತ್ನಗಳಾಗಿವೆ. ಸ್ವಲ್ಪ ಸಮಯದ ನಂತರ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ. | [ ] |
+| login.class_key_not_found | No class has this key. Check it with your teacher. | इस कुंजी वाली कोई कक्षा नहीं है। अपने शिक्षक से जाँच लें। | ಈ ಕೀ ಇರುವ ತರಗತಿ ಇಲ್ಲ. ನಿಮ್ಮ ಶಿಕ್ಷಕರೊಂದಿಗೆ ಪರಿಶೀಲಿಸಿ. | [ ] |
+| login.network | No internet connection. Check it and try again. | इंटरनेट नहीं है। जाँच कर फिर कोशिश करें। | ಇಂಟರ್ನೆಟ್ ಇಲ್ಲ. ಪರಿಶೀಲಿಸಿ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ. | [ ] |
+| login.unavailable | This way of signing in isn't ready yet. Use a phone number. | साइन इन का यह तरीका अभी तैयार नहीं है। फ़ोन नंबर से आएँ। | ಈ ಸೈನ್ ಇನ್ ವಿಧಾನ ಇನ್ನೂ ಸಿದ್ಧವಾಗಿಲ್ಲ. ಫೋನ್ ಸಂಖ್ಯೆ ಬಳಸಿ. | [ ] |
+| login.unknown | Something went wrong. Let's try again. | कुछ गड़बड़ हो गई। चलो फिर से कोशिश करें। | ಏನೋ ತಪ್ಪಾಯಿತು. ಮತ್ತೆ ಪ್ರಯತ್ನಿಸೋಣ. | [ ] |
+| school.title | School computer sign-in | स्कूल कंप्यूटर से साइन इन | ಶಾಲಾ ಕಂಪ್ಯೂಟರ್ ಸೈನ್ ಇನ್ | [ ] |
+| school.subtitle | Type your class key and your name. | अपनी कक्षा कुंजी और अपना नाम लिखें। | ನಿಮ್ಮ ತರಗತಿ ಕೀ ಮತ್ತು ಹೆಸರನ್ನು ಬರೆಯಿರಿ. | [ ] |
+| school.keyLabel | Class key | कक्षा कुंजी | ತರಗತಿ ಕೀ | [ ] |
+| school.keyHint | Like BI09-K4X2. Your teacher has it. | जैसे BI09-K4X2। यह तुम्हारे शिक्षक के पास है। | ಉದಾ. BI09-K4X2. ಇದು ನಿಮ್ಮ ಶಿಕ್ಷಕರ ಬಳಿ ಇದೆ. | [ ] |
+| school.nameLabel | Your name | तुम्हारा नाम | ನಿನ್ನ ಹೆಸರು | [ ] |
+| school.signIn | Sign in | साइन इन | ಸೈನ್ ಇನ್ | [ ] |
+| school.invalid_key | A class key looks like BI09-K4X2. | कक्षा कुंजी BI09-K4X2 जैसी दिखती है। | ತರಗತಿ ಕೀ BI09-K4X2 ರೀತಿ ಇರುತ್ತದೆ. | [ ] |
+| school.name_required | Please type your name. | कृपया अपना नाम लिखें। | ದಯವಿಟ್ಟು ನಿನ್ನ ಹೆಸರು ಬರೆ. | [ ] |
+| school.name_too_long | That name is too long. | यह नाम बहुत लंबा है। | ಈ ಹೆಸರು ತುಂಬಾ ಉದ್ದವಾಗಿದೆ. | [ ] |
+| welcome.title | What should we call you? | हम तुम्हें क्या बुलाएँ? | ನಿನ್ನನ್ನು ಏನೆಂದು ಕರೆಯೋಣ? | [ ] |
+| welcome.nameLabel | Your name | तुम्हारा नाम | ನಿನ್ನ ಹೆಸರು | [ ] |
+| welcome.save | Let's go! | चलो चलें! | ಹೋಗೋಣ! | [ ] |
+| welcome.name_required | Please type your name. | कृपया अपना नाम लिखें। | ದಯವಿಟ್ಟು ನಿನ್ನ ಹೆಸರು ಬರೆ. | [ ] |
+| welcome.name_too_long | That name is too long. | यह नाम बहुत लंबा है। | ಈ ಹೆಸರು ತುಂಬಾ ಉದ್ದವಾಗಿದೆ. | [ ] |
+| join.title | Join your class | अपनी कक्षा से जुड़ें | ನಿನ್ನ ತರಗತಿಗೆ ಸೇರು | [ ] |
+| join.keyLabel | Class key | कक्षा कुंजी | ತರಗತಿ ಕೀ | [ ] |
+| join.keyHint | Like BI09-K4X2. Your teacher has it. | जैसे BI09-K4X2। यह तुम्हारे शिक्षक के पास है। | ಉದಾ. BI09-K4X2. ಇದು ನಿಮ್ಮ ಶಿಕ್ಷಕರ ಬಳಿ ಇದೆ. | [ ] |
+| join.find | Find class | कक्षा खोजें | ತರಗತಿ ಹುಡುಕಿ | [ ] |
+| join.scan | Scan QR code | QR कोड स्कैन करें | QR ಕೋಡ್ ಸ್ಕ್ಯಾನ್ ಮಾಡಿ | [ ] |
+| join.scanning | Point the camera at the QR code | कैमरा QR कोड की ओर करें | ಕ್ಯಾಮೆರಾವನ್ನು QR ಕೋಡ್ ಕಡೆಗೆ ತೋರಿಸಿ | [ ] |
+| join.stopScan | Stop scanning | स्कैन बंद करें | ಸ್ಕ್ಯಾನ್ ನಿಲ್ಲಿಸಿ | [ ] |
+| join.join | Join this class | इस कक्षा से जुड़ें | ಈ ತರಗತಿಗೆ ಸೇರು | [ ] |
+| join.teacher | Teacher: {name} | शिक्षक: {name} | ಶಿಕ್ಷಕರು: {name} | [ ] |
+| join.students | {count} students | {count} विद्यार्थी | {count} ವಿದ್ಯಾರ್ಥಿಗಳು | [ ] |
+| join.joined | You joined {name}! | तुम {name} से जुड़ गए! | ನೀನು {name} ಗೆ ಸೇರಿದೆ! | [ ] |
+| join.skip | Not now | अभी नहीं | ಈಗ ಬೇಡ | [ ] |
+| join.invalid_key | A class key looks like BI09-K4X2. | कक्षा कुंजी BI09-K4X2 जैसी दिखती है। | ತರಗತಿ ಕೀ BI09-K4X2 ರೀತಿ ಇರುತ್ತದೆ. | [ ] |
+| farm.label | Your 3D farm. Drag to turn, pinch or scroll to zoom, tap a place to look at it. | तुम्हारा 3D खेत। घुमाने के लिए खींचें, ज़ूम के लिए पिंच या स्क्रॉल करें, किसी जगह को देखने के लिए टैप करें। | ನಿನ್ನ 3D ಹೊಲ. ತಿರುಗಿಸಲು ಎಳೆಯಿರಿ, ಜೂಮ್ ಮಾಡಲು ಪಿಂಚ್ ಅಥವಾ ಸ್ಕ್ರಾಲ್ ಮಾಡಿ, ಒಂದು ಸ್ಥಳ ನೋಡಲು ಟ್ಯಾಪ್ ಮಾಡಿ. | [ ] |
+| farm.loading | Building your farm… | तुम्हारा खेत बन रहा है… | ನಿನ್ನ ಹೊಲ ತಯಾರಾಗುತ್ತಿದೆ… | [ ] |
+| farm.loadingProgress | Building your farm… {percent}% | तुम्हारा खेत बन रहा है… {percent}% | ನಿನ್ನ ಹೊಲ ತಯಾರಾಗುತ್ತಿದೆ… {percent}% | [ ] |
+| farm.error | The farm couldn't load. Let's try again. | खेत लोड नहीं हुआ। चलो फिर से कोशिश करें। | ಹೊಲ ಲೋಡ್ ಆಗಲಿಲ್ಲ. ಮತ್ತೆ ಪ್ರಯತ್ನಿಸೋಣ. | [ ] |
+| farm.unsupported | This computer can't show the 3D farm. You can still learn with Mooshala. | यह कंप्यूटर 3D खेत नहीं दिखा सकता। तुम फिर भी मूशाला से सीख सकते हो। | ಈ ಕಂಪ್ಯೂಟರ್ 3D ಹೊಲವನ್ನು ತೋರಿಸಲಾರದು. ಆದರೂ ನೀನು ಮೂಶಾಲಾದೊಂದಿಗೆ ಕಲಿಯಬಹುದು. | [ ] |
+| farm.places | Places on the farm | खेत की जगहें | ಹೊಲದ ಸ್ಥಳಗಳು | [ ] |
+| farm.selected | {place} selected | {place} चुना गया | {place} ಆಯ್ಕೆಯಾಗಿದೆ | [ ] |
+| farm.close | Close | बंद करें | ಮುಚ್ಚಿ | [ ] |
+| farm.placeComingSoon | Lessons and games arrive here soon. | यहाँ जल्द ही पाठ और खेल आएँगे। | ಇಲ್ಲಿ ಶೀಘ್ರದಲ್ಲೇ ಪಾಠಗಳು ಮತ್ತು ಆಟಗಳು ಬರುತ್ತವೆ. | [ ] |
+| farm.barn | Barn | खलिहान | ಕೊಟ್ಟಿಗೆ | [ ] |
+| farm.field | Crop field | फ़सल का खेत | ಬೆಳೆ ಹೊಲ | [ ] |
+| farm.windmill | Windmill | पवनचक्की | ಗಾಳಿಯಂತ್ರ | [ ] |
+| farm.pond | Pond | तालाब | ಕೊಳ | [ ] |
+| farm.hello | Hi {name}! Welcome to your farm. | नमस्ते {name}! अपने खेत में स्वागत है। | ನಮಸ್ಕಾರ {name}! ನಿನ್ನ ಹೊಲಕ್ಕೆ ಸ್ವಾಗತ. | [ ] |
+| nav.farm | Farm | खेत | ಹೊಲ | [ ] |
+| nav.learn | Learn | सीखें | ಕಲಿ | [ ] |
+| nav.quests | Quests | क्वेस्ट | ಕ್ವೆಸ್ಟ್ | [ ] |
+| nav.league | League | लीग | ಲೀಗ್ | [ ] |
+| nav.profile | Profile | प्रोफ़ाइल | ಪ್ರೊಫೈಲ್ | [ ] |
+| nav.menu | Menu | मेनू | ಮೆನು | [ ] |
+| nav.studentNav | Farm navigation | खेत नेविगेशन | ಹೊಲದ ನ್ಯಾವಿಗೇಶನ್ | [ ] |
+| nav.overview | Overview | सारांश | ಸಾರಾಂಶ | [ ] |
+| nav.students | Students | विद्यार्थी | ವಿದ್ಯಾರ್ಥಿಗಳು | [ ] |
+| nav.courses | Courses | कोर्स | ಕೋರ್ಸ್‌ಗಳು | [ ] |
+| nav.calls | Calls | कॉल | ಕರೆಗಳು | [ ] |
+| nav.classSwitcher | Class | कक्षा | ತರಗತಿ | [ ] |
+| nav.noClasses | No classes yet | अभी कोई कक्षा नहीं | ಇನ್ನೂ ತರಗತಿಗಳಿಲ್ಲ | [ ] |
+| nav.teacherNav | Teacher sections | शिक्षक विभाग | ಶಿಕ್ಷಕರ ವಿಭಾಗಗಳು | [ ] |
+| teacher.title | Teacher | शिक्षक | ಶಿಕ್ಷಕ | [ ] |
+| teacher.placeholder | Your class tools arrive in Phase 3. | तुम्हारी कक्षा के टूल फ़ेज़ 3 में आएँगे। | ನಿಮ್ಮ ತರಗತಿಯ ಉಪಕರಣಗಳು ಹಂತ 3 ರಲ್ಲಿ ಬರುತ್ತವೆ. | [ ] |
+| teacher.empty | You haven't made a class yet. | तुमने अभी कोई कक्षा नहीं बनाई है। | ನೀವು ಇನ್ನೂ ಯಾವುದೇ ತರಗತಿ ಮಾಡಿಲ್ಲ. | [ ] |
+| parent.title | Parent | माता-पिता | ಪೋಷಕರು | [ ] |
+| parent.placeholder | Linking your child and weekly summaries arrive soon. | बच्चे को जोड़ना और साप्ताहिक सारांश जल्द आएँगे। | ಮಗುವನ್ನು ಜೋಡಿಸುವುದು ಮತ್ತು ವಾರದ ಸಾರಾಂಶ ಶೀಘ್ರದಲ್ಲೇ ಬರುತ್ತವೆ. | [ ] |

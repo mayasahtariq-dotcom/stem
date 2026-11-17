@@ -109,3 +109,27 @@ One checklist per milestone, copied from `docs/PRD.md`. Tick items only when the
 - [ ] The 7A, 7B, 7C and 7D checklists are complete.
 - [ ] The pilot metrics are logged: weekly active students per class, lessons per student per week, accuracy on repeated topics, the share of AI questions teachers edited (target under 20%), voice usage share, and call minutes per student.
 - [ ] `progress.md` is ticked, with a demo note for each part.
+
+
+# Mooshala Web (P2 frontend)
+
+## Web Phase 1: Foundation
+
+Plan: `docs/web/p2-frontend-plan.md`. Demo: `docs/demos/web-phase-1.md`. Deviations: `docs/decisions.md` ("Web Phase 1").
+
+- [x] `apps/web` on Next.js App Router, strict TypeScript, route groups (auth), (student), (teacher), (parent).
+- [x] `packages/tokens` (colours, radii, fonts, spacing, elevation, motion) as CSS variables wired into Tailwind.
+- [x] Fonts via next/font (Rubik, Noto Sans Devanagari, Noto Sans Kannada); next-intl with en, hi, kn; language follows the stored mode.
+- [x] Core components with Storybook stories (ChunkyButton, AnswerOption, SpeechBubble, ProgressBar, TopStatsBar, StreakFlame, XPRing, HeartMeter, GemCounter, LeagueRow, QuestCard, BadgeTile, GoluMascot static, MeadowScene, BilingualText, SourceChip, StickerIcon, plus inputs, cards, dialog, toasts, screen states).
+- [x] Motion presets with reduced-motion fades; sound manager that waits for a gesture and has one-tap mute.
+- [x] Shells: student (3D farm, HUD, dock), teacher (top bar, class switcher, tabs), parent (single column).
+- [x] Auth screens: language, role, phone OTP, school-computer class key + name, name for new users, join a class by key, link or QR.
+- [x] Data layer: TanStack Query on the generated OpenAPI client, Zustand stores, MSW handlers, Sentry (opt-in by DSN).
+- [x] 3D foundation (user brief): scene host with lifecycle, camera, lighting, shadows, quality tiers, GLB loading with fallbacks, pointer and keyboard interaction; proof-of-concept farm with terrain, barn, windmill, field, fence, trees, hay bales.
+- [x] Done when: every component has a story that passes axe (Hindi and Kannada).
+- [x] Done when: Playwright logs in by OTP and by class key against the fakes (desktop and phone).
+- [x] CI workflow for web: lint, typecheck, unit tests, Storybook build, build, Playwright.
+- [ ] CI run on GitHub (nothing has been pushed yet).
+- [ ] Real Supabase OTP sign-in checked on a phone.
+- [ ] `POST /auth/class-key` built by the backend (contract in `docs/web/backend-handoff.md`).
+- [ ] Hindi and Kannada strings reviewed by native speakers.

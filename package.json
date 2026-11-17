@@ -1,0 +1,20 @@
+{
+  "name": "mooshala",
+  "private": true,
+  "packageManager": "pnpm@10.28.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "turbo run dev --filter=@mooshala/web",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "e2e": "turbo run e2e --filter=@mooshala/web",
+    "storybook:build": "turbo run storybook:build --filter=@mooshala/web"
+  },
+  "devDependencies": {
+    "turbo": "2.11.11"
+  }
+}
