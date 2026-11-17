@@ -8,6 +8,7 @@ import { useClassStore } from "@/features/teacher/class-store";
 import { useBilingual } from "@/lib/i18n/use-bilingual";
 import { cn } from "@/lib/utils/cn";
 import { HudControls } from "./HudControls";
+import { RoleBadge } from "./RoleBadge";
 import { NAV, isAvailable } from "./nav";
 
 /** Teacher shell: top bar with class switcher, then section tabs, full-width content. */
@@ -25,6 +26,7 @@ export function TeacherShell({ children }: { children: ReactNode }) {
           <span className="flex items-center gap-2 text-xl font-extrabold text-grass-strong">
             <StickerIcon name="sprout" size={28} /> {c("appName").regional}
           </span>
+          <RoleBadge role="teacher" />
           <label className="ml-auto flex items-center gap-2 text-sm font-semibold">
             <span>{n("classSwitcher").regional}</span>
             <select

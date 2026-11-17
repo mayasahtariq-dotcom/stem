@@ -9,6 +9,7 @@ import { useProfile } from "@/features/auth/hooks";
 import { useBilingual } from "@/lib/i18n/use-bilingual";
 import { cn } from "@/lib/utils/cn";
 import { HudControls } from "./HudControls";
+import { RoleBadge } from "./RoleBadge";
 import { NAV, isAvailable } from "./nav";
 
 /**
@@ -39,6 +40,7 @@ export function StudentShell({ children }: { children: ReactNode }) {
           </span>
           <span className="hidden max-w-[30vw] truncate font-bold tablet:inline laptop:hidden">{profile.data?.name ?? ""}</span>
           <span className="hidden text-xl font-extrabold text-grass-strong laptop:inline">{c("appName").regional}</span>
+          <RoleBadge role="student" className="ml-1" />
         </div>
         <nav aria-label={n("studentNav").english} className="hidden flex-1 laptop:block">
           <ul className="flex items-center gap-1">
