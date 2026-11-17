@@ -133,3 +133,19 @@ Plan: `docs/web/p2-frontend-plan.md`. Demo: `docs/demos/web-phase-1.md`. Deviati
 - [ ] Real Supabase OTP sign-in checked on a phone.
 - [ ] `POST /auth/class-key` built by the backend (contract in `docs/web/backend-handoff.md`).
 - [ ] Hindi and Kannada strings reviewed by native speakers.
+
+## Web Phase 2: Student core
+
+Demo: `docs/demos/web-phase-2.md`. Deviations: `docs/decisions.md` ("Web Phase 2").
+
+- [x] 3D farm home: farmhouse, barn, lab, signboard, market stall, pasture with cows, chickens, ducks, trees, bushes, flowers, fences, path, crop field, pond and stream.
+- [x] Idle life: cows blink, swish tails and graze; grass and flowers sway; butterflies, drifting clouds, flowing stream, pond ripples, windmill. All still with reduced motion.
+- [x] Learning path as in-world destinations with done, current and locked lessons, chapter progress and "finish X first" prerequisites; `/farm/learn` list view.
+- [x] Lesson player for multiple choice, match pairs, fill the formula and true/false on `POST /lessons/{id}/start`, `POST /attempts`, `POST /lessons/{id}/complete`.
+- [x] Farm feedback: sprout blooms and Golu cheers for a right answer; plant bends and recovers, Golu thinks, explanation, "Not quite", retry at the end; basket fills at the end. No confetti.
+- [x] HUD with streak, hearts, gems and daily-goal ring from the server; XP kept separate from gems; gems never block lessons.
+- [x] Market stall: streak freeze and decorations bought with gems (mocked game endpoints), shown on the farm.
+- [x] Word book (search in three languages, meaning, farm analogy, save) and doubt chat with Golu (notes page, simpler, example, daily limit).
+- [x] Interrupted lessons resume; failed answers are kept and resent.
+- [x] Tests: path, four question types, answer shapes, session rules, XP/streak/hearts parity with the backend rules, terms, doubts, persistence, 3D scene and interaction; Playwright student journey.
+- [ ] Game endpoints built by the backend (`docs/web/backend-handoff.md`).

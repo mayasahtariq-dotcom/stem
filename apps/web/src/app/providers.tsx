@@ -18,7 +18,9 @@ function SessionBootstrap() {
 /** Unlocks sound on the first user gesture and keeps the mute switch in sync. */
 function SoundBootstrap() {
   const muted = useAppStore((s) => s.soundMuted);
-  useEffect(() => sounds.setMuted(muted), [muted]);
+  useEffect(() => {
+    sounds.setMuted(muted);
+  }, [muted]);
   useEffect(() => {
     const unlock = () => sounds.unlock();
     window.addEventListener("pointerdown", unlock, { once: true });

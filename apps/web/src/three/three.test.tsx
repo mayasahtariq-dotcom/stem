@@ -85,7 +85,7 @@ describe("FarmWorld scene graph", () => {
     const r = await ReactThreeTestRenderer.create(<FarmWorld quality={QUALITY.low} onSelect={onSelect} controls={false} reducedMotion />);
     const names = new Set<string>();
     (r.scene.instance as unknown as { traverse: (f: (o: { name: string }) => void) => void }).traverse((o) => o.name && names.add(o.name));
-    for (const n of ["terrain", "terrain-ground", "pond-water", "barn", "windmill", "crop-field", "fence", "tree-fallback", "hay-fallback"]) {
+    for (const n of ["terrain", "terrain-ground", "pond-water", "barn", "windmill", "crop-field", "fence", "tree-fallback", "hay-fallback", "farmhouse", "lab", "signboard", "market", "golu", "cow", "chicken", "duck", "bush", "stream", "clouds", "butterflies", "pond-ripples"]) {
       expect(names).toContain(n);
     }
     const ground = r.scene.findByProps({ name: "terrain-ground" });
@@ -96,5 +96,58 @@ describe("FarmWorld scene graph", () => {
     await r.fireEvent(barn, "click");
     expect(onSelect).toHaveBeenCalledWith("barn");
     await r.unmount();
+  });
+});
+
+describe("FarmWorld with student progress", () => {
+  it("shows lesson markers by state, blooms a flower per finished lesson, and selects a lesson by tap", async () => {
+    const { FarmWorld } = await import("./world/FarmWorld");
+    const { EMPTY_SCENE } = await import("./world/scene-model");
+    const onSelect = vi.fn();
+    const scene = {
+      ...EMPTY_SCENE,
+      stations: [
+        { id: "l1", state: "done" as const, position: [0, 0, 0] as [number, number, number] },
+        { id: "l2", state: "current" as const, position: [0, 0, 0] as [number, number, number] },
+        { id: "l3", state: "locked" as const, position: [0, 0, 0] as [number, number, number] },
+      ],
+      flowerCount: 6,
+      bloomedFlowers: 2,
+      cropGrowth: 0.5,
+      decorations: ["deco-scarecrow"],
+    };
+    const r = await ReactThreeTestRenderer.create(<FarmWorld quality={QUALITY.low} scene={scene} onSelect={onSelect} controls={false} reducedMotion />);
+    const names: string[] = [];
+    (r.scene.instance as unknown as { traverse: (f: (o: { name: string }) => void) => void }).traverse((o) => o.name && names.push(o.name));
+    expect(names).toEqual(expect.arrayContaining(["station-done", "station-current", "station-locked", "deco-scarecrow"]));
+    expect(names.filter((n) => n === "flower-bloomed")).toHaveLength(2);
+    expect(names.filter((n) => n === "flower-bud")).toHaveLength(4);
+    expect(r.scene.findByProps({ name: "crop-field" }).props.userData).toEqual({ growth: 0.5 });
+    await r.fireEvent(r.scene.findByProps({ name: "interactable-lesson:l2" }), "click");
+    expect(onSelect).toHaveBeenCalledWith("lesson:l2");
+    await r.fireEvent(r.scene.findByProps({ name: "interactable-farmhouse" }), "click");
+    expect(onSelect).toHaveBeenCalledWith("farmhouse");
+    await r.unmount();
+  });
+});
+
+describe("idle animation curves", () => {
+  it("blinks briefly and stays open most of the time", async () => {
+    const { blink, tailSwing, graze, cloudX, butterflyPath } = await import("./animation/idle");
+    const samples = Array.from({ length: 420 }, (_, i) => blink(i / 100));
+    expect(samples.filter((v) => v < 0.5).length).toBeGreaterThan(0);
+    expect(samples.filter((v) => v === 1).length / samples.length).toBeGreaterThan(0.9);
+    expect(Math.abs(tailSwing(0.4))).toBeLessThanOrEqual(0.45);
+    expect(graze(0)).toBe(0);
+    expect(Math.abs(cloudX(1e6, 0, 1))).toBeLessThanOrEqual(80);
+    const [, y] = butterflyPath(3, 1);
+    expect(y).toBeGreaterThan(0.5);
+  });
+  it("places lesson markers on the path and flowers beside it", async () => {
+    const { stationPositions, flowerSpots, pathX } = await import("./world/layout");
+    const st = stationPositions(5);
+    expect(st).toHaveLength(5);
+    st.forEach(([x, , z]) => expect(Math.abs(x - pathX(z))).toBeCloseTo(2.1));
+    flowerSpots(6).forEach(([x, z]) => expect(Math.abs(x - pathX(z))).toBeGreaterThan(3));
   });
 });

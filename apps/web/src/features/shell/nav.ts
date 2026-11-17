@@ -15,7 +15,7 @@ export interface NavItem {
   phase: number;
 }
 
-export const CURRENT_PHASE = 1;
+export const CURRENT_PHASE = 2;
 
 export const NAV: Record<Role, NavItem[]> = {
   student: [

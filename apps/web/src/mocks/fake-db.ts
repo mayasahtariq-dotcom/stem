@@ -45,6 +45,12 @@ interface Db {
 }
 
 let db: Db;
+const resetHooks: (() => void)[] = [];
+/** Lets feature fakes (learning, game, calls) reset their state with the core db. */
+export function onFakeDbReset(fn: () => void) {
+  resetHooks.push(fn);
+  fn();
+}
 
 const tokenForPhone = (tenDigits: string) => `fake-token-91${tenDigits}`;
 
@@ -60,10 +66,45 @@ export function resetFakeDb() {
     [tokenForPhone(DEMO.parentPhone), { id: "u-meena", phone: `+91${DEMO.parentPhone}`, name: "Meena", roles: ["parent"], language_mode: "kannada", registered: true }],
   ]);
   db = { users, classrooms, memberships: new Map([["u-asha", new Set(["c-bio9a"])]]), joinAttempts: new Map() };
+  resetHooks.forEach((fn) => fn());
 }
 resetFakeDb();
 
 export const fakeDb = () => db;
+
+/*
+ * Snapshot support so the in-browser fake backend survives a page reload
+ * (a real backend would keep its data too). Feature fakes register their
+ * state; Maps and Sets are encoded explicitly.
+ */
+const stores = new Map<string, { get: () => unknown; set: (v: never) => void }>();
+export function registerFakeStore<T>(name: string, get: () => T, set: (v: T) => void) {
+  stores.set(name, { get, set: set as (v: never) => void });
+}
+registerFakeStore("core", () => db, (v) => (db = v));
+
+const encode = (_k: string, v: unknown) => (v instanceof Map ? { __map: [...v.entries()] } : v instanceof Set ? { __set: [...v] } : v);
+const decode = (_k: string, v: unknown) => {
+  if (v && typeof v === "object" && "__map" in v) return new Map((v as { __map: [unknown, unknown][] }).__map);
+  if (v && typeof v === "object" && "__set" in v) return new Set((v as { __set: unknown[] }).__set);
+  return v;
+};
+
+export function dumpFakeDb(): string {
+  return JSON.stringify(Object.fromEntries([...stores].map(([k, s]) => [k, s.get()])), encode);
+}
+
+/** Restores a snapshot; returns false (keeping the seed) if it doesn't parse. */
+export function loadFakeDb(json: string): boolean {
+  try {
+    const data = JSON.parse(json, decode) as Record<string, unknown>;
+    for (const [k, s] of stores) if (k in data) s.set(data[k] as never);
+    return true;
+  } catch {
+    resetFakeDb();
+    return false;
+  }
+}
 
 /** Finds or creates the user behind a fake bearer token. */
 export function userForToken(token: string): FakeUser {

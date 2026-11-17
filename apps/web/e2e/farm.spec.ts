@@ -19,9 +19,9 @@ test("3D farm: renders, takes pointer input, and offers keyboard access to place
   expect(Buffer.compare(before, await canvas.screenshot())).not.toBe(0);
 
   // Keyboard users reach the same places through the hidden list.
-  await page.getByRole("button", { name: /खलिहान · Barn/ }).focus();
+  await page.getByRole("button", { name: /खलिहान · Learning barn/ }).focus();
   await page.keyboard.press("Enter");
-  await expect(page.getByRole("dialog", { name: "Barn" })).toBeVisible();
+  await expect(page.getByRole("dialog", { name: "Learning barn" })).toBeVisible();
   await page.screenshot({ path: info.outputPath("farm.png") });
 
   // Student nav: later-phase items are present but disabled.

@@ -6,7 +6,7 @@ import preview from "../../.storybook/preview";
 setProjectAnnotations(preview);
 
 // Every story file in the design system.
-const files = import.meta.glob("../components/ui/*.stories.tsx", { eager: true }) as Record<string, Record<string, unknown>>;
+const files = import.meta.glob(["../components/ui/*.stories.tsx", "../features/**/*.stories.tsx"], { eager: true }) as Record<string, Record<string, unknown>>;
 
 /**
  * Phase 1 definition of done: every component has a story that passes axe.

@@ -3,6 +3,7 @@ import { createContext, useContext, type ReactNode } from "react";
 import type { ApiClient } from "@mooshala/api-client";
 import type { AuthGateway } from "@/features/auth/gateway";
 import type { ErrorReporter } from "@/lib/errors/reporter";
+import type { PendingClient } from "@/lib/api/pending-client";
 
 /**
  * External services behind interfaces. Production wiring lives in
@@ -11,6 +12,8 @@ import type { ErrorReporter } from "@/lib/errors/reporter";
 export interface Services {
   auth: AuthGateway;
   api: ApiClient;
+  /** Endpoints the spec names but the backend hasn't built (mocked). */
+  pending: PendingClient;
   reporter: ErrorReporter;
 }
 

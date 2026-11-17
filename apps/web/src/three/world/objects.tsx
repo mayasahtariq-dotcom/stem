@@ -81,7 +81,7 @@ export function Windmill({ reducedMotion }: { reducedMotion?: boolean }) {
 }
 
 /** Rows of young crops on the tilled field, drawn with one instanced mesh. */
-export function CropField({ detail = 1 }: { detail?: number }) {
+export function CropField({ detail = 1, growth = 1 }: { detail?: number; growth?: number }) {
   const ref = useRef<THREE.InstancedMesh>(null);
   const rows = 6;
   const perRow = Math.max(6, Math.round(14 * detail));
@@ -93,13 +93,13 @@ export function CropField({ detail = 1 }: { detail?: number }) {
       for (let i = 0; i < perRow; i++) {
         const x = FIELD.x - FIELD.width / 2 + 0.8 + (i / (perRow - 1)) * (FIELD.width - 1.6);
         const z = FIELD.z - FIELD.depth / 2 + 1 + (r / (rows - 1)) * (FIELD.depth - 2);
-        const s = 0.8 + ((r * 7 + i * 13) % 5) * 0.08;
+        const s = (0.8 + ((r * 7 + i * 13) % 5) * 0.08) * (0.35 + 0.65 * Math.max(0, Math.min(1, growth)));
         m.compose(new THREE.Vector3(x, terrainHeight(x, z) + 0.45 * s, z), new THREE.Quaternion(), new THREE.Vector3(s, s, s));
         out.push(m.clone());
       }
     }
     return out;
-  }, [perRow]);
+  }, [perRow, growth]);
   return (
     <instancedMesh
       ref={(mesh) => {
@@ -111,6 +111,7 @@ export function CropField({ detail = 1 }: { detail?: number }) {
       args={[undefined, undefined, count]}
       castShadow
       name="crop-field"
+      userData={{ growth }}
     >
       <coneGeometry args={[0.35, 0.9, 5]} />
       <Std c={color.leaf} />

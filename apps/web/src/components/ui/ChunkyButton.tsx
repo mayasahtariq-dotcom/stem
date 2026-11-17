@@ -21,6 +21,7 @@ const button = cva(
         wood: "wood-grain text-white [--lip-color:var(--color-wood-dark)] [text-shadow:0_1px_0_rgb(0_0_0/0.35)]",
       },
       size: {
+        sm: "min-h-11 px-3 py-1.5 text-sm",
         md: "py-3 text-base",
         lg: "py-4 text-lg",
         icon: "size-11 p-0",

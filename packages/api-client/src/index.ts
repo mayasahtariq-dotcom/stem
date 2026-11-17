@@ -31,3 +31,4 @@ export function createApiClient(opts: CreateApiClientOptions): ApiClient {
   for (const m of opts.middleware ?? []) client.use(m);
   return client;
 }
+export * from "./pending-game";

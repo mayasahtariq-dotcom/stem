@@ -8,7 +8,7 @@ test("student logs in by phone OTP and lands on the 3D farm", async ({ page }) =
   await expect(page.getByText("Enter a 10-digit mobile number.")).toBeVisible();
   await loginByOtp(page, DEMO.student);
   await page.waitForURL("**/farm");
-  await expect(page.getByText(/Hi Asha! Welcome to your farm./)).toBeVisible();
+  await expect(page.getByText(/Hi Asha! Tap the glowing post/)).toBeVisible();
   await expectFarmRendered(page);
 });
 

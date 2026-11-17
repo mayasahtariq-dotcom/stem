@@ -1,4 +1,5 @@
 import { buildApiClient } from "@/lib/api/client";
+import { buildPendingClient } from "@/lib/api/pending-client";
 import { env } from "@/lib/env";
 import { FakeAuthGateway } from "@/features/auth/fake-gateway";
 import { SupabaseAuthGateway } from "@/features/auth/supabase-gateway";
@@ -15,6 +16,7 @@ export function createServices(): Services {
   return {
     auth,
     api: buildApiClient(() => auth.getAccessToken()),
+    pending: buildPendingClient(() => auth.getAccessToken()),
     reporter: env.sentryDsn ? sentryReporter : consoleReporter,
   };
 }

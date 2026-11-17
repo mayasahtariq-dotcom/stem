@@ -6,6 +6,7 @@ import en from "../../messages/en.json";
 import hi from "../../messages/hi.json";
 import kn from "../../messages/kn.json";
 import { buildApiClient } from "@/lib/api/client";
+import { buildPendingClient } from "@/lib/api/pending-client";
 import { FAKE_API_BASE_URL } from "@/lib/env";
 import { FakeAuthGateway } from "@/features/auth/fake-gateway";
 import { memoryStorage } from "@/features/auth/storage";
@@ -20,6 +21,7 @@ export function makeTestServices(overrides: Partial<Services> = {}): Services {
   return {
     auth,
     api: buildApiClient(() => auth.getAccessToken(), FAKE_API_BASE_URL),
+    pending: buildPendingClient(() => auth.getAccessToken(), FAKE_API_BASE_URL),
     reporter: silentReporter,
     ...overrides,
   };

@@ -1,4 +1,4 @@
-# Backend handoff for Mooshala Web (Phase 1)
+# Backend handoff for Mooshala Web
 
 Nov 17, 2026
 
@@ -27,6 +27,12 @@ Errors must keep the existing format: `{"detail": {"code": "SOME_CODE"}}` with t
 | `GET /classrooms` | Teacher shell class switcher |
 | `GET /classrooms/preview/{key}` | Join a class: preview, including the join errors |
 | `POST /classrooms/join` | Join a class |
+| `GET /me/home`, `GET /me/stats`, `PUT /me/daily-goal` | Farm HUD, signboard, daily goal (Phase 2) |
+| `GET /courses/{id}/path` | Lesson markers on the farm path, `/farm/learn` |
+| `POST /lessons/{id}/start`, `GET /lessons/{id}` | Lesson player (GET when resuming an interrupted lesson, so the attempt window isn't reset) |
+| `POST /attempts`, `POST /lessons/{id}/complete` | Grading, XP, hearts, streak |
+| `GET /courses/{id}/terms`, `PUT/DELETE /me/saved-terms/{course_id}/{key}` | Word book |
+| `POST /doubts`, `POST /audio` | Doubt chat, listen buttons |
 
 Every call sends `Authorization: Bearer <Supabase access token>`, which the backend already verifies (`backend/app/auth.py`).
 
@@ -84,3 +90,18 @@ If you choose a different shape, only `apps/web/src/features/auth/class-key.ts` 
 ## Prefix
 
 The web PRD says "REST under /v1". The current backend serves routes at the root (`/me`, not `/v1/me`). The web app uses whatever `NEXT_PUBLIC_API_BASE_URL` points at, so adding `/v1` later only means setting the base URL to `https://api.example/v1`.
+
+
+## Game endpoints the web app mocks (Phase 2 onwards): please build
+
+The web spec names `GET /game/stats`, `GET /game/quests`, `GET /game/league`, `POST /game/pots/{id}/open`, `POST /game/freeze` and `GET /game/badges` without payloads. The web app's assumed payloads are typed in `packages/api-client/src/pending-game.ts` and served by the fakes in `apps/web/src/mocks/game/`. Errors use the usual `{"detail": {"code": ...}}` form.
+
+| Call | Status | Body |
+| --- | --- | --- |
+| `GET /game/stats` | spec | `GameStats`: `gems`, `freezes`, `max_freezes`, `freeze_cost`, `mascot {stage, xp_total, next_stage_xp, outfit}`, `owned[]`, `pending_pots[]` |
+| `POST /game/freeze` | spec | → `GameStats`; errors `NOT_ENOUGH_GEMS`, `FREEZES_FULL` |
+| `GET /game/shop` | assumed | `ShopItem[]`: `id`, `kind` (outfit or decoration), `name {en,hi,kn}`, `icon`, `price`, `owned` |
+| `POST /game/shop/{item}/buy` | assumed | → `GameStats`; errors `NOT_ENOUGH_GEMS`, `ALREADY_OWNED` |
+| `PUT /game/mascot/outfit` | assumed | `{outfit: string or null}` → `GameStats` |
+
+Numbers from the spec the server should apply: 5 gems per finished lesson, 20 per quest, 50 per badge, a streak freeze costs 100 gems and at most two are stored, the gems ledger is append-only. Shop prices in the mock are placeholders.

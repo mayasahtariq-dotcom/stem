@@ -615,3 +615,173 @@ File: `apps/web/messages/{hi,kn}.json` (keys are `namespace.key`).
 | teacher.empty | You haven't made a class yet. | तुमने अभी कोई कक्षा नहीं बनाई है। | ನೀವು ಇನ್ನೂ ಯಾವುದೇ ತರಗತಿ ಮಾಡಿಲ್ಲ. | [ ] |
 | parent.title | Parent | माता-पिता | ಪೋಷಕರು | [ ] |
 | parent.placeholder | Linking your child and weekly summaries arrive soon. | बच्चे को जोड़ना और साप्ताहिक सारांश जल्द आएँगे। | ಮಗುವನ್ನು ಜೋಡಿಸುವುದು ಮತ್ತು ವಾರದ ಸಾರಾಂಶ ಶೀಘ್ರದಲ್ಲೇ ಬರುತ್ತವೆ. | [ ] |
+
+## Web Phase 2 (student core)
+
+| Key | English | Hindi | Kannada | Reviewed |
+|---|---|---|---|---|
+| lesson.loading | Getting your lesson ready… | तुम्हारा पाठ तैयार हो रहा है… | ನಿಮ್ಮ ಪಾಠ ಸಿದ್ಧವಾಗುತ್ತಿದೆ… | [ ] |
+| lesson.backToFarm | Back to the farm | खेत पर वापस | ಹೊಲಕ್ಕೆ ಹಿಂತಿರುಗಿ | [ ] |
+| lesson.noQuestions | This lesson has no questions yet. | इस पाठ में अभी कोई सवाल नहीं है। | ಈ ಪಾಠದಲ್ಲಿ ಇನ್ನೂ ಪ್ರಶ್ನೆಗಳಿಲ್ಲ. | [ ] |
+| lesson.doneTitle | Lesson complete! Your basket is full. | पाठ पूरा! तुम्हारी टोकरी भर गई। | ಪಾಠ ಮುಗಿಯಿತು! ನಿಮ್ಮ ಬುಟ್ಟಿ ತುಂಬಿತು. | [ ] |
+| lesson.xpEarned | XP earned | कमाए XP | ಗಳಿಸಿದ XP | [ ] |
+| lesson.accuracy | Accuracy | सटीकता | ನಿಖರತೆ | [ ] |
+| lesson.streak | Day streak | दिनों की लड़ी | ದಿನಗಳ ಸರಣಿ | [ ] |
+| lesson.streakDays | {n} day streak | {n} दिन की लड़ी | {n} ದಿನದ ಸರಣಿ | [ ] |
+| lesson.streakGrew | Your streak grew today! | आज तुम्हारी लड़ी बढ़ी! | ಇಂದು ನಿಮ್ಮ ಸರಣಿ ಬೆಳೆಯಿತು! | [ ] |
+| lesson.bestCombo | Best combo: {n} in a row | सबसे अच्छा कॉम्बो: लगातार {n} | ಅತ್ಯುತ್ತಮ ಕಾಂಬೊ: ಸತತ {n} | [ ] |
+| lesson.finishing | Counting your harvest… | तुम्हारी फ़सल गिनी जा रही है… | ನಿಮ್ಮ ಫಸಲು ಎಣಿಸಲಾಗುತ್ತಿದೆ… | [ ] |
+| lesson.finishFailed | We couldn't save the end of the lesson. Your answers are safe. | पाठ का अंत सेव नहीं हुआ। तुम्हारे जवाब सुरक्षित हैं। | ಪಾಠದ ಕೊನೆ ಉಳಿಸಲಾಗಲಿಲ್ಲ. ನಿಮ್ಮ ಉತ್ತರಗಳು ಸುರಕ್ಷಿತ. | [ ] |
+| lesson.exit | Leave the lesson (progress is saved) | पाठ छोड़ो (प्रगति सेव है) | ಪಾಠ ಬಿಡಿ (ಪ್ರಗತಿ ಉಳಿದಿದೆ) | [ ] |
+| lesson.progressLabel | {done} of {total} questions | {total} में से {done} सवाल | {total} ರಲ್ಲಿ {done} ಪ್ರಶ್ನೆಗಳು | [ ] |
+| lesson.combo | {n} right in a row | लगातार {n} सही | ಸತತ {n} ಸರಿ | [ ] |
+| lesson.hearts | {n} hearts | {n} दिल | {n} ಹೃದಯಗಳು | [ ] |
+| lesson.retryBadge | Let's try this one again | इसे फिर से करते हैं | ಇದನ್ನು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸೋಣ | [ ] |
+| lesson.listen | Listen | सुनो | ಕೇಳಿ | [ ] |
+| lesson.sendFailed | Your answer didn't reach the farm. It's kept here, try sending it again. | तुम्हारा जवाब नहीं पहुँचा। वह यहीं रखा है, फिर से भेजो। | ನಿಮ್ಮ ಉತ್ತರ ತಲುಪಲಿಲ್ಲ. ಅದು ಇಲ್ಲೇ ಇದೆ, ಮತ್ತೆ ಕಳುಹಿಸಿ. | [ ] |
+| lesson.heartsEmpty | You're out of hearts for now. Golu is resting too. | अभी तुम्हारे दिल ख़त्म हो गए। गोलू भी आराम कर रहा है। | ಈಗ ನಿಮ್ಮ ಹೃದಯಗಳು ಮುಗಿದಿವೆ. ಗೋಲು ಕೂಡ ವಿಶ್ರಾಂತಿ ಪಡೆಯುತ್ತಿದೆ. | [ ] |
+| lesson.heartsRefill | Next heart at {time} | अगला दिल {time} बजे | ಮುಂದಿನ ಹೃದಯ {time} ಕ್ಕೆ | [ ] |
+| lesson.niceWork | Nice! A flower bloomed. | बढ़िया! एक फूल खिला। | ಚೆನ್ನಾಗಿದೆ! ಒಂದು ಹೂವು ಅರಳಿತು. | [ ] |
+| lesson.notQuiteTitle | Not quite | पूरा सही नहीं | ಸರಿಯಾಗಿಲ್ಲ | [ ] |
+| lesson.xpGained | +{n} XP | +{n} XP | +{n} XP | [ ] |
+| lesson.heartUsed | One heart used | एक दिल गया | ಒಂದು ಹೃದಯ ಹೋಯಿತು | [ ] |
+| lesson.comeBack | We'll come back to this one at the end. | यह सवाल आख़िर में फिर आएगा। | ಈ ಪ್ರಶ್ನೆ ಕೊನೆಯಲ್ಲಿ ಮತ್ತೆ ಬರುತ್ತದೆ. | [ ] |
+| lesson.continue | Continue | आगे बढ़ो | ಮುಂದುವರಿಸಿ | [ ] |
+| lesson.askWhy | Ask Golu why | गोलू से पूछो क्यों | ಗೋಲುವನ್ನು ಏಕೆ ಎಂದು ಕೇಳಿ | [ ] |
+| lesson.check | Check | जाँचो | ಪರಿಶೀಲಿಸಿ | [ ] |
+| lesson.chooseOne | Choose one answer | एक जवाब चुनो | ಒಂದು ಉತ್ತರ ಆರಿಸಿ | [ ] |
+| lesson.correctLabel | Correct | सही | ಸರಿ | [ ] |
+| lesson.notQuite | Not quite | पूरा सही नहीं | ಸರಿಯಾಗಿಲ್ಲ | [ ] |
+| lesson.true | True | सही | ಸರಿ | [ ] |
+| lesson.false | False | गलत | ತಪ್ಪು | [ ] |
+| lesson.formula | Formula | सूत्र | ಸೂತ್ರ | [ ] |
+| lesson.rightChip | The right piece | सही टुकड़ा | ಸರಿಯಾದ ತುಂಡು | [ ] |
+| lesson.chooseChip | Choose the missing piece | छूटा टुकड़ा चुनो | ಕಾಣೆಯಾದ ತುಂಡು ಆರಿಸಿ | [ ] |
+| lesson.matchProgress | {done} of {total} pairs matched | {total} में से {done} जोड़े मिले | {total} ರಲ್ಲಿ {done} ಜೋಡಿ ಹೊಂದಿವೆ | [ ] |
+| lesson.matchLeft | Parts | भाग | ಭಾಗಗಳು | [ ] |
+| lesson.matchRight | Matches | जोड़ीदार | ಜೋಡಿಗಳು | [ ] |
+| lesson.matchNoHeart | Mixed-up pairs don't cost a heart. Keep going! | गलत जोड़ी पर दिल नहीं जाता। चलते रहो! | ತಪ್ಪು ಜೋಡಿಗೆ ಹೃದಯ ಹೋಗುವುದಿಲ್ಲ. ಮುಂದುವರಿಸಿ! | [ ] |
+| farm.farmhouse | Farmhouse study | फ़ार्महाउस अध्ययन कक्ष | ತೋಟದ ಮನೆಯ ಓದುಕೋಣೆ | [ ] |
+| farm.lab | Farm lab | खेत की प्रयोगशाला | ಹೊಲದ ಪ್ರಯೋಗಾಲಯ | [ ] |
+| farm.signboard | Signboard | सूचना पट | ಸೂಚನಾ ಫಲಕ | [ ] |
+| farm.market | Market stall | बाज़ार की दुकान | ಮಾರುಕಟ್ಟೆ ಅಂಗಡಿ | [ ] |
+| farm.golu | Golu the cow | गोलू गाय | ಗೋಲು ಹಸು | [ ] |
+| farm.lessonMissing | Lesson | पाठ | ಪಾಠ | [ ] |
+| farm.state_done | Done | पूरा | ಮುಗಿದಿದೆ | [ ] |
+| farm.state_current | Up next | अगला | ಮುಂದಿನದು | [ ] |
+| farm.state_locked | Locked | बंद | ಲಾಕ್ ಆಗಿದೆ | [ ] |
+| farm.questionCount | {n} questions | {n} सवाल | {n} ಪ್ರಶ್ನೆಗಳು | [ ] |
+| farm.finishFirst | Finish “{titleEn}” first | पहले “{title}” पूरा करो | ಮೊದಲು “{title}” ಮುಗಿಸಿ | [ ] |
+| farm.lockedHint | Finish the lessons before this one first. | पहले इससे पहले के पाठ पूरे करो। | ಮೊದಲು ಹಿಂದಿನ ಪಾಠಗಳನ್ನು ಮುಗಿಸಿ. | [ ] |
+| farm.lessonMaking | Golu is still preparing this lesson. Check back soon. | गोलू अभी यह पाठ तैयार कर रहा है। थोड़ी देर में देखो। | ಗೋಲು ಇನ್ನೂ ಈ ಪಾಠ ಸಿದ್ಧಪಡಿಸುತ್ತಿದೆ. ಸ್ವಲ್ಪ ಸಮಯದ ನಂತರ ನೋಡಿ. | [ ] |
+| farm.playAgain | Play again | फिर से खेलो | ಮತ್ತೆ ಆಡಿ | [ ] |
+| farm.startLesson | Start lesson | पाठ शुरू करो | ಪಾಠ ಆರಂಭಿಸಿ | [ ] |
+| farm.barnHint | Your lessons live here. | तुम्हारे पाठ यहाँ रहते हैं। | ನಿಮ್ಮ ಪಾಠಗಳು ಇಲ್ಲಿವೆ. | [ ] |
+| farm.noCourse | No lessons yet. Join your class to get them. | अभी कोई पाठ नहीं। पाठ पाने के लिए अपनी कक्षा से जुड़ो। | ಇನ್ನೂ ಪಾಠಗಳಿಲ್ಲ. ಪಡೆಯಲು ನಿಮ್ಮ ತರಗತಿಗೆ ಸೇರಿ. | [ ] |
+| farm.joinClass | Join a class | कक्षा से जुड़ो | ತರಗತಿಗೆ ಸೇರಿ | [ ] |
+| farm.lessonOf | Lesson {n} of {total} | पाठ {n} / {total} | ಪಾಠ {n} / {total} | [ ] |
+| farm.allDone | You've finished every lesson here. Wonderful! | तुमने यहाँ के सारे पाठ पूरे कर लिए। शानदार! | ಇಲ್ಲಿನ ಎಲ್ಲಾ ಪಾಠಗಳನ್ನು ಮುಗಿಸಿದ್ದೀರಿ. ಅದ್ಭುತ! | [ ] |
+| farm.wholePath | See all lessons | सारे पाठ देखो | ಎಲ್ಲಾ ಪಾಠಗಳನ್ನು ನೋಡಿ | [ ] |
+| farm.courseProgress | {done} of {total} lessons done | {total} में से {done} पाठ पूरे | {total} ರಲ್ಲಿ {done} ಪಾಠ ಮುಗಿದಿವೆ | [ ] |
+| farm.unitProgress | {done} of {total} lessons in this chapter | इस अध्याय के {total} में से {done} पाठ | ಈ ಅಧ್ಯಾಯದ {total} ರಲ್ಲಿ {done} ಪಾಠ | [ ] |
+| farm.farmhouseHint | Read and save the key words from your lessons. | अपने पाठों के मुख्य शब्द पढ़ो और सेव करो। | ನಿಮ್ಮ ಪಾಠಗಳ ಮುಖ್ಯ ಪದಗಳನ್ನು ಓದಿ ಮತ್ತು ಉಳಿಸಿ. | [ ] |
+| farm.openWordBook | Open the word book | शब्द-पुस्तक खोलो | ಪದ ಪುಸ್ತಕ ತೆರೆಯಿರಿ | [ ] |
+| farm.askHint | Stuck on something? Golu will explain it from your notes. | कहीं अटके? गोलू तुम्हारे नोट्स से समझाएगा। | ಎಲ್ಲಾದರೂ ಸಿಲುಕಿದ್ದೀರಾ? ಗೋಲು ನಿಮ್ಮ ನೋಟ್ಸ್‌ನಿಂದ ವಿವರಿಸುತ್ತದೆ. | [ ] |
+| farm.askGolu | Ask Golu a doubt | गोलू से सवाल पूछो | ಗೋಲುವಿಗೆ ಸಂದೇಹ ಕೇಳಿ | [ ] |
+| farm.marketHint | Spend gems on farm treats. Lessons are always free. | रत्न खेत की चीज़ों पर ख़र्च करो। पाठ हमेशा मुफ़्त हैं। | ರತ್ನಗಳನ್ನು ಹೊಲದ ವಸ್ತುಗಳಿಗೆ ಖರ್ಚು ಮಾಡಿ. ಪಾಠಗಳು ಯಾವಾಗಲೂ ಉಚಿತ. | [ ] |
+| farm.gemsBalance | {n} gems | {n} रत्न | {n} ರತ್ನಗಳು | [ ] |
+| farm.freeze | Streak freeze | लड़ी बचाव | ಸರಣಿ ರಕ್ಷಣೆ | [ ] |
+| farm.freezeOwned | You have {n} of {max} | तुम्हारे पास {max} में से {n} | ನಿಮ್ಮ ಬಳಿ {max} ರಲ್ಲಿ {n} | [ ] |
+| farm.gemsNeverBlock | Gems are only for fun extras. They never lock a lesson. | रत्न सिर्फ़ मज़े की चीज़ों के लिए हैं। इनसे कोई पाठ बंद नहीं होता। | ರತ್ನಗಳು ಮೋಜಿನ ವಸ್ತುಗಳಿಗೆ ಮಾತ್ರ. ಅವು ಯಾವ ಪಾಠವನ್ನೂ ತಡೆಯುವುದಿಲ್ಲ. | [ ] |
+| farm.fieldHint | Your crops grow as you finish lessons: {pct}% grown. | पाठ पूरे करने पर फ़सल बढ़ती है: {pct}% बढ़ी। | ಪಾಠ ಮುಗಿಸಿದಂತೆ ಬೆಳೆ ಬೆಳೆಯುತ್ತದೆ: {pct}% ಬೆಳೆದಿದೆ. | [ ] |
+| farm.windmillHint | Today's goal turns the windmill. | आज का लक्ष्य पवनचक्की घुमाता है। | ಇಂದಿನ ಗುರಿ ಗಾಳಿಯಂತ್ರವನ್ನು ತಿರುಗಿಸುತ್ತದೆ. | [ ] |
+| farm.goalRing | {xp} of {goal} XP today | आज {goal} में से {xp} XP | ಇಂದು {goal} ರಲ್ಲಿ {xp} XP | [ ] |
+| farm.changeGoal | Change daily goal | रोज़ का लक्ष्य बदलो | ದೈನಂದಿನ ಗುರಿ ಬದಲಿಸಿ | [ ] |
+| farm.pondHint | The ducks say hello! | बत्तखें नमस्ते कह रही हैं! | ಬಾತುಕೋಳಿಗಳು ನಮಸ್ಕಾರ ಹೇಳುತ್ತಿವೆ! | [ ] |
+| farm.owned | Owned | तुम्हारा | ನಿಮ್ಮದು | [ ] |
+| farm.buyFor | Buy {item} for {n} gems | {item} {n} रत्नों में ख़रीदो | {item} ಅನ್ನು {n} ರತ್ನಕ್ಕೆ ಕೊಳ್ಳಿ | [ ] |
+| farm.freezeBought | Streak freeze stored! | लड़ी बचाव रख लिया! | ಸರಣಿ ರಕ್ಷಣೆ ಸಂಗ್ರಹಿಸಲಾಗಿದೆ! | [ ] |
+| farm.itemBought | It's on your farm now! | अब यह तुम्हारे खेत पर है! | ಈಗ ಇದು ನಿಮ್ಮ ಹೊಲದಲ್ಲಿದೆ! | [ ] |
+| farm.resume | Continue “{title}” | “{title}” जारी रखो | “{title}” ಮುಂದುವರಿಸಿ | [ ] |
+| farm.helloNoCourse | Hi {name}! Join your class to plant your first lesson. | नमस्ते {name}! पहला पाठ लगाने के लिए कक्षा से जुड़ो। | ನಮಸ್ಕಾರ {name}! ಮೊದಲ ಪಾಠ ನೆಡಲು ತರಗತಿಗೆ ಸೇರಿ. | [ ] |
+| farm.helloTap | Hi {name}! Tap the glowing post on the path to start. | नमस्ते {name}! शुरू करने के लिए रास्ते पर चमकते खंभे को छुओ। | ನಮಸ್ಕಾರ {name}! ಆರಂಭಿಸಲು ದಾರಿಯ ಹೊಳೆಯುವ ಕಂಬವನ್ನು ಮುಟ್ಟಿ. | [ ] |
+| path.unit | Chapter {n}: {titleEn} | अध्याय {n}: {title} | ಅಧ್ಯಾಯ {n}: {title} | [ ] |
+| terms.title | Word book | शब्द-पुस्तक | ಪದ ಪುಸ್ತಕ | [ ] |
+| terms.search | Search words | शब्द खोजो | ಪದಗಳನ್ನು ಹುಡುಕಿ | [ ] |
+| terms.filter | Show | दिखाओ | ತೋರಿಸಿ | [ ] |
+| terms.saved | Saved | सेव किए | ಉಳಿಸಿದವು | [ ] |
+| terms.all | All words | सारे शब्द | ಎಲ್ಲಾ ಪದಗಳು | [ ] |
+| terms.listen | Listen to the word | शब्द सुनो | ಪದ ಕೇಳಿ | [ ] |
+| terms.close | Close | बंद करो | ಮುಚ್ಚಿ | [ ] |
+| terms.meaning | What it means | इसका मतलब | ಇದರ ಅರ್ಥ | [ ] |
+| terms.likeOnTheFarm | Like on the farm | जैसे खेत पर | ಹೊಲದಲ್ಲಿ ಹೇಗೆಂದರೆ | [ ] |
+| terms.page | Notes page {n} | नोट्स पन्ना {n} | ನೋಟ್ಸ್ ಪುಟ {n} | [ ] |
+| terms.mastery | You know this {pct}% | तुम यह {pct}% जानते हो | ನಿಮಗೆ ಇದು {pct}% ಗೊತ್ತು | [ ] |
+| terms.save | Save word | शब्द सेव करो | ಪದ ಉಳಿಸಿ | [ ] |
+| terms.unsave | Remove from saved | सेव से हटाओ | ಉಳಿಸಿದವುಗಳಿಂದ ತೆಗೆಯಿರಿ | [ ] |
+| terms.ask | Ask Golu about it | गोलू से इसके बारे में पूछो | ಇದರ ಬಗ್ಗೆ ಗೋಲುವನ್ನು ಕೇಳಿ | [ ] |
+| terms.noSaved | No saved words yet. Tap a word, then Save. | अभी कोई शब्द सेव नहीं। किसी शब्द को छुओ, फिर सेव करो। | ಇನ್ನೂ ಉಳಿಸಿದ ಪದಗಳಿಲ್ಲ. ಪದ ಮುಟ್ಟಿ, ನಂತರ ಉಳಿಸಿ. | [ ] |
+| terms.noMatch | No word matches that search. | इस खोज से कोई शब्द नहीं मिला। | ಈ ಹುಡುಕಾಟಕ್ಕೆ ಯಾವ ಪದವೂ ಸಿಗಲಿಲ್ಲ. | [ ] |
+| terms.noCourse | Join a class to get your word book. | शब्द-पुस्तक पाने के लिए कक्षा से जुड़ो। | ಪದ ಪುಸ್ತಕ ಪಡೆಯಲು ತರಗತಿಗೆ ಸೇರಿ. | [ ] |
+| ask.title | Ask Golu | गोलू से पूछो | ಗೋಲುವನ್ನು ಕೇಳಿ | [ ] |
+| ask.conversation | Your chat with Golu | गोलू से तुम्हारी बात | ಗೋಲು ಜೊತೆ ನಿಮ್ಮ ಮಾತು | [ ] |
+| ask.intro | Moo! Ask me anything about your lesson. I answer from your notes. | म्बाँ! पाठ के बारे में कुछ भी पूछो। मैं तुम्हारे नोट्स से जवाब देता हूँ। | ಅಂಬಾ! ಪಾಠದ ಬಗ್ಗೆ ಏನಾದರೂ ಕೇಳಿ. ನಾನು ನಿಮ್ಮ ನೋಟ್ಸ್‌ನಿಂದ ಉತ್ತರಿಸುತ್ತೇನೆ. | [ ] |
+| ask.fromNotes | From your notes, page {pages} | तुम्हारे नोट्स से, पन्ना {pages} | ನಿಮ್ಮ ನೋಟ್ಸ್‌ನಿಂದ, ಪುಟ {pages} | [ ] |
+| ask.notInNotes | Not in your notes | तुम्हारे नोट्स में नहीं | ನಿಮ್ಮ ನೋಟ್ಸ್‌ನಲ್ಲಿ ಇಲ್ಲ | [ ] |
+| ask.thinking | Golu is thinking… | गोलू सोच रहा है… | ಗೋಲು ಯೋಚಿಸುತ್ತಿದೆ… | [ ] |
+| ask.simpler | Explain it simpler | और आसान समझाओ | ಇನ್ನೂ ಸರಳವಾಗಿ ವಿವರಿಸಿ | [ ] |
+| ask.example | Give an example | एक उदाहरण दो | ಒಂದು ಉದಾಹರಣೆ ಕೊಡಿ | [ ] |
+| ask.label | Your doubt | तुम्हारा सवाल | ನಿಮ್ಮ ಸಂದೇಹ | [ ] |
+| ask.send | Send | भेजो | ಕಳುಹಿಸಿ | [ ] |
+| ask.left | {n} doubts left today | आज {n} सवाल बाक़ी | ಇಂದು {n} ಸಂದೇಹಗಳು ಉಳಿದಿವೆ | [ ] |
+| ask.noCourse | Join a class so Golu can read your notes. | कक्षा से जुड़ो ताकि गोलू तुम्हारे नोट्स पढ़ सके। | ಗೋಲು ನಿಮ್ಮ ನೋಟ್ಸ್ ಓದಲು ತರಗತಿಗೆ ಸೇರಿ. | [ ] |
+| ask.aboutQuestion | About the question you just answered | अभी के सवाल के बारे में | ಈಗಷ್ಟೇ ಉತ್ತರಿಸಿದ ಪ್ರಶ್ನೆಯ ಬಗ್ಗೆ | [ ] |
+| ask.aboutTerm | About “{termEn}” | “{term}” के बारे में | “{term}” ಬಗ್ಗೆ | [ ] |
+| ask.limit | That's all the doubts for today. Golu will be back tomorrow! | आज के सवाल पूरे हुए। गोलू कल फिर आएगा! | ಇಂದಿನ ಸಂದೇಹಗಳು ಮುಗಿದವು. ಗೋಲು ನಾಳೆ ಮತ್ತೆ ಬರುತ್ತದೆ! | [ ] |
+| ask.unavailable | Golu can't answer right now. Your question is still in the box, try again soon. | गोलू अभी जवाब नहीं दे सकता। सवाल बॉक्स में है, थोड़ी देर में फिर कोशिश करो। | ಗೋಲು ಈಗ ಉತ್ತರಿಸಲು ಆಗುತ್ತಿಲ್ಲ. ಪ್ರಶ್ನೆ ಬಾಕ್ಸ್‌ನಲ್ಲಿದೆ, ಸ್ವಲ್ಪ ಸಮಯದ ನಂತರ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ. | [ ] |
+| profile.subtitle | Your farm backpack | तुम्हारा खेत का बस्ता | ನಿಮ್ಮ ಹೊಲದ ಚೀಲ | [ ] |
+| profile.xpTotal | Total XP | कुल XP | ಒಟ್ಟು XP | [ ] |
+| profile.streak | Day streak | दिनों की लड़ी | ದಿನಗಳ ಸರಣಿ | [ ] |
+| profile.longest | Longest streak | सबसे लंबी लड़ी | ಅತಿ ಉದ್ದದ ಸರಣಿ | [ ] |
+| profile.hearts | Hearts | दिल | ಹೃದಯಗಳು | [ ] |
+| profile.gems | Gems | रत्न | ರತ್ನಗಳು | [ ] |
+| profile.freezes | Streak freezes | लड़ी बचाव | ಸರಣಿ ರಕ್ಷಣೆಗಳು | [ ] |
+| profile.nextHeart | Next heart comes back at {time}. | अगला दिल {time} बजे वापस आएगा। | ಮುಂದಿನ ಹೃದಯ {time} ಕ್ಕೆ ಮರಳುತ್ತದೆ. | [ ] |
+| profile.today | {xp} of {goal} XP today | आज {goal} में से {xp} XP | ಇಂದು {goal} ರಲ್ಲಿ {xp} XP | [ ] |
+| profile.dailyGoal | Daily goal | रोज़ का लक्ष्य | ದೈನಂದಿನ ಗುರಿ | [ ] |
+| profile.goal30 | Easy | आसान | ಸುಲಭ | [ ] |
+| profile.goal50 | Steady | बराबर | ಸ್ಥಿರ | [ ] |
+| profile.goal100 | Serious | ज़ोरदार | ಗಂಭೀರ | [ ] |
+| hud.xpToday | {xp} of {goal} XP today | आज {goal} में से {xp} XP | ಇಂದು {goal} ರಲ್ಲಿ {xp} XP | [ ] |
+| hud.streak | {n} day streak | {n} दिन की लड़ी | {n} ದಿನದ ಸರಣಿ | [ ] |
+| hud.hearts | {n} of {max} hearts | {max} में से {n} दिल | {max} ರಲ್ಲಿ {n} ಹೃದಯಗಳು | [ ] |
+| hud.gems | {n} gems | {n} रत्न | {n} ರತ್ನಗಳು | [ ] |
+| errors.KEY_GENERATION_FAILED | We couldn't make a class key. Try again. | कक्षा कुंजी नहीं बनी। फिर कोशिश करो। | ತರಗತಿ ಕೀ ಮಾಡಲಾಗಲಿಲ್ಲ. ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ. | [ ] |
+| errors.INVALID_UPLOAD | This file can't be used. Upload JPG, PNG or PDF pages. | यह फ़ाइल नहीं चलेगी। JPG, PNG या PDF पन्ने अपलोड करो। | ಈ ಫೈಲ್ ಬಳಸಲಾಗದು. JPG, PNG ಅಥವಾ PDF ಪುಟಗಳನ್ನು ಅಪ್‌ಲೋಡ್ ಮಾಡಿ. | [ ] |
+| errors.FILE_TOO_LARGE | A page is too large. Each page must be under 10 MB. | एक पन्ना बहुत बड़ा है। हर पन्ना 10 MB से कम हो। | ಒಂದು ಪುಟ ತುಂಬಾ ದೊಡ್ಡದು. ಪ್ರತಿ ಪುಟ 10 MB ಗಿಂತ ಕಡಿಮೆ ಇರಲಿ. | [ ] |
+| errors.PAGES_MISSING | Some pages didn't finish uploading. Retry them. | कुछ पन्ने पूरे अपलोड नहीं हुए। उन्हें फिर भेजो। | ಕೆಲವು ಪುಟಗಳು ಪೂರ್ಣ ಅಪ್‌ಲೋಡ್ ಆಗಿಲ್ಲ. ಮತ್ತೆ ಕಳುಹಿಸಿ. | [ ] |
+| errors.LESSON_NOT_PUBLISHED | This lesson isn't published yet. | यह पाठ अभी प्रकाशित नहीं हुआ। | ಈ ಪಾಠ ಇನ್ನೂ ಪ್ರಕಟವಾಗಿಲ್ಲ. | [ ] |
+| errors.LESSON_NOT_READY | Golu is still preparing this lesson. Check back soon. | गोलू अभी यह पाठ तैयार कर रहा है। थोड़ी देर में देखो। | ಗೋಲು ಇನ್ನೂ ಈ ಪಾಠ ಸಿದ್ಧಪಡಿಸುತ್ತಿದೆ. ಸ್ವಲ್ಪ ಸಮಯದ ನಂತರ ನೋಡಿ. | [ ] |
+| errors.INVALID_QUESTION | This question isn't complete. Check every field. | यह सवाल पूरा नहीं है। हर हिस्सा जाँचो। | ಈ ಪ್ರಶ್ನೆ ಪೂರ್ಣವಾಗಿಲ್ಲ. ಪ್ರತಿ ಭಾಗ ಪರಿಶೀಲಿಸಿ. | [ ] |
+| errors.AI_UNAVAILABLE | Golu's helper is busy right now. Try again in a minute. | गोलू का सहायक अभी व्यस्त है। एक मिनट में फिर कोशिश करो। | ಗೋಲುವಿನ ಸಹಾಯಕ ಈಗ ಕಾರ್ಯನಿರತ. ಒಂದು ನಿಮಿಷದಲ್ಲಿ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ. | [ ] |
+| errors.HEARTS_EMPTY | You're out of hearts for now. | अभी तुम्हारे दिल ख़त्म हैं। | ಈಗ ನಿಮ್ಮ ಹೃದಯಗಳು ಮುಗಿದಿವೆ. | [ ] |
+| errors.DOUBT_LIMIT | That's all the doubts for today. | आज के सवाल पूरे हुए। | ಇಂದಿನ ಸಂದೇಹಗಳು ಮುಗಿದವು. | [ ] |
+| errors.INVALID_ANSWER | That answer couldn't be read. Try again. | वह जवाब पढ़ा नहीं जा सका। फिर कोशिश करो। | ಆ ಉತ್ತರ ಓದಲಾಗಲಿಲ್ಲ. ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ. | [ ] |
+| errors.LESSON_NOT_STARTED | This lesson wasn't started. Open it again from the farm. | यह पाठ शुरू नहीं हुआ था। खेत से फिर खोलो। | ಈ ಪಾಠ ಆರಂಭವಾಗಿರಲಿಲ್ಲ. ಹೊಲದಿಂದ ಮತ್ತೆ ತೆರೆಯಿರಿ. | [ ] |
+| errors.CODE_NOT_FOUND | We couldn't find that code. Check it and try again. | वह कोड नहीं मिला। जाँचकर फिर कोशिश करो। | ಆ ಕೋಡ್ ಸಿಗಲಿಲ್ಲ. ಪರಿಶೀಲಿಸಿ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ. | [ ] |
+| errors.CODE_EXPIRED | That code has expired. Ask your child for a new one. | वह कोड पुराना हो गया। बच्चे से नया कोड लो। | ಆ ಕೋಡ್ ಅವಧಿ ಮುಗಿದಿದೆ. ಮಗುವಿನಿಂದ ಹೊಸ ಕೋಡ್ ಪಡೆಯಿರಿ. | [ ] |
+| errors.TOO_MANY_PARENTS | This child already has two parents linked. | इस बच्चे से पहले ही दो अभिभावक जुड़े हैं। | ಈ ಮಗುವಿಗೆ ಈಗಾಗಲೇ ಇಬ್ಬರು ಪೋಷಕರು ಜೋಡಣೆಯಾಗಿದ್ದಾರೆ. | [ ] |
+| errors.NOT_ENOUGH_GEMS | Not enough gems yet. Finish a lesson to earn more. | अभी रत्न कम हैं। और पाने के लिए पाठ पूरा करो। | ಇನ್ನೂ ರತ್ನಗಳು ಸಾಲದು. ಹೆಚ್ಚು ಪಡೆಯಲು ಪಾಠ ಮುಗಿಸಿ. | [ ] |
+| errors.FREEZES_FULL | You already have the most freezes you can keep. | तुम्हारे पास पहले से सबसे ज़्यादा बचाव हैं। | ನಿಮ್ಮ ಬಳಿ ಈಗಾಗಲೇ ಗರಿಷ್ಠ ರಕ್ಷಣೆಗಳಿವೆ. | [ ] |
+| errors.ALREADY_OWNED | You already have this. | यह पहले से तुम्हारा है। | ಇದು ಈಗಾಗಲೇ ನಿಮ್ಮದು. | [ ] |
+| errors.ALREADY_CLAIMED | This reward was already collected. | यह इनाम पहले ही ले लिया गया। | ಈ ಬಹುಮಾನ ಈಗಾಗಲೇ ಪಡೆಯಲಾಗಿದೆ. | [ ] |
+| errors.QUEST_NOT_COMPLETE | Finish the quest first, then collect. | पहले काम पूरा करो, फिर इनाम लो। | ಮೊದಲು ಕೆಲಸ ಮುಗಿಸಿ, ನಂತರ ಪಡೆಯಿರಿ. | [ ] |
+| errors.POT_ALREADY_OPENED | This pot was already opened. | यह मटका पहले ही खुल चुका है। | ಈ ಮಡಕೆ ಈಗಾಗಲೇ ತೆರೆಯಲಾಗಿದೆ. | [ ] |
+| errors.DUPLICATE_PHONE | A student with this phone number is already in this class. | इस फ़ोन नंबर वाला छात्र पहले से कक्षा में है। | ಈ ಫೋನ್ ಸಂಖ್ಯೆಯ ವಿದ್ಯಾರ್ಥಿ ಈಗಾಗಲೇ ತರಗತಿಯಲ್ಲಿದ್ದಾರೆ. | [ ] |
+| errors.OUTSIDE_CALL_HOURS | Calls can only be made between 9 am and 9 pm. | कॉल सिर्फ़ सुबह 9 से रात 9 बजे के बीच हो सकती है। | ಕರೆಗಳನ್ನು ಬೆಳಿಗ್ಗೆ 9 ರಿಂದ ರಾತ್ರಿ 9 ರ ನಡುವೆ ಮಾತ್ರ ಮಾಡಬಹುದು. | [ ] |
+| errors.CALL_IN_PROGRESS | A call to this student is already happening. | इस छात्र को कॉल पहले से चल रही है। | ಈ ವಿದ್ಯಾರ್ಥಿಗೆ ಕರೆ ಈಗಾಗಲೇ ನಡೆಯುತ್ತಿದೆ. | [ ] |
+| errors.CONSENT_PENDING | We're still waiting for consent for this student. | इस छात्र की सहमति का इंतज़ार है। | ಈ ವಿದ್ಯಾರ್ಥಿಯ ಒಪ್ಪಿಗೆಗಾಗಿ ಕಾಯುತ್ತಿದ್ದೇವೆ. | [ ] |
+| errors.CALLS_PAUSED | Calls are paused for this student. | इस छात्र की कॉल रुकी हुई हैं। | ಈ ವಿದ್ಯಾರ್ಥಿಯ ಕರೆಗಳನ್ನು ನಿಲ್ಲಿಸಲಾಗಿದೆ. | [ ] |
+| errors.WEEKLY_CAP_REACHED | This student has used this week's call minutes. | इस छात्र के इस हफ़्ते के कॉल मिनट पूरे हो गए। | ಈ ವಿದ್ಯಾರ್ಥಿಯ ಈ ವಾರದ ಕರೆ ನಿಮಿಷಗಳು ಮುಗಿದಿವೆ. | [ ] |
+| farm.barn | Learning barn | सीखने का खलिहान | ಕಲಿಕೆಯ ಕೊಟ್ಟಿಗೆ | [ ] |
+| common.resetDemo | Reset demo data | डेमो डेटा फिर से शुरू करो | ಡೆಮೊ ಡೇಟಾ ಮರುಹೊಂದಿಸಿ | [ ] |

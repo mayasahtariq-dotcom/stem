@@ -2,6 +2,8 @@ import { http, HttpResponse } from "msw";
 import type { Schemas } from "@mooshala/api-client";
 import { FAKE_API_BASE_URL } from "@/lib/env";
 import { DEMO, fakeDb, userForToken, type FakeClassroom } from "./fake-db";
+import { makeLearningHandlers } from "./learning/handlers";
+import { makeGameHandlers } from "./game/handlers";
 
 const err = (status: number, code: string) => HttpResponse.json({ detail: { code } }, { status });
 
@@ -46,6 +48,9 @@ function checkJoin(userId: string, language: string | null | undefined, key: str
 
 export function makeHandlers(base = FAKE_API_BASE_URL) {
   return [
+    ...makeLearningHandlers(base),
+    // MOCK ONLY: endpoints the backend hasn't built yet.
+    ...makeGameHandlers(base),
     http.get(`${base}/me`, ({ request }) => {
       const u = auth(request);
       return u ? HttpResponse.json(me(u)) : err(401, "UNAUTHORIZED");

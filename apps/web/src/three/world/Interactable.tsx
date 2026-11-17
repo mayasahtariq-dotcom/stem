@@ -7,6 +7,8 @@ export interface InteractableProps {
   id: string;
   position?: [number, number, number];
   rotationY?: number;
+  /** Resting size; hover/selection scale up from here. */
+  scale?: number;
   selected?: boolean;
   onSelect?: (id: string) => void;
   reducedMotion?: boolean;
@@ -17,7 +19,7 @@ export interface InteractableProps {
  * Makes a farm object hoverable and tappable (mouse, touch and pen through R3F
  * pointer events). Feedback is a springy scale-up, so it works on any material.
  */
-export function Interactable({ id, position, rotationY = 0, selected, onSelect, reducedMotion, children }: InteractableProps) {
+export function Interactable({ id, position, rotationY = 0, scale = 1, selected, onSelect, reducedMotion, children }: InteractableProps) {
   const ref = useRef<THREE.Group>(null);
   const [hovered, setHovered] = useState(false);
 
@@ -32,7 +34,7 @@ export function Interactable({ id, position, rotationY = 0, selected, onSelect, 
   useFrame((_, dt) => {
     const g = ref.current;
     if (!g) return;
-    const target = selected ? 1.08 : hovered ? 1.04 : 1;
+    const target = scale * (selected ? 1.08 : hovered ? 1.04 : 1);
     const k = reducedMotion ? 1 : Math.min(1, dt * 12);
     g.scale.setScalar(g.scale.x + (target - g.scale.x) * k);
   });

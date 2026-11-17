@@ -2,7 +2,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
-import { BilingualText, GoluMascot, StickerIcon } from "@/components/ui";
+import { BilingualText, GemCounter, GoluMascot, HeartMeter, StickerIcon, StreakFlame, XPRing } from "@/components/ui";
+import { useGameStats } from "@/features/game/api";
+import { useStats } from "@/features/learning/api";
 import { useProfile } from "@/features/auth/hooks";
 import { useBilingual } from "@/lib/i18n/use-bilingual";
 import { cn } from "@/lib/utils/cn";
@@ -18,6 +20,12 @@ export function StudentShell({ children }: { children: ReactNode }) {
   const n = useBilingual("nav");
   const c = useBilingual("common");
   const pathname = usePathname();
+  const h = useBilingual("hud");
+  const stats = useStats();
+  const game = useGameStats();
+  // The lesson player is full screen: no HUD or dock over the questions.
+  const immersive = pathname.startsWith("/farm/lesson/");
+  if (immersive) return <div className="relative h-dvh w-full overflow-hidden bg-white">{children}</div>;
   return (
     <div className="relative h-dvh w-full overflow-hidden bg-sky-soft">
       <main className="absolute inset-0">{children}</main>
@@ -27,9 +35,17 @@ export function StudentShell({ children }: { children: ReactNode }) {
           <span className="grid size-10 place-items-center overflow-hidden rounded-full bg-sun-soft">
             <GoluMascot pose="wave" size={40} animated={false} />
           </span>
-          <span className="max-w-[40vw] truncate font-bold">{profile.data?.name ?? ""}</span>
+          <span className="hidden max-w-[30vw] truncate font-bold tablet:inline">{profile.data?.name ?? ""}</span>
         </div>
-        <div className="pointer-events-auto">
+        <div className="pointer-events-auto flex flex-wrap items-center justify-end gap-1.5">
+          {stats.data && (
+            <>
+              <XPRing value={stats.data.xp_today} goal={stats.data.daily_goal} size={44} label={h("xpToday", { xp: stats.data.xp_today, goal: stats.data.daily_goal }).english} className="hidden tablet:inline-grid" />
+              <StreakFlame value={stats.data.streak} active={stats.data.streak > 0} label={h("streak", { n: stats.data.streak }).english} />
+              <HeartMeter value={stats.data.hearts} max={stats.data.max_hearts} label={h("hearts", { n: stats.data.hearts, max: stats.data.max_hearts }).english} />
+            </>
+          )}
+          {game.data && <GemCounter value={game.data.gems} label={h("gems", { n: game.data.gems }).english} />}
           <HudControls />
         </div>
       </header>
