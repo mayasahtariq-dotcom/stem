@@ -30,6 +30,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import com.stemtutor.app.di.DevServerSettings
 import com.stemtutor.app.gallery.GalleryRoute
+import com.stemtutor.app.prototype.PrototypeScreen
 import com.stemtutor.core.designsystem.component.BilingualText
 import com.stemtutor.core.designsystem.component.BilingualTextSize
 import com.stemtutor.core.designsystem.component.ChoiceCard
@@ -47,10 +48,12 @@ import kotlinx.coroutines.launch
 import kotlin.system.exitProcess
 
 private const val GALLERY = "debug/gallery"
+private const val PROTOTYPE = "debug/prototype"
 
 /** Debug builds only: the M0 component gallery stays reachable from Profile. */
 fun NavGraphBuilder.debugDestinations(navController: NavHostController) {
     composable(GALLERY) { GalleryRoute() }
+    composable(PROTOTYPE) { PrototypeScreen() }
 }
 
 @EntryPoint
@@ -64,6 +67,7 @@ interface DebugEntryPoint {
 fun DebugProfileExtras(navController: NavHostController) {
     ServerSetting()
     ChunkyButton(R.string.gallery_title, { navController.navigate(GALLERY) }, Modifier.fillMaxWidth(), ChunkyButtonStyle.White)
+    ChunkyButton(R.string.prototype_title, { navController.navigate(PROTOTYPE) }, Modifier.fillMaxWidth(), ChunkyButtonStyle.White)
 }
 
 /**

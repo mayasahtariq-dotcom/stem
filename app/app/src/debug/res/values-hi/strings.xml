@@ -20,4 +20,5 @@
     <string name="dev_server_url_hint">सर्वर का पता</string>
     <string name="dev_server_url_invalid">http://192.168.1.5:8000/ जैसा पता लिखें</string>
     <string name="dev_server_apply">सेव करें और फिर से खोलें</string>
+    <string name="prototype_title">डिज़ाइन प्रोटोटाइप (वेब)</string>
 </resources>

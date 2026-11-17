@@ -139,3 +139,10 @@ The user supplied a web prototype, `docs/design/mooshala-code.md` ("Mooshala"), 
 - **Deletion:** the request is recorded at once (and processing stops: consent becomes revoked), then a job deletes the student's profile, which cascades to their learning data, twin, links and consent records. In development the job runs right away; in production it runs from the queue, well inside the PRD's seven days. VERIFY: deleting the Supabase auth account itself needs Supabase's admin API (`DELETE /auth/v1/admin/users/{id}`) and isn't done yet.
 - **Link codes** use the class-key alphabet (no 0/O/1/I/L), last 24 hours and work once. The QR holds just the code; the parent's scanner reuses the class-join scanner with a different code pattern.
 - **Offline fakes:** debug builds show a class of eight students and a parent with two children (one approved, one waiting); code `KAV234` links a third. Pretend-mode lessons aren't consent-gated.
+
+## Mooshala web prototype bundled in debug builds
+
+- The prototype (`docs/design/mooshala-code.md`) is copied to `app/app/src/debug/assets/mooshala/` and shown in a WebView from Profile → "Design prototype (web)". Debug builds only; release builds contain neither the files nor the screen.
+- It is a design reference to look at on a phone, not a replacement for the native Compose screens. Its fonts load from Google Fonts, so it needs internet for the exact look.
+- If `mooshala-code.md` changes, re-copy the three files.
+- Not yet run on a device: this PC has no Android SDK, so it was not compiled locally; CI is the first build.
